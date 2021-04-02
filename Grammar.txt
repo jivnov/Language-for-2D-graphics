@@ -1,0 +1,69 @@
+<program> ::= <viewport> <program_body> <draw>
+
+<whitespace> ::= (" " | "\t")*
+<symbol> ::= "!" | "@" | "#" | "%" | "^" | "&" | "*" | "(" | ")" | "_" | "-" | "=" | "+" | "[" | "]" | "{" | "}" | "|" | "<" | ">" | "." | "," | "?" | ":" | ";" | "~" | "`"
+<comment> ::= "//" ([A-Za-z0-9] | <whitespace> | <symbol>)*
+<endl> ::= ";" <whitespace> <comment> "\n" (<whitespace> | "\n")*
+| ";\n" (<whitespace> | "\n")*
+
+
+<viewport> ::= "#viewport " [0-9]+ " " [0-9]+ <endl> 
+
+<integer> ::= "-"? ([0-9]+ | <variable>)
+
+<size> ::= [0-9] [0-9]? "%"
+<size_list> ::= <size>
+| <size_list> "," <whitespace> <size>
+
+<variable> ::= [A-Z] [a-z]* [0-9]*
+<variable_list> ::= <variable>
+| <variable_list> "," <whitespace> <variable>
+
+<argument> ::= <integer> | <size> | <variable> | <primitive_shape_call> | <custom_shape_call>
+
+<argument_list> ::= <argument>
+| <argument_list> "," <whitespace> <argument>
+
+<variable_assignment> ::= <variable> " "? "=" " "? <argument>
+
+<variable_declaration_list> ::= <variable>
+| <variable_assignment>
+| <variable_declaration_list> "," <whitespace> <variable> 
+| <variable_declaration_list> "," <whitespace> <variable_assignment>
+
+<primitive_shape_name> ::= "rect" | "square" | "circle" | "triangle"
+<primitive_shape_call> ::= <primitive_shape_name> "(" <argument_list> ")" ("[" <size> "," " "? <size> "]")?
+
+<primitive_shape_declaration> ::= <primitive_shape_name> " " <variable_declaration_list>
+
+<relational_operator_same_layer> ::= " right " | " left " | " top " | " bottom "
+<relational_operator_between_layers> ::= " on " | " under " | " in "
+<relational_operation> ::= <variable> <relational_operator_between_layers> <variable>
+| <variable> <relational_operator_same_layer> <variable>
+| <variable> <relational_operator_same_layer> "inner " <variable>
+| <variable> <relational_operator_same_layer> "outer " <variable>
+
+<shape_arithmetic_operator> ::= "-" | "+"
+<shape_arithmetic_operation> ::= <variable> <shape_arithmetic_operator> <variable> 
+| <shape_arithmetic_operation> <shape_arithmetic_operator> <shape_arithmetic_operation>
+
+<custom_shape_definition> ::= <variable> "()" "{\n" <program_body> "}\n"
+<custom_shape_call> ::= <variable> "(" <variable_list> ")"
+
+<custom_shape_declaration> ::= "shape " <variable_declaration_list>
+
+<draw> ::= "draw " <variable>
+| "draw " <primitive_shape_call>
+| "draw " <custom_shape_call>
+
+
+
+<expression> ::= <whitespace>  <primitive_shape_declaration> <endl> 
+| <whitespace> <custom_shape_definition> <endl>
+| <whitespace> <relational_operation> <endl> 
+| <whitespace> <custom_shape_declaration>
+| <whitespace> <variable_assignment> <endl> 
+| <whitespace> <draw> <endl>
+| <whitespace> <comment>
+
+<program_body> ::= <expression> | <expression> <program_body>
