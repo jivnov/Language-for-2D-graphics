@@ -114,6 +114,10 @@ fragment ESCAPED_VALUE
     : '\\' [abfnrtv\\'"]
     ;
 
+fragment SIZE
+    : DECIMALS '%'
+    ;
+
 fragment DECIMALS
     : [0-9]+
     ;
