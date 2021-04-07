@@ -5,3 +5,4 @@ Useful links:
     https://tomassetti.me/antlr-mega-tutorial/#chapter17
     
   - Unicode properties reference, can be used with \p{Property}, i.e. \p{L} means "Letter" (including upper, lower, title case):
+    http://unicode.org/reports/tr44/#Properties
