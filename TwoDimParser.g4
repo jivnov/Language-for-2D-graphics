@@ -10,7 +10,7 @@ sourceFile
     ;
 
 viewportClause
-    : '#viewport' DECIMALS ' ' DECIMALS eos
+    : VIEWPORT WS DECIMALS WS DECIMALS eos
     ;
 
 declaration
@@ -22,6 +22,10 @@ identifierList
     ;
 
 // Function declarations
+
+drawClause
+    : DRAW IDENTIFIER
+    ;
 
 varDecl
     : (varSpec | '(' (varSpec eos)* ')')
@@ -57,11 +61,11 @@ expressionStmt
     ;
 
 declStmt
-    : primitiveType_ '(' arguments ')' ('[' SIZE (',' ' '? SIZE)? ']')?
+    : type_ L_PAREN arguments R_PAREN (L_BRACKET SIZE (COMMA WS? SIZE)? R_BRACKET)?
     ;
 
 assignment
-    : expressionList assign_op expressionList
+    : IDENTIFIER assign_op expression
     ;
 
 assign_op
@@ -85,7 +89,7 @@ exprCaseClause
     ;
 
 exprSwitchCase
-    : 'case' expressionList
+    : 'case' expression
     | 'default'
     ;
 
@@ -95,16 +99,15 @@ type_
     ;
 
 typeName
-    : 'rect' | 'square' | 'circle' | 'triangle' | 'shape'
+    : RECT 
+    | SQUARE 
+    | CIRCLE 
+    | TRIANGLE 
+    | SHAPE
     ;
 
 elementType
     : type_
-    ;
-
-signature
-    : {noTerminatorAfterParams(1)}? parameters result
-    | parameters
     ;
 
 expression
@@ -154,7 +157,7 @@ literalType
     ;
 
 literalValue
-    : '{' (elementList ','?)? '}'
+    : '{' (element)? '}'
     ;
 
 element
@@ -168,7 +171,7 @@ string_
     ;
 
 arguments
-    : '(' SIZE (',' ' '? SIZE)? ')'
+    : L_PAREN SIZE (COMMA WS? SIZE)? R_PAREN
     ;
 
 eos

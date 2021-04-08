@@ -16,8 +16,16 @@ NIL_LIT                : 'nil';
 
 IDENTIFIER             : [_\p{L}] [_\p{L}\p{Nd}]*;  // L - "Letter" (any case); Nd - "Number Decimal" (see unicode reference in README)
 
+//TwoDim shapes
+SQUARE                 : 'square';
+RECT                   : 'rect';
+CIRCLE                 : 'circle';
+TRIANGLE               : 'triangle';
+SHAPE                  : 'shape';
+
 // TwoDim specific keywords:
 DRAW                   : 'draw';
+VIEWPORT               : '#viewport';
 
 // -- Same layer relations
 LEFT                   : 'left';
