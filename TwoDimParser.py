@@ -537,8 +537,6 @@ class TwoDimParser ( TwoDimParserBase ):
         self._predicates = None
 
 
-
-
     class SourceFileContext(ParserRuleContext):
         __slots__ = 'parser'
 
