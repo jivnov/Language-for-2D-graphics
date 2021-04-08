@@ -6,58 +6,25 @@ options {
 }
 
 sourceFile
-    : packageClause eos (importDecl eos)* ((functionDecl | methodDecl | declaration) eos)*
+    : viewportClause  (declaration eos)* drawClause eos
     ;
 
-packageClause
-    : 'package' IDENTIFIER
-    ;
-
-importDecl
-    : 'import' (importSpec | '(' (importSpec eos)* ')')
-    ;
-
-importSpec
-    : ('.' | IDENTIFIER)? importPath
-    ;
-
-importPath
-    : string_
+viewportClause
+    : VIEWPORT WS DECIMALS WS DECIMALS eos
     ;
 
 declaration
-    : typeDecl
-    | varDecl
+    : varDecl
     ;
 
 identifierList
     : IDENTIFIER (',' IDENTIFIER)*
     ;
 
-expressionList
-    : expression (',' expression)*
-    ;
-
-typeDecl
-    : 'type' (typeSpec | '(' (typeSpec eos)* ')')
-    ;
-
-typeSpec
-    : IDENTIFIER ASSIGN? type_
-    ;
-
 // Function declarations
 
-functionDecl
-    : 'func' IDENTIFIER (signature block?)
-    ;
-
-methodDecl
-    : 'func' receiver IDENTIFIER (signature block?)
-    ;
-
-receiver
-    : parameters
+drawClause
+    : DRAW IDENTIFIER
     ;
 
 varDecl
@@ -65,7 +32,7 @@ varDecl
     ;
 
 varSpec
-    : type_ identifierList '=' expressionList
+    : type_ identifierList '=' declStmt
     ;
 
 block
@@ -78,7 +45,6 @@ statementList
 
 statement
     : declaration
-    | labeledStmt
     | simpleStmt
     | block
     | ifStmt
@@ -87,33 +53,23 @@ statement
 
 simpleStmt
     : expressionStmt
-    | incDecStmt
     | assignment
-    | emptyStmt
     ;
 
 expressionStmt
     : expression
     ;
 
-incDecStmt
-    : expression (PLUS_PLUS | MINUS_MINUS)
+declStmt
+    : type_ L_PAREN arguments R_PAREN (L_BRACKET SIZE (COMMA WS? SIZE)? R_BRACKET)?
     ;
 
 assignment
-    : expressionList assign_op expressionList
+    : IDENTIFIER assign_op expression
     ;
 
 assign_op
-    : ('+' | '-')? '='
-    ;
-
-emptyStmt
-    : ';'
-    ;
-
-labeledStmt
-    : IDENTIFIER ':' statement
+    : '='
     ;
 
 ifStmt
@@ -122,7 +78,6 @@ ifStmt
 
 switchStmt
     : exprSwitchStmt
-    | typeSwitchStmt
     ;
 
 exprSwitchStmt
@@ -134,121 +89,46 @@ exprCaseClause
     ;
 
 exprSwitchCase
-    : 'case' expressionList
+    : 'case' expression
     | 'default'
-    ;
-
-typeSwitchStmt
-    : 'switch' (simpleStmt ';')? typeSwitchGuard '{' typeCaseClause* '}'
-    ;
-
-typeSwitchGuard
-    : primaryExpr '.' '(' 'type' ')'
-    ;
-
-typeCaseClause
-    : typeSwitchCase ':' statementList?
-    ;
-
-typeSwitchCase
-    : 'case' typeList
-    | 'default'
-    ;
-
-typeList
-    : (type_ | NIL_LIT) (',' (type_ | NIL_LIT))*
-    ;
-
-recvStmt
-    : (expressionList '=')? expression
     ;
 
 type_
     : typeName
-    | typeLit
     | '(' type_ ')'
     ;
 
 typeName
-    : IDENTIFIER
-    | qualifiedIdent
-    ;
-
-typeLit
-    : functionType
+    : RECT 
+    | SQUARE 
+    | CIRCLE 
+    | TRIANGLE 
+    | SHAPE
     ;
 
 elementType
     : type_
     ;
 
-methodSpec
-    : {noTerminatorAfterParams(2)}? IDENTIFIER parameters result
-    | typeName
-    | IDENTIFIER parameters
-    ;
-
-functionType
-    : 'func' signature
-    ;
-
-signature
-    : {noTerminatorAfterParams(1)}? parameters result
-    | parameters
-    ;
-
-result
-    : parameters
-    | type_
-    ;
-
-parameters
-    : '(' (parameterDecl (COMMA parameterDecl)* COMMA?)? ')'
-    ;
-
-parameterDecl
-    : identifierList? type_
-    ;
-
 expression
     : primaryExpr
-    | unaryExpr
-    | expression ('*' | '/' | '%' | '<<' | '>>' | '&' | '&^') expression
-    | expression ('+' | '-' | '|' | '^') expression
-    | expression ('==' | '!=' | '<' | '<=' | '>' | '>=') expression
-    | expression 'and' expression
-    | expression 'or' expression
+    | primaryExpr (LEFT | RIGHT | TOP | BOT) (INNER | OUTER)? primaryExpr
+    | primaryExpr (IN | ON | UNDER) primaryExpr
+    | primaryExpr ('+' | '-') primaryExpr
     ;
 
 primaryExpr
     : operand
-    | conversion
-    | primaryExpr ( DOT IDENTIFIER
-                  | index
-                  | typeAssertion
-                  | arguments)
-    ;
-
-unaryExpr
-    : primaryExpr
-    | ('+' | '-' | '!' | '^' | '*' | '&') expression
-    ;
-
-conversion
-    : type_ '(' expression ','? ')'
     ;
 
 operand
     : literal
     | operandName
-    | methodExpr
-    | '(' expression ')'
     ;
 
 literal
     : basicLit
     | compositeLit
-    | functionLit
     ;
 
 basicLit
@@ -266,11 +146,6 @@ integer
 
 operandName
     : IDENTIFIER
-    | qualifiedIdent
-    ;
-
-qualifiedIdent
-    : IDENTIFIER '.' IDENTIFIER
     ;
 
 compositeLit
@@ -278,26 +153,11 @@ compositeLit
     ;
 
 literalType
-    : '[' ']' elementType
-    | typeName
+    : elementType
     ;
 
 literalValue
-    : '{' (elementList ','?)? '}'
-    ;
-
-elementList
-    : keyedElement (',' keyedElement)*
-    ;
-
-keyedElement
-    : (key ':')? element
-    ;
-
-key
-    : IDENTIFIER
-    | expression
-    | literalValue
+    : '{' (element)? '}'
     ;
 
 element
@@ -305,42 +165,13 @@ element
     | literalValue
     ;
 
-fieldDecl
-    : ({noTerminatorBetween(2)}? identifierList type_ | anonymousField) string_?
-    ;
-
 string_
     : RAW_STRING_LIT
     | INTERPRETED_STRING_LIT
     ;
 
-anonymousField
-    : '*'? typeName
-    ;
-
-functionLit
-    : 'func' signature block // function
-    ;
-
-index
-    : '[' expression ']'
-    ;
-
-typeAssertion
-    : '.' '(' type_ ')'
-    ;
-
 arguments
-    : '(' ((expressionList | type_ (',' expressionList)?) ','?)? ')'
-    ;
-
-methodExpr
-    : receiverType DOT IDENTIFIER
-    ;
-
-receiverType
-    : typeName
-    | '(' ('*' typeName | receiverType) ')'
+    : L_PAREN SIZE (COMMA WS? SIZE)? R_PAREN
     ;
 
 eos
