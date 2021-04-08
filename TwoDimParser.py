@@ -46,8 +46,8 @@ def serializedATN():
         buf.write("\"\3#\3#\5#\u0118\n#\3$\3$\3%\3%\3%\3%\5%\u0120\n%\3%")
         buf.write("\5%\u0123\n%\3%\3%\3&\3&\3&\3&\5&\u012b\n&\3&\2\2\'\2")
         buf.write("\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64")
-        buf.write("\668:<>@BDFHJ\2\t\3\2EI\3\2\17\22\3\2\23\24\3\2\25\27")
-        buf.write("\3\2\64\65\4\299;;\3\2<=\2\u012f\2L\3\2\2\2\4U\3\2\2\2")
+        buf.write("\668:<>@BDFHJ\2\t\3\2\16\22\3\2\25\30\3\2\31\32\3\2\33")
+        buf.write("\35\3\2:;\4\2??AA\3\2BC\2\u012f\2L\3\2\2\2\4U\3\2\2\2")
         buf.write("\6\\\3\2\2\2\b^\3\2\2\2\nf\3\2\2\2\ft\3\2\2\2\16v\3\2")
         buf.write("\2\2\20{\3\2\2\2\22\u0084\3\2\2\2\24\u008d\3\2\2\2\26")
         buf.write("\u0091\3\2\2\2\30\u0093\3\2\2\2\32\u0095\3\2\2\2\34\u00a5")
@@ -59,88 +59,87 @@ def serializedATN():
         buf.write("\2\2\2@\u010d\3\2\2\2B\u010f\3\2\2\2D\u0117\3\2\2\2F\u0119")
         buf.write("\3\2\2\2H\u011b\3\2\2\2J\u012a\3\2\2\2LR\5\4\3\2MN\5\6")
         buf.write("\4\2NO\5J&\2OQ\3\2\2\2PM\3\2\2\2QT\3\2\2\2RP\3\2\2\2R")
-        buf.write("S\3\2\2\2S\3\3\2\2\2TR\3\2\2\2UV\7B\2\2VW\7>\2\2WX\7C")
-        buf.write("\2\2XY\7>\2\2YZ\7C\2\2Z[\5J&\2[\5\3\2\2\2\\]\5\f\7\2]")
-        buf.write("\7\3\2\2\2^c\7\r\2\2_`\7\37\2\2`b\7\r\2\2a_\3\2\2\2be")
-        buf.write("\3\2\2\2ca\3\2\2\2cd\3\2\2\2d\t\3\2\2\2ec\3\2\2\2fg\7")
-        buf.write("\16\2\2gh\7\r\2\2h\13\3\2\2\2iu\5\16\b\2jp\7\30\2\2kl")
-        buf.write("\5\16\b\2lm\5J&\2mo\3\2\2\2nk\3\2\2\2or\3\2\2\2pn\3\2")
-        buf.write("\2\2pq\3\2\2\2qs\3\2\2\2rp\3\2\2\2su\7\31\2\2ti\3\2\2")
-        buf.write("\2tj\3\2\2\2u\r\3\2\2\2vw\5*\26\2wx\5\b\5\2xy\7\36\2\2")
-        buf.write("yz\5\32\16\2z\17\3\2\2\2{}\7\32\2\2|~\5\22\n\2}|\3\2\2")
-        buf.write("\2}~\3\2\2\2~\177\3\2\2\2\177\u0080\7\33\2\2\u0080\21")
-        buf.write("\3\2\2\2\u0081\u0082\5\24\13\2\u0082\u0083\5J&\2\u0083")
-        buf.write("\u0085\3\2\2\2\u0084\u0081\3\2\2\2\u0085\u0086\3\2\2\2")
-        buf.write("\u0086\u0084\3\2\2\2\u0086\u0087\3\2\2\2\u0087\23\3\2")
-        buf.write("\2\2\u0088\u008e\5\6\4\2\u0089\u008e\5\26\f\2\u008a\u008e")
-        buf.write("\5\20\t\2\u008b\u008e\5 \21\2\u008c\u008e\5\"\22\2\u008d")
-        buf.write("\u0088\3\2\2\2\u008d\u0089\3\2\2\2\u008d\u008a\3\2\2\2")
-        buf.write("\u008d\u008b\3\2\2\2\u008d\u008c\3\2\2\2\u008e\25\3\2")
-        buf.write("\2\2\u008f\u0092\5\30\r\2\u0090\u0092\5\34\17\2\u0091")
-        buf.write("\u008f\3\2\2\2\u0091\u0090\3\2\2\2\u0092\27\3\2\2\2\u0093")
-        buf.write("\u0094\5\60\31\2\u0094\31\3\2\2\2\u0095\u0096\5*\26\2")
-        buf.write("\u0096\u0097\7\30\2\2\u0097\u0098\5H%\2\u0098\u00a3\7")
-        buf.write("\31\2\2\u0099\u009a\7\34\2\2\u009a\u00a0\7D\2\2\u009b")
-        buf.write("\u009d\7\37\2\2\u009c\u009e\7>\2\2\u009d\u009c\3\2\2\2")
-        buf.write("\u009d\u009e\3\2\2\2\u009e\u009f\3\2\2\2\u009f\u00a1\7")
-        buf.write("D\2\2\u00a0\u009b\3\2\2\2\u00a0\u00a1\3\2\2\2\u00a1\u00a2")
-        buf.write("\3\2\2\2\u00a2\u00a4\7\35\2\2\u00a3\u0099\3\2\2\2\u00a3")
-        buf.write("\u00a4\3\2\2\2\u00a4\33\3\2\2\2\u00a5\u00a6\7\r\2\2\u00a6")
-        buf.write("\u00a7\5\36\20\2\u00a7\u00a8\5\60\31\2\u00a8\35\3\2\2")
-        buf.write("\2\u00a9\u00aa\7\36\2\2\u00aa\37\3\2\2\2\u00ab\u00af\7")
-        buf.write("\7\2\2\u00ac\u00ad\5\26\f\2\u00ad\u00ae\7 \2\2\u00ae\u00b0")
-        buf.write("\3\2\2\2\u00af\u00ac\3\2\2\2\u00af\u00b0\3\2\2\2\u00b0")
-        buf.write("\u00b1\3\2\2\2\u00b1\u00b2\5\60\31\2\u00b2\u00b8\5\20")
-        buf.write("\t\2\u00b3\u00b6\7\b\2\2\u00b4\u00b7\5 \21\2\u00b5\u00b7")
-        buf.write("\5\20\t\2\u00b6\u00b4\3\2\2\2\u00b6\u00b5\3\2\2\2\u00b7")
-        buf.write("\u00b9\3\2\2\2\u00b8\u00b3\3\2\2\2\u00b8\u00b9\3\2\2\2")
-        buf.write("\u00b9!\3\2\2\2\u00ba\u00bb\5$\23\2\u00bb#\3\2\2\2\u00bc")
-        buf.write("\u00c0\7\4\2\2\u00bd\u00be\5\26\f\2\u00be\u00bf\7 \2\2")
-        buf.write("\u00bf\u00c1\3\2\2\2\u00c0\u00bd\3\2\2\2\u00c0\u00c1\3")
-        buf.write("\2\2\2\u00c1\u00c3\3\2\2\2\u00c2\u00c4\5\60\31\2\u00c3")
-        buf.write("\u00c2\3\2\2\2\u00c3\u00c4\3\2\2\2\u00c4\u00c5\3\2\2\2")
-        buf.write("\u00c5\u00c9\7\32\2\2\u00c6\u00c8\5&\24\2\u00c7\u00c6")
-        buf.write("\3\2\2\2\u00c8\u00cb\3\2\2\2\u00c9\u00c7\3\2\2\2\u00c9")
-        buf.write("\u00ca\3\2\2\2\u00ca\u00cc\3\2\2\2\u00cb\u00c9\3\2\2\2")
-        buf.write("\u00cc\u00cd\7\33\2\2\u00cd%\3\2\2\2\u00ce\u00cf\5(\25")
-        buf.write("\2\u00cf\u00d1\7!\2\2\u00d0\u00d2\5\22\n\2\u00d1\u00d0")
-        buf.write("\3\2\2\2\u00d1\u00d2\3\2\2\2\u00d2\'\3\2\2\2\u00d3\u00d4")
-        buf.write("\7\5\2\2\u00d4\u00d7\5\60\31\2\u00d5\u00d7\7\6\2\2\u00d6")
-        buf.write("\u00d3\3\2\2\2\u00d6\u00d5\3\2\2\2\u00d7)\3\2\2\2\u00d8")
-        buf.write("\u00de\5,\27\2\u00d9\u00da\7\30\2\2\u00da\u00db\5*\26")
-        buf.write("\2\u00db\u00dc\7\31\2\2\u00dc\u00de\3\2\2\2\u00dd\u00d8")
-        buf.write("\3\2\2\2\u00dd\u00d9\3\2\2\2\u00de+\3\2\2\2\u00df\u00e0")
-        buf.write("\t\2\2\2\u00e0-\3\2\2\2\u00e1\u00e2\5*\26\2\u00e2/\3\2")
-        buf.write("\2\2\u00e3\u00f4\5\62\32\2\u00e4\u00e5\5\62\32\2\u00e5")
-        buf.write("\u00e7\t\3\2\2\u00e6\u00e8\t\4\2\2\u00e7\u00e6\3\2\2\2")
-        buf.write("\u00e7\u00e8\3\2\2\2\u00e8\u00e9\3\2\2\2\u00e9\u00ea\5")
-        buf.write("\62\32\2\u00ea\u00f4\3\2\2\2\u00eb\u00ec\5\62\32\2\u00ec")
-        buf.write("\u00ed\t\5\2\2\u00ed\u00ee\5\62\32\2\u00ee\u00f4\3\2\2")
-        buf.write("\2\u00ef\u00f0\5\62\32\2\u00f0\u00f1\t\6\2\2\u00f1\u00f2")
-        buf.write("\5\62\32\2\u00f2\u00f4\3\2\2\2\u00f3\u00e3\3\2\2\2\u00f3")
-        buf.write("\u00e4\3\2\2\2\u00f3\u00eb\3\2\2\2\u00f3\u00ef\3\2\2\2")
-        buf.write("\u00f4\61\3\2\2\2\u00f5\u00f6\5\64\33\2\u00f6\63\3\2\2")
-        buf.write("\2\u00f7\u00fa\5\66\34\2\u00f8\u00fa\5<\37\2\u00f9\u00f7")
-        buf.write("\3\2\2\2\u00f9\u00f8\3\2\2\2\u00fa\65\3\2\2\2\u00fb\u00fe")
-        buf.write("\58\35\2\u00fc\u00fe\5> \2\u00fd\u00fb\3\2\2\2\u00fd\u00fc")
-        buf.write("\3\2\2\2\u00fe\67\3\2\2\2\u00ff\u0105\7\f\2\2\u0100\u0105")
-        buf.write("\5:\36\2\u0101\u0105\5F$\2\u0102\u0105\7:\2\2\u0103\u0105")
-        buf.write("\7;\2\2\u0104\u00ff\3\2\2\2\u0104\u0100\3\2\2\2\u0104")
-        buf.write("\u0101\3\2\2\2\u0104\u0102\3\2\2\2\u0104\u0103\3\2\2\2")
-        buf.write("\u01059\3\2\2\2\u0106\u0107\t\7\2\2\u0107;\3\2\2\2\u0108")
-        buf.write("\u0109\7\r\2\2\u0109=\3\2\2\2\u010a\u010b\5@!\2\u010b")
-        buf.write("\u010c\5B\"\2\u010c?\3\2\2\2\u010d\u010e\5.\30\2\u010e")
-        buf.write("A\3\2\2\2\u010f\u0111\7\32\2\2\u0110\u0112\5D#\2\u0111")
-        buf.write("\u0110\3\2\2\2\u0111\u0112\3\2\2\2\u0112\u0113\3\2\2\2")
-        buf.write("\u0113\u0114\7\33\2\2\u0114C\3\2\2\2\u0115\u0118\5\60")
-        buf.write("\31\2\u0116\u0118\5B\"\2\u0117\u0115\3\2\2\2\u0117\u0116")
-        buf.write("\3\2\2\2\u0118E\3\2\2\2\u0119\u011a\t\b\2\2\u011aG\3\2")
-        buf.write("\2\2\u011b\u011c\7\30\2\2\u011c\u0122\7D\2\2\u011d\u011f")
-        buf.write("\7\37\2\2\u011e\u0120\7>\2\2\u011f\u011e\3\2\2\2\u011f")
-        buf.write("\u0120\3\2\2\2\u0120\u0121\3\2\2\2\u0121\u0123\7D\2\2")
+        buf.write("S\3\2\2\2S\3\3\2\2\2TR\3\2\2\2UV\7\24\2\2VW\7D\2\2WX\7")
+        buf.write("H\2\2XY\7D\2\2YZ\7H\2\2Z[\5J&\2[\5\3\2\2\2\\]\5\f\7\2")
+        buf.write("]\7\3\2\2\2^c\7\r\2\2_`\7%\2\2`b\7\r\2\2a_\3\2\2\2be\3")
+        buf.write("\2\2\2ca\3\2\2\2cd\3\2\2\2d\t\3\2\2\2ec\3\2\2\2fg\7\23")
+        buf.write("\2\2gh\7\r\2\2h\13\3\2\2\2iu\5\16\b\2jp\7\36\2\2kl\5\16")
+        buf.write("\b\2lm\5J&\2mo\3\2\2\2nk\3\2\2\2or\3\2\2\2pn\3\2\2\2p")
+        buf.write("q\3\2\2\2qs\3\2\2\2rp\3\2\2\2su\7\37\2\2ti\3\2\2\2tj\3")
+        buf.write("\2\2\2u\r\3\2\2\2vw\5*\26\2wx\5\b\5\2xy\7$\2\2yz\5\32")
+        buf.write("\16\2z\17\3\2\2\2{}\7 \2\2|~\5\22\n\2}|\3\2\2\2}~\3\2")
+        buf.write("\2\2~\177\3\2\2\2\177\u0080\7!\2\2\u0080\21\3\2\2\2\u0081")
+        buf.write("\u0082\5\24\13\2\u0082\u0083\5J&\2\u0083\u0085\3\2\2\2")
+        buf.write("\u0084\u0081\3\2\2\2\u0085\u0086\3\2\2\2\u0086\u0084\3")
+        buf.write("\2\2\2\u0086\u0087\3\2\2\2\u0087\23\3\2\2\2\u0088\u008e")
+        buf.write("\5\6\4\2\u0089\u008e\5\26\f\2\u008a\u008e\5\20\t\2\u008b")
+        buf.write("\u008e\5 \21\2\u008c\u008e\5\"\22\2\u008d\u0088\3\2\2")
+        buf.write("\2\u008d\u0089\3\2\2\2\u008d\u008a\3\2\2\2\u008d\u008b")
+        buf.write("\3\2\2\2\u008d\u008c\3\2\2\2\u008e\25\3\2\2\2\u008f\u0092")
+        buf.write("\5\30\r\2\u0090\u0092\5\34\17\2\u0091\u008f\3\2\2\2\u0091")
+        buf.write("\u0090\3\2\2\2\u0092\27\3\2\2\2\u0093\u0094\5\60\31\2")
+        buf.write("\u0094\31\3\2\2\2\u0095\u0096\5*\26\2\u0096\u0097\7\36")
+        buf.write("\2\2\u0097\u0098\5H%\2\u0098\u00a3\7\37\2\2\u0099\u009a")
+        buf.write("\7\"\2\2\u009a\u00a0\7I\2\2\u009b\u009d\7%\2\2\u009c\u009e")
+        buf.write("\7D\2\2\u009d\u009c\3\2\2\2\u009d\u009e\3\2\2\2\u009e")
+        buf.write("\u009f\3\2\2\2\u009f\u00a1\7I\2\2\u00a0\u009b\3\2\2\2")
+        buf.write("\u00a0\u00a1\3\2\2\2\u00a1\u00a2\3\2\2\2\u00a2\u00a4\7")
+        buf.write("#\2\2\u00a3\u0099\3\2\2\2\u00a3\u00a4\3\2\2\2\u00a4\33")
+        buf.write("\3\2\2\2\u00a5\u00a6\7\r\2\2\u00a6\u00a7\5\36\20\2\u00a7")
+        buf.write("\u00a8\5\60\31\2\u00a8\35\3\2\2\2\u00a9\u00aa\7$\2\2\u00aa")
+        buf.write("\37\3\2\2\2\u00ab\u00af\7\7\2\2\u00ac\u00ad\5\26\f\2\u00ad")
+        buf.write("\u00ae\7&\2\2\u00ae\u00b0\3\2\2\2\u00af\u00ac\3\2\2\2")
+        buf.write("\u00af\u00b0\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1\u00b2\5")
+        buf.write("\60\31\2\u00b2\u00b8\5\20\t\2\u00b3\u00b6\7\b\2\2\u00b4")
+        buf.write("\u00b7\5 \21\2\u00b5\u00b7\5\20\t\2\u00b6\u00b4\3\2\2")
+        buf.write("\2\u00b6\u00b5\3\2\2\2\u00b7\u00b9\3\2\2\2\u00b8\u00b3")
+        buf.write("\3\2\2\2\u00b8\u00b9\3\2\2\2\u00b9!\3\2\2\2\u00ba\u00bb")
+        buf.write("\5$\23\2\u00bb#\3\2\2\2\u00bc\u00c0\7\4\2\2\u00bd\u00be")
+        buf.write("\5\26\f\2\u00be\u00bf\7&\2\2\u00bf\u00c1\3\2\2\2\u00c0")
+        buf.write("\u00bd\3\2\2\2\u00c0\u00c1\3\2\2\2\u00c1\u00c3\3\2\2\2")
+        buf.write("\u00c2\u00c4\5\60\31\2\u00c3\u00c2\3\2\2\2\u00c3\u00c4")
+        buf.write("\3\2\2\2\u00c4\u00c5\3\2\2\2\u00c5\u00c9\7 \2\2\u00c6")
+        buf.write("\u00c8\5&\24\2\u00c7\u00c6\3\2\2\2\u00c8\u00cb\3\2\2\2")
+        buf.write("\u00c9\u00c7\3\2\2\2\u00c9\u00ca\3\2\2\2\u00ca\u00cc\3")
+        buf.write("\2\2\2\u00cb\u00c9\3\2\2\2\u00cc\u00cd\7!\2\2\u00cd%\3")
+        buf.write("\2\2\2\u00ce\u00cf\5(\25\2\u00cf\u00d1\7\'\2\2\u00d0\u00d2")
+        buf.write("\5\22\n\2\u00d1\u00d0\3\2\2\2\u00d1\u00d2\3\2\2\2\u00d2")
+        buf.write("\'\3\2\2\2\u00d3\u00d4\7\5\2\2\u00d4\u00d7\5\60\31\2\u00d5")
+        buf.write("\u00d7\7\6\2\2\u00d6\u00d3\3\2\2\2\u00d6\u00d5\3\2\2\2")
+        buf.write("\u00d7)\3\2\2\2\u00d8\u00de\5,\27\2\u00d9\u00da\7\36\2")
+        buf.write("\2\u00da\u00db\5*\26\2\u00db\u00dc\7\37\2\2\u00dc\u00de")
+        buf.write("\3\2\2\2\u00dd\u00d8\3\2\2\2\u00dd\u00d9\3\2\2\2\u00de")
+        buf.write("+\3\2\2\2\u00df\u00e0\t\2\2\2\u00e0-\3\2\2\2\u00e1\u00e2")
+        buf.write("\5*\26\2\u00e2/\3\2\2\2\u00e3\u00f4\5\62\32\2\u00e4\u00e5")
+        buf.write("\5\62\32\2\u00e5\u00e7\t\3\2\2\u00e6\u00e8\t\4\2\2\u00e7")
+        buf.write("\u00e6\3\2\2\2\u00e7\u00e8\3\2\2\2\u00e8\u00e9\3\2\2\2")
+        buf.write("\u00e9\u00ea\5\62\32\2\u00ea\u00f4\3\2\2\2\u00eb\u00ec")
+        buf.write("\5\62\32\2\u00ec\u00ed\t\5\2\2\u00ed\u00ee\5\62\32\2\u00ee")
+        buf.write("\u00f4\3\2\2\2\u00ef\u00f0\5\62\32\2\u00f0\u00f1\t\6\2")
+        buf.write("\2\u00f1\u00f2\5\62\32\2\u00f2\u00f4\3\2\2\2\u00f3\u00e3")
+        buf.write("\3\2\2\2\u00f3\u00e4\3\2\2\2\u00f3\u00eb\3\2\2\2\u00f3")
+        buf.write("\u00ef\3\2\2\2\u00f4\61\3\2\2\2\u00f5\u00f6\5\64\33\2")
+        buf.write("\u00f6\63\3\2\2\2\u00f7\u00fa\5\66\34\2\u00f8\u00fa\5")
+        buf.write("<\37\2\u00f9\u00f7\3\2\2\2\u00f9\u00f8\3\2\2\2\u00fa\65")
+        buf.write("\3\2\2\2\u00fb\u00fe\58\35\2\u00fc\u00fe\5> \2\u00fd\u00fb")
+        buf.write("\3\2\2\2\u00fd\u00fc\3\2\2\2\u00fe\67\3\2\2\2\u00ff\u0105")
+        buf.write("\7\f\2\2\u0100\u0105\5:\36\2\u0101\u0105\5F$\2\u0102\u0105")
+        buf.write("\7@\2\2\u0103\u0105\7A\2\2\u0104\u00ff\3\2\2\2\u0104\u0100")
+        buf.write("\3\2\2\2\u0104\u0101\3\2\2\2\u0104\u0102\3\2\2\2\u0104")
+        buf.write("\u0103\3\2\2\2\u01059\3\2\2\2\u0106\u0107\t\7\2\2\u0107")
+        buf.write(";\3\2\2\2\u0108\u0109\7\r\2\2\u0109=\3\2\2\2\u010a\u010b")
+        buf.write("\5@!\2\u010b\u010c\5B\"\2\u010c?\3\2\2\2\u010d\u010e\5")
+        buf.write(".\30\2\u010eA\3\2\2\2\u010f\u0111\7 \2\2\u0110\u0112\5")
+        buf.write("D#\2\u0111\u0110\3\2\2\2\u0111\u0112\3\2\2\2\u0112\u0113")
+        buf.write("\3\2\2\2\u0113\u0114\7!\2\2\u0114C\3\2\2\2\u0115\u0118")
+        buf.write("\5\60\31\2\u0116\u0118\5B\"\2\u0117\u0115\3\2\2\2\u0117")
+        buf.write("\u0116\3\2\2\2\u0118E\3\2\2\2\u0119\u011a\t\b\2\2\u011a")
+        buf.write("G\3\2\2\2\u011b\u011c\7\36\2\2\u011c\u0122\7I\2\2\u011d")
+        buf.write("\u011f\7%\2\2\u011e\u0120\7D\2\2\u011f\u011e\3\2\2\2\u011f")
+        buf.write("\u0120\3\2\2\2\u0120\u0121\3\2\2\2\u0121\u0123\7I\2\2")
         buf.write("\u0122\u011d\3\2\2\2\u0122\u0123\3\2\2\2\u0123\u0124\3")
-        buf.write("\2\2\2\u0124\u0125\7\31\2\2\u0125I\3\2\2\2\u0126\u012b")
-        buf.write("\7 \2\2\u0127\u012b\7\2\2\3\u0128\u012b\6&\2\2\u0129\u012b")
+        buf.write("\2\2\2\u0124\u0125\7\37\2\2\u0125I\3\2\2\2\u0126\u012b")
+        buf.write("\7&\2\2\u0127\u012b\7\2\2\3\u0128\u012b\6&\2\2\u0129\u012b")
         buf.write("\6&\3\2\u012a\u0126\3\2\2\2\u012a\u0127\3\2\2\2\u012a")
         buf.write("\u0128\3\2\2\2\u012a\u0129\3\2\2\2\u012bK\3\2\2\2 Rcp")
         buf.write("t}\u0086\u008d\u0091\u009d\u00a0\u00a3\u00af\u00b6\u00b8")
@@ -161,18 +160,20 @@ class TwoDimParser ( TwoDimParserBase ):
 
     literalNames = [ "<INVALID>", "'func'", "'switch'", "'case'", "'default'", 
                      "'if'", "'else'", "'type'", "'package'", "'import'", 
-                     "'nil'", "<INVALID>", "'draw'", "'left'", "'right'", 
-                     "'top'", "'bot'", "'outer'", "'inner'", "'on'", "'under'", 
-                     "'in'", "'('", "')'", "'{'", "'}'", "'['", "']'", "'='", 
-                     "','", "';'", "':'", "'.'", "'++'", "'--'", "'or'", 
-                     "'and'", "'=='", "'!='", "'<'", "'<='", "'>'", "'>='", 
-                     "'|'", "'/'", "'%'", "'<<'", "'>>'", "'&^'", "'!'", 
-                     "'+'", "'-'", "'^'", "'*'", "'&'" ]
+                     "'nil'", "<INVALID>", "'square'", "'rect'", "'circle'", 
+                     "'triangle'", "'shape'", "'draw'", "'#viewport'", "'left'", 
+                     "'right'", "'top'", "'bot'", "'outer'", "'inner'", 
+                     "'on'", "'under'", "'in'", "'('", "')'", "'{'", "'}'", 
+                     "'['", "']'", "'='", "','", "';'", "':'", "'.'", "'++'", 
+                     "'--'", "'or'", "'and'", "'=='", "'!='", "'<'", "'<='", 
+                     "'>'", "'>='", "'|'", "'/'", "'%'", "'<<'", "'>>'", 
+                     "'&^'", "'!'", "'+'", "'-'", "'^'", "'*'", "'&'" ]
 
     symbolicNames = [ "<INVALID>", "FUNC", "SWITCH", "CASE", "DEFAULT", 
                       "IF", "ELSE", "TYPE", "PACKAGE", "IMPORT", "NIL_LIT", 
-                      "IDENTIFIER", "DRAW", "LEFT", "RIGHT", "TOP", "BOT", 
-                      "OUTER", "INNER", "ON", "UNDER", "IN", "L_PAREN", 
+                      "IDENTIFIER", "SQUARE", "RECT", "CIRCLE", "TRIANGLE", 
+                      "SHAPE", "DRAW", "VIEWPORT", "LEFT", "RIGHT", "TOP", 
+                      "BOT", "OUTER", "INNER", "ON", "UNDER", "IN", "L_PAREN", 
                       "R_PAREN", "L_CURLY", "R_CURLY", "L_BRACKET", "R_BRACKET", 
                       "ASSIGN", "COMMA", "SEMI", "COLON", "DOT", "PLUS_PLUS", 
                       "MINUS_MINUS", "LOGICAL_OR", "LOGICAL_AND", "EQUALS", 
@@ -181,9 +182,8 @@ class TwoDimParser ( TwoDimParserBase ):
                       "RSHIFT", "BIT_CLEAR", "EXCLAMATION", "PLUS", "MINUS", 
                       "CARET", "STAR", "AMPERSAND", "DECIMAL_LIT", "FLOAT_LIT", 
                       "RUNE_LIT", "RAW_STRING_LIT", "INTERPRETED_STRING_LIT", 
-                      "WS", "COMMENT", "TERMINATOR", "LINE_COMMENT", "VIEWPORT", 
-                      "DECIMALS", "SIZE", "RECT", "SQUARE", "CIRCLE", "TRIANGLE", 
-                      "SHAPE" ]
+                      "WS", "COMMENT", "TERMINATOR", "LINE_COMMENT", "DECIMALS", 
+                      "SIZE" ]
 
     RULE_sourceFile = 0
     RULE_viewportClause = 1
@@ -245,66 +245,66 @@ class TwoDimParser ( TwoDimParserBase ):
     IMPORT=9
     NIL_LIT=10
     IDENTIFIER=11
-    DRAW=12
-    LEFT=13
-    RIGHT=14
-    TOP=15
-    BOT=16
-    OUTER=17
-    INNER=18
-    ON=19
-    UNDER=20
-    IN=21
-    L_PAREN=22
-    R_PAREN=23
-    L_CURLY=24
-    R_CURLY=25
-    L_BRACKET=26
-    R_BRACKET=27
-    ASSIGN=28
-    COMMA=29
-    SEMI=30
-    COLON=31
-    DOT=32
-    PLUS_PLUS=33
-    MINUS_MINUS=34
-    LOGICAL_OR=35
-    LOGICAL_AND=36
-    EQUALS=37
-    NOT_EQUALS=38
-    LESS=39
-    LESS_OR_EQUALS=40
-    GREATER=41
-    GREATER_OR_EQUALS=42
-    OR=43
-    DIV=44
-    MOD=45
-    LSHIFT=46
-    RSHIFT=47
-    BIT_CLEAR=48
-    EXCLAMATION=49
-    PLUS=50
-    MINUS=51
-    CARET=52
-    STAR=53
-    AMPERSAND=54
-    DECIMAL_LIT=55
-    FLOAT_LIT=56
-    RUNE_LIT=57
-    RAW_STRING_LIT=58
-    INTERPRETED_STRING_LIT=59
-    WS=60
-    COMMENT=61
-    TERMINATOR=62
-    LINE_COMMENT=63
-    VIEWPORT=64
-    DECIMALS=65
-    SIZE=66
-    RECT=67
-    SQUARE=68
-    CIRCLE=69
-    TRIANGLE=70
-    SHAPE=71
+    SQUARE=12
+    RECT=13
+    CIRCLE=14
+    TRIANGLE=15
+    SHAPE=16
+    DRAW=17
+    VIEWPORT=18
+    LEFT=19
+    RIGHT=20
+    TOP=21
+    BOT=22
+    OUTER=23
+    INNER=24
+    ON=25
+    UNDER=26
+    IN=27
+    L_PAREN=28
+    R_PAREN=29
+    L_CURLY=30
+    R_CURLY=31
+    L_BRACKET=32
+    R_BRACKET=33
+    ASSIGN=34
+    COMMA=35
+    SEMI=36
+    COLON=37
+    DOT=38
+    PLUS_PLUS=39
+    MINUS_MINUS=40
+    LOGICAL_OR=41
+    LOGICAL_AND=42
+    EQUALS=43
+    NOT_EQUALS=44
+    LESS=45
+    LESS_OR_EQUALS=46
+    GREATER=47
+    GREATER_OR_EQUALS=48
+    OR=49
+    DIV=50
+    MOD=51
+    LSHIFT=52
+    RSHIFT=53
+    BIT_CLEAR=54
+    EXCLAMATION=55
+    PLUS=56
+    MINUS=57
+    CARET=58
+    STAR=59
+    AMPERSAND=60
+    DECIMAL_LIT=61
+    FLOAT_LIT=62
+    RUNE_LIT=63
+    RAW_STRING_LIT=64
+    INTERPRETED_STRING_LIT=65
+    WS=66
+    COMMENT=67
+    TERMINATOR=68
+    LINE_COMMENT=69
+    DECIMALS=70
+    SIZE=71
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -366,7 +366,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 80
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while ((((_la - 22)) & ~0x3f) == 0 and ((1 << (_la - 22)) & ((1 << (TwoDimParser.L_PAREN - 22)) | (1 << (TwoDimParser.RECT - 22)) | (1 << (TwoDimParser.SQUARE - 22)) | (1 << (TwoDimParser.CIRCLE - 22)) | (1 << (TwoDimParser.TRIANGLE - 22)) | (1 << (TwoDimParser.SHAPE - 22)))) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE) | (1 << TwoDimParser.L_PAREN))) != 0):
                 self.state = 75
                 self.declaration()
                 self.state = 76
@@ -664,7 +664,7 @@ class TwoDimParser ( TwoDimParserBase ):
                 self.state = 110
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while ((((_la - 22)) & ~0x3f) == 0 and ((1 << (_la - 22)) & ((1 << (TwoDimParser.L_PAREN - 22)) | (1 << (TwoDimParser.RECT - 22)) | (1 << (TwoDimParser.SQUARE - 22)) | (1 << (TwoDimParser.CIRCLE - 22)) | (1 << (TwoDimParser.TRIANGLE - 22)) | (1 << (TwoDimParser.SHAPE - 22)))) != 0):
+                while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE) | (1 << TwoDimParser.L_PAREN))) != 0):
                     self.state = 105
                     self.varSpec()
                     self.state = 106
@@ -789,7 +789,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 123
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SWITCH) | (1 << TwoDimParser.IF) | (1 << TwoDimParser.NIL_LIT) | (1 << TwoDimParser.IDENTIFIER) | (1 << TwoDimParser.L_PAREN) | (1 << TwoDimParser.L_CURLY) | (1 << TwoDimParser.DECIMAL_LIT) | (1 << TwoDimParser.FLOAT_LIT) | (1 << TwoDimParser.RUNE_LIT) | (1 << TwoDimParser.RAW_STRING_LIT) | (1 << TwoDimParser.INTERPRETED_STRING_LIT))) != 0) or ((((_la - 67)) & ~0x3f) == 0 and ((1 << (_la - 67)) & ((1 << (TwoDimParser.RECT - 67)) | (1 << (TwoDimParser.SQUARE - 67)) | (1 << (TwoDimParser.CIRCLE - 67)) | (1 << (TwoDimParser.TRIANGLE - 67)) | (1 << (TwoDimParser.SHAPE - 67)))) != 0):
+            if ((((_la - 2)) & ~0x3f) == 0 and ((1 << (_la - 2)) & ((1 << (TwoDimParser.SWITCH - 2)) | (1 << (TwoDimParser.IF - 2)) | (1 << (TwoDimParser.NIL_LIT - 2)) | (1 << (TwoDimParser.IDENTIFIER - 2)) | (1 << (TwoDimParser.SQUARE - 2)) | (1 << (TwoDimParser.RECT - 2)) | (1 << (TwoDimParser.CIRCLE - 2)) | (1 << (TwoDimParser.TRIANGLE - 2)) | (1 << (TwoDimParser.SHAPE - 2)) | (1 << (TwoDimParser.L_PAREN - 2)) | (1 << (TwoDimParser.L_CURLY - 2)) | (1 << (TwoDimParser.DECIMAL_LIT - 2)) | (1 << (TwoDimParser.FLOAT_LIT - 2)) | (1 << (TwoDimParser.RUNE_LIT - 2)) | (1 << (TwoDimParser.RAW_STRING_LIT - 2)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 2)))) != 0):
                 self.state = 122
                 self.statementList()
 
@@ -858,7 +858,7 @@ class TwoDimParser ( TwoDimParserBase ):
                 self.state = 132 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SWITCH) | (1 << TwoDimParser.IF) | (1 << TwoDimParser.NIL_LIT) | (1 << TwoDimParser.IDENTIFIER) | (1 << TwoDimParser.L_PAREN) | (1 << TwoDimParser.L_CURLY) | (1 << TwoDimParser.DECIMAL_LIT) | (1 << TwoDimParser.FLOAT_LIT) | (1 << TwoDimParser.RUNE_LIT) | (1 << TwoDimParser.RAW_STRING_LIT) | (1 << TwoDimParser.INTERPRETED_STRING_LIT))) != 0) or ((((_la - 67)) & ~0x3f) == 0 and ((1 << (_la - 67)) & ((1 << (TwoDimParser.RECT - 67)) | (1 << (TwoDimParser.SQUARE - 67)) | (1 << (TwoDimParser.CIRCLE - 67)) | (1 << (TwoDimParser.TRIANGLE - 67)) | (1 << (TwoDimParser.SHAPE - 67)))) != 0)):
+                if not (((((_la - 2)) & ~0x3f) == 0 and ((1 << (_la - 2)) & ((1 << (TwoDimParser.SWITCH - 2)) | (1 << (TwoDimParser.IF - 2)) | (1 << (TwoDimParser.NIL_LIT - 2)) | (1 << (TwoDimParser.IDENTIFIER - 2)) | (1 << (TwoDimParser.SQUARE - 2)) | (1 << (TwoDimParser.RECT - 2)) | (1 << (TwoDimParser.CIRCLE - 2)) | (1 << (TwoDimParser.TRIANGLE - 2)) | (1 << (TwoDimParser.SHAPE - 2)) | (1 << (TwoDimParser.L_PAREN - 2)) | (1 << (TwoDimParser.L_CURLY - 2)) | (1 << (TwoDimParser.DECIMAL_LIT - 2)) | (1 << (TwoDimParser.FLOAT_LIT - 2)) | (1 << (TwoDimParser.RUNE_LIT - 2)) | (1 << (TwoDimParser.RAW_STRING_LIT - 2)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 2)))) != 0)):
                     break
 
         except RecognitionException as re:
@@ -1475,7 +1475,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 193
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)) | (1 << (TwoDimParser.RECT - 10)) | (1 << (TwoDimParser.SQUARE - 10)) | (1 << (TwoDimParser.CIRCLE - 10)) | (1 << (TwoDimParser.TRIANGLE - 10)) | (1 << (TwoDimParser.SHAPE - 10)))) != 0):
+            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (1 << (TwoDimParser.SQUARE - 10)) | (1 << (TwoDimParser.RECT - 10)) | (1 << (TwoDimParser.CIRCLE - 10)) | (1 << (TwoDimParser.TRIANGLE - 10)) | (1 << (TwoDimParser.SHAPE - 10)) | (1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)))) != 0):
                 self.state = 192
                 self.expression()
 
@@ -1549,7 +1549,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 207
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SWITCH) | (1 << TwoDimParser.IF) | (1 << TwoDimParser.NIL_LIT) | (1 << TwoDimParser.IDENTIFIER) | (1 << TwoDimParser.L_PAREN) | (1 << TwoDimParser.L_CURLY) | (1 << TwoDimParser.DECIMAL_LIT) | (1 << TwoDimParser.FLOAT_LIT) | (1 << TwoDimParser.RUNE_LIT) | (1 << TwoDimParser.RAW_STRING_LIT) | (1 << TwoDimParser.INTERPRETED_STRING_LIT))) != 0) or ((((_la - 67)) & ~0x3f) == 0 and ((1 << (_la - 67)) & ((1 << (TwoDimParser.RECT - 67)) | (1 << (TwoDimParser.SQUARE - 67)) | (1 << (TwoDimParser.CIRCLE - 67)) | (1 << (TwoDimParser.TRIANGLE - 67)) | (1 << (TwoDimParser.SHAPE - 67)))) != 0):
+            if ((((_la - 2)) & ~0x3f) == 0 and ((1 << (_la - 2)) & ((1 << (TwoDimParser.SWITCH - 2)) | (1 << (TwoDimParser.IF - 2)) | (1 << (TwoDimParser.NIL_LIT - 2)) | (1 << (TwoDimParser.IDENTIFIER - 2)) | (1 << (TwoDimParser.SQUARE - 2)) | (1 << (TwoDimParser.RECT - 2)) | (1 << (TwoDimParser.CIRCLE - 2)) | (1 << (TwoDimParser.TRIANGLE - 2)) | (1 << (TwoDimParser.SHAPE - 2)) | (1 << (TwoDimParser.L_PAREN - 2)) | (1 << (TwoDimParser.L_CURLY - 2)) | (1 << (TwoDimParser.DECIMAL_LIT - 2)) | (1 << (TwoDimParser.FLOAT_LIT - 2)) | (1 << (TwoDimParser.RUNE_LIT - 2)) | (1 << (TwoDimParser.RAW_STRING_LIT - 2)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 2)))) != 0):
                 self.state = 206
                 self.statementList()
 
@@ -1669,7 +1669,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 219
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [TwoDimParser.RECT, TwoDimParser.SQUARE, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE]:
+            if token in [TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 214
                 self.typeName()
@@ -1740,7 +1740,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.enterOuterAlt(localctx, 1)
             self.state = 221
             _la = self._input.LA(1)
-            if not(((((_la - 67)) & ~0x3f) == 0 and ((1 << (_la - 67)) & ((1 << (TwoDimParser.RECT - 67)) | (1 << (TwoDimParser.SQUARE - 67)) | (1 << (TwoDimParser.CIRCLE - 67)) | (1 << (TwoDimParser.TRIANGLE - 67)) | (1 << (TwoDimParser.SHAPE - 67)))) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2019,7 +2019,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 247
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [TwoDimParser.NIL_LIT, TwoDimParser.L_PAREN, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT, TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT, TwoDimParser.RECT, TwoDimParser.SQUARE, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE]:
+            if token in [TwoDimParser.NIL_LIT, TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE, TwoDimParser.L_PAREN, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT, TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 245
                 self.literal()
@@ -2083,7 +2083,7 @@ class TwoDimParser ( TwoDimParserBase ):
                 self.state = 249
                 self.basicLit()
                 pass
-            elif token in [TwoDimParser.L_PAREN, TwoDimParser.RECT, TwoDimParser.SQUARE, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE]:
+            elif token in [TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE, TwoDimParser.L_PAREN]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 250
                 self.compositeLit()
@@ -2410,7 +2410,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 271
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.L_CURLY - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)) | (1 << (TwoDimParser.RECT - 10)) | (1 << (TwoDimParser.SQUARE - 10)) | (1 << (TwoDimParser.CIRCLE - 10)) | (1 << (TwoDimParser.TRIANGLE - 10)) | (1 << (TwoDimParser.SHAPE - 10)))) != 0):
+            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (1 << (TwoDimParser.SQUARE - 10)) | (1 << (TwoDimParser.RECT - 10)) | (1 << (TwoDimParser.CIRCLE - 10)) | (1 << (TwoDimParser.TRIANGLE - 10)) | (1 << (TwoDimParser.SHAPE - 10)) | (1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.L_CURLY - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)))) != 0):
                 self.state = 270
                 self.element()
 
@@ -2463,7 +2463,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 277
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [TwoDimParser.NIL_LIT, TwoDimParser.IDENTIFIER, TwoDimParser.L_PAREN, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT, TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT, TwoDimParser.RECT, TwoDimParser.SQUARE, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE]:
+            if token in [TwoDimParser.NIL_LIT, TwoDimParser.IDENTIFIER, TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE, TwoDimParser.L_PAREN, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT, TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 275
                 self.expression()

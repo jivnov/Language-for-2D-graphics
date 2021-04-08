@@ -6,7 +6,7 @@ options {
 }
 
 sourceFile
-    : viewportClause  (declaration eos)*
+    : viewportClause  (declaration eos)* drawClause eos
     ;
 
 viewportClause
