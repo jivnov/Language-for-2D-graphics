@@ -14,7 +14,7 @@ IMPORT                 : 'import';
 
 NIL_LIT                : 'nil';
 
-IDENTIFIER             : [_\p{L}] [_\p{L}\p{Nd}]*;  // L - "Letter" (any case); Nd - "Number Decimal" (see unicode reference in README)
+IDENTIFIER             : [\p{Lu}] [_\p{L}\p{Nd}]*;  // L - "Letter" (any case); Nd - "Number Decimal" (see unicode reference in README)
 
 //TwoDim shapes
 SQUARE                 : 'square';
@@ -111,9 +111,13 @@ RUNE_LIT               : '\'' (~[\n\\] | ESCAPED_VALUE) '\'';
 RAW_STRING_LIT         : '`' ~'`'*                      '`';
 INTERPRETED_STRING_LIT : '"' (~["\\] | ESCAPED_VALUE)*  '"';
 
+// TwoDim special literals
+
+SIZE_LIT               : SIZE;
+
 
 // Hidden tokens
-WS                     : [ \t]+             -> channel(HIDDEN);
+WS                     : [ ]+             -> channel(HIDDEN);
 COMMENT                : '/*' .*? '*/'      -> channel(HIDDEN);
 TERMINATOR             : [\r\n]+            -> channel(HIDDEN);
 LINE_COMMENT           : '//' ~[\r\n]*      -> channel(HIDDEN);

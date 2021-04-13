@@ -6,33 +6,54 @@ options {
 }
 
 sourceFile
-    : viewportClause  (declaration eos)* drawClause eos
+    : viewportClause? ((functionDecl | declaration) eos)* statementList? drawClause eos
     ;
 
 viewportClause
-    : VIEWPORT WS DECIMALS WS DECIMALS eos
+    : VIEWPORT DECIMAL_LIT DECIMAL_LIT eos
     ;
 
 declaration
-    : varDecl
+    : shapeDecl
     ;
 
 identifierList
     : IDENTIFIER (',' IDENTIFIER)*
     ;
 
+expressionList
+    : expression (',' expression)*
+    ;
+
 // Function declarations
+
+functionDecl
+    : 'func' IDENTIFIER (signature block?)
+    ;
+
+signature
+    : {self.noTerminatorAfterParams(1)}? parameters
+    | parameters
+    ;
+
+parameters
+    : '(' (parameterDecl (COMMA parameterDecl)*)? ')'
+    ;
+
+parameterDecl
+    : typeName identifierList?
+    ;
 
 drawClause
     : DRAW IDENTIFIER
     ;
 
-varDecl
-    : (varSpec | '(' (varSpec eos)* ')')
+shapeDecl
+    : shapeSpec
     ;
 
-varSpec
-    : type_ identifierList '=' declStmt
+shapeSpec
+    : typeName IDENTIFIER WS? shapeArguments (',' WS? IDENTIFIER shapeArguments)*  // e.x. 'square A(20%) [15%], B(30%) [15%]'
     ;
 
 block
@@ -54,14 +75,15 @@ statement
 simpleStmt
     : expressionStmt
     | assignment
+    | drawClause
     ;
 
 expressionStmt
     : expression
     ;
 
-declStmt
-    : type_ L_PAREN arguments R_PAREN (L_BRACKET SIZE (COMMA WS? SIZE)? R_BRACKET)?
+shapeArguments
+    : arguments? WS? (L_BRACKET WS? SIZE_LIT (COMMA WS? SIZE_LIT)? WS? R_BRACKET)?
     ;
 
 assignment
@@ -93,21 +115,12 @@ exprSwitchCase
     | 'default'
     ;
 
-type_
-    : typeName
-    | '(' type_ ')'
-    ;
-
 typeName
     : RECT 
     | SQUARE 
     | CIRCLE 
     | TRIANGLE 
     | SHAPE
-    ;
-
-elementType
-    : type_
     ;
 
 expression
@@ -124,11 +137,11 @@ primaryExpr
 operand
     : literal
     | operandName
+    | '(' expression ')'
     ;
 
 literal
     : basicLit
-    | compositeLit
     ;
 
 basicLit
@@ -148,35 +161,18 @@ operandName
     : IDENTIFIER
     ;
 
-compositeLit
-    : literalType literalValue
-    ;
-
-literalType
-    : elementType
-    ;
-
-literalValue
-    : '{' (element)? '}'
-    ;
-
-element
-    : expression
-    | literalValue
-    ;
-
 string_
     : RAW_STRING_LIT
     | INTERPRETED_STRING_LIT
     ;
 
 arguments
-    : L_PAREN SIZE (COMMA WS? SIZE)? R_PAREN
+    : '(' (expressionList)? ')'
     ;
 
 eos
     : ';'
-    | EOF
-    | {lineTerminatorAhead()}?
-    | {checkPreviousTokenText("}")}?
+    | ';' EOF
+    | {self.lineTerminatorAhead()}?
+    | {self.checkPreviousTokenText("}")}?
     ;

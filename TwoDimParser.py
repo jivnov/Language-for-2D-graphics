@@ -16,135 +16,153 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3I")
-        buf.write("\u012d\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3H")
+        buf.write("\u0148\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
         buf.write("\t\31\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36")
-        buf.write("\4\37\t\37\4 \t \4!\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t")
-        buf.write("&\3\2\3\2\3\2\3\2\7\2Q\n\2\f\2\16\2T\13\2\3\3\3\3\3\3")
-        buf.write("\3\3\3\3\3\3\3\3\3\4\3\4\3\5\3\5\3\5\7\5b\n\5\f\5\16\5")
-        buf.write("e\13\5\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\7\7o\n\7\f\7\16")
-        buf.write("\7r\13\7\3\7\5\7u\n\7\3\b\3\b\3\b\3\b\3\b\3\t\3\t\5\t")
-        buf.write("~\n\t\3\t\3\t\3\n\3\n\3\n\6\n\u0085\n\n\r\n\16\n\u0086")
-        buf.write("\3\13\3\13\3\13\3\13\3\13\5\13\u008e\n\13\3\f\3\f\5\f")
-        buf.write("\u0092\n\f\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3\16\3\16")
-        buf.write("\3\16\5\16\u009e\n\16\3\16\5\16\u00a1\n\16\3\16\5\16\u00a4")
-        buf.write("\n\16\3\17\3\17\3\17\3\17\3\20\3\20\3\21\3\21\3\21\3\21")
-        buf.write("\5\21\u00b0\n\21\3\21\3\21\3\21\3\21\3\21\5\21\u00b7\n")
-        buf.write("\21\5\21\u00b9\n\21\3\22\3\22\3\23\3\23\3\23\3\23\5\23")
-        buf.write("\u00c1\n\23\3\23\5\23\u00c4\n\23\3\23\3\23\7\23\u00c8")
-        buf.write("\n\23\f\23\16\23\u00cb\13\23\3\23\3\23\3\24\3\24\3\24")
-        buf.write("\5\24\u00d2\n\24\3\25\3\25\3\25\5\25\u00d7\n\25\3\26\3")
-        buf.write("\26\3\26\3\26\3\26\5\26\u00de\n\26\3\27\3\27\3\30\3\30")
-        buf.write("\3\31\3\31\3\31\3\31\5\31\u00e8\n\31\3\31\3\31\3\31\3")
-        buf.write("\31\3\31\3\31\3\31\3\31\3\31\3\31\5\31\u00f4\n\31\3\32")
-        buf.write("\3\32\3\33\3\33\5\33\u00fa\n\33\3\34\3\34\5\34\u00fe\n")
-        buf.write("\34\3\35\3\35\3\35\3\35\3\35\5\35\u0105\n\35\3\36\3\36")
-        buf.write("\3\37\3\37\3 \3 \3 \3!\3!\3\"\3\"\5\"\u0112\n\"\3\"\3")
-        buf.write("\"\3#\3#\5#\u0118\n#\3$\3$\3%\3%\3%\3%\5%\u0120\n%\3%")
-        buf.write("\5%\u0123\n%\3%\3%\3&\3&\3&\3&\5&\u012b\n&\3&\2\2\'\2")
-        buf.write("\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64")
-        buf.write("\668:<>@BDFHJ\2\t\3\2\16\22\3\2\25\30\3\2\31\32\3\2\33")
-        buf.write("\35\3\2:;\4\2??AA\3\2BC\2\u012f\2L\3\2\2\2\4U\3\2\2\2")
-        buf.write("\6\\\3\2\2\2\b^\3\2\2\2\nf\3\2\2\2\ft\3\2\2\2\16v\3\2")
-        buf.write("\2\2\20{\3\2\2\2\22\u0084\3\2\2\2\24\u008d\3\2\2\2\26")
-        buf.write("\u0091\3\2\2\2\30\u0093\3\2\2\2\32\u0095\3\2\2\2\34\u00a5")
-        buf.write("\3\2\2\2\36\u00a9\3\2\2\2 \u00ab\3\2\2\2\"\u00ba\3\2\2")
-        buf.write("\2$\u00bc\3\2\2\2&\u00ce\3\2\2\2(\u00d6\3\2\2\2*\u00dd")
-        buf.write("\3\2\2\2,\u00df\3\2\2\2.\u00e1\3\2\2\2\60\u00f3\3\2\2")
-        buf.write("\2\62\u00f5\3\2\2\2\64\u00f9\3\2\2\2\66\u00fd\3\2\2\2")
-        buf.write("8\u0104\3\2\2\2:\u0106\3\2\2\2<\u0108\3\2\2\2>\u010a\3")
-        buf.write("\2\2\2@\u010d\3\2\2\2B\u010f\3\2\2\2D\u0117\3\2\2\2F\u0119")
-        buf.write("\3\2\2\2H\u011b\3\2\2\2J\u012a\3\2\2\2LR\5\4\3\2MN\5\6")
-        buf.write("\4\2NO\5J&\2OQ\3\2\2\2PM\3\2\2\2QT\3\2\2\2RP\3\2\2\2R")
-        buf.write("S\3\2\2\2S\3\3\2\2\2TR\3\2\2\2UV\7\24\2\2VW\7D\2\2WX\7")
-        buf.write("H\2\2XY\7D\2\2YZ\7H\2\2Z[\5J&\2[\5\3\2\2\2\\]\5\f\7\2")
-        buf.write("]\7\3\2\2\2^c\7\r\2\2_`\7%\2\2`b\7\r\2\2a_\3\2\2\2be\3")
-        buf.write("\2\2\2ca\3\2\2\2cd\3\2\2\2d\t\3\2\2\2ec\3\2\2\2fg\7\23")
-        buf.write("\2\2gh\7\r\2\2h\13\3\2\2\2iu\5\16\b\2jp\7\36\2\2kl\5\16")
-        buf.write("\b\2lm\5J&\2mo\3\2\2\2nk\3\2\2\2or\3\2\2\2pn\3\2\2\2p")
-        buf.write("q\3\2\2\2qs\3\2\2\2rp\3\2\2\2su\7\37\2\2ti\3\2\2\2tj\3")
-        buf.write("\2\2\2u\r\3\2\2\2vw\5*\26\2wx\5\b\5\2xy\7$\2\2yz\5\32")
-        buf.write("\16\2z\17\3\2\2\2{}\7 \2\2|~\5\22\n\2}|\3\2\2\2}~\3\2")
-        buf.write("\2\2~\177\3\2\2\2\177\u0080\7!\2\2\u0080\21\3\2\2\2\u0081")
-        buf.write("\u0082\5\24\13\2\u0082\u0083\5J&\2\u0083\u0085\3\2\2\2")
-        buf.write("\u0084\u0081\3\2\2\2\u0085\u0086\3\2\2\2\u0086\u0084\3")
-        buf.write("\2\2\2\u0086\u0087\3\2\2\2\u0087\23\3\2\2\2\u0088\u008e")
-        buf.write("\5\6\4\2\u0089\u008e\5\26\f\2\u008a\u008e\5\20\t\2\u008b")
-        buf.write("\u008e\5 \21\2\u008c\u008e\5\"\22\2\u008d\u0088\3\2\2")
-        buf.write("\2\u008d\u0089\3\2\2\2\u008d\u008a\3\2\2\2\u008d\u008b")
-        buf.write("\3\2\2\2\u008d\u008c\3\2\2\2\u008e\25\3\2\2\2\u008f\u0092")
-        buf.write("\5\30\r\2\u0090\u0092\5\34\17\2\u0091\u008f\3\2\2\2\u0091")
-        buf.write("\u0090\3\2\2\2\u0092\27\3\2\2\2\u0093\u0094\5\60\31\2")
-        buf.write("\u0094\31\3\2\2\2\u0095\u0096\5*\26\2\u0096\u0097\7\36")
-        buf.write("\2\2\u0097\u0098\5H%\2\u0098\u00a3\7\37\2\2\u0099\u009a")
-        buf.write("\7\"\2\2\u009a\u00a0\7I\2\2\u009b\u009d\7%\2\2\u009c\u009e")
-        buf.write("\7D\2\2\u009d\u009c\3\2\2\2\u009d\u009e\3\2\2\2\u009e")
-        buf.write("\u009f\3\2\2\2\u009f\u00a1\7I\2\2\u00a0\u009b\3\2\2\2")
-        buf.write("\u00a0\u00a1\3\2\2\2\u00a1\u00a2\3\2\2\2\u00a2\u00a4\7")
-        buf.write("#\2\2\u00a3\u0099\3\2\2\2\u00a3\u00a4\3\2\2\2\u00a4\33")
-        buf.write("\3\2\2\2\u00a5\u00a6\7\r\2\2\u00a6\u00a7\5\36\20\2\u00a7")
-        buf.write("\u00a8\5\60\31\2\u00a8\35\3\2\2\2\u00a9\u00aa\7$\2\2\u00aa")
-        buf.write("\37\3\2\2\2\u00ab\u00af\7\7\2\2\u00ac\u00ad\5\26\f\2\u00ad")
-        buf.write("\u00ae\7&\2\2\u00ae\u00b0\3\2\2\2\u00af\u00ac\3\2\2\2")
-        buf.write("\u00af\u00b0\3\2\2\2\u00b0\u00b1\3\2\2\2\u00b1\u00b2\5")
-        buf.write("\60\31\2\u00b2\u00b8\5\20\t\2\u00b3\u00b6\7\b\2\2\u00b4")
-        buf.write("\u00b7\5 \21\2\u00b5\u00b7\5\20\t\2\u00b6\u00b4\3\2\2")
-        buf.write("\2\u00b6\u00b5\3\2\2\2\u00b7\u00b9\3\2\2\2\u00b8\u00b3")
-        buf.write("\3\2\2\2\u00b8\u00b9\3\2\2\2\u00b9!\3\2\2\2\u00ba\u00bb")
-        buf.write("\5$\23\2\u00bb#\3\2\2\2\u00bc\u00c0\7\4\2\2\u00bd\u00be")
-        buf.write("\5\26\f\2\u00be\u00bf\7&\2\2\u00bf\u00c1\3\2\2\2\u00c0")
-        buf.write("\u00bd\3\2\2\2\u00c0\u00c1\3\2\2\2\u00c1\u00c3\3\2\2\2")
-        buf.write("\u00c2\u00c4\5\60\31\2\u00c3\u00c2\3\2\2\2\u00c3\u00c4")
-        buf.write("\3\2\2\2\u00c4\u00c5\3\2\2\2\u00c5\u00c9\7 \2\2\u00c6")
-        buf.write("\u00c8\5&\24\2\u00c7\u00c6\3\2\2\2\u00c8\u00cb\3\2\2\2")
-        buf.write("\u00c9\u00c7\3\2\2\2\u00c9\u00ca\3\2\2\2\u00ca\u00cc\3")
-        buf.write("\2\2\2\u00cb\u00c9\3\2\2\2\u00cc\u00cd\7!\2\2\u00cd%\3")
-        buf.write("\2\2\2\u00ce\u00cf\5(\25\2\u00cf\u00d1\7\'\2\2\u00d0\u00d2")
-        buf.write("\5\22\n\2\u00d1\u00d0\3\2\2\2\u00d1\u00d2\3\2\2\2\u00d2")
-        buf.write("\'\3\2\2\2\u00d3\u00d4\7\5\2\2\u00d4\u00d7\5\60\31\2\u00d5")
-        buf.write("\u00d7\7\6\2\2\u00d6\u00d3\3\2\2\2\u00d6\u00d5\3\2\2\2")
-        buf.write("\u00d7)\3\2\2\2\u00d8\u00de\5,\27\2\u00d9\u00da\7\36\2")
-        buf.write("\2\u00da\u00db\5*\26\2\u00db\u00dc\7\37\2\2\u00dc\u00de")
-        buf.write("\3\2\2\2\u00dd\u00d8\3\2\2\2\u00dd\u00d9\3\2\2\2\u00de")
-        buf.write("+\3\2\2\2\u00df\u00e0\t\2\2\2\u00e0-\3\2\2\2\u00e1\u00e2")
-        buf.write("\5*\26\2\u00e2/\3\2\2\2\u00e3\u00f4\5\62\32\2\u00e4\u00e5")
-        buf.write("\5\62\32\2\u00e5\u00e7\t\3\2\2\u00e6\u00e8\t\4\2\2\u00e7")
-        buf.write("\u00e6\3\2\2\2\u00e7\u00e8\3\2\2\2\u00e8\u00e9\3\2\2\2")
-        buf.write("\u00e9\u00ea\5\62\32\2\u00ea\u00f4\3\2\2\2\u00eb\u00ec")
-        buf.write("\5\62\32\2\u00ec\u00ed\t\5\2\2\u00ed\u00ee\5\62\32\2\u00ee")
-        buf.write("\u00f4\3\2\2\2\u00ef\u00f0\5\62\32\2\u00f0\u00f1\t\6\2")
-        buf.write("\2\u00f1\u00f2\5\62\32\2\u00f2\u00f4\3\2\2\2\u00f3\u00e3")
-        buf.write("\3\2\2\2\u00f3\u00e4\3\2\2\2\u00f3\u00eb\3\2\2\2\u00f3")
-        buf.write("\u00ef\3\2\2\2\u00f4\61\3\2\2\2\u00f5\u00f6\5\64\33\2")
-        buf.write("\u00f6\63\3\2\2\2\u00f7\u00fa\5\66\34\2\u00f8\u00fa\5")
-        buf.write("<\37\2\u00f9\u00f7\3\2\2\2\u00f9\u00f8\3\2\2\2\u00fa\65")
-        buf.write("\3\2\2\2\u00fb\u00fe\58\35\2\u00fc\u00fe\5> \2\u00fd\u00fb")
-        buf.write("\3\2\2\2\u00fd\u00fc\3\2\2\2\u00fe\67\3\2\2\2\u00ff\u0105")
-        buf.write("\7\f\2\2\u0100\u0105\5:\36\2\u0101\u0105\5F$\2\u0102\u0105")
-        buf.write("\7@\2\2\u0103\u0105\7A\2\2\u0104\u00ff\3\2\2\2\u0104\u0100")
-        buf.write("\3\2\2\2\u0104\u0101\3\2\2\2\u0104\u0102\3\2\2\2\u0104")
-        buf.write("\u0103\3\2\2\2\u01059\3\2\2\2\u0106\u0107\t\7\2\2\u0107")
-        buf.write(";\3\2\2\2\u0108\u0109\7\r\2\2\u0109=\3\2\2\2\u010a\u010b")
-        buf.write("\5@!\2\u010b\u010c\5B\"\2\u010c?\3\2\2\2\u010d\u010e\5")
-        buf.write(".\30\2\u010eA\3\2\2\2\u010f\u0111\7 \2\2\u0110\u0112\5")
-        buf.write("D#\2\u0111\u0110\3\2\2\2\u0111\u0112\3\2\2\2\u0112\u0113")
-        buf.write("\3\2\2\2\u0113\u0114\7!\2\2\u0114C\3\2\2\2\u0115\u0118")
-        buf.write("\5\60\31\2\u0116\u0118\5B\"\2\u0117\u0115\3\2\2\2\u0117")
-        buf.write("\u0116\3\2\2\2\u0118E\3\2\2\2\u0119\u011a\t\b\2\2\u011a")
-        buf.write("G\3\2\2\2\u011b\u011c\7\36\2\2\u011c\u0122\7I\2\2\u011d")
-        buf.write("\u011f\7%\2\2\u011e\u0120\7D\2\2\u011f\u011e\3\2\2\2\u011f")
-        buf.write("\u0120\3\2\2\2\u0120\u0121\3\2\2\2\u0121\u0123\7I\2\2")
-        buf.write("\u0122\u011d\3\2\2\2\u0122\u0123\3\2\2\2\u0123\u0124\3")
-        buf.write("\2\2\2\u0124\u0125\7\37\2\2\u0125I\3\2\2\2\u0126\u012b")
-        buf.write("\7&\2\2\u0127\u012b\7\2\2\3\u0128\u012b\6&\2\2\u0129\u012b")
-        buf.write("\6&\3\2\u012a\u0126\3\2\2\2\u012a\u0127\3\2\2\2\u012a")
-        buf.write("\u0128\3\2\2\2\u012a\u0129\3\2\2\2\u012bK\3\2\2\2 Rcp")
-        buf.write("t}\u0086\u008d\u0091\u009d\u00a0\u00a3\u00af\u00b6\u00b8")
-        buf.write("\u00c0\u00c3\u00c9\u00d1\u00d6\u00dd\u00e7\u00f3\u00f9")
-        buf.write("\u00fd\u0104\u0111\u0117\u011f\u0122\u012a")
+        buf.write("\4\37\t\37\4 \t \4!\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\3\2\5")
+        buf.write("\2L\n\2\3\2\3\2\5\2P\n\2\3\2\3\2\7\2T\n\2\f\2\16\2W\13")
+        buf.write("\2\3\2\5\2Z\n\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\4\3")
+        buf.write("\4\3\5\3\5\3\5\7\5i\n\5\f\5\16\5l\13\5\3\6\3\6\3\6\7\6")
+        buf.write("q\n\6\f\6\16\6t\13\6\3\7\3\7\3\7\3\7\5\7z\n\7\3\b\3\b")
+        buf.write("\3\b\5\b\177\n\b\3\t\3\t\3\t\3\t\7\t\u0085\n\t\f\t\16")
+        buf.write("\t\u0088\13\t\5\t\u008a\n\t\3\t\3\t\3\n\3\n\5\n\u0090")
+        buf.write("\n\n\3\13\3\13\3\13\3\f\3\f\3\r\3\r\3\r\5\r\u009a\n\r")
+        buf.write("\3\r\3\r\3\r\5\r\u009f\n\r\3\r\3\r\7\r\u00a3\n\r\f\r\16")
+        buf.write("\r\u00a6\13\r\3\16\3\16\5\16\u00aa\n\16\3\16\3\16\3\17")
+        buf.write("\3\17\3\17\6\17\u00b1\n\17\r\17\16\17\u00b2\3\20\3\20")
+        buf.write("\3\20\3\20\3\20\5\20\u00ba\n\20\3\21\3\21\3\21\5\21\u00bf")
+        buf.write("\n\21\3\22\3\22\3\23\5\23\u00c4\n\23\3\23\5\23\u00c7\n")
+        buf.write("\23\3\23\3\23\5\23\u00cb\n\23\3\23\3\23\3\23\5\23\u00d0")
+        buf.write("\n\23\3\23\5\23\u00d3\n\23\3\23\5\23\u00d6\n\23\3\23\5")
+        buf.write("\23\u00d9\n\23\3\24\3\24\3\24\3\24\3\25\3\25\3\26\3\26")
+        buf.write("\3\26\3\26\5\26\u00e5\n\26\3\26\3\26\3\26\3\26\3\26\5")
+        buf.write("\26\u00ec\n\26\5\26\u00ee\n\26\3\27\3\27\3\30\3\30\3\30")
+        buf.write("\3\30\5\30\u00f6\n\30\3\30\5\30\u00f9\n\30\3\30\3\30\7")
+        buf.write("\30\u00fd\n\30\f\30\16\30\u0100\13\30\3\30\3\30\3\31\3")
+        buf.write("\31\3\31\5\31\u0107\n\31\3\32\3\32\3\32\5\32\u010c\n\32")
+        buf.write("\3\33\3\33\3\34\3\34\3\34\3\34\5\34\u0114\n\34\3\34\3")
+        buf.write("\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\5\34\u0120")
+        buf.write("\n\34\3\35\3\35\3\36\3\36\3\36\3\36\3\36\3\36\5\36\u012a")
+        buf.write("\n\36\3\37\3\37\3 \3 \3 \3 \3 \5 \u0133\n \3!\3!\3\"\3")
+        buf.write("\"\3#\3#\3$\3$\5$\u013d\n$\3$\3$\3%\3%\3%\3%\3%\5%\u0146")
+        buf.write("\n%\3%\2\2&\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"")
+        buf.write("$&(*,.\60\62\64\668:<>@BDFH\2\t\3\2\16\22\3\2\25\30\3")
+        buf.write("\2\31\32\3\2\33\35\3\2:;\4\2??AA\3\2BC\2\u0156\2K\3\2")
+        buf.write("\2\2\4^\3\2\2\2\6c\3\2\2\2\be\3\2\2\2\nm\3\2\2\2\fu\3")
+        buf.write("\2\2\2\16~\3\2\2\2\20\u0080\3\2\2\2\22\u008d\3\2\2\2\24")
+        buf.write("\u0091\3\2\2\2\26\u0094\3\2\2\2\30\u0096\3\2\2\2\32\u00a7")
+        buf.write("\3\2\2\2\34\u00b0\3\2\2\2\36\u00b9\3\2\2\2 \u00be\3\2")
+        buf.write("\2\2\"\u00c0\3\2\2\2$\u00c3\3\2\2\2&\u00da\3\2\2\2(\u00de")
+        buf.write("\3\2\2\2*\u00e0\3\2\2\2,\u00ef\3\2\2\2.\u00f1\3\2\2\2")
+        buf.write("\60\u0103\3\2\2\2\62\u010b\3\2\2\2\64\u010d\3\2\2\2\66")
+        buf.write("\u011f\3\2\2\28\u0121\3\2\2\2:\u0129\3\2\2\2<\u012b\3")
+        buf.write("\2\2\2>\u0132\3\2\2\2@\u0134\3\2\2\2B\u0136\3\2\2\2D\u0138")
+        buf.write("\3\2\2\2F\u013a\3\2\2\2H\u0145\3\2\2\2JL\5\4\3\2KJ\3\2")
+        buf.write("\2\2KL\3\2\2\2LU\3\2\2\2MP\5\f\7\2NP\5\6\4\2OM\3\2\2\2")
+        buf.write("ON\3\2\2\2PQ\3\2\2\2QR\5H%\2RT\3\2\2\2SO\3\2\2\2TW\3\2")
+        buf.write("\2\2US\3\2\2\2UV\3\2\2\2VY\3\2\2\2WU\3\2\2\2XZ\5\34\17")
+        buf.write("\2YX\3\2\2\2YZ\3\2\2\2Z[\3\2\2\2[\\\5\24\13\2\\]\5H%\2")
+        buf.write("]\3\3\2\2\2^_\7\24\2\2_`\7?\2\2`a\7?\2\2ab\5H%\2b\5\3")
+        buf.write("\2\2\2cd\5\26\f\2d\7\3\2\2\2ej\7\r\2\2fg\7%\2\2gi\7\r")
+        buf.write("\2\2hf\3\2\2\2il\3\2\2\2jh\3\2\2\2jk\3\2\2\2k\t\3\2\2")
+        buf.write("\2lj\3\2\2\2mr\5\66\34\2no\7%\2\2oq\5\66\34\2pn\3\2\2")
+        buf.write("\2qt\3\2\2\2rp\3\2\2\2rs\3\2\2\2s\13\3\2\2\2tr\3\2\2\2")
+        buf.write("uv\7\3\2\2vw\7\r\2\2wy\5\16\b\2xz\5\32\16\2yx\3\2\2\2")
+        buf.write("yz\3\2\2\2z\r\3\2\2\2{|\6\b\2\2|\177\5\20\t\2}\177\5\20")
+        buf.write("\t\2~{\3\2\2\2~}\3\2\2\2\177\17\3\2\2\2\u0080\u0089\7")
+        buf.write("\36\2\2\u0081\u0086\5\22\n\2\u0082\u0083\7%\2\2\u0083")
+        buf.write("\u0085\5\22\n\2\u0084\u0082\3\2\2\2\u0085\u0088\3\2\2")
+        buf.write("\2\u0086\u0084\3\2\2\2\u0086\u0087\3\2\2\2\u0087\u008a")
+        buf.write("\3\2\2\2\u0088\u0086\3\2\2\2\u0089\u0081\3\2\2\2\u0089")
+        buf.write("\u008a\3\2\2\2\u008a\u008b\3\2\2\2\u008b\u008c\7\37\2")
+        buf.write("\2\u008c\21\3\2\2\2\u008d\u008f\5\64\33\2\u008e\u0090")
+        buf.write("\5\b\5\2\u008f\u008e\3\2\2\2\u008f\u0090\3\2\2\2\u0090")
+        buf.write("\23\3\2\2\2\u0091\u0092\7\23\2\2\u0092\u0093\7\r\2\2\u0093")
+        buf.write("\25\3\2\2\2\u0094\u0095\5\30\r\2\u0095\27\3\2\2\2\u0096")
+        buf.write("\u0097\5\64\33\2\u0097\u0099\7\r\2\2\u0098\u009a\7E\2")
+        buf.write("\2\u0099\u0098\3\2\2\2\u0099\u009a\3\2\2\2\u009a\u009b")
+        buf.write("\3\2\2\2\u009b\u00a4\5$\23\2\u009c\u009e\7%\2\2\u009d")
+        buf.write("\u009f\7E\2\2\u009e\u009d\3\2\2\2\u009e\u009f\3\2\2\2")
+        buf.write("\u009f\u00a0\3\2\2\2\u00a0\u00a1\7\r\2\2\u00a1\u00a3\5")
+        buf.write("$\23\2\u00a2\u009c\3\2\2\2\u00a3\u00a6\3\2\2\2\u00a4\u00a2")
+        buf.write("\3\2\2\2\u00a4\u00a5\3\2\2\2\u00a5\31\3\2\2\2\u00a6\u00a4")
+        buf.write("\3\2\2\2\u00a7\u00a9\7 \2\2\u00a8\u00aa\5\34\17\2\u00a9")
+        buf.write("\u00a8\3\2\2\2\u00a9\u00aa\3\2\2\2\u00aa\u00ab\3\2\2\2")
+        buf.write("\u00ab\u00ac\7!\2\2\u00ac\33\3\2\2\2\u00ad\u00ae\5\36")
+        buf.write("\20\2\u00ae\u00af\5H%\2\u00af\u00b1\3\2\2\2\u00b0\u00ad")
+        buf.write("\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2\u00b0\3\2\2\2\u00b2")
+        buf.write("\u00b3\3\2\2\2\u00b3\35\3\2\2\2\u00b4\u00ba\5\6\4\2\u00b5")
+        buf.write("\u00ba\5 \21\2\u00b6\u00ba\5\32\16\2\u00b7\u00ba\5*\26")
+        buf.write("\2\u00b8\u00ba\5,\27\2\u00b9\u00b4\3\2\2\2\u00b9\u00b5")
+        buf.write("\3\2\2\2\u00b9\u00b6\3\2\2\2\u00b9\u00b7\3\2\2\2\u00b9")
+        buf.write("\u00b8\3\2\2\2\u00ba\37\3\2\2\2\u00bb\u00bf\5\"\22\2\u00bc")
+        buf.write("\u00bf\5&\24\2\u00bd\u00bf\5\24\13\2\u00be\u00bb\3\2\2")
+        buf.write("\2\u00be\u00bc\3\2\2\2\u00be\u00bd\3\2\2\2\u00bf!\3\2")
+        buf.write("\2\2\u00c0\u00c1\5\66\34\2\u00c1#\3\2\2\2\u00c2\u00c4")
+        buf.write("\5F$\2\u00c3\u00c2\3\2\2\2\u00c3\u00c4\3\2\2\2\u00c4\u00c6")
+        buf.write("\3\2\2\2\u00c5\u00c7\7E\2\2\u00c6\u00c5\3\2\2\2\u00c6")
+        buf.write("\u00c7\3\2\2\2\u00c7\u00d8\3\2\2\2\u00c8\u00ca\7\"\2\2")
+        buf.write("\u00c9\u00cb\7E\2\2\u00ca\u00c9\3\2\2\2\u00ca\u00cb\3")
+        buf.write("\2\2\2\u00cb\u00cc\3\2\2\2\u00cc\u00d2\7D\2\2\u00cd\u00cf")
+        buf.write("\7%\2\2\u00ce\u00d0\7E\2\2\u00cf\u00ce\3\2\2\2\u00cf\u00d0")
+        buf.write("\3\2\2\2\u00d0\u00d1\3\2\2\2\u00d1\u00d3\7D\2\2\u00d2")
+        buf.write("\u00cd\3\2\2\2\u00d2\u00d3\3\2\2\2\u00d3\u00d5\3\2\2\2")
+        buf.write("\u00d4\u00d6\7E\2\2\u00d5\u00d4\3\2\2\2\u00d5\u00d6\3")
+        buf.write("\2\2\2\u00d6\u00d7\3\2\2\2\u00d7\u00d9\7#\2\2\u00d8\u00c8")
+        buf.write("\3\2\2\2\u00d8\u00d9\3\2\2\2\u00d9%\3\2\2\2\u00da\u00db")
+        buf.write("\7\r\2\2\u00db\u00dc\5(\25\2\u00dc\u00dd\5\66\34\2\u00dd")
+        buf.write("\'\3\2\2\2\u00de\u00df\7$\2\2\u00df)\3\2\2\2\u00e0\u00e4")
+        buf.write("\7\7\2\2\u00e1\u00e2\5 \21\2\u00e2\u00e3\7&\2\2\u00e3")
+        buf.write("\u00e5\3\2\2\2\u00e4\u00e1\3\2\2\2\u00e4\u00e5\3\2\2\2")
+        buf.write("\u00e5\u00e6\3\2\2\2\u00e6\u00e7\5\66\34\2\u00e7\u00ed")
+        buf.write("\5\32\16\2\u00e8\u00eb\7\b\2\2\u00e9\u00ec\5*\26\2\u00ea")
+        buf.write("\u00ec\5\32\16\2\u00eb\u00e9\3\2\2\2\u00eb\u00ea\3\2\2")
+        buf.write("\2\u00ec\u00ee\3\2\2\2\u00ed\u00e8\3\2\2\2\u00ed\u00ee")
+        buf.write("\3\2\2\2\u00ee+\3\2\2\2\u00ef\u00f0\5.\30\2\u00f0-\3\2")
+        buf.write("\2\2\u00f1\u00f5\7\4\2\2\u00f2\u00f3\5 \21\2\u00f3\u00f4")
+        buf.write("\7&\2\2\u00f4\u00f6\3\2\2\2\u00f5\u00f2\3\2\2\2\u00f5")
+        buf.write("\u00f6\3\2\2\2\u00f6\u00f8\3\2\2\2\u00f7\u00f9\5\66\34")
+        buf.write("\2\u00f8\u00f7\3\2\2\2\u00f8\u00f9\3\2\2\2\u00f9\u00fa")
+        buf.write("\3\2\2\2\u00fa\u00fe\7 \2\2\u00fb\u00fd\5\60\31\2\u00fc")
+        buf.write("\u00fb\3\2\2\2\u00fd\u0100\3\2\2\2\u00fe\u00fc\3\2\2\2")
+        buf.write("\u00fe\u00ff\3\2\2\2\u00ff\u0101\3\2\2\2\u0100\u00fe\3")
+        buf.write("\2\2\2\u0101\u0102\7!\2\2\u0102/\3\2\2\2\u0103\u0104\5")
+        buf.write("\62\32\2\u0104\u0106\7\'\2\2\u0105\u0107\5\34\17\2\u0106")
+        buf.write("\u0105\3\2\2\2\u0106\u0107\3\2\2\2\u0107\61\3\2\2\2\u0108")
+        buf.write("\u0109\7\5\2\2\u0109\u010c\5\66\34\2\u010a\u010c\7\6\2")
+        buf.write("\2\u010b\u0108\3\2\2\2\u010b\u010a\3\2\2\2\u010c\63\3")
+        buf.write("\2\2\2\u010d\u010e\t\2\2\2\u010e\65\3\2\2\2\u010f\u0120")
+        buf.write("\58\35\2\u0110\u0111\58\35\2\u0111\u0113\t\3\2\2\u0112")
+        buf.write("\u0114\t\4\2\2\u0113\u0112\3\2\2\2\u0113\u0114\3\2\2\2")
+        buf.write("\u0114\u0115\3\2\2\2\u0115\u0116\58\35\2\u0116\u0120\3")
+        buf.write("\2\2\2\u0117\u0118\58\35\2\u0118\u0119\t\5\2\2\u0119\u011a")
+        buf.write("\58\35\2\u011a\u0120\3\2\2\2\u011b\u011c\58\35\2\u011c")
+        buf.write("\u011d\t\6\2\2\u011d\u011e\58\35\2\u011e\u0120\3\2\2\2")
+        buf.write("\u011f\u010f\3\2\2\2\u011f\u0110\3\2\2\2\u011f\u0117\3")
+        buf.write("\2\2\2\u011f\u011b\3\2\2\2\u0120\67\3\2\2\2\u0121\u0122")
+        buf.write("\5:\36\2\u01229\3\2\2\2\u0123\u012a\5<\37\2\u0124\u012a")
+        buf.write("\5B\"\2\u0125\u0126\7\36\2\2\u0126\u0127\5\66\34\2\u0127")
+        buf.write("\u0128\7\37\2\2\u0128\u012a\3\2\2\2\u0129\u0123\3\2\2")
+        buf.write("\2\u0129\u0124\3\2\2\2\u0129\u0125\3\2\2\2\u012a;\3\2")
+        buf.write("\2\2\u012b\u012c\5> \2\u012c=\3\2\2\2\u012d\u0133\7\f")
+        buf.write("\2\2\u012e\u0133\5@!\2\u012f\u0133\5D#\2\u0130\u0133\7")
+        buf.write("@\2\2\u0131\u0133\7A\2\2\u0132\u012d\3\2\2\2\u0132\u012e")
+        buf.write("\3\2\2\2\u0132\u012f\3\2\2\2\u0132\u0130\3\2\2\2\u0132")
+        buf.write("\u0131\3\2\2\2\u0133?\3\2\2\2\u0134\u0135\t\7\2\2\u0135")
+        buf.write("A\3\2\2\2\u0136\u0137\7\r\2\2\u0137C\3\2\2\2\u0138\u0139")
+        buf.write("\t\b\2\2\u0139E\3\2\2\2\u013a\u013c\7\36\2\2\u013b\u013d")
+        buf.write("\5\n\6\2\u013c\u013b\3\2\2\2\u013c\u013d\3\2\2\2\u013d")
+        buf.write("\u013e\3\2\2\2\u013e\u013f\7\37\2\2\u013fG\3\2\2\2\u0140")
+        buf.write("\u0146\7&\2\2\u0141\u0142\7&\2\2\u0142\u0146\7\2\2\3\u0143")
+        buf.write("\u0146\6%\3\2\u0144\u0146\6%\4\2\u0145\u0140\3\2\2\2\u0145")
+        buf.write("\u0141\3\2\2\2\u0145\u0143\3\2\2\2\u0145\u0144\3\2\2\2")
+        buf.write("\u0146I\3\2\2\2)KOUYjry~\u0086\u0089\u008f\u0099\u009e")
+        buf.write("\u00a4\u00a9\u00b2\u00b9\u00be\u00c3\u00c6\u00ca\u00cf")
+        buf.write("\u00d2\u00d5\u00d8\u00e4\u00eb\u00ed\u00f5\u00f8\u00fe")
+        buf.write("\u0106\u010b\u0113\u011f\u0129\u0132\u013c\u0145")
         return buf.getvalue()
 
 
@@ -182,56 +200,54 @@ class TwoDimParser ( TwoDimParserBase ):
                       "RSHIFT", "BIT_CLEAR", "EXCLAMATION", "PLUS", "MINUS", 
                       "CARET", "STAR", "AMPERSAND", "DECIMAL_LIT", "FLOAT_LIT", 
                       "RUNE_LIT", "RAW_STRING_LIT", "INTERPRETED_STRING_LIT", 
-                      "WS", "COMMENT", "TERMINATOR", "LINE_COMMENT", "DECIMALS", 
-                      "SIZE" ]
+                      "SIZE_LIT", "WS", "COMMENT", "TERMINATOR", "LINE_COMMENT" ]
 
     RULE_sourceFile = 0
     RULE_viewportClause = 1
     RULE_declaration = 2
     RULE_identifierList = 3
-    RULE_drawClause = 4
-    RULE_varDecl = 5
-    RULE_varSpec = 6
-    RULE_block = 7
-    RULE_statementList = 8
-    RULE_statement = 9
-    RULE_simpleStmt = 10
-    RULE_expressionStmt = 11
-    RULE_declStmt = 12
-    RULE_assignment = 13
-    RULE_assign_op = 14
-    RULE_ifStmt = 15
-    RULE_switchStmt = 16
-    RULE_exprSwitchStmt = 17
-    RULE_exprCaseClause = 18
-    RULE_exprSwitchCase = 19
-    RULE_type_ = 20
-    RULE_typeName = 21
-    RULE_elementType = 22
-    RULE_expression = 23
-    RULE_primaryExpr = 24
-    RULE_operand = 25
-    RULE_literal = 26
-    RULE_basicLit = 27
-    RULE_integer = 28
-    RULE_operandName = 29
-    RULE_compositeLit = 30
-    RULE_literalType = 31
-    RULE_literalValue = 32
-    RULE_element = 33
-    RULE_string_ = 34
-    RULE_arguments = 35
-    RULE_eos = 36
+    RULE_expressionList = 4
+    RULE_functionDecl = 5
+    RULE_signature = 6
+    RULE_parameters = 7
+    RULE_parameterDecl = 8
+    RULE_drawClause = 9
+    RULE_shapeDecl = 10
+    RULE_shapeSpec = 11
+    RULE_block = 12
+    RULE_statementList = 13
+    RULE_statement = 14
+    RULE_simpleStmt = 15
+    RULE_expressionStmt = 16
+    RULE_shapeArguments = 17
+    RULE_assignment = 18
+    RULE_assign_op = 19
+    RULE_ifStmt = 20
+    RULE_switchStmt = 21
+    RULE_exprSwitchStmt = 22
+    RULE_exprCaseClause = 23
+    RULE_exprSwitchCase = 24
+    RULE_typeName = 25
+    RULE_expression = 26
+    RULE_primaryExpr = 27
+    RULE_operand = 28
+    RULE_literal = 29
+    RULE_basicLit = 30
+    RULE_integer = 31
+    RULE_operandName = 32
+    RULE_string_ = 33
+    RULE_arguments = 34
+    RULE_eos = 35
 
     ruleNames =  [ "sourceFile", "viewportClause", "declaration", "identifierList", 
-                   "drawClause", "varDecl", "varSpec", "block", "statementList", 
-                   "statement", "simpleStmt", "expressionStmt", "declStmt", 
-                   "assignment", "assign_op", "ifStmt", "switchStmt", "exprSwitchStmt", 
-                   "exprCaseClause", "exprSwitchCase", "type_", "typeName", 
-                   "elementType", "expression", "primaryExpr", "operand", 
-                   "literal", "basicLit", "integer", "operandName", "compositeLit", 
-                   "literalType", "literalValue", "element", "string_", 
-                   "arguments", "eos" ]
+                   "expressionList", "functionDecl", "signature", "parameters", 
+                   "parameterDecl", "drawClause", "shapeDecl", "shapeSpec", 
+                   "block", "statementList", "statement", "simpleStmt", 
+                   "expressionStmt", "shapeArguments", "assignment", "assign_op", 
+                   "ifStmt", "switchStmt", "exprSwitchStmt", "exprCaseClause", 
+                   "exprSwitchCase", "typeName", "expression", "primaryExpr", 
+                   "operand", "literal", "basicLit", "integer", "operandName", 
+                   "string_", "arguments", "eos" ]
 
     EOF = Token.EOF
     FUNC=1
@@ -299,18 +315,19 @@ class TwoDimParser ( TwoDimParserBase ):
     RUNE_LIT=63
     RAW_STRING_LIT=64
     INTERPRETED_STRING_LIT=65
-    WS=66
-    COMMENT=67
-    TERMINATOR=68
-    LINE_COMMENT=69
-    DECIMALS=70
-    SIZE=71
+    SIZE_LIT=66
+    WS=67
+    COMMENT=68
+    TERMINATOR=69
+    LINE_COMMENT=70
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
         self.checkVersion("4.9.2")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
+
+
 
 
     class SourceFileContext(ParserRuleContext):
@@ -320,15 +337,8 @@ class TwoDimParser ( TwoDimParserBase ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def viewportClause(self):
-            return self.getTypedRuleContext(TwoDimParser.ViewportClauseContext,0)
-
-
-        def declaration(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(TwoDimParser.DeclarationContext)
-            else:
-                return self.getTypedRuleContext(TwoDimParser.DeclarationContext,i)
+        def drawClause(self):
+            return self.getTypedRuleContext(TwoDimParser.DrawClauseContext,0)
 
 
         def eos(self, i:int=None):
@@ -336,6 +346,28 @@ class TwoDimParser ( TwoDimParserBase ):
                 return self.getTypedRuleContexts(TwoDimParser.EosContext)
             else:
                 return self.getTypedRuleContext(TwoDimParser.EosContext,i)
+
+
+        def viewportClause(self):
+            return self.getTypedRuleContext(TwoDimParser.ViewportClauseContext,0)
+
+
+        def statementList(self):
+            return self.getTypedRuleContext(TwoDimParser.StatementListContext,0)
+
+
+        def functionDecl(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(TwoDimParser.FunctionDeclContext)
+            else:
+                return self.getTypedRuleContext(TwoDimParser.FunctionDeclContext,i)
+
+
+        def declaration(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(TwoDimParser.DeclarationContext)
+            else:
+                return self.getTypedRuleContext(TwoDimParser.DeclarationContext,i)
 
 
         def getRuleIndex(self):
@@ -359,20 +391,51 @@ class TwoDimParser ( TwoDimParserBase ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 74
-            self.viewportClause()
-            self.state = 80
+            self.state = 73
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE) | (1 << TwoDimParser.L_PAREN))) != 0):
-                self.state = 75
-                self.declaration()
-                self.state = 76
-                self.eos()
-                self.state = 82
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
+            if _la==TwoDimParser.VIEWPORT:
+                self.state = 72
+                self.viewportClause()
 
+
+            self.state = 83
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,2,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    self.state = 77
+                    self._errHandler.sync(self)
+                    token = self._input.LA(1)
+                    if token in [TwoDimParser.FUNC]:
+                        self.state = 75
+                        self.functionDecl()
+                        pass
+                    elif token in [TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE]:
+                        self.state = 76
+                        self.declaration()
+                        pass
+                    else:
+                        raise NoViableAltException(self)
+
+                    self.state = 79
+                    self.eos() 
+                self.state = 85
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,2,self._ctx)
+
+            self.state = 87
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
+            if la_ == 1:
+                self.state = 86
+                self.statementList()
+
+
+            self.state = 89
+            self.drawClause()
+            self.state = 90
+            self.eos()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -392,17 +455,11 @@ class TwoDimParser ( TwoDimParserBase ):
         def VIEWPORT(self):
             return self.getToken(TwoDimParser.VIEWPORT, 0)
 
-        def WS(self, i:int=None):
+        def DECIMAL_LIT(self, i:int=None):
             if i is None:
-                return self.getTokens(TwoDimParser.WS)
+                return self.getTokens(TwoDimParser.DECIMAL_LIT)
             else:
-                return self.getToken(TwoDimParser.WS, i)
-
-        def DECIMALS(self, i:int=None):
-            if i is None:
-                return self.getTokens(TwoDimParser.DECIMALS)
-            else:
-                return self.getToken(TwoDimParser.DECIMALS, i)
+                return self.getToken(TwoDimParser.DECIMAL_LIT, i)
 
         def eos(self):
             return self.getTypedRuleContext(TwoDimParser.EosContext,0)
@@ -428,17 +485,13 @@ class TwoDimParser ( TwoDimParserBase ):
         self.enterRule(localctx, 2, self.RULE_viewportClause)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 83
+            self.state = 92
             self.match(TwoDimParser.VIEWPORT)
-            self.state = 84
-            self.match(TwoDimParser.WS)
-            self.state = 85
-            self.match(TwoDimParser.DECIMALS)
-            self.state = 86
-            self.match(TwoDimParser.WS)
-            self.state = 87
-            self.match(TwoDimParser.DECIMALS)
-            self.state = 88
+            self.state = 93
+            self.match(TwoDimParser.DECIMAL_LIT)
+            self.state = 94
+            self.match(TwoDimParser.DECIMAL_LIT)
+            self.state = 95
             self.eos()
         except RecognitionException as re:
             localctx.exception = re
@@ -456,8 +509,8 @@ class TwoDimParser ( TwoDimParserBase ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def varDecl(self):
-            return self.getTypedRuleContext(TwoDimParser.VarDeclContext,0)
+        def shapeDecl(self):
+            return self.getTypedRuleContext(TwoDimParser.ShapeDeclContext,0)
 
 
         def getRuleIndex(self):
@@ -480,8 +533,8 @@ class TwoDimParser ( TwoDimParserBase ):
         self.enterRule(localctx, 4, self.RULE_declaration)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 90
-            self.varDecl()
+            self.state = 97
+            self.shapeDecl()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -528,22 +581,345 @@ class TwoDimParser ( TwoDimParserBase ):
 
         localctx = TwoDimParser.IdentifierListContext(self, self._ctx, self.state)
         self.enterRule(localctx, 6, self.RULE_identifierList)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 99
+            self.match(TwoDimParser.IDENTIFIER)
+            self.state = 104
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    self.state = 100
+                    self.match(TwoDimParser.COMMA)
+                    self.state = 101
+                    self.match(TwoDimParser.IDENTIFIER) 
+                self.state = 106
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ExpressionListContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def expression(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(TwoDimParser.ExpressionContext)
+            else:
+                return self.getTypedRuleContext(TwoDimParser.ExpressionContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(TwoDimParser.COMMA)
+            else:
+                return self.getToken(TwoDimParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return TwoDimParser.RULE_expressionList
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterExpressionList" ):
+                listener.enterExpressionList(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitExpressionList" ):
+                listener.exitExpressionList(self)
+
+
+
+
+    def expressionList(self):
+
+        localctx = TwoDimParser.ExpressionListContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 8, self.RULE_expressionList)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 92
-            self.match(TwoDimParser.IDENTIFIER)
-            self.state = 97
+            self.state = 107
+            self.expression()
+            self.state = 112
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==TwoDimParser.COMMA:
-                self.state = 93
+                self.state = 108
                 self.match(TwoDimParser.COMMA)
-                self.state = 94
-                self.match(TwoDimParser.IDENTIFIER)
-                self.state = 99
+                self.state = 109
+                self.expression()
+                self.state = 114
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class FunctionDeclContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def FUNC(self):
+            return self.getToken(TwoDimParser.FUNC, 0)
+
+        def IDENTIFIER(self):
+            return self.getToken(TwoDimParser.IDENTIFIER, 0)
+
+        def signature(self):
+            return self.getTypedRuleContext(TwoDimParser.SignatureContext,0)
+
+
+        def block(self):
+            return self.getTypedRuleContext(TwoDimParser.BlockContext,0)
+
+
+        def getRuleIndex(self):
+            return TwoDimParser.RULE_functionDecl
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterFunctionDecl" ):
+                listener.enterFunctionDecl(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitFunctionDecl" ):
+                listener.exitFunctionDecl(self)
+
+
+
+
+    def functionDecl(self):
+
+        localctx = TwoDimParser.FunctionDeclContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 10, self.RULE_functionDecl)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 115
+            self.match(TwoDimParser.FUNC)
+            self.state = 116
+            self.match(TwoDimParser.IDENTIFIER)
+
+            self.state = 117
+            self.signature()
+            self.state = 119
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
+            if la_ == 1:
+                self.state = 118
+                self.block()
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class SignatureContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def parameters(self):
+            return self.getTypedRuleContext(TwoDimParser.ParametersContext,0)
+
+
+        def getRuleIndex(self):
+            return TwoDimParser.RULE_signature
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterSignature" ):
+                listener.enterSignature(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitSignature" ):
+                listener.exitSignature(self)
+
+
+
+
+    def signature(self):
+
+        localctx = TwoDimParser.SignatureContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 12, self.RULE_signature)
+        try:
+            self.state = 124
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
+            if la_ == 1:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 121
+                if not self.noTerminatorAfterParams(1):
+                    from antlr4.error.Errors import FailedPredicateException
+                    raise FailedPredicateException(self, "self.noTerminatorAfterParams(1)")
+                self.state = 122
+                self.parameters()
+                pass
+
+            elif la_ == 2:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 123
+                self.parameters()
+                pass
+
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ParametersContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def L_PAREN(self):
+            return self.getToken(TwoDimParser.L_PAREN, 0)
+
+        def R_PAREN(self):
+            return self.getToken(TwoDimParser.R_PAREN, 0)
+
+        def parameterDecl(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(TwoDimParser.ParameterDeclContext)
+            else:
+                return self.getTypedRuleContext(TwoDimParser.ParameterDeclContext,i)
+
+
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(TwoDimParser.COMMA)
+            else:
+                return self.getToken(TwoDimParser.COMMA, i)
+
+        def getRuleIndex(self):
+            return TwoDimParser.RULE_parameters
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParameters" ):
+                listener.enterParameters(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParameters" ):
+                listener.exitParameters(self)
+
+
+
+
+    def parameters(self):
+
+        localctx = TwoDimParser.ParametersContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 14, self.RULE_parameters)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 126
+            self.match(TwoDimParser.L_PAREN)
+            self.state = 135
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE))) != 0):
+                self.state = 127
+                self.parameterDecl()
+                self.state = 132
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                while _la==TwoDimParser.COMMA:
+                    self.state = 128
+                    self.match(TwoDimParser.COMMA)
+                    self.state = 129
+                    self.parameterDecl()
+                    self.state = 134
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+
+
+
+            self.state = 137
+            self.match(TwoDimParser.R_PAREN)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ParameterDeclContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def typeName(self):
+            return self.getTypedRuleContext(TwoDimParser.TypeNameContext,0)
+
+
+        def identifierList(self):
+            return self.getTypedRuleContext(TwoDimParser.IdentifierListContext,0)
+
+
+        def getRuleIndex(self):
+            return TwoDimParser.RULE_parameterDecl
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParameterDecl" ):
+                listener.enterParameterDecl(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParameterDecl" ):
+                listener.exitParameterDecl(self)
+
+
+
+
+    def parameterDecl(self):
+
+        localctx = TwoDimParser.ParameterDeclContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 16, self.RULE_parameterDecl)
+        self._la = 0 # Token type
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 139
+            self.typeName()
+            self.state = 141
+            self._errHandler.sync(self)
+            _la = self._input.LA(1)
+            if _la==TwoDimParser.IDENTIFIER:
+                self.state = 140
+                self.identifierList()
+
 
         except RecognitionException as re:
             localctx.exception = re
@@ -584,12 +960,12 @@ class TwoDimParser ( TwoDimParserBase ):
     def drawClause(self):
 
         localctx = TwoDimParser.DrawClauseContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 8, self.RULE_drawClause)
+        self.enterRule(localctx, 18, self.RULE_drawClause)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 100
+            self.state = 143
             self.match(TwoDimParser.DRAW)
-            self.state = 101
+            self.state = 144
             self.match(TwoDimParser.IDENTIFIER)
         except RecognitionException as re:
             localctx.exception = re
@@ -600,82 +976,39 @@ class TwoDimParser ( TwoDimParserBase ):
         return localctx
 
 
-    class VarDeclContext(ParserRuleContext):
+    class ShapeDeclContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def varSpec(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(TwoDimParser.VarSpecContext)
-            else:
-                return self.getTypedRuleContext(TwoDimParser.VarSpecContext,i)
-
-
-        def L_PAREN(self):
-            return self.getToken(TwoDimParser.L_PAREN, 0)
-
-        def R_PAREN(self):
-            return self.getToken(TwoDimParser.R_PAREN, 0)
-
-        def eos(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(TwoDimParser.EosContext)
-            else:
-                return self.getTypedRuleContext(TwoDimParser.EosContext,i)
+        def shapeSpec(self):
+            return self.getTypedRuleContext(TwoDimParser.ShapeSpecContext,0)
 
 
         def getRuleIndex(self):
-            return TwoDimParser.RULE_varDecl
+            return TwoDimParser.RULE_shapeDecl
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterVarDecl" ):
-                listener.enterVarDecl(self)
+            if hasattr( listener, "enterShapeDecl" ):
+                listener.enterShapeDecl(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitVarDecl" ):
-                listener.exitVarDecl(self)
+            if hasattr( listener, "exitShapeDecl" ):
+                listener.exitShapeDecl(self)
 
 
 
 
-    def varDecl(self):
+    def shapeDecl(self):
 
-        localctx = TwoDimParser.VarDeclContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 10, self.RULE_varDecl)
-        self._la = 0 # Token type
+        localctx = TwoDimParser.ShapeDeclContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 20, self.RULE_shapeDecl)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 114
-            self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
-            if la_ == 1:
-                self.state = 103
-                self.varSpec()
-                pass
-
-            elif la_ == 2:
-                self.state = 104
-                self.match(TwoDimParser.L_PAREN)
-                self.state = 110
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                while (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE) | (1 << TwoDimParser.L_PAREN))) != 0):
-                    self.state = 105
-                    self.varSpec()
-                    self.state = 106
-                    self.eos()
-                    self.state = 112
-                    self._errHandler.sync(self)
-                    _la = self._input.LA(1)
-
-                self.state = 113
-                self.match(TwoDimParser.R_PAREN)
-                pass
-
-
+            self.state = 146
+            self.shapeSpec()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -685,56 +1018,100 @@ class TwoDimParser ( TwoDimParserBase ):
         return localctx
 
 
-    class VarSpecContext(ParserRuleContext):
+    class ShapeSpecContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def type_(self):
-            return self.getTypedRuleContext(TwoDimParser.Type_Context,0)
+        def typeName(self):
+            return self.getTypedRuleContext(TwoDimParser.TypeNameContext,0)
 
 
-        def identifierList(self):
-            return self.getTypedRuleContext(TwoDimParser.IdentifierListContext,0)
+        def IDENTIFIER(self, i:int=None):
+            if i is None:
+                return self.getTokens(TwoDimParser.IDENTIFIER)
+            else:
+                return self.getToken(TwoDimParser.IDENTIFIER, i)
+
+        def shapeArguments(self, i:int=None):
+            if i is None:
+                return self.getTypedRuleContexts(TwoDimParser.ShapeArgumentsContext)
+            else:
+                return self.getTypedRuleContext(TwoDimParser.ShapeArgumentsContext,i)
 
 
-        def ASSIGN(self):
-            return self.getToken(TwoDimParser.ASSIGN, 0)
+        def WS(self, i:int=None):
+            if i is None:
+                return self.getTokens(TwoDimParser.WS)
+            else:
+                return self.getToken(TwoDimParser.WS, i)
 
-        def declStmt(self):
-            return self.getTypedRuleContext(TwoDimParser.DeclStmtContext,0)
-
+        def COMMA(self, i:int=None):
+            if i is None:
+                return self.getTokens(TwoDimParser.COMMA)
+            else:
+                return self.getToken(TwoDimParser.COMMA, i)
 
         def getRuleIndex(self):
-            return TwoDimParser.RULE_varSpec
+            return TwoDimParser.RULE_shapeSpec
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterVarSpec" ):
-                listener.enterVarSpec(self)
+            if hasattr( listener, "enterShapeSpec" ):
+                listener.enterShapeSpec(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitVarSpec" ):
-                listener.exitVarSpec(self)
+            if hasattr( listener, "exitShapeSpec" ):
+                listener.exitShapeSpec(self)
 
 
 
 
-    def varSpec(self):
+    def shapeSpec(self):
 
-        localctx = TwoDimParser.VarSpecContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 12, self.RULE_varSpec)
+        localctx = TwoDimParser.ShapeSpecContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 22, self.RULE_shapeSpec)
+        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 116
-            self.type_()
-            self.state = 117
-            self.identifierList()
-            self.state = 118
-            self.match(TwoDimParser.ASSIGN)
-            self.state = 119
-            self.declStmt()
+            self.state = 148
+            self.typeName()
+            self.state = 149
+            self.match(TwoDimParser.IDENTIFIER)
+            self.state = 151
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
+            if la_ == 1:
+                self.state = 150
+                self.match(TwoDimParser.WS)
+
+
+            self.state = 153
+            self.shapeArguments()
+            self.state = 162
+            self._errHandler.sync(self)
+            _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt==1:
+                    self.state = 154
+                    self.match(TwoDimParser.COMMA)
+                    self.state = 156
+                    self._errHandler.sync(self)
+                    _la = self._input.LA(1)
+                    if _la==TwoDimParser.WS:
+                        self.state = 155
+                        self.match(TwoDimParser.WS)
+
+
+                    self.state = 158
+                    self.match(TwoDimParser.IDENTIFIER)
+                    self.state = 159
+                    self.shapeArguments() 
+                self.state = 164
+                self._errHandler.sync(self)
+                _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -778,21 +1155,21 @@ class TwoDimParser ( TwoDimParserBase ):
     def block(self):
 
         localctx = TwoDimParser.BlockContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 14, self.RULE_block)
+        self.enterRule(localctx, 24, self.RULE_block)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 121
+            self.state = 165
             self.match(TwoDimParser.L_CURLY)
-            self.state = 123
+            self.state = 167
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if ((((_la - 2)) & ~0x3f) == 0 and ((1 << (_la - 2)) & ((1 << (TwoDimParser.SWITCH - 2)) | (1 << (TwoDimParser.IF - 2)) | (1 << (TwoDimParser.NIL_LIT - 2)) | (1 << (TwoDimParser.IDENTIFIER - 2)) | (1 << (TwoDimParser.SQUARE - 2)) | (1 << (TwoDimParser.RECT - 2)) | (1 << (TwoDimParser.CIRCLE - 2)) | (1 << (TwoDimParser.TRIANGLE - 2)) | (1 << (TwoDimParser.SHAPE - 2)) | (1 << (TwoDimParser.L_PAREN - 2)) | (1 << (TwoDimParser.L_CURLY - 2)) | (1 << (TwoDimParser.DECIMAL_LIT - 2)) | (1 << (TwoDimParser.FLOAT_LIT - 2)) | (1 << (TwoDimParser.RUNE_LIT - 2)) | (1 << (TwoDimParser.RAW_STRING_LIT - 2)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 2)))) != 0):
-                self.state = 122
+            if ((((_la - 2)) & ~0x3f) == 0 and ((1 << (_la - 2)) & ((1 << (TwoDimParser.SWITCH - 2)) | (1 << (TwoDimParser.IF - 2)) | (1 << (TwoDimParser.NIL_LIT - 2)) | (1 << (TwoDimParser.IDENTIFIER - 2)) | (1 << (TwoDimParser.SQUARE - 2)) | (1 << (TwoDimParser.RECT - 2)) | (1 << (TwoDimParser.CIRCLE - 2)) | (1 << (TwoDimParser.TRIANGLE - 2)) | (1 << (TwoDimParser.SHAPE - 2)) | (1 << (TwoDimParser.DRAW - 2)) | (1 << (TwoDimParser.L_PAREN - 2)) | (1 << (TwoDimParser.L_CURLY - 2)) | (1 << (TwoDimParser.DECIMAL_LIT - 2)) | (1 << (TwoDimParser.FLOAT_LIT - 2)) | (1 << (TwoDimParser.RUNE_LIT - 2)) | (1 << (TwoDimParser.RAW_STRING_LIT - 2)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 2)))) != 0):
+                self.state = 166
                 self.statementList()
 
 
-            self.state = 125
+            self.state = 169
             self.match(TwoDimParser.R_CURLY)
         except RecognitionException as re:
             localctx.exception = re
@@ -841,23 +1218,24 @@ class TwoDimParser ( TwoDimParserBase ):
     def statementList(self):
 
         localctx = TwoDimParser.StatementListContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 16, self.RULE_statementList)
-        self._la = 0 # Token type
+        self.enterRule(localctx, 26, self.RULE_statementList)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 130 
+            self.state = 174 
             self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            while True:
-                self.state = 127
-                self.statement()
-                self.state = 128
-                self.eos()
-                self.state = 132 
+            _alt = 1
+            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                if _alt == 1:
+                    self.state = 171
+                    self.statement()
+                    self.state = 172
+                    self.eos()
+
+                else:
+                    raise NoViableAltException(self)
+                self.state = 176 
                 self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if not (((((_la - 2)) & ~0x3f) == 0 and ((1 << (_la - 2)) & ((1 << (TwoDimParser.SWITCH - 2)) | (1 << (TwoDimParser.IF - 2)) | (1 << (TwoDimParser.NIL_LIT - 2)) | (1 << (TwoDimParser.IDENTIFIER - 2)) | (1 << (TwoDimParser.SQUARE - 2)) | (1 << (TwoDimParser.RECT - 2)) | (1 << (TwoDimParser.CIRCLE - 2)) | (1 << (TwoDimParser.TRIANGLE - 2)) | (1 << (TwoDimParser.SHAPE - 2)) | (1 << (TwoDimParser.L_PAREN - 2)) | (1 << (TwoDimParser.L_CURLY - 2)) | (1 << (TwoDimParser.DECIMAL_LIT - 2)) | (1 << (TwoDimParser.FLOAT_LIT - 2)) | (1 << (TwoDimParser.RUNE_LIT - 2)) | (1 << (TwoDimParser.RAW_STRING_LIT - 2)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 2)))) != 0)):
-                    break
+                _alt = self._interp.adaptivePredict(self._input,15,self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -912,41 +1290,38 @@ class TwoDimParser ( TwoDimParserBase ):
     def statement(self):
 
         localctx = TwoDimParser.StatementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_statement)
+        self.enterRule(localctx, 28, self.RULE_statement)
         try:
-            self.state = 139
+            self.state = 183
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
-            if la_ == 1:
+            token = self._input.LA(1)
+            if token in [TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 134
+                self.state = 178
                 self.declaration()
                 pass
-
-            elif la_ == 2:
+            elif token in [TwoDimParser.NIL_LIT, TwoDimParser.IDENTIFIER, TwoDimParser.DRAW, TwoDimParser.L_PAREN, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT, TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 135
+                self.state = 179
                 self.simpleStmt()
                 pass
-
-            elif la_ == 3:
+            elif token in [TwoDimParser.L_CURLY]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 136
+                self.state = 180
                 self.block()
                 pass
-
-            elif la_ == 4:
+            elif token in [TwoDimParser.IF]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 137
+                self.state = 181
                 self.ifStmt()
                 pass
-
-            elif la_ == 5:
+            elif token in [TwoDimParser.SWITCH]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 138
+                self.state = 182
                 self.switchStmt()
                 pass
-
+            else:
+                raise NoViableAltException(self)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -972,6 +1347,10 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getTypedRuleContext(TwoDimParser.AssignmentContext,0)
 
 
+        def drawClause(self):
+            return self.getTypedRuleContext(TwoDimParser.DrawClauseContext,0)
+
+
         def getRuleIndex(self):
             return TwoDimParser.RULE_simpleStmt
 
@@ -989,21 +1368,27 @@ class TwoDimParser ( TwoDimParserBase ):
     def simpleStmt(self):
 
         localctx = TwoDimParser.SimpleStmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_simpleStmt)
+        self.enterRule(localctx, 30, self.RULE_simpleStmt)
         try:
-            self.state = 143
+            self.state = 188
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 141
+                self.state = 185
                 self.expressionStmt()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 142
+                self.state = 186
                 self.assignment()
+                pass
+
+            elif la_ == 3:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 187
+                self.drawClause()
                 pass
 
 
@@ -1044,10 +1429,10 @@ class TwoDimParser ( TwoDimParserBase ):
     def expressionStmt(self):
 
         localctx = TwoDimParser.ExpressionStmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_expressionStmt)
+        self.enterRule(localctx, 32, self.RULE_expressionStmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 145
+            self.state = 190
             self.expression()
         except RecognitionException as re:
             localctx.exception = re
@@ -1058,35 +1443,31 @@ class TwoDimParser ( TwoDimParserBase ):
         return localctx
 
 
-    class DeclStmtContext(ParserRuleContext):
+    class ShapeArgumentsContext(ParserRuleContext):
         __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def type_(self):
-            return self.getTypedRuleContext(TwoDimParser.Type_Context,0)
-
-
-        def L_PAREN(self):
-            return self.getToken(TwoDimParser.L_PAREN, 0)
-
         def arguments(self):
             return self.getTypedRuleContext(TwoDimParser.ArgumentsContext,0)
 
 
-        def R_PAREN(self):
-            return self.getToken(TwoDimParser.R_PAREN, 0)
+        def WS(self, i:int=None):
+            if i is None:
+                return self.getTokens(TwoDimParser.WS)
+            else:
+                return self.getToken(TwoDimParser.WS, i)
 
         def L_BRACKET(self):
             return self.getToken(TwoDimParser.L_BRACKET, 0)
 
-        def SIZE(self, i:int=None):
+        def SIZE_LIT(self, i:int=None):
             if i is None:
-                return self.getTokens(TwoDimParser.SIZE)
+                return self.getTokens(TwoDimParser.SIZE_LIT)
             else:
-                return self.getToken(TwoDimParser.SIZE, i)
+                return self.getToken(TwoDimParser.SIZE_LIT, i)
 
         def R_BRACKET(self):
             return self.getToken(TwoDimParser.R_BRACKET, 0)
@@ -1094,65 +1475,86 @@ class TwoDimParser ( TwoDimParserBase ):
         def COMMA(self):
             return self.getToken(TwoDimParser.COMMA, 0)
 
-        def WS(self):
-            return self.getToken(TwoDimParser.WS, 0)
-
         def getRuleIndex(self):
-            return TwoDimParser.RULE_declStmt
+            return TwoDimParser.RULE_shapeArguments
 
         def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDeclStmt" ):
-                listener.enterDeclStmt(self)
+            if hasattr( listener, "enterShapeArguments" ):
+                listener.enterShapeArguments(self)
 
         def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDeclStmt" ):
-                listener.exitDeclStmt(self)
+            if hasattr( listener, "exitShapeArguments" ):
+                listener.exitShapeArguments(self)
 
 
 
 
-    def declStmt(self):
+    def shapeArguments(self):
 
-        localctx = TwoDimParser.DeclStmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_declStmt)
+        localctx = TwoDimParser.ShapeArgumentsContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 34, self.RULE_shapeArguments)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 147
-            self.type_()
-            self.state = 148
-            self.match(TwoDimParser.L_PAREN)
-            self.state = 149
-            self.arguments()
-            self.state = 150
-            self.match(TwoDimParser.R_PAREN)
-            self.state = 161
+            self.state = 193
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,10,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,18,self._ctx)
             if la_ == 1:
-                self.state = 151
+                self.state = 192
+                self.arguments()
+
+
+            self.state = 196
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
+            if la_ == 1:
+                self.state = 195
+                self.match(TwoDimParser.WS)
+
+
+            self.state = 214
+            self._errHandler.sync(self)
+            la_ = self._interp.adaptivePredict(self._input,24,self._ctx)
+            if la_ == 1:
+                self.state = 198
                 self.match(TwoDimParser.L_BRACKET)
-                self.state = 152
-                self.match(TwoDimParser.SIZE)
-                self.state = 158
+                self.state = 200
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if _la==TwoDimParser.WS:
+                    self.state = 199
+                    self.match(TwoDimParser.WS)
+
+
+                self.state = 202
+                self.match(TwoDimParser.SIZE_LIT)
+                self.state = 208
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==TwoDimParser.COMMA:
-                    self.state = 153
+                    self.state = 203
                     self.match(TwoDimParser.COMMA)
-                    self.state = 155
+                    self.state = 205
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     if _la==TwoDimParser.WS:
-                        self.state = 154
+                        self.state = 204
                         self.match(TwoDimParser.WS)
 
 
-                    self.state = 157
-                    self.match(TwoDimParser.SIZE)
+                    self.state = 207
+                    self.match(TwoDimParser.SIZE_LIT)
 
 
-                self.state = 160
+                self.state = 211
+                self._errHandler.sync(self)
+                _la = self._input.LA(1)
+                if _la==TwoDimParser.WS:
+                    self.state = 210
+                    self.match(TwoDimParser.WS)
+
+
+                self.state = 213
                 self.match(TwoDimParser.R_BRACKET)
 
 
@@ -1200,14 +1602,14 @@ class TwoDimParser ( TwoDimParserBase ):
     def assignment(self):
 
         localctx = TwoDimParser.AssignmentContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_assignment)
+        self.enterRule(localctx, 36, self.RULE_assignment)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 163
+            self.state = 216
             self.match(TwoDimParser.IDENTIFIER)
-            self.state = 164
+            self.state = 217
             self.assign_op()
-            self.state = 165
+            self.state = 218
             self.expression()
         except RecognitionException as re:
             localctx.exception = re
@@ -1245,10 +1647,10 @@ class TwoDimParser ( TwoDimParserBase ):
     def assign_op(self):
 
         localctx = TwoDimParser.Assign_opContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_assign_op)
+        self.enterRule(localctx, 38, self.RULE_assign_op)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 167
+            self.state = 220
             self.match(TwoDimParser.ASSIGN)
         except RecognitionException as re:
             localctx.exception = re
@@ -1311,40 +1713,40 @@ class TwoDimParser ( TwoDimParserBase ):
     def ifStmt(self):
 
         localctx = TwoDimParser.IfStmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 30, self.RULE_ifStmt)
+        self.enterRule(localctx, 40, self.RULE_ifStmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 169
+            self.state = 222
             self.match(TwoDimParser.IF)
-            self.state = 173
+            self.state = 226
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,11,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,25,self._ctx)
             if la_ == 1:
-                self.state = 170
+                self.state = 223
                 self.simpleStmt()
-                self.state = 171
+                self.state = 224
                 self.match(TwoDimParser.SEMI)
 
 
-            self.state = 175
+            self.state = 228
             self.expression()
-            self.state = 176
+            self.state = 229
             self.block()
-            self.state = 182
+            self.state = 235
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,13,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,27,self._ctx)
             if la_ == 1:
-                self.state = 177
+                self.state = 230
                 self.match(TwoDimParser.ELSE)
-                self.state = 180
+                self.state = 233
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [TwoDimParser.IF]:
-                    self.state = 178
+                    self.state = 231
                     self.ifStmt()
                     pass
                 elif token in [TwoDimParser.L_CURLY]:
-                    self.state = 179
+                    self.state = 232
                     self.block()
                     pass
                 else:
@@ -1389,10 +1791,10 @@ class TwoDimParser ( TwoDimParserBase ):
     def switchStmt(self):
 
         localctx = TwoDimParser.SwitchStmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 32, self.RULE_switchStmt)
+        self.enterRule(localctx, 42, self.RULE_switchStmt)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 184
+            self.state = 237
             self.exprSwitchStmt()
         except RecognitionException as re:
             localctx.exception = re
@@ -1454,43 +1856,43 @@ class TwoDimParser ( TwoDimParserBase ):
     def exprSwitchStmt(self):
 
         localctx = TwoDimParser.ExprSwitchStmtContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 34, self.RULE_exprSwitchStmt)
+        self.enterRule(localctx, 44, self.RULE_exprSwitchStmt)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 186
+            self.state = 239
             self.match(TwoDimParser.SWITCH)
-            self.state = 190
+            self.state = 243
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,14,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,28,self._ctx)
             if la_ == 1:
-                self.state = 187
+                self.state = 240
                 self.simpleStmt()
-                self.state = 188
+                self.state = 241
                 self.match(TwoDimParser.SEMI)
 
 
-            self.state = 193
+            self.state = 246
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (1 << (TwoDimParser.SQUARE - 10)) | (1 << (TwoDimParser.RECT - 10)) | (1 << (TwoDimParser.CIRCLE - 10)) | (1 << (TwoDimParser.TRIANGLE - 10)) | (1 << (TwoDimParser.SHAPE - 10)) | (1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)))) != 0):
-                self.state = 192
+            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)))) != 0):
+                self.state = 245
                 self.expression()
 
 
-            self.state = 195
+            self.state = 248
             self.match(TwoDimParser.L_CURLY)
-            self.state = 199
+            self.state = 252
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==TwoDimParser.CASE or _la==TwoDimParser.DEFAULT:
-                self.state = 196
+                self.state = 249
                 self.exprCaseClause()
-                self.state = 201
+                self.state = 254
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 202
+            self.state = 255
             self.match(TwoDimParser.R_CURLY)
         except RecognitionException as re:
             localctx.exception = re
@@ -1536,19 +1938,19 @@ class TwoDimParser ( TwoDimParserBase ):
     def exprCaseClause(self):
 
         localctx = TwoDimParser.ExprCaseClauseContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 36, self.RULE_exprCaseClause)
+        self.enterRule(localctx, 46, self.RULE_exprCaseClause)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 204
+            self.state = 257
             self.exprSwitchCase()
-            self.state = 205
+            self.state = 258
             self.match(TwoDimParser.COLON)
-            self.state = 207
+            self.state = 260
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if ((((_la - 2)) & ~0x3f) == 0 and ((1 << (_la - 2)) & ((1 << (TwoDimParser.SWITCH - 2)) | (1 << (TwoDimParser.IF - 2)) | (1 << (TwoDimParser.NIL_LIT - 2)) | (1 << (TwoDimParser.IDENTIFIER - 2)) | (1 << (TwoDimParser.SQUARE - 2)) | (1 << (TwoDimParser.RECT - 2)) | (1 << (TwoDimParser.CIRCLE - 2)) | (1 << (TwoDimParser.TRIANGLE - 2)) | (1 << (TwoDimParser.SHAPE - 2)) | (1 << (TwoDimParser.L_PAREN - 2)) | (1 << (TwoDimParser.L_CURLY - 2)) | (1 << (TwoDimParser.DECIMAL_LIT - 2)) | (1 << (TwoDimParser.FLOAT_LIT - 2)) | (1 << (TwoDimParser.RUNE_LIT - 2)) | (1 << (TwoDimParser.RAW_STRING_LIT - 2)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 2)))) != 0):
-                self.state = 206
+            if ((((_la - 2)) & ~0x3f) == 0 and ((1 << (_la - 2)) & ((1 << (TwoDimParser.SWITCH - 2)) | (1 << (TwoDimParser.IF - 2)) | (1 << (TwoDimParser.NIL_LIT - 2)) | (1 << (TwoDimParser.IDENTIFIER - 2)) | (1 << (TwoDimParser.SQUARE - 2)) | (1 << (TwoDimParser.RECT - 2)) | (1 << (TwoDimParser.CIRCLE - 2)) | (1 << (TwoDimParser.TRIANGLE - 2)) | (1 << (TwoDimParser.SHAPE - 2)) | (1 << (TwoDimParser.DRAW - 2)) | (1 << (TwoDimParser.L_PAREN - 2)) | (1 << (TwoDimParser.L_CURLY - 2)) | (1 << (TwoDimParser.DECIMAL_LIT - 2)) | (1 << (TwoDimParser.FLOAT_LIT - 2)) | (1 << (TwoDimParser.RUNE_LIT - 2)) | (1 << (TwoDimParser.RAW_STRING_LIT - 2)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 2)))) != 0):
+                self.state = 259
                 self.statementList()
 
 
@@ -1595,91 +1997,22 @@ class TwoDimParser ( TwoDimParserBase ):
     def exprSwitchCase(self):
 
         localctx = TwoDimParser.ExprSwitchCaseContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 38, self.RULE_exprSwitchCase)
+        self.enterRule(localctx, 48, self.RULE_exprSwitchCase)
         try:
-            self.state = 212
+            self.state = 265
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [TwoDimParser.CASE]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 209
+                self.state = 262
                 self.match(TwoDimParser.CASE)
-                self.state = 210
+                self.state = 263
                 self.expression()
                 pass
             elif token in [TwoDimParser.DEFAULT]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 211
+                self.state = 264
                 self.match(TwoDimParser.DEFAULT)
-                pass
-            else:
-                raise NoViableAltException(self)
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class Type_Context(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def typeName(self):
-            return self.getTypedRuleContext(TwoDimParser.TypeNameContext,0)
-
-
-        def L_PAREN(self):
-            return self.getToken(TwoDimParser.L_PAREN, 0)
-
-        def type_(self):
-            return self.getTypedRuleContext(TwoDimParser.Type_Context,0)
-
-
-        def R_PAREN(self):
-            return self.getToken(TwoDimParser.R_PAREN, 0)
-
-        def getRuleIndex(self):
-            return TwoDimParser.RULE_type_
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterType_" ):
-                listener.enterType_(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitType_" ):
-                listener.exitType_(self)
-
-
-
-
-    def type_(self):
-
-        localctx = TwoDimParser.Type_Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 40, self.RULE_type_)
-        try:
-            self.state = 219
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE]:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 214
-                self.typeName()
-                pass
-            elif token in [TwoDimParser.L_PAREN]:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 215
-                self.match(TwoDimParser.L_PAREN)
-                self.state = 216
-                self.type_()
-                self.state = 217
-                self.match(TwoDimParser.R_PAREN)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -1732,59 +2065,17 @@ class TwoDimParser ( TwoDimParserBase ):
     def typeName(self):
 
         localctx = TwoDimParser.TypeNameContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 42, self.RULE_typeName)
+        self.enterRule(localctx, 50, self.RULE_typeName)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 221
+            self.state = 267
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class ElementTypeContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def type_(self):
-            return self.getTypedRuleContext(TwoDimParser.Type_Context,0)
-
-
-        def getRuleIndex(self):
-            return TwoDimParser.RULE_elementType
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterElementType" ):
-                listener.enterElementType(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitElementType" ):
-                listener.exitElementType(self)
-
-
-
-
-    def elementType(self):
-
-        localctx = TwoDimParser.ElementTypeContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 44, self.RULE_elementType)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 223
-            self.type_()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1858,34 +2149,34 @@ class TwoDimParser ( TwoDimParserBase ):
     def expression(self):
 
         localctx = TwoDimParser.ExpressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 46, self.RULE_expression)
+        self.enterRule(localctx, 52, self.RULE_expression)
         self._la = 0 # Token type
         try:
-            self.state = 241
+            self.state = 285
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,21,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,34,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 225
+                self.state = 269
                 self.primaryExpr()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 226
+                self.state = 270
                 self.primaryExpr()
-                self.state = 227
+                self.state = 271
                 _la = self._input.LA(1)
                 if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.LEFT) | (1 << TwoDimParser.RIGHT) | (1 << TwoDimParser.TOP) | (1 << TwoDimParser.BOT))) != 0)):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 229
+                self.state = 273
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==TwoDimParser.OUTER or _la==TwoDimParser.INNER:
-                    self.state = 228
+                    self.state = 272
                     _la = self._input.LA(1)
                     if not(_la==TwoDimParser.OUTER or _la==TwoDimParser.INNER):
                         self._errHandler.recoverInline(self)
@@ -1894,37 +2185,37 @@ class TwoDimParser ( TwoDimParserBase ):
                         self.consume()
 
 
-                self.state = 231
+                self.state = 275
                 self.primaryExpr()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 233
+                self.state = 277
                 self.primaryExpr()
-                self.state = 234
+                self.state = 278
                 _la = self._input.LA(1)
                 if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.ON) | (1 << TwoDimParser.UNDER) | (1 << TwoDimParser.IN))) != 0)):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 235
+                self.state = 279
                 self.primaryExpr()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 237
+                self.state = 281
                 self.primaryExpr()
-                self.state = 238
+                self.state = 282
                 _la = self._input.LA(1)
                 if not(_la==TwoDimParser.PLUS or _la==TwoDimParser.MINUS):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 239
+                self.state = 283
                 self.primaryExpr()
                 pass
 
@@ -1966,10 +2257,10 @@ class TwoDimParser ( TwoDimParserBase ):
     def primaryExpr(self):
 
         localctx = TwoDimParser.PrimaryExprContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 48, self.RULE_primaryExpr)
+        self.enterRule(localctx, 54, self.RULE_primaryExpr)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 243
+            self.state = 287
             self.operand()
         except RecognitionException as re:
             localctx.exception = re
@@ -1995,6 +2286,16 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getTypedRuleContext(TwoDimParser.OperandNameContext,0)
 
 
+        def L_PAREN(self):
+            return self.getToken(TwoDimParser.L_PAREN, 0)
+
+        def expression(self):
+            return self.getTypedRuleContext(TwoDimParser.ExpressionContext,0)
+
+
+        def R_PAREN(self):
+            return self.getToken(TwoDimParser.R_PAREN, 0)
+
         def getRuleIndex(self):
             return TwoDimParser.RULE_operand
 
@@ -2012,20 +2313,29 @@ class TwoDimParser ( TwoDimParserBase ):
     def operand(self):
 
         localctx = TwoDimParser.OperandContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 50, self.RULE_operand)
+        self.enterRule(localctx, 56, self.RULE_operand)
         try:
-            self.state = 247
+            self.state = 295
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [TwoDimParser.NIL_LIT, TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE, TwoDimParser.L_PAREN, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT, TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT]:
+            if token in [TwoDimParser.NIL_LIT, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT, TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 245
+                self.state = 289
                 self.literal()
                 pass
             elif token in [TwoDimParser.IDENTIFIER]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 246
+                self.state = 290
                 self.operandName()
+                pass
+            elif token in [TwoDimParser.L_PAREN]:
+                self.enterOuterAlt(localctx, 3)
+                self.state = 291
+                self.match(TwoDimParser.L_PAREN)
+                self.state = 292
+                self.expression()
+                self.state = 293
+                self.match(TwoDimParser.R_PAREN)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -2050,10 +2360,6 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getTypedRuleContext(TwoDimParser.BasicLitContext,0)
 
 
-        def compositeLit(self):
-            return self.getTypedRuleContext(TwoDimParser.CompositeLitContext,0)
-
-
         def getRuleIndex(self):
             return TwoDimParser.RULE_literal
 
@@ -2071,24 +2377,11 @@ class TwoDimParser ( TwoDimParserBase ):
     def literal(self):
 
         localctx = TwoDimParser.LiteralContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 52, self.RULE_literal)
+        self.enterRule(localctx, 58, self.RULE_literal)
         try:
-            self.state = 251
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [TwoDimParser.NIL_LIT, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT, TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT]:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 249
-                self.basicLit()
-                pass
-            elif token in [TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE, TwoDimParser.L_PAREN]:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 250
-                self.compositeLit()
-                pass
-            else:
-                raise NoViableAltException(self)
-
+            self.enterOuterAlt(localctx, 1)
+            self.state = 297
+            self.basicLit()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -2139,38 +2432,38 @@ class TwoDimParser ( TwoDimParserBase ):
     def basicLit(self):
 
         localctx = TwoDimParser.BasicLitContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 54, self.RULE_basicLit)
+        self.enterRule(localctx, 60, self.RULE_basicLit)
         try:
-            self.state = 258
+            self.state = 304
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,24,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,36,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 253
+                self.state = 299
                 self.match(TwoDimParser.NIL_LIT)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 254
+                self.state = 300
                 self.integer()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 255
+                self.state = 301
                 self.string_()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 256
+                self.state = 302
                 self.match(TwoDimParser.FLOAT_LIT)
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 257
+                self.state = 303
                 self.match(TwoDimParser.RUNE_LIT)
                 pass
 
@@ -2214,11 +2507,11 @@ class TwoDimParser ( TwoDimParserBase ):
     def integer(self):
 
         localctx = TwoDimParser.IntegerContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 56, self.RULE_integer)
+        self.enterRule(localctx, 62, self.RULE_integer)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 260
+            self.state = 306
             _la = self._input.LA(1)
             if not(_la==TwoDimParser.DECIMAL_LIT or _la==TwoDimParser.RUNE_LIT):
                 self._errHandler.recoverInline(self)
@@ -2261,219 +2554,11 @@ class TwoDimParser ( TwoDimParserBase ):
     def operandName(self):
 
         localctx = TwoDimParser.OperandNameContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 58, self.RULE_operandName)
+        self.enterRule(localctx, 64, self.RULE_operandName)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 262
+            self.state = 308
             self.match(TwoDimParser.IDENTIFIER)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class CompositeLitContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def literalType(self):
-            return self.getTypedRuleContext(TwoDimParser.LiteralTypeContext,0)
-
-
-        def literalValue(self):
-            return self.getTypedRuleContext(TwoDimParser.LiteralValueContext,0)
-
-
-        def getRuleIndex(self):
-            return TwoDimParser.RULE_compositeLit
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterCompositeLit" ):
-                listener.enterCompositeLit(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitCompositeLit" ):
-                listener.exitCompositeLit(self)
-
-
-
-
-    def compositeLit(self):
-
-        localctx = TwoDimParser.CompositeLitContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 60, self.RULE_compositeLit)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 264
-            self.literalType()
-            self.state = 265
-            self.literalValue()
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class LiteralTypeContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def elementType(self):
-            return self.getTypedRuleContext(TwoDimParser.ElementTypeContext,0)
-
-
-        def getRuleIndex(self):
-            return TwoDimParser.RULE_literalType
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLiteralType" ):
-                listener.enterLiteralType(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLiteralType" ):
-                listener.exitLiteralType(self)
-
-
-
-
-    def literalType(self):
-
-        localctx = TwoDimParser.LiteralTypeContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 62, self.RULE_literalType)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 267
-            self.elementType()
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class LiteralValueContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def L_CURLY(self):
-            return self.getToken(TwoDimParser.L_CURLY, 0)
-
-        def R_CURLY(self):
-            return self.getToken(TwoDimParser.R_CURLY, 0)
-
-        def element(self):
-            return self.getTypedRuleContext(TwoDimParser.ElementContext,0)
-
-
-        def getRuleIndex(self):
-            return TwoDimParser.RULE_literalValue
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLiteralValue" ):
-                listener.enterLiteralValue(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLiteralValue" ):
-                listener.exitLiteralValue(self)
-
-
-
-
-    def literalValue(self):
-
-        localctx = TwoDimParser.LiteralValueContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 64, self.RULE_literalValue)
-        self._la = 0 # Token type
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 269
-            self.match(TwoDimParser.L_CURLY)
-            self.state = 271
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (1 << (TwoDimParser.SQUARE - 10)) | (1 << (TwoDimParser.RECT - 10)) | (1 << (TwoDimParser.CIRCLE - 10)) | (1 << (TwoDimParser.TRIANGLE - 10)) | (1 << (TwoDimParser.SHAPE - 10)) | (1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.L_CURLY - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)))) != 0):
-                self.state = 270
-                self.element()
-
-
-            self.state = 273
-            self.match(TwoDimParser.R_CURLY)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class ElementContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def expression(self):
-            return self.getTypedRuleContext(TwoDimParser.ExpressionContext,0)
-
-
-        def literalValue(self):
-            return self.getTypedRuleContext(TwoDimParser.LiteralValueContext,0)
-
-
-        def getRuleIndex(self):
-            return TwoDimParser.RULE_element
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterElement" ):
-                listener.enterElement(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitElement" ):
-                listener.exitElement(self)
-
-
-
-
-    def element(self):
-
-        localctx = TwoDimParser.ElementContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 66, self.RULE_element)
-        try:
-            self.state = 277
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [TwoDimParser.NIL_LIT, TwoDimParser.IDENTIFIER, TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE, TwoDimParser.L_PAREN, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT, TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT]:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 275
-                self.expression()
-                pass
-            elif token in [TwoDimParser.L_CURLY]:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 276
-                self.literalValue()
-                pass
-            else:
-                raise NoViableAltException(self)
-
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -2513,11 +2598,11 @@ class TwoDimParser ( TwoDimParserBase ):
     def string_(self):
 
         localctx = TwoDimParser.String_Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 68, self.RULE_string_)
+        self.enterRule(localctx, 66, self.RULE_string_)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 279
+            self.state = 310
             _la = self._input.LA(1)
             if not(_la==TwoDimParser.RAW_STRING_LIT or _la==TwoDimParser.INTERPRETED_STRING_LIT):
                 self._errHandler.recoverInline(self)
@@ -2543,20 +2628,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def L_PAREN(self):
             return self.getToken(TwoDimParser.L_PAREN, 0)
 
-        def SIZE(self, i:int=None):
-            if i is None:
-                return self.getTokens(TwoDimParser.SIZE)
-            else:
-                return self.getToken(TwoDimParser.SIZE, i)
-
         def R_PAREN(self):
             return self.getToken(TwoDimParser.R_PAREN, 0)
 
-        def COMMA(self):
-            return self.getToken(TwoDimParser.COMMA, 0)
+        def expressionList(self):
+            return self.getTypedRuleContext(TwoDimParser.ExpressionListContext,0)
 
-        def WS(self):
-            return self.getToken(TwoDimParser.WS, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_arguments
@@ -2575,33 +2652,21 @@ class TwoDimParser ( TwoDimParserBase ):
     def arguments(self):
 
         localctx = TwoDimParser.ArgumentsContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 70, self.RULE_arguments)
+        self.enterRule(localctx, 68, self.RULE_arguments)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 281
+            self.state = 312
             self.match(TwoDimParser.L_PAREN)
-            self.state = 282
-            self.match(TwoDimParser.SIZE)
-            self.state = 288
+            self.state = 314
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==TwoDimParser.COMMA:
-                self.state = 283
-                self.match(TwoDimParser.COMMA)
-                self.state = 285
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la==TwoDimParser.WS:
-                    self.state = 284
-                    self.match(TwoDimParser.WS)
+            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)))) != 0):
+                self.state = 313
+                self.expressionList()
 
 
-                self.state = 287
-                self.match(TwoDimParser.SIZE)
-
-
-            self.state = 290
+            self.state = 316
             self.match(TwoDimParser.R_PAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -2642,37 +2707,39 @@ class TwoDimParser ( TwoDimParserBase ):
     def eos(self):
 
         localctx = TwoDimParser.EosContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 72, self.RULE_eos)
+        self.enterRule(localctx, 70, self.RULE_eos)
         try:
-            self.state = 296
+            self.state = 323
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,29,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,38,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 292
+                self.state = 318
                 self.match(TwoDimParser.SEMI)
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 293
+                self.state = 319
+                self.match(TwoDimParser.SEMI)
+                self.state = 320
                 self.match(TwoDimParser.EOF)
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 294
-                if not lineTerminatorAhead():
+                self.state = 321
+                if not self.lineTerminatorAhead():
                     from antlr4.error.Errors import FailedPredicateException
-                    raise FailedPredicateException(self, "lineTerminatorAhead()")
+                    raise FailedPredicateException(self, "self.lineTerminatorAhead()")
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 295
-                if not checkPreviousTokenText("}"):
+                self.state = 322
+                if not self.checkPreviousTokenText("}"):
                     from antlr4.error.Errors import FailedPredicateException
-                    raise FailedPredicateException(self, "checkPreviousTokenText(\"}\")")
+                    raise FailedPredicateException(self, "self.checkPreviousTokenText(\"}\")")
                 pass
 
 
@@ -2689,20 +2756,26 @@ class TwoDimParser ( TwoDimParserBase ):
     def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
         if self._predicates == None:
             self._predicates = dict()
-        self._predicates[36] = self.eos_sempred
+        self._predicates[6] = self.signature_sempred
+        self._predicates[35] = self.eos_sempred
         pred = self._predicates.get(ruleIndex, None)
         if pred is None:
             raise Exception("No predicate with index:" + str(ruleIndex))
         else:
             return pred(localctx, predIndex)
 
-    def eos_sempred(self, localctx:EosContext, predIndex:int):
+    def signature_sempred(self, localctx:SignatureContext, predIndex:int):
             if predIndex == 0:
-                return lineTerminatorAhead()
+                return self.noTerminatorAfterParams(1)
          
 
+    def eos_sempred(self, localctx:EosContext, predIndex:int):
             if predIndex == 1:
-                return checkPreviousTokenText("}")
+                return self.lineTerminatorAhead()
+         
+
+            if predIndex == 2:
+                return self.checkPreviousTokenText("}")
          
 
 

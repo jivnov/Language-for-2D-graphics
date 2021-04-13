@@ -44,6 +44,51 @@ class TwoDimParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by TwoDimParser#expressionList.
+    def enterExpressionList(self, ctx:TwoDimParser.ExpressionListContext):
+        pass
+
+    # Exit a parse tree produced by TwoDimParser#expressionList.
+    def exitExpressionList(self, ctx:TwoDimParser.ExpressionListContext):
+        pass
+
+
+    # Enter a parse tree produced by TwoDimParser#functionDecl.
+    def enterFunctionDecl(self, ctx:TwoDimParser.FunctionDeclContext):
+        pass
+
+    # Exit a parse tree produced by TwoDimParser#functionDecl.
+    def exitFunctionDecl(self, ctx:TwoDimParser.FunctionDeclContext):
+        pass
+
+
+    # Enter a parse tree produced by TwoDimParser#signature.
+    def enterSignature(self, ctx:TwoDimParser.SignatureContext):
+        pass
+
+    # Exit a parse tree produced by TwoDimParser#signature.
+    def exitSignature(self, ctx:TwoDimParser.SignatureContext):
+        pass
+
+
+    # Enter a parse tree produced by TwoDimParser#parameters.
+    def enterParameters(self, ctx:TwoDimParser.ParametersContext):
+        pass
+
+    # Exit a parse tree produced by TwoDimParser#parameters.
+    def exitParameters(self, ctx:TwoDimParser.ParametersContext):
+        pass
+
+
+    # Enter a parse tree produced by TwoDimParser#parameterDecl.
+    def enterParameterDecl(self, ctx:TwoDimParser.ParameterDeclContext):
+        pass
+
+    # Exit a parse tree produced by TwoDimParser#parameterDecl.
+    def exitParameterDecl(self, ctx:TwoDimParser.ParameterDeclContext):
+        pass
+
+
     # Enter a parse tree produced by TwoDimParser#drawClause.
     def enterDrawClause(self, ctx:TwoDimParser.DrawClauseContext):
         pass
@@ -53,21 +98,21 @@ class TwoDimParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by TwoDimParser#varDecl.
-    def enterVarDecl(self, ctx:TwoDimParser.VarDeclContext):
+    # Enter a parse tree produced by TwoDimParser#shapeDecl.
+    def enterShapeDecl(self, ctx:TwoDimParser.ShapeDeclContext):
         pass
 
-    # Exit a parse tree produced by TwoDimParser#varDecl.
-    def exitVarDecl(self, ctx:TwoDimParser.VarDeclContext):
+    # Exit a parse tree produced by TwoDimParser#shapeDecl.
+    def exitShapeDecl(self, ctx:TwoDimParser.ShapeDeclContext):
         pass
 
 
-    # Enter a parse tree produced by TwoDimParser#varSpec.
-    def enterVarSpec(self, ctx:TwoDimParser.VarSpecContext):
+    # Enter a parse tree produced by TwoDimParser#shapeSpec.
+    def enterShapeSpec(self, ctx:TwoDimParser.ShapeSpecContext):
         pass
 
-    # Exit a parse tree produced by TwoDimParser#varSpec.
-    def exitVarSpec(self, ctx:TwoDimParser.VarSpecContext):
+    # Exit a parse tree produced by TwoDimParser#shapeSpec.
+    def exitShapeSpec(self, ctx:TwoDimParser.ShapeSpecContext):
         pass
 
 
@@ -116,12 +161,12 @@ class TwoDimParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by TwoDimParser#declStmt.
-    def enterDeclStmt(self, ctx:TwoDimParser.DeclStmtContext):
+    # Enter a parse tree produced by TwoDimParser#shapeArguments.
+    def enterShapeArguments(self, ctx:TwoDimParser.ShapeArgumentsContext):
         pass
 
-    # Exit a parse tree produced by TwoDimParser#declStmt.
-    def exitDeclStmt(self, ctx:TwoDimParser.DeclStmtContext):
+    # Exit a parse tree produced by TwoDimParser#shapeArguments.
+    def exitShapeArguments(self, ctx:TwoDimParser.ShapeArgumentsContext):
         pass
 
 
@@ -188,30 +233,12 @@ class TwoDimParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by TwoDimParser#type_.
-    def enterType_(self, ctx:TwoDimParser.Type_Context):
-        pass
-
-    # Exit a parse tree produced by TwoDimParser#type_.
-    def exitType_(self, ctx:TwoDimParser.Type_Context):
-        pass
-
-
     # Enter a parse tree produced by TwoDimParser#typeName.
     def enterTypeName(self, ctx:TwoDimParser.TypeNameContext):
         pass
 
     # Exit a parse tree produced by TwoDimParser#typeName.
     def exitTypeName(self, ctx:TwoDimParser.TypeNameContext):
-        pass
-
-
-    # Enter a parse tree produced by TwoDimParser#elementType.
-    def enterElementType(self, ctx:TwoDimParser.ElementTypeContext):
-        pass
-
-    # Exit a parse tree produced by TwoDimParser#elementType.
-    def exitElementType(self, ctx:TwoDimParser.ElementTypeContext):
         pass
 
 
@@ -275,42 +302,6 @@ class TwoDimParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by TwoDimParser#operandName.
     def exitOperandName(self, ctx:TwoDimParser.OperandNameContext):
-        pass
-
-
-    # Enter a parse tree produced by TwoDimParser#compositeLit.
-    def enterCompositeLit(self, ctx:TwoDimParser.CompositeLitContext):
-        pass
-
-    # Exit a parse tree produced by TwoDimParser#compositeLit.
-    def exitCompositeLit(self, ctx:TwoDimParser.CompositeLitContext):
-        pass
-
-
-    # Enter a parse tree produced by TwoDimParser#literalType.
-    def enterLiteralType(self, ctx:TwoDimParser.LiteralTypeContext):
-        pass
-
-    # Exit a parse tree produced by TwoDimParser#literalType.
-    def exitLiteralType(self, ctx:TwoDimParser.LiteralTypeContext):
-        pass
-
-
-    # Enter a parse tree produced by TwoDimParser#literalValue.
-    def enterLiteralValue(self, ctx:TwoDimParser.LiteralValueContext):
-        pass
-
-    # Exit a parse tree produced by TwoDimParser#literalValue.
-    def exitLiteralValue(self, ctx:TwoDimParser.LiteralValueContext):
-        pass
-
-
-    # Enter a parse tree produced by TwoDimParser#element.
-    def enterElement(self, ctx:TwoDimParser.ElementContext):
-        pass
-
-    # Exit a parse tree produced by TwoDimParser#element.
-    def exitElement(self, ctx:TwoDimParser.ElementContext):
         pass
 
 
