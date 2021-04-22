@@ -1,4 +1,4 @@
-#viewport 100 100;
+#viewport 200 100;
 rect A;
 shape B;
 //comment
