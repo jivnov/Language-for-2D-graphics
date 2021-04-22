@@ -1,3 +1,5 @@
 #viewport 100 100;
 rect A;
+shape B;
+//comment
 draw A;
