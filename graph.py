@@ -21,6 +21,7 @@ class Vertex:
     def __init__(self, var_name: str,  shape: str,  args: Any):
         self.name = var_name
         self.shape = None
+        self.bb_w = 0.0
         if shape == "rect":
             self.shape = Shape.RECT
         if shape == "square":
@@ -31,6 +32,9 @@ class Vertex:
             self.shape = Shape.TRIANGLE
         if shape == "shape":
             self.shape == Shape.SHAPE
+        if (isinstance(args, list) and len(args)>0):
+            self.bb_w = int(args[0].replace('%', ''))/100
+            self.bb_h = int(args[1].replace('%', ''))/100
 
 class Graph:
     def __init__(self):

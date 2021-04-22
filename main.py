@@ -19,6 +19,7 @@ class MyTwoDimParserListener(TwoDimParserListener):
 
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
         self.relationsGraph.get_relations(self.relationsGraph.find_vertex(ctx.IDENTIFIER()))
+        self.res.draw(self.relationsGraph.find_vertex(vertex_name = ctx.IDENTIFIER()))
         self.res.canvas.saveSvg('example.svg')
         print(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")  # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
 
