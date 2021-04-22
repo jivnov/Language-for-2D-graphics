@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Any
 
 class Shape(Enum):
     SQUARE = 1
@@ -17,9 +18,19 @@ class Relation(Enum):
     UNDER = 7
 
 class Vertex:
-    def __init__(self, var_name: str,  shape: Shape,  args):
+    def __init__(self, var_name: str,  shape: str,  args: Any):
         self.name = var_name
-        self.shape = shape
+        self.shape = None
+        if shape == "rect":
+            self.shape = Shape.RECT
+        if shape == "square":
+            self.shape = Shape.SQUARE
+        if shape == "circle":
+            self.shape = Shape.CIRCLE
+        if shape == "triangle":
+            self.shape = Shape.TRIANGLE
+        if shape == "shape":
+            self.shape == Shape.SHAPE
 
 class Graph:
     def __init__(self):
@@ -41,7 +52,14 @@ class Graph:
         if v not in self.vertices:
             print("not in graph")
         else:
+            print("found vertex...")
             for el in self.vertices[v]:
                 vertex_name = el[0].name
                 vertex_relation = el[1]
                 print(f"{el[0].shape}:{vertex_name} {vertex_relation}")
+    
+    def find_vertex(self, vertex_name: str) -> Vertex:
+        for v in self.vertices.keys():
+            if str(v.name) == str(vertex_name):
+                return v
+
