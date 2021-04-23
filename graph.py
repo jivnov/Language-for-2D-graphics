@@ -33,8 +33,14 @@ class Vertex:
         if shape == "shape":
             self.shape == Shape.SHAPE
         if (isinstance(args, list) and len(args)>0):
-            self.bb_w = int(args[0].replace('%', ''))/100
-            self.bb_h = int(args[1].replace('%', ''))/100
+            self.bb_w = int(args.pop(0).replace('%', ''))/100
+            if (len(args) > 0):
+                self.bb_h = int(args.pop(0).replace('%', ''))/100
+            else:
+                self.bb_h = self.bb_h
+        if self.shape == Shape.SQUARE or self.shape == Shape.CIRCLE:
+            self.bb_h = self.bb_w = min(self.bb_h, self.bb_w)
+            print(f"Sq size: {self.bb_w} {self.bb_h}")
 
 class Graph:
     def __init__(self):
