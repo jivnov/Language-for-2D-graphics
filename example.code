@@ -1,5 +1,5 @@
-#viewport 200 100;
-rect A [20%, 30%], C [50%, 50%];
+#viewport 800 600;
+rect A [20%, 30%], C [75%, 50%];
 shape B;
 //comment
-draw A;
+draw C;
