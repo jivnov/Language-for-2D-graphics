@@ -1,12 +1,16 @@
 import sys
-import svgwrite as d
+import svgwrite as svg
 from graph import Shape, Vertex
 
-filename = "example.svg"
 
 class Drawing2d:
     def __init__(self, w, h):
-        self.viewport_width = w 
+        """
+
+        :param w:
+        :param h:
+        """
+        self.viewport_width = w
         self.viewport_height = h
         self.canvas = d.Drawing(filename, (w, h))
 

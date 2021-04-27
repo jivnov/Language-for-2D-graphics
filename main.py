@@ -14,28 +14,32 @@ class MyTwoDimParserListener(TwoDimParserListener):
     relationsGraph = graph.Graph()
     res = None
 
-    def enterSourceFile(self, ctx: TwoDimParser.SourceFileContext):  # XYZContext classes are syntax trees; XYZ is the root node; you can access all the child nodes and their values
+    def enterSourceFile(self,
+                        ctx: TwoDimParser.SourceFileContext):  # XYZContext classes are syntax trees; XYZ is the root
+        # node; you can access all the child nodes and their values
         print("I just entered the source file")
 
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
         self.relationsGraph.get_relations(self.relationsGraph.find_vertex(ctx.IDENTIFIER()))
         self.res.draw(self.relationsGraph.find_vertex(vertex_name = ctx.IDENTIFIER()))
         self.res.canvas.save(pretty = True)
-        print(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")  # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
+        # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
+        print(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")  
 
     def enterShapeSpec(self, ctx: TwoDimParser.ShapeSpecContext):
         for i, id in enumerate(ctx.IDENTIFIER()):
-            #TODO
-            #At the moment assuming SIZE is the only argument
+            # TODO
+            # At the moment assuming SIZE is the only argument
             self.relationsGraph.add_vertex(
-                graph.Vertex(var_name = id, shape = ctx.typeName().getText(), args = [size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
+                graph.Vertex(var_name=id, shape=ctx.typeName().getText(),
+                             args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
             )
-        
+
     def enterViewportClause(self, ctx: TwoDimParser.ViewportClauseContext):
-        #now was here for testing purposes
-        self.res = drawing.Drawing2d(int(ctx.DECIMAL_LIT(0).getText()),int(ctx.DECIMAL_LIT(1).getText()))
-        
-        
+        # now was here for testing purposes
+        self.res = drawing.Drawing2d(int(ctx.DECIMAL_LIT(0).getText()), int(ctx.DECIMAL_LIT(1).getText()))
+
+
 def main(argv):
     input_stream = FileStream(argv[1])
     lexer = TwoDimLexer(input_stream)
