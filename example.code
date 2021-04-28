@@ -1,3 +1,0 @@
-#viewport 100 100;
-rect A;
-draw A;

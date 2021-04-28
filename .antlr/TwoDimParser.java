@@ -1,4 +1,4 @@
-// Generated from /home/pbilko/Desktop/SZKOŁA/KOMPILATORY/Language-for-2D-graphics/TwoDimParser.g4 by ANTLR 4.8
+// Generated from /home/liza/TKK/projekt/Language-for-2D-graphics/TwoDimParser.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -34,21 +34,19 @@ public class TwoDimParser extends TwoDimParserBase {
 		RULE_block = 12, RULE_statementList = 13, RULE_statement = 14, RULE_simpleStmt = 15, 
 		RULE_expressionStmt = 16, RULE_shapeArguments = 17, RULE_assignment = 18, 
 		RULE_assign_op = 19, RULE_ifStmt = 20, RULE_switchStmt = 21, RULE_exprSwitchStmt = 22, 
-		RULE_exprCaseClause = 23, RULE_exprSwitchCase = 24, RULE_type_ = 25, RULE_typeName = 26, 
-		RULE_elementType = 27, RULE_expression = 28, RULE_primaryExpr = 29, RULE_operand = 30, 
-		RULE_literal = 31, RULE_basicLit = 32, RULE_integer = 33, RULE_operandName = 34, 
-		RULE_compositeLit = 35, RULE_literalType = 36, RULE_literalValue = 37, 
-		RULE_element = 38, RULE_string_ = 39, RULE_arguments = 40, RULE_eos = 41;
+		RULE_exprCaseClause = 23, RULE_exprSwitchCase = 24, RULE_typeName = 25, 
+		RULE_expression = 26, RULE_primaryExpr = 27, RULE_operand = 28, RULE_literal = 29, 
+		RULE_basicLit = 30, RULE_integer = 31, RULE_operandName = 32, RULE_string_ = 33, 
+		RULE_arguments = 34, RULE_eos = 35;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"sourceFile", "viewportClause", "declaration", "identifierList", "expressionList", 
 			"functionDecl", "signature", "parameters", "parameterDecl", "drawClause", 
 			"shapeDecl", "shapeSpec", "block", "statementList", "statement", "simpleStmt", 
 			"expressionStmt", "shapeArguments", "assignment", "assign_op", "ifStmt", 
-			"switchStmt", "exprSwitchStmt", "exprCaseClause", "exprSwitchCase", "type_", 
-			"typeName", "elementType", "expression", "primaryExpr", "operand", "literal", 
-			"basicLit", "integer", "operandName", "compositeLit", "literalType", 
-			"literalValue", "element", "string_", "arguments", "eos"
+			"switchStmt", "exprSwitchStmt", "exprCaseClause", "exprSwitchCase", "typeName", 
+			"expression", "primaryExpr", "operand", "literal", "basicLit", "integer", 
+			"operandName", "string_", "arguments", "eos"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -174,29 +172,29 @@ public class TwoDimParser extends TwoDimParserBase {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(73);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==VIEWPORT) {
 				{
-				setState(84);
+				setState(72);
 				viewportClause();
 				}
 			}
 
-			setState(95);
+			setState(83);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(89);
+					setState(77);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
 					case FUNC:
 						{
-						setState(87);
+						setState(75);
 						functionDecl();
 						}
 						break;
@@ -206,35 +204,35 @@ public class TwoDimParser extends TwoDimParserBase {
 					case TRIANGLE:
 					case SHAPE:
 						{
-						setState(88);
+						setState(76);
 						declaration();
 						}
 						break;
 					default:
 						throw new NoViableAltException(this);
 					}
-					setState(91);
+					setState(79);
 					eos();
 					}
 					} 
 				}
-				setState(97);
+				setState(85);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			}
-			setState(99);
+			setState(87);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (SWITCH - 2)) | (1L << (IF - 2)) | (1L << (NIL_LIT - 2)) | (1L << (IDENTIFIER - 2)) | (1L << (SQUARE - 2)) | (1L << (RECT - 2)) | (1L << (CIRCLE - 2)) | (1L << (TRIANGLE - 2)) | (1L << (SHAPE - 2)) | (1L << (L_PAREN - 2)) | (1L << (L_CURLY - 2)) | (1L << (DECIMAL_LIT - 2)) | (1L << (FLOAT_LIT - 2)) | (1L << (RUNE_LIT - 2)) | (1L << (RAW_STRING_LIT - 2)) | (1L << (INTERPRETED_STRING_LIT - 2)))) != 0)) {
+			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			case 1:
 				{
-				setState(98);
+				setState(86);
 				statementList();
 				}
+				break;
 			}
-
-			setState(101);
+			setState(89);
 			drawClause();
-			setState(102);
+			setState(90);
 			eos();
 			}
 		}
@@ -251,10 +249,6 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public static class ViewportClauseContext extends ParserRuleContext {
 		public TerminalNode VIEWPORT() { return getToken(TwoDimParser.VIEWPORT, 0); }
-		public List<TerminalNode> WS() { return getTokens(TwoDimParser.WS); }
-		public TerminalNode WS(int i) {
-			return getToken(TwoDimParser.WS, i);
-		}
 		public List<TerminalNode> DECIMAL_LIT() { return getTokens(TwoDimParser.DECIMAL_LIT); }
 		public TerminalNode DECIMAL_LIT(int i) {
 			return getToken(TwoDimParser.DECIMAL_LIT, i);
@@ -274,17 +268,13 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(104);
+			setState(92);
 			match(VIEWPORT);
-			setState(105);
-			match(WS);
-			setState(106);
+			setState(93);
 			match(DECIMAL_LIT);
-			setState(107);
-			match(WS);
-			setState(108);
+			setState(94);
 			match(DECIMAL_LIT);
-			setState(109);
+			setState(95);
 			eos();
 			}
 		}
@@ -315,7 +305,7 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(111);
+			setState(97);
 			shapeDecl();
 			}
 		}
@@ -352,23 +342,23 @@ public class TwoDimParser extends TwoDimParserBase {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(113);
+			setState(99);
 			match(IDENTIFIER);
-			setState(118);
+			setState(104);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(114);
+					setState(100);
 					match(COMMA);
-					setState(115);
+					setState(101);
 					match(IDENTIFIER);
 					}
 					} 
 				}
-				setState(120);
+				setState(106);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			}
@@ -409,21 +399,21 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(121);
+			setState(107);
 			expression();
-			setState(126);
+			setState(112);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(122);
+				setState(108);
 				match(COMMA);
-				setState(123);
+				setState(109);
 				expression();
 				}
 				}
-				setState(128);
+				setState(114);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -461,19 +451,19 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(129);
+			setState(115);
 			match(FUNC);
-			setState(130);
+			setState(116);
 			match(IDENTIFIER);
 			{
-			setState(131);
+			setState(117);
 			signature();
-			setState(133);
+			setState(119);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
 			case 1:
 				{
-				setState(132);
+				setState(118);
 				block();
 				}
 				break;
@@ -506,22 +496,22 @@ public class TwoDimParser extends TwoDimParserBase {
 		SignatureContext _localctx = new SignatureContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_signature);
 		try {
-			setState(138);
+			setState(124);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(135);
+				setState(121);
 				if (!(self.noTerminatorAfterParams(1))) throw new FailedPredicateException(this, "self.noTerminatorAfterParams(1)");
-				setState(136);
+				setState(122);
 				parameters();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(137);
+				setState(123);
 				parameters();
 				}
 				break;
@@ -564,35 +554,35 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(140);
+			setState(126);
 			match(L_PAREN);
-			setState(149);
+			setState(135);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SQUARE) | (1L << RECT) | (1L << CIRCLE) | (1L << TRIANGLE) | (1L << SHAPE))) != 0)) {
 				{
-				setState(141);
+				setState(127);
 				parameterDecl();
-				setState(146);
+				setState(132);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(142);
+					setState(128);
 					match(COMMA);
-					setState(143);
+					setState(129);
 					parameterDecl();
 					}
 					}
-					setState(148);
+					setState(134);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(151);
+			setState(137);
 			match(R_PAREN);
 			}
 		}
@@ -608,8 +598,8 @@ public class TwoDimParser extends TwoDimParserBase {
 	}
 
 	public static class ParameterDeclContext extends ParserRuleContext {
-		public Type_Context type_() {
-			return getRuleContext(Type_Context.class,0);
+		public TypeNameContext typeName() {
+			return getRuleContext(TypeNameContext.class,0);
 		}
 		public IdentifierListContext identifierList() {
 			return getRuleContext(IdentifierListContext.class,0);
@@ -627,14 +617,14 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(153);
-			type_();
-			setState(155);
+			setState(139);
+			typeName();
+			setState(141);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==IDENTIFIER) {
 				{
-				setState(154);
+				setState(140);
 				identifierList();
 				}
 			}
@@ -654,7 +644,6 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public static class DrawClauseContext extends ParserRuleContext {
 		public TerminalNode DRAW() { return getToken(TwoDimParser.DRAW, 0); }
-		public TerminalNode WS() { return getToken(TwoDimParser.WS, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(TwoDimParser.IDENTIFIER, 0); }
 		public DrawClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -668,11 +657,9 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(157);
+			setState(143);
 			match(DRAW);
-			setState(158);
-			match(WS);
-			setState(159);
+			setState(144);
 			match(IDENTIFIER);
 			}
 		}
@@ -703,7 +690,7 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(161);
+			setState(146);
 			shapeSpec();
 			}
 		}
@@ -719,12 +706,8 @@ public class TwoDimParser extends TwoDimParserBase {
 	}
 
 	public static class ShapeSpecContext extends ParserRuleContext {
-		public Type_Context type_() {
-			return getRuleContext(Type_Context.class,0);
-		}
-		public List<TerminalNode> WS() { return getTokens(TwoDimParser.WS); }
-		public TerminalNode WS(int i) {
-			return getToken(TwoDimParser.WS, i);
+		public TypeNameContext typeName() {
+			return getRuleContext(TypeNameContext.class,0);
 		}
 		public List<TerminalNode> IDENTIFIER() { return getTokens(TwoDimParser.IDENTIFIER); }
 		public TerminalNode IDENTIFIER(int i) {
@@ -735,6 +718,10 @@ public class TwoDimParser extends TwoDimParserBase {
 		}
 		public ShapeArgumentsContext shapeArguments(int i) {
 			return getRuleContext(ShapeArgumentsContext.class,i);
+		}
+		public List<TerminalNode> WS() { return getTokens(TwoDimParser.WS); }
+		public TerminalNode WS(int i) {
+			return getToken(TwoDimParser.WS, i);
 		}
 		public List<TerminalNode> COMMA() { return getTokens(TwoDimParser.COMMA); }
 		public TerminalNode COMMA(int i) {
@@ -754,51 +741,49 @@ public class TwoDimParser extends TwoDimParserBase {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(163);
-			type_();
-			setState(164);
-			match(WS);
-			setState(165);
+			setState(148);
+			typeName();
+			setState(149);
 			match(IDENTIFIER);
-			setState(167);
+			setState(151);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 			case 1:
 				{
-				setState(166);
+				setState(150);
 				match(WS);
 				}
 				break;
 			}
-			setState(169);
+			setState(153);
 			shapeArguments();
-			setState(178);
+			setState(162);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(170);
+					setState(154);
 					match(COMMA);
-					setState(172);
+					setState(156);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==WS) {
 						{
-						setState(171);
+						setState(155);
 						match(WS);
 						}
 					}
 
-					setState(174);
+					setState(158);
 					match(IDENTIFIER);
-					setState(175);
+					setState(159);
 					shapeArguments();
 					}
 					} 
 				}
-				setState(180);
+				setState(164);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
 			}
@@ -834,19 +819,19 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(181);
+			setState(165);
 			match(L_CURLY);
-			setState(183);
+			setState(167);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (SWITCH - 2)) | (1L << (IF - 2)) | (1L << (NIL_LIT - 2)) | (1L << (IDENTIFIER - 2)) | (1L << (SQUARE - 2)) | (1L << (RECT - 2)) | (1L << (CIRCLE - 2)) | (1L << (TRIANGLE - 2)) | (1L << (SHAPE - 2)) | (1L << (L_PAREN - 2)) | (1L << (L_CURLY - 2)) | (1L << (DECIMAL_LIT - 2)) | (1L << (FLOAT_LIT - 2)) | (1L << (RUNE_LIT - 2)) | (1L << (RAW_STRING_LIT - 2)) | (1L << (INTERPRETED_STRING_LIT - 2)))) != 0)) {
+			if (((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (SWITCH - 2)) | (1L << (IF - 2)) | (1L << (NIL_LIT - 2)) | (1L << (IDENTIFIER - 2)) | (1L << (SQUARE - 2)) | (1L << (RECT - 2)) | (1L << (CIRCLE - 2)) | (1L << (TRIANGLE - 2)) | (1L << (SHAPE - 2)) | (1L << (DRAW - 2)) | (1L << (L_PAREN - 2)) | (1L << (L_CURLY - 2)) | (1L << (DECIMAL_LIT - 2)) | (1L << (FLOAT_LIT - 2)) | (1L << (RUNE_LIT - 2)) | (1L << (RAW_STRING_LIT - 2)) | (1L << (INTERPRETED_STRING_LIT - 2)))) != 0)) {
 				{
-				setState(182);
+				setState(166);
 				statementList();
 				}
 			}
 
-			setState(185);
+			setState(169);
 			match(R_CURLY);
 			}
 		}
@@ -883,26 +868,32 @@ public class TwoDimParser extends TwoDimParserBase {
 	public final StatementListContext statementList() throws RecognitionException {
 		StatementListContext _localctx = new StatementListContext(_ctx, getState());
 		enterRule(_localctx, 26, RULE_statementList);
-		int _la;
 		try {
+			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(190); 
+			setState(174); 
 			_errHandler.sync(this);
-			_la = _input.LA(1);
+			_alt = 1;
 			do {
-				{
-				{
-				setState(187);
-				statement();
-				setState(188);
-				eos();
+				switch (_alt) {
+				case 1:
+					{
+					{
+					setState(171);
+					statement();
+					setState(172);
+					eos();
+					}
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
 				}
-				}
-				setState(192); 
+				setState(176); 
 				_errHandler.sync(this);
-				_la = _input.LA(1);
-			} while ( ((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (SWITCH - 2)) | (1L << (IF - 2)) | (1L << (NIL_LIT - 2)) | (1L << (IDENTIFIER - 2)) | (1L << (SQUARE - 2)) | (1L << (RECT - 2)) | (1L << (CIRCLE - 2)) | (1L << (TRIANGLE - 2)) | (1L << (SHAPE - 2)) | (1L << (L_PAREN - 2)) | (1L << (L_CURLY - 2)) | (1L << (DECIMAL_LIT - 2)) | (1L << (FLOAT_LIT - 2)) | (1L << (RUNE_LIT - 2)) | (1L << (RAW_STRING_LIT - 2)) | (1L << (INTERPRETED_STRING_LIT - 2)))) != 0) );
+				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
+			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
 		catch (RecognitionException re) {
@@ -942,44 +933,58 @@ public class TwoDimParser extends TwoDimParserBase {
 		StatementContext _localctx = new StatementContext(_ctx, getState());
 		enterRule(_localctx, 28, RULE_statement);
 		try {
-			setState(199);
+			setState(183);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case SQUARE:
+			case RECT:
+			case CIRCLE:
+			case TRIANGLE:
+			case SHAPE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(194);
+				setState(178);
 				declaration();
 				}
 				break;
-			case 2:
+			case NIL_LIT:
+			case IDENTIFIER:
+			case DRAW:
+			case L_PAREN:
+			case DECIMAL_LIT:
+			case FLOAT_LIT:
+			case RUNE_LIT:
+			case RAW_STRING_LIT:
+			case INTERPRETED_STRING_LIT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(195);
+				setState(179);
 				simpleStmt();
 				}
 				break;
-			case 3:
+			case L_CURLY:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(196);
+				setState(180);
 				block();
 				}
 				break;
-			case 4:
+			case IF:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(197);
+				setState(181);
 				ifStmt();
 				}
 				break;
-			case 5:
+			case SWITCH:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(198);
+				setState(182);
 				switchStmt();
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1000,6 +1005,9 @@ public class TwoDimParser extends TwoDimParserBase {
 		public AssignmentContext assignment() {
 			return getRuleContext(AssignmentContext.class,0);
 		}
+		public DrawClauseContext drawClause() {
+			return getRuleContext(DrawClauseContext.class,0);
+		}
 		public SimpleStmtContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1010,21 +1018,28 @@ public class TwoDimParser extends TwoDimParserBase {
 		SimpleStmtContext _localctx = new SimpleStmtContext(_ctx, getState());
 		enterRule(_localctx, 30, RULE_simpleStmt);
 		try {
-			setState(203);
+			setState(188);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(201);
+				setState(185);
 				expressionStmt();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(202);
+				setState(186);
 				assignment();
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(187);
+				drawClause();
 				}
 				break;
 			}
@@ -1056,7 +1071,7 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(205);
+			setState(190);
 			expression();
 			}
 		}
@@ -1099,78 +1114,78 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(208);
+			setState(193);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,18,_ctx) ) {
 			case 1:
 				{
-				setState(207);
+				setState(192);
 				arguments();
 				}
 				break;
 			}
-			setState(211);
+			setState(196);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
 			case 1:
 				{
-				setState(210);
+				setState(195);
 				match(WS);
 				}
 				break;
 			}
-			setState(229);
+			setState(214);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
 			case 1:
 				{
-				setState(213);
+				setState(198);
 				match(L_BRACKET);
-				setState(215);
+				setState(200);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==WS) {
 					{
-					setState(214);
+					setState(199);
 					match(WS);
 					}
 				}
 
-				setState(217);
+				setState(202);
 				match(SIZE_LIT);
-				setState(223);
+				setState(208);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==COMMA) {
 					{
-					setState(218);
+					setState(203);
 					match(COMMA);
-					setState(220);
+					setState(205);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==WS) {
 						{
-						setState(219);
+						setState(204);
 						match(WS);
 						}
 					}
 
-					setState(222);
+					setState(207);
 					match(SIZE_LIT);
 					}
 				}
 
-				setState(226);
+				setState(211);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==WS) {
 					{
-					setState(225);
+					setState(210);
 					match(WS);
 					}
 				}
 
-				setState(228);
+				setState(213);
 				match(R_BRACKET);
 				}
 				break;
@@ -1208,11 +1223,11 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(231);
+			setState(216);
 			match(IDENTIFIER);
-			setState(232);
+			setState(217);
 			assign_op();
-			setState(233);
+			setState(218);
 			expression();
 			}
 		}
@@ -1241,7 +1256,7 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(235);
+			setState(220);
 			match(ASSIGN);
 			}
 		}
@@ -1287,43 +1302,43 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(237);
+			setState(222);
 			match(IF);
-			setState(241);
+			setState(226);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
 			case 1:
 				{
-				setState(238);
+				setState(223);
 				simpleStmt();
-				setState(239);
+				setState(224);
 				match(SEMI);
 				}
 				break;
 			}
-			setState(243);
+			setState(228);
 			expression();
-			setState(244);
+			setState(229);
 			block();
-			setState(250);
+			setState(235);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
 			case 1:
 				{
-				setState(245);
+				setState(230);
 				match(ELSE);
-				setState(248);
+				setState(233);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case IF:
 					{
-					setState(246);
+					setState(231);
 					ifStmt();
 					}
 					break;
 				case L_CURLY:
 					{
-					setState(247);
+					setState(232);
 					block();
 					}
 					break;
@@ -1362,7 +1377,7 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(252);
+			setState(237);
 			exprSwitchStmt();
 			}
 		}
@@ -1407,47 +1422,47 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(254);
+			setState(239);
 			match(SWITCH);
-			setState(258);
+			setState(243);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
 			case 1:
 				{
-				setState(255);
+				setState(240);
 				simpleStmt();
-				setState(256);
+				setState(241);
 				match(SEMI);
 				}
 				break;
 			}
-			setState(261);
+			setState(246);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 10)) & ~0x3f) == 0 && ((1L << (_la - 10)) & ((1L << (NIL_LIT - 10)) | (1L << (IDENTIFIER - 10)) | (1L << (SQUARE - 10)) | (1L << (RECT - 10)) | (1L << (CIRCLE - 10)) | (1L << (TRIANGLE - 10)) | (1L << (SHAPE - 10)) | (1L << (L_PAREN - 10)) | (1L << (DECIMAL_LIT - 10)) | (1L << (FLOAT_LIT - 10)) | (1L << (RUNE_LIT - 10)) | (1L << (RAW_STRING_LIT - 10)) | (1L << (INTERPRETED_STRING_LIT - 10)))) != 0)) {
+			if (((((_la - 10)) & ~0x3f) == 0 && ((1L << (_la - 10)) & ((1L << (NIL_LIT - 10)) | (1L << (IDENTIFIER - 10)) | (1L << (L_PAREN - 10)) | (1L << (DECIMAL_LIT - 10)) | (1L << (FLOAT_LIT - 10)) | (1L << (RUNE_LIT - 10)) | (1L << (RAW_STRING_LIT - 10)) | (1L << (INTERPRETED_STRING_LIT - 10)))) != 0)) {
 				{
-				setState(260);
+				setState(245);
 				expression();
 				}
 			}
 
-			setState(263);
+			setState(248);
 			match(L_CURLY);
-			setState(267);
+			setState(252);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==CASE || _la==DEFAULT) {
 				{
 				{
-				setState(264);
+				setState(249);
 				exprCaseClause();
 				}
 				}
-				setState(269);
+				setState(254);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(270);
+			setState(255);
 			match(R_CURLY);
 			}
 		}
@@ -1483,16 +1498,16 @@ public class TwoDimParser extends TwoDimParserBase {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(272);
+			setState(257);
 			exprSwitchCase();
-			setState(273);
+			setState(258);
 			match(COLON);
-			setState(275);
+			setState(260);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (SWITCH - 2)) | (1L << (IF - 2)) | (1L << (NIL_LIT - 2)) | (1L << (IDENTIFIER - 2)) | (1L << (SQUARE - 2)) | (1L << (RECT - 2)) | (1L << (CIRCLE - 2)) | (1L << (TRIANGLE - 2)) | (1L << (SHAPE - 2)) | (1L << (L_PAREN - 2)) | (1L << (L_CURLY - 2)) | (1L << (DECIMAL_LIT - 2)) | (1L << (FLOAT_LIT - 2)) | (1L << (RUNE_LIT - 2)) | (1L << (RAW_STRING_LIT - 2)) | (1L << (INTERPRETED_STRING_LIT - 2)))) != 0)) {
+			if (((((_la - 2)) & ~0x3f) == 0 && ((1L << (_la - 2)) & ((1L << (SWITCH - 2)) | (1L << (IF - 2)) | (1L << (NIL_LIT - 2)) | (1L << (IDENTIFIER - 2)) | (1L << (SQUARE - 2)) | (1L << (RECT - 2)) | (1L << (CIRCLE - 2)) | (1L << (TRIANGLE - 2)) | (1L << (SHAPE - 2)) | (1L << (DRAW - 2)) | (1L << (L_PAREN - 2)) | (1L << (L_CURLY - 2)) | (1L << (DECIMAL_LIT - 2)) | (1L << (FLOAT_LIT - 2)) | (1L << (RUNE_LIT - 2)) | (1L << (RAW_STRING_LIT - 2)) | (1L << (INTERPRETED_STRING_LIT - 2)))) != 0)) {
 				{
-				setState(274);
+				setState(259);
 				statementList();
 				}
 			}
@@ -1526,58 +1541,27 @@ public class TwoDimParser extends TwoDimParserBase {
 		ExprSwitchCaseContext _localctx = new ExprSwitchCaseContext(_ctx, getState());
 		enterRule(_localctx, 48, RULE_exprSwitchCase);
 		try {
-			setState(280);
+			setState(265);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case CASE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(277);
+				setState(262);
 				match(CASE);
-				setState(278);
+				setState(263);
 				expression();
 				}
 				break;
 			case DEFAULT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(279);
+				setState(264);
 				match(DEFAULT);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class Type_Context extends ParserRuleContext {
-		public TypeNameContext typeName() {
-			return getRuleContext(TypeNameContext.class,0);
-		}
-		public Type_Context(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_type_; }
-	}
-
-	public final Type_Context type_() throws RecognitionException {
-		Type_Context _localctx = new Type_Context(_ctx, getState());
-		enterRule(_localctx, 50, RULE_type_);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(282);
-			typeName();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1605,12 +1589,12 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final TypeNameContext typeName() throws RecognitionException {
 		TypeNameContext _localctx = new TypeNameContext(_ctx, getState());
-		enterRule(_localctx, 52, RULE_typeName);
+		enterRule(_localctx, 50, RULE_typeName);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(284);
+			setState(267);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SQUARE) | (1L << RECT) | (1L << CIRCLE) | (1L << TRIANGLE) | (1L << SHAPE))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -1620,37 +1604,6 @@ public class TwoDimParser extends TwoDimParserBase {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class ElementTypeContext extends ParserRuleContext {
-		public Type_Context type_() {
-			return getRuleContext(Type_Context.class,0);
-		}
-		public ElementTypeContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_elementType; }
-	}
-
-	public final ElementTypeContext elementType() throws RecognitionException {
-		ElementTypeContext _localctx = new ElementTypeContext(_ctx, getState());
-		enterRule(_localctx, 54, RULE_elementType);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(286);
-			type_();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1690,25 +1643,25 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final ExpressionContext expression() throws RecognitionException {
 		ExpressionContext _localctx = new ExpressionContext(_ctx, getState());
-		enterRule(_localctx, 56, RULE_expression);
+		enterRule(_localctx, 52, RULE_expression);
 		int _la;
 		try {
-			setState(304);
+			setState(285);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,34,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(288);
+				setState(269);
 				primaryExpr();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(289);
+				setState(270);
 				primaryExpr();
-				setState(290);
+				setState(271);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LEFT) | (1L << RIGHT) | (1L << TOP) | (1L << BOT))) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -1718,12 +1671,12 @@ public class TwoDimParser extends TwoDimParserBase {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(292);
+				setState(273);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==OUTER || _la==INNER) {
 					{
-					setState(291);
+					setState(272);
 					_la = _input.LA(1);
 					if ( !(_la==OUTER || _la==INNER) ) {
 					_errHandler.recoverInline(this);
@@ -1736,16 +1689,16 @@ public class TwoDimParser extends TwoDimParserBase {
 					}
 				}
 
-				setState(294);
+				setState(275);
 				primaryExpr();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(296);
+				setState(277);
 				primaryExpr();
-				setState(297);
+				setState(278);
 				_la = _input.LA(1);
 				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ON) | (1L << UNDER) | (1L << IN))) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -1755,16 +1708,16 @@ public class TwoDimParser extends TwoDimParserBase {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(298);
+				setState(279);
 				primaryExpr();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(300);
+				setState(281);
 				primaryExpr();
-				setState(301);
+				setState(282);
 				_la = _input.LA(1);
 				if ( !(_la==PLUS || _la==MINUS) ) {
 				_errHandler.recoverInline(this);
@@ -1774,7 +1727,7 @@ public class TwoDimParser extends TwoDimParserBase {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(302);
+				setState(283);
 				primaryExpr();
 				}
 				break;
@@ -1803,11 +1756,11 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final PrimaryExprContext primaryExpr() throws RecognitionException {
 		PrimaryExprContext _localctx = new PrimaryExprContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_primaryExpr);
+		enterRule(_localctx, 54, RULE_primaryExpr);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(306);
+			setState(287);
 			operand();
 			}
 		}
@@ -1842,17 +1795,12 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final OperandContext operand() throws RecognitionException {
 		OperandContext _localctx = new OperandContext(_ctx, getState());
-		enterRule(_localctx, 60, RULE_operand);
+		enterRule(_localctx, 56, RULE_operand);
 		try {
-			setState(314);
+			setState(295);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NIL_LIT:
-			case SQUARE:
-			case RECT:
-			case CIRCLE:
-			case TRIANGLE:
-			case SHAPE:
 			case DECIMAL_LIT:
 			case FLOAT_LIT:
 			case RUNE_LIT:
@@ -1860,25 +1808,25 @@ public class TwoDimParser extends TwoDimParserBase {
 			case INTERPRETED_STRING_LIT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(308);
+				setState(289);
 				literal();
 				}
 				break;
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(309);
+				setState(290);
 				operandName();
 				}
 				break;
 			case L_PAREN:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(310);
+				setState(291);
 				match(L_PAREN);
-				setState(311);
+				setState(292);
 				expression();
-				setState(312);
+				setState(293);
 				match(R_PAREN);
 				}
 				break;
@@ -1901,9 +1849,6 @@ public class TwoDimParser extends TwoDimParserBase {
 		public BasicLitContext basicLit() {
 			return getRuleContext(BasicLitContext.class,0);
 		}
-		public CompositeLitContext compositeLit() {
-			return getRuleContext(CompositeLitContext.class,0);
-		}
 		public LiteralContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1912,36 +1857,12 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final LiteralContext literal() throws RecognitionException {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
-		enterRule(_localctx, 62, RULE_literal);
+		enterRule(_localctx, 58, RULE_literal);
 		try {
-			setState(318);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case NIL_LIT:
-			case DECIMAL_LIT:
-			case FLOAT_LIT:
-			case RUNE_LIT:
-			case RAW_STRING_LIT:
-			case INTERPRETED_STRING_LIT:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(316);
-				basicLit();
-				}
-				break;
-			case SQUARE:
-			case RECT:
-			case CIRCLE:
-			case TRIANGLE:
-			case SHAPE:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(317);
-				compositeLit();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(297);
+			basicLit();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1973,43 +1894,43 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final BasicLitContext basicLit() throws RecognitionException {
 		BasicLitContext _localctx = new BasicLitContext(_ctx, getState());
-		enterRule(_localctx, 64, RULE_basicLit);
+		enterRule(_localctx, 60, RULE_basicLit);
 		try {
-			setState(325);
+			setState(304);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,37,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,36,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(320);
+				setState(299);
 				match(NIL_LIT);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(321);
+				setState(300);
 				integer();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(322);
+				setState(301);
 				string_();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(323);
+				setState(302);
 				match(FLOAT_LIT);
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(324);
+				setState(303);
 				match(RUNE_LIT);
 				}
 				break;
@@ -2037,12 +1958,12 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final IntegerContext integer() throws RecognitionException {
 		IntegerContext _localctx = new IntegerContext(_ctx, getState());
-		enterRule(_localctx, 66, RULE_integer);
+		enterRule(_localctx, 62, RULE_integer);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(327);
+			setState(306);
 			_la = _input.LA(1);
 			if ( !(_la==DECIMAL_LIT || _la==RUNE_LIT) ) {
 			_errHandler.recoverInline(this);
@@ -2075,202 +1996,12 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final OperandNameContext operandName() throws RecognitionException {
 		OperandNameContext _localctx = new OperandNameContext(_ctx, getState());
-		enterRule(_localctx, 68, RULE_operandName);
+		enterRule(_localctx, 64, RULE_operandName);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(329);
+			setState(308);
 			match(IDENTIFIER);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class CompositeLitContext extends ParserRuleContext {
-		public LiteralTypeContext literalType() {
-			return getRuleContext(LiteralTypeContext.class,0);
-		}
-		public LiteralValueContext literalValue() {
-			return getRuleContext(LiteralValueContext.class,0);
-		}
-		public CompositeLitContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_compositeLit; }
-	}
-
-	public final CompositeLitContext compositeLit() throws RecognitionException {
-		CompositeLitContext _localctx = new CompositeLitContext(_ctx, getState());
-		enterRule(_localctx, 70, RULE_compositeLit);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(331);
-			literalType();
-			setState(332);
-			literalValue();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class LiteralTypeContext extends ParserRuleContext {
-		public ElementTypeContext elementType() {
-			return getRuleContext(ElementTypeContext.class,0);
-		}
-		public TypeNameContext typeName() {
-			return getRuleContext(TypeNameContext.class,0);
-		}
-		public LiteralTypeContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_literalType; }
-	}
-
-	public final LiteralTypeContext literalType() throws RecognitionException {
-		LiteralTypeContext _localctx = new LiteralTypeContext(_ctx, getState());
-		enterRule(_localctx, 72, RULE_literalType);
-		try {
-			setState(336);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,38,_ctx) ) {
-			case 1:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(334);
-				elementType();
-				}
-				break;
-			case 2:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(335);
-				typeName();
-				}
-				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class LiteralValueContext extends ParserRuleContext {
-		public TerminalNode L_CURLY() { return getToken(TwoDimParser.L_CURLY, 0); }
-		public TerminalNode R_CURLY() { return getToken(TwoDimParser.R_CURLY, 0); }
-		public ElementContext element() {
-			return getRuleContext(ElementContext.class,0);
-		}
-		public LiteralValueContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_literalValue; }
-	}
-
-	public final LiteralValueContext literalValue() throws RecognitionException {
-		LiteralValueContext _localctx = new LiteralValueContext(_ctx, getState());
-		enterRule(_localctx, 74, RULE_literalValue);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(338);
-			match(L_CURLY);
-			setState(340);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			if (((((_la - 10)) & ~0x3f) == 0 && ((1L << (_la - 10)) & ((1L << (NIL_LIT - 10)) | (1L << (IDENTIFIER - 10)) | (1L << (SQUARE - 10)) | (1L << (RECT - 10)) | (1L << (CIRCLE - 10)) | (1L << (TRIANGLE - 10)) | (1L << (SHAPE - 10)) | (1L << (L_PAREN - 10)) | (1L << (L_CURLY - 10)) | (1L << (DECIMAL_LIT - 10)) | (1L << (FLOAT_LIT - 10)) | (1L << (RUNE_LIT - 10)) | (1L << (RAW_STRING_LIT - 10)) | (1L << (INTERPRETED_STRING_LIT - 10)))) != 0)) {
-				{
-				setState(339);
-				element();
-				}
-			}
-
-			setState(342);
-			match(R_CURLY);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class ElementContext extends ParserRuleContext {
-		public ExpressionContext expression() {
-			return getRuleContext(ExpressionContext.class,0);
-		}
-		public LiteralValueContext literalValue() {
-			return getRuleContext(LiteralValueContext.class,0);
-		}
-		public ElementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_element; }
-	}
-
-	public final ElementContext element() throws RecognitionException {
-		ElementContext _localctx = new ElementContext(_ctx, getState());
-		enterRule(_localctx, 76, RULE_element);
-		try {
-			setState(346);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case NIL_LIT:
-			case IDENTIFIER:
-			case SQUARE:
-			case RECT:
-			case CIRCLE:
-			case TRIANGLE:
-			case SHAPE:
-			case L_PAREN:
-			case DECIMAL_LIT:
-			case FLOAT_LIT:
-			case RUNE_LIT:
-			case RAW_STRING_LIT:
-			case INTERPRETED_STRING_LIT:
-				enterOuterAlt(_localctx, 1);
-				{
-				setState(344);
-				expression();
-				}
-				break;
-			case L_CURLY:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(345);
-				literalValue();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2295,12 +2026,12 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final String_Context string_() throws RecognitionException {
 		String_Context _localctx = new String_Context(_ctx, getState());
-		enterRule(_localctx, 78, RULE_string_);
+		enterRule(_localctx, 66, RULE_string_);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(348);
+			setState(310);
 			_la = _input.LA(1);
 			if ( !(_la==RAW_STRING_LIT || _la==INTERPRETED_STRING_LIT) ) {
 			_errHandler.recoverInline(this);
@@ -2337,24 +2068,24 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final ArgumentsContext arguments() throws RecognitionException {
 		ArgumentsContext _localctx = new ArgumentsContext(_ctx, getState());
-		enterRule(_localctx, 80, RULE_arguments);
+		enterRule(_localctx, 68, RULE_arguments);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(350);
+			setState(312);
 			match(L_PAREN);
-			setState(352);
+			setState(314);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 10)) & ~0x3f) == 0 && ((1L << (_la - 10)) & ((1L << (NIL_LIT - 10)) | (1L << (IDENTIFIER - 10)) | (1L << (SQUARE - 10)) | (1L << (RECT - 10)) | (1L << (CIRCLE - 10)) | (1L << (TRIANGLE - 10)) | (1L << (SHAPE - 10)) | (1L << (L_PAREN - 10)) | (1L << (DECIMAL_LIT - 10)) | (1L << (FLOAT_LIT - 10)) | (1L << (RUNE_LIT - 10)) | (1L << (RAW_STRING_LIT - 10)) | (1L << (INTERPRETED_STRING_LIT - 10)))) != 0)) {
+			if (((((_la - 10)) & ~0x3f) == 0 && ((1L << (_la - 10)) & ((1L << (NIL_LIT - 10)) | (1L << (IDENTIFIER - 10)) | (1L << (L_PAREN - 10)) | (1L << (DECIMAL_LIT - 10)) | (1L << (FLOAT_LIT - 10)) | (1L << (RUNE_LIT - 10)) | (1L << (RAW_STRING_LIT - 10)) | (1L << (INTERPRETED_STRING_LIT - 10)))) != 0)) {
 				{
-				setState(351);
+				setState(313);
 				expressionList();
 				}
 			}
 
-			setState(354);
+			setState(316);
 			match(R_PAREN);
 			}
 		}
@@ -2380,38 +2111,38 @@ public class TwoDimParser extends TwoDimParserBase {
 
 	public final EosContext eos() throws RecognitionException {
 		EosContext _localctx = new EosContext(_ctx, getState());
-		enterRule(_localctx, 82, RULE_eos);
+		enterRule(_localctx, 70, RULE_eos);
 		try {
-			setState(361);
+			setState(323);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,42,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,38,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(356);
+				setState(318);
 				match(SEMI);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(357);
+				setState(319);
 				match(SEMI);
-				setState(358);
+				setState(320);
 				match(EOF);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(359);
+				setState(321);
 				if (!(self.lineTerminatorAhead())) throw new FailedPredicateException(this, "self.lineTerminatorAhead()");
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(360);
+				setState(322);
 				if (!(self.checkPreviousTokenText("}"))) throw new FailedPredicateException(this, "self.checkPreviousTokenText(\"}\")");
 				}
 				break;
@@ -2432,7 +2163,7 @@ public class TwoDimParser extends TwoDimParserBase {
 		switch (ruleIndex) {
 		case 6:
 			return signature_sempred((SignatureContext)_localctx, predIndex);
-		case 41:
+		case 35:
 			return eos_sempred((EosContext)_localctx, predIndex);
 		}
 		return true;
@@ -2455,134 +2186,120 @@ public class TwoDimParser extends TwoDimParserBase {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3H\u016e\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3H\u0148\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
 		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
-		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\4\'\t\'\4(\t(\4)\t)\4*\t*\4+\t+\3"+
-		"\2\5\2X\n\2\3\2\3\2\5\2\\\n\2\3\2\3\2\7\2`\n\2\f\2\16\2c\13\2\3\2\5\2"+
-		"f\n\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\5\3\5\3\5\7\5"+
-		"w\n\5\f\5\16\5z\13\5\3\6\3\6\3\6\7\6\177\n\6\f\6\16\6\u0082\13\6\3\7\3"+
-		"\7\3\7\3\7\5\7\u0088\n\7\3\b\3\b\3\b\5\b\u008d\n\b\3\t\3\t\3\t\3\t\7\t"+
-		"\u0093\n\t\f\t\16\t\u0096\13\t\5\t\u0098\n\t\3\t\3\t\3\n\3\n\5\n\u009e"+
-		"\n\n\3\13\3\13\3\13\3\13\3\f\3\f\3\r\3\r\3\r\3\r\5\r\u00aa\n\r\3\r\3\r"+
-		"\3\r\5\r\u00af\n\r\3\r\3\r\7\r\u00b3\n\r\f\r\16\r\u00b6\13\r\3\16\3\16"+
-		"\5\16\u00ba\n\16\3\16\3\16\3\17\3\17\3\17\6\17\u00c1\n\17\r\17\16\17\u00c2"+
-		"\3\20\3\20\3\20\3\20\3\20\5\20\u00ca\n\20\3\21\3\21\5\21\u00ce\n\21\3"+
-		"\22\3\22\3\23\5\23\u00d3\n\23\3\23\5\23\u00d6\n\23\3\23\3\23\5\23\u00da"+
-		"\n\23\3\23\3\23\3\23\5\23\u00df\n\23\3\23\5\23\u00e2\n\23\3\23\5\23\u00e5"+
-		"\n\23\3\23\5\23\u00e8\n\23\3\24\3\24\3\24\3\24\3\25\3\25\3\26\3\26\3\26"+
-		"\3\26\5\26\u00f4\n\26\3\26\3\26\3\26\3\26\3\26\5\26\u00fb\n\26\5\26\u00fd"+
-		"\n\26\3\27\3\27\3\30\3\30\3\30\3\30\5\30\u0105\n\30\3\30\5\30\u0108\n"+
-		"\30\3\30\3\30\7\30\u010c\n\30\f\30\16\30\u010f\13\30\3\30\3\30\3\31\3"+
-		"\31\3\31\5\31\u0116\n\31\3\32\3\32\3\32\5\32\u011b\n\32\3\33\3\33\3\34"+
-		"\3\34\3\35\3\35\3\36\3\36\3\36\3\36\5\36\u0127\n\36\3\36\3\36\3\36\3\36"+
-		"\3\36\3\36\3\36\3\36\3\36\3\36\5\36\u0133\n\36\3\37\3\37\3 \3 \3 \3 \3"+
-		" \3 \5 \u013d\n \3!\3!\5!\u0141\n!\3\"\3\"\3\"\3\"\3\"\5\"\u0148\n\"\3"+
-		"#\3#\3$\3$\3%\3%\3%\3&\3&\5&\u0153\n&\3\'\3\'\5\'\u0157\n\'\3\'\3\'\3"+
-		"(\3(\5(\u015d\n(\3)\3)\3*\3*\5*\u0163\n*\3*\3*\3+\3+\3+\3+\3+\5+\u016c"+
-		"\n+\3+\2\2,\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\66"+
-		"8:<>@BDFHJLNPRT\2\t\3\2\16\22\3\2\25\30\3\2\31\32\3\2\33\35\3\2:;\4\2"+
-		"??AA\3\2BC\2\u0179\2W\3\2\2\2\4j\3\2\2\2\6q\3\2\2\2\bs\3\2\2\2\n{\3\2"+
-		"\2\2\f\u0083\3\2\2\2\16\u008c\3\2\2\2\20\u008e\3\2\2\2\22\u009b\3\2\2"+
-		"\2\24\u009f\3\2\2\2\26\u00a3\3\2\2\2\30\u00a5\3\2\2\2\32\u00b7\3\2\2\2"+
-		"\34\u00c0\3\2\2\2\36\u00c9\3\2\2\2 \u00cd\3\2\2\2\"\u00cf\3\2\2\2$\u00d2"+
-		"\3\2\2\2&\u00e9\3\2\2\2(\u00ed\3\2\2\2*\u00ef\3\2\2\2,\u00fe\3\2\2\2."+
-		"\u0100\3\2\2\2\60\u0112\3\2\2\2\62\u011a\3\2\2\2\64\u011c\3\2\2\2\66\u011e"+
-		"\3\2\2\28\u0120\3\2\2\2:\u0132\3\2\2\2<\u0134\3\2\2\2>\u013c\3\2\2\2@"+
-		"\u0140\3\2\2\2B\u0147\3\2\2\2D\u0149\3\2\2\2F\u014b\3\2\2\2H\u014d\3\2"+
-		"\2\2J\u0152\3\2\2\2L\u0154\3\2\2\2N\u015c\3\2\2\2P\u015e\3\2\2\2R\u0160"+
-		"\3\2\2\2T\u016b\3\2\2\2VX\5\4\3\2WV\3\2\2\2WX\3\2\2\2Xa\3\2\2\2Y\\\5\f"+
-		"\7\2Z\\\5\6\4\2[Y\3\2\2\2[Z\3\2\2\2\\]\3\2\2\2]^\5T+\2^`\3\2\2\2_[\3\2"+
-		"\2\2`c\3\2\2\2a_\3\2\2\2ab\3\2\2\2be\3\2\2\2ca\3\2\2\2df\5\34\17\2ed\3"+
-		"\2\2\2ef\3\2\2\2fg\3\2\2\2gh\5\24\13\2hi\5T+\2i\3\3\2\2\2jk\7\24\2\2k"+
-		"l\7E\2\2lm\7?\2\2mn\7E\2\2no\7?\2\2op\5T+\2p\5\3\2\2\2qr\5\26\f\2r\7\3"+
-		"\2\2\2sx\7\r\2\2tu\7%\2\2uw\7\r\2\2vt\3\2\2\2wz\3\2\2\2xv\3\2\2\2xy\3"+
-		"\2\2\2y\t\3\2\2\2zx\3\2\2\2{\u0080\5:\36\2|}\7%\2\2}\177\5:\36\2~|\3\2"+
-		"\2\2\177\u0082\3\2\2\2\u0080~\3\2\2\2\u0080\u0081\3\2\2\2\u0081\13\3\2"+
-		"\2\2\u0082\u0080\3\2\2\2\u0083\u0084\7\3\2\2\u0084\u0085\7\r\2\2\u0085"+
-		"\u0087\5\16\b\2\u0086\u0088\5\32\16\2\u0087\u0086\3\2\2\2\u0087\u0088"+
-		"\3\2\2\2\u0088\r\3\2\2\2\u0089\u008a\6\b\2\2\u008a\u008d\5\20\t\2\u008b"+
-		"\u008d\5\20\t\2\u008c\u0089\3\2\2\2\u008c\u008b\3\2\2\2\u008d\17\3\2\2"+
-		"\2\u008e\u0097\7\36\2\2\u008f\u0094\5\22\n\2\u0090\u0091\7%\2\2\u0091"+
-		"\u0093\5\22\n\2\u0092\u0090\3\2\2\2\u0093\u0096\3\2\2\2\u0094\u0092\3"+
-		"\2\2\2\u0094\u0095\3\2\2\2\u0095\u0098\3\2\2\2\u0096\u0094\3\2\2\2\u0097"+
-		"\u008f\3\2\2\2\u0097\u0098\3\2\2\2\u0098\u0099\3\2\2\2\u0099\u009a\7\37"+
-		"\2\2\u009a\21\3\2\2\2\u009b\u009d\5\64\33\2\u009c\u009e\5\b\5\2\u009d"+
-		"\u009c\3\2\2\2\u009d\u009e\3\2\2\2\u009e\23\3\2\2\2\u009f\u00a0\7\23\2"+
-		"\2\u00a0\u00a1\7E\2\2\u00a1\u00a2\7\r\2\2\u00a2\25\3\2\2\2\u00a3\u00a4"+
-		"\5\30\r\2\u00a4\27\3\2\2\2\u00a5\u00a6\5\64\33\2\u00a6\u00a7\7E\2\2\u00a7"+
-		"\u00a9\7\r\2\2\u00a8\u00aa\7E\2\2\u00a9\u00a8\3\2\2\2\u00a9\u00aa\3\2"+
-		"\2\2\u00aa\u00ab\3\2\2\2\u00ab\u00b4\5$\23\2\u00ac\u00ae\7%\2\2\u00ad"+
-		"\u00af\7E\2\2\u00ae\u00ad\3\2\2\2\u00ae\u00af\3\2\2\2\u00af\u00b0\3\2"+
-		"\2\2\u00b0\u00b1\7\r\2\2\u00b1\u00b3\5$\23\2\u00b2\u00ac\3\2\2\2\u00b3"+
-		"\u00b6\3\2\2\2\u00b4\u00b2\3\2\2\2\u00b4\u00b5\3\2\2\2\u00b5\31\3\2\2"+
-		"\2\u00b6\u00b4\3\2\2\2\u00b7\u00b9\7 \2\2\u00b8\u00ba\5\34\17\2\u00b9"+
-		"\u00b8\3\2\2\2\u00b9\u00ba\3\2\2\2\u00ba\u00bb\3\2\2\2\u00bb\u00bc\7!"+
-		"\2\2\u00bc\33\3\2\2\2\u00bd\u00be\5\36\20\2\u00be\u00bf\5T+\2\u00bf\u00c1"+
-		"\3\2\2\2\u00c0\u00bd\3\2\2\2\u00c1\u00c2\3\2\2\2\u00c2\u00c0\3\2\2\2\u00c2"+
-		"\u00c3\3\2\2\2\u00c3\35\3\2\2\2\u00c4\u00ca\5\6\4\2\u00c5\u00ca\5 \21"+
-		"\2\u00c6\u00ca\5\32\16\2\u00c7\u00ca\5*\26\2\u00c8\u00ca\5,\27\2\u00c9"+
-		"\u00c4\3\2\2\2\u00c9\u00c5\3\2\2\2\u00c9\u00c6\3\2\2\2\u00c9\u00c7\3\2"+
-		"\2\2\u00c9\u00c8\3\2\2\2\u00ca\37\3\2\2\2\u00cb\u00ce\5\"\22\2\u00cc\u00ce"+
-		"\5&\24\2\u00cd\u00cb\3\2\2\2\u00cd\u00cc\3\2\2\2\u00ce!\3\2\2\2\u00cf"+
-		"\u00d0\5:\36\2\u00d0#\3\2\2\2\u00d1\u00d3\5R*\2\u00d2\u00d1\3\2\2\2\u00d2"+
+		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\3\2\5\2L\n\2\3\2\3\2\5\2P\n\2\3\2\3\2\7"+
+		"\2T\n\2\f\2\16\2W\13\2\3\2\5\2Z\n\2\3\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3"+
+		"\4\3\4\3\5\3\5\3\5\7\5i\n\5\f\5\16\5l\13\5\3\6\3\6\3\6\7\6q\n\6\f\6\16"+
+		"\6t\13\6\3\7\3\7\3\7\3\7\5\7z\n\7\3\b\3\b\3\b\5\b\177\n\b\3\t\3\t\3\t"+
+		"\3\t\7\t\u0085\n\t\f\t\16\t\u0088\13\t\5\t\u008a\n\t\3\t\3\t\3\n\3\n\5"+
+		"\n\u0090\n\n\3\13\3\13\3\13\3\f\3\f\3\r\3\r\3\r\5\r\u009a\n\r\3\r\3\r"+
+		"\3\r\5\r\u009f\n\r\3\r\3\r\7\r\u00a3\n\r\f\r\16\r\u00a6\13\r\3\16\3\16"+
+		"\5\16\u00aa\n\16\3\16\3\16\3\17\3\17\3\17\6\17\u00b1\n\17\r\17\16\17\u00b2"+
+		"\3\20\3\20\3\20\3\20\3\20\5\20\u00ba\n\20\3\21\3\21\3\21\5\21\u00bf\n"+
+		"\21\3\22\3\22\3\23\5\23\u00c4\n\23\3\23\5\23\u00c7\n\23\3\23\3\23\5\23"+
+		"\u00cb\n\23\3\23\3\23\3\23\5\23\u00d0\n\23\3\23\5\23\u00d3\n\23\3\23\5"+
+		"\23\u00d6\n\23\3\23\5\23\u00d9\n\23\3\24\3\24\3\24\3\24\3\25\3\25\3\26"+
+		"\3\26\3\26\3\26\5\26\u00e5\n\26\3\26\3\26\3\26\3\26\3\26\5\26\u00ec\n"+
+		"\26\5\26\u00ee\n\26\3\27\3\27\3\30\3\30\3\30\3\30\5\30\u00f6\n\30\3\30"+
+		"\5\30\u00f9\n\30\3\30\3\30\7\30\u00fd\n\30\f\30\16\30\u0100\13\30\3\30"+
+		"\3\30\3\31\3\31\3\31\5\31\u0107\n\31\3\32\3\32\3\32\5\32\u010c\n\32\3"+
+		"\33\3\33\3\34\3\34\3\34\3\34\5\34\u0114\n\34\3\34\3\34\3\34\3\34\3\34"+
+		"\3\34\3\34\3\34\3\34\3\34\5\34\u0120\n\34\3\35\3\35\3\36\3\36\3\36\3\36"+
+		"\3\36\3\36\5\36\u012a\n\36\3\37\3\37\3 \3 \3 \3 \3 \5 \u0133\n \3!\3!"+
+		"\3\"\3\"\3#\3#\3$\3$\5$\u013d\n$\3$\3$\3%\3%\3%\3%\3%\5%\u0146\n%\3%\2"+
+		"\2&\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@B"+
+		"DFH\2\t\3\2\16\22\3\2\25\30\3\2\31\32\3\2\33\35\3\2:;\4\2??AA\3\2BC\2"+
+		"\u0156\2K\3\2\2\2\4^\3\2\2\2\6c\3\2\2\2\be\3\2\2\2\nm\3\2\2\2\fu\3\2\2"+
+		"\2\16~\3\2\2\2\20\u0080\3\2\2\2\22\u008d\3\2\2\2\24\u0091\3\2\2\2\26\u0094"+
+		"\3\2\2\2\30\u0096\3\2\2\2\32\u00a7\3\2\2\2\34\u00b0\3\2\2\2\36\u00b9\3"+
+		"\2\2\2 \u00be\3\2\2\2\"\u00c0\3\2\2\2$\u00c3\3\2\2\2&\u00da\3\2\2\2(\u00de"+
+		"\3\2\2\2*\u00e0\3\2\2\2,\u00ef\3\2\2\2.\u00f1\3\2\2\2\60\u0103\3\2\2\2"+
+		"\62\u010b\3\2\2\2\64\u010d\3\2\2\2\66\u011f\3\2\2\28\u0121\3\2\2\2:\u0129"+
+		"\3\2\2\2<\u012b\3\2\2\2>\u0132\3\2\2\2@\u0134\3\2\2\2B\u0136\3\2\2\2D"+
+		"\u0138\3\2\2\2F\u013a\3\2\2\2H\u0145\3\2\2\2JL\5\4\3\2KJ\3\2\2\2KL\3\2"+
+		"\2\2LU\3\2\2\2MP\5\f\7\2NP\5\6\4\2OM\3\2\2\2ON\3\2\2\2PQ\3\2\2\2QR\5H"+
+		"%\2RT\3\2\2\2SO\3\2\2\2TW\3\2\2\2US\3\2\2\2UV\3\2\2\2VY\3\2\2\2WU\3\2"+
+		"\2\2XZ\5\34\17\2YX\3\2\2\2YZ\3\2\2\2Z[\3\2\2\2[\\\5\24\13\2\\]\5H%\2]"+
+		"\3\3\2\2\2^_\7\24\2\2_`\7?\2\2`a\7?\2\2ab\5H%\2b\5\3\2\2\2cd\5\26\f\2"+
+		"d\7\3\2\2\2ej\7\r\2\2fg\7%\2\2gi\7\r\2\2hf\3\2\2\2il\3\2\2\2jh\3\2\2\2"+
+		"jk\3\2\2\2k\t\3\2\2\2lj\3\2\2\2mr\5\66\34\2no\7%\2\2oq\5\66\34\2pn\3\2"+
+		"\2\2qt\3\2\2\2rp\3\2\2\2rs\3\2\2\2s\13\3\2\2\2tr\3\2\2\2uv\7\3\2\2vw\7"+
+		"\r\2\2wy\5\16\b\2xz\5\32\16\2yx\3\2\2\2yz\3\2\2\2z\r\3\2\2\2{|\6\b\2\2"+
+		"|\177\5\20\t\2}\177\5\20\t\2~{\3\2\2\2~}\3\2\2\2\177\17\3\2\2\2\u0080"+
+		"\u0089\7\36\2\2\u0081\u0086\5\22\n\2\u0082\u0083\7%\2\2\u0083\u0085\5"+
+		"\22\n\2\u0084\u0082\3\2\2\2\u0085\u0088\3\2\2\2\u0086\u0084\3\2\2\2\u0086"+
+		"\u0087\3\2\2\2\u0087\u008a\3\2\2\2\u0088\u0086\3\2\2\2\u0089\u0081\3\2"+
+		"\2\2\u0089\u008a\3\2\2\2\u008a\u008b\3\2\2\2\u008b\u008c\7\37\2\2\u008c"+
+		"\21\3\2\2\2\u008d\u008f\5\64\33\2\u008e\u0090\5\b\5\2\u008f\u008e\3\2"+
+		"\2\2\u008f\u0090\3\2\2\2\u0090\23\3\2\2\2\u0091\u0092\7\23\2\2\u0092\u0093"+
+		"\7\r\2\2\u0093\25\3\2\2\2\u0094\u0095\5\30\r\2\u0095\27\3\2\2\2\u0096"+
+		"\u0097\5\64\33\2\u0097\u0099\7\r\2\2\u0098\u009a\7E\2\2\u0099\u0098\3"+
+		"\2\2\2\u0099\u009a\3\2\2\2\u009a\u009b\3\2\2\2\u009b\u00a4\5$\23\2\u009c"+
+		"\u009e\7%\2\2\u009d\u009f\7E\2\2\u009e\u009d\3\2\2\2\u009e\u009f\3\2\2"+
+		"\2\u009f\u00a0\3\2\2\2\u00a0\u00a1\7\r\2\2\u00a1\u00a3\5$\23\2\u00a2\u009c"+
+		"\3\2\2\2\u00a3\u00a6\3\2\2\2\u00a4\u00a2\3\2\2\2\u00a4\u00a5\3\2\2\2\u00a5"+
+		"\31\3\2\2\2\u00a6\u00a4\3\2\2\2\u00a7\u00a9\7 \2\2\u00a8\u00aa\5\34\17"+
+		"\2\u00a9\u00a8\3\2\2\2\u00a9\u00aa\3\2\2\2\u00aa\u00ab\3\2\2\2\u00ab\u00ac"+
+		"\7!\2\2\u00ac\33\3\2\2\2\u00ad\u00ae\5\36\20\2\u00ae\u00af\5H%\2\u00af"+
+		"\u00b1\3\2\2\2\u00b0\u00ad\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2\u00b0\3\2"+
+		"\2\2\u00b2\u00b3\3\2\2\2\u00b3\35\3\2\2\2\u00b4\u00ba\5\6\4\2\u00b5\u00ba"+
+		"\5 \21\2\u00b6\u00ba\5\32\16\2\u00b7\u00ba\5*\26\2\u00b8\u00ba\5,\27\2"+
+		"\u00b9\u00b4\3\2\2\2\u00b9\u00b5\3\2\2\2\u00b9\u00b6\3\2\2\2\u00b9\u00b7"+
+		"\3\2\2\2\u00b9\u00b8\3\2\2\2\u00ba\37\3\2\2\2\u00bb\u00bf\5\"\22\2\u00bc"+
+		"\u00bf\5&\24\2\u00bd\u00bf\5\24\13\2\u00be\u00bb\3\2\2\2\u00be\u00bc\3"+
+		"\2\2\2\u00be\u00bd\3\2\2\2\u00bf!\3\2\2\2\u00c0\u00c1\5\66\34\2\u00c1"+
+		"#\3\2\2\2\u00c2\u00c4\5F$\2\u00c3\u00c2\3\2\2\2\u00c3\u00c4\3\2\2\2\u00c4"+
+		"\u00c6\3\2\2\2\u00c5\u00c7\7E\2\2\u00c6\u00c5\3\2\2\2\u00c6\u00c7\3\2"+
+		"\2\2\u00c7\u00d8\3\2\2\2\u00c8\u00ca\7\"\2\2\u00c9\u00cb\7E\2\2\u00ca"+
+		"\u00c9\3\2\2\2\u00ca\u00cb\3\2\2\2\u00cb\u00cc\3\2\2\2\u00cc\u00d2\7D"+
+		"\2\2\u00cd\u00cf\7%\2\2\u00ce\u00d0\7E\2\2\u00cf\u00ce\3\2\2\2\u00cf\u00d0"+
+		"\3\2\2\2\u00d0\u00d1\3\2\2\2\u00d1\u00d3\7D\2\2\u00d2\u00cd\3\2\2\2\u00d2"+
 		"\u00d3\3\2\2\2\u00d3\u00d5\3\2\2\2\u00d4\u00d6\7E\2\2\u00d5\u00d4\3\2"+
-		"\2\2\u00d5\u00d6\3\2\2\2\u00d6\u00e7\3\2\2\2\u00d7\u00d9\7\"\2\2\u00d8"+
-		"\u00da\7E\2\2\u00d9\u00d8\3\2\2\2\u00d9\u00da\3\2\2\2\u00da\u00db\3\2"+
-		"\2\2\u00db\u00e1\7D\2\2\u00dc\u00de\7%\2\2\u00dd\u00df\7E\2\2\u00de\u00dd"+
-		"\3\2\2\2\u00de\u00df\3\2\2\2\u00df\u00e0\3\2\2\2\u00e0\u00e2\7D\2\2\u00e1"+
-		"\u00dc\3\2\2\2\u00e1\u00e2\3\2\2\2\u00e2\u00e4\3\2\2\2\u00e3\u00e5\7E"+
-		"\2\2\u00e4\u00e3\3\2\2\2\u00e4\u00e5\3\2\2\2\u00e5\u00e6\3\2\2\2\u00e6"+
-		"\u00e8\7#\2\2\u00e7\u00d7\3\2\2\2\u00e7\u00e8\3\2\2\2\u00e8%\3\2\2\2\u00e9"+
-		"\u00ea\7\r\2\2\u00ea\u00eb\5(\25\2\u00eb\u00ec\5:\36\2\u00ec\'\3\2\2\2"+
-		"\u00ed\u00ee\7$\2\2\u00ee)\3\2\2\2\u00ef\u00f3\7\7\2\2\u00f0\u00f1\5 "+
-		"\21\2\u00f1\u00f2\7&\2\2\u00f2\u00f4\3\2\2\2\u00f3\u00f0\3\2\2\2\u00f3"+
-		"\u00f4\3\2\2\2\u00f4\u00f5\3\2\2\2\u00f5\u00f6\5:\36\2\u00f6\u00fc\5\32"+
-		"\16\2\u00f7\u00fa\7\b\2\2\u00f8\u00fb\5*\26\2\u00f9\u00fb\5\32\16\2\u00fa"+
-		"\u00f8\3\2\2\2\u00fa\u00f9\3\2\2\2\u00fb\u00fd\3\2\2\2\u00fc\u00f7\3\2"+
-		"\2\2\u00fc\u00fd\3\2\2\2\u00fd+\3\2\2\2\u00fe\u00ff\5.\30\2\u00ff-\3\2"+
-		"\2\2\u0100\u0104\7\4\2\2\u0101\u0102\5 \21\2\u0102\u0103\7&\2\2\u0103"+
-		"\u0105\3\2\2\2\u0104\u0101\3\2\2\2\u0104\u0105\3\2\2\2\u0105\u0107\3\2"+
-		"\2\2\u0106\u0108\5:\36\2\u0107\u0106\3\2\2\2\u0107\u0108\3\2\2\2\u0108"+
-		"\u0109\3\2\2\2\u0109\u010d\7 \2\2\u010a\u010c\5\60\31\2\u010b\u010a\3"+
-		"\2\2\2\u010c\u010f\3\2\2\2\u010d\u010b\3\2\2\2\u010d\u010e\3\2\2\2\u010e"+
-		"\u0110\3\2\2\2\u010f\u010d\3\2\2\2\u0110\u0111\7!\2\2\u0111/\3\2\2\2\u0112"+
-		"\u0113\5\62\32\2\u0113\u0115\7\'\2\2\u0114\u0116\5\34\17\2\u0115\u0114"+
-		"\3\2\2\2\u0115\u0116\3\2\2\2\u0116\61\3\2\2\2\u0117\u0118\7\5\2\2\u0118"+
-		"\u011b\5:\36\2\u0119\u011b\7\6\2\2\u011a\u0117\3\2\2\2\u011a\u0119\3\2"+
-		"\2\2\u011b\63\3\2\2\2\u011c\u011d\5\66\34\2\u011d\65\3\2\2\2\u011e\u011f"+
-		"\t\2\2\2\u011f\67\3\2\2\2\u0120\u0121\5\64\33\2\u01219\3\2\2\2\u0122\u0133"+
-		"\5<\37\2\u0123\u0124\5<\37\2\u0124\u0126\t\3\2\2\u0125\u0127\t\4\2\2\u0126"+
-		"\u0125\3\2\2\2\u0126\u0127\3\2\2\2\u0127\u0128\3\2\2\2\u0128\u0129\5<"+
-		"\37\2\u0129\u0133\3\2\2\2\u012a\u012b\5<\37\2\u012b\u012c\t\5\2\2\u012c"+
-		"\u012d\5<\37\2\u012d\u0133\3\2\2\2\u012e\u012f\5<\37\2\u012f\u0130\t\6"+
-		"\2\2\u0130\u0131\5<\37\2\u0131\u0133\3\2\2\2\u0132\u0122\3\2\2\2\u0132"+
-		"\u0123\3\2\2\2\u0132\u012a\3\2\2\2\u0132\u012e\3\2\2\2\u0133;\3\2\2\2"+
-		"\u0134\u0135\5> \2\u0135=\3\2\2\2\u0136\u013d\5@!\2\u0137\u013d\5F$\2"+
-		"\u0138\u0139\7\36\2\2\u0139\u013a\5:\36\2\u013a\u013b\7\37\2\2\u013b\u013d"+
-		"\3\2\2\2\u013c\u0136\3\2\2\2\u013c\u0137\3\2\2\2\u013c\u0138\3\2\2\2\u013d"+
-		"?\3\2\2\2\u013e\u0141\5B\"\2\u013f\u0141\5H%\2\u0140\u013e\3\2\2\2\u0140"+
-		"\u013f\3\2\2\2\u0141A\3\2\2\2\u0142\u0148\7\f\2\2\u0143\u0148\5D#\2\u0144"+
-		"\u0148\5P)\2\u0145\u0148\7@\2\2\u0146\u0148\7A\2\2\u0147\u0142\3\2\2\2"+
-		"\u0147\u0143\3\2\2\2\u0147\u0144\3\2\2\2\u0147\u0145\3\2\2\2\u0147\u0146"+
-		"\3\2\2\2\u0148C\3\2\2\2\u0149\u014a\t\7\2\2\u014aE\3\2\2\2\u014b\u014c"+
-		"\7\r\2\2\u014cG\3\2\2\2\u014d\u014e\5J&\2\u014e\u014f\5L\'\2\u014fI\3"+
-		"\2\2\2\u0150\u0153\58\35\2\u0151\u0153\5\66\34\2\u0152\u0150\3\2\2\2\u0152"+
-		"\u0151\3\2\2\2\u0153K\3\2\2\2\u0154\u0156\7 \2\2\u0155\u0157\5N(\2\u0156"+
-		"\u0155\3\2\2\2\u0156\u0157\3\2\2\2\u0157\u0158\3\2\2\2\u0158\u0159\7!"+
-		"\2\2\u0159M\3\2\2\2\u015a\u015d\5:\36\2\u015b\u015d\5L\'\2\u015c\u015a"+
-		"\3\2\2\2\u015c\u015b\3\2\2\2\u015dO\3\2\2\2\u015e\u015f\t\b\2\2\u015f"+
-		"Q\3\2\2\2\u0160\u0162\7\36\2\2\u0161\u0163\5\n\6\2\u0162\u0161\3\2\2\2"+
-		"\u0162\u0163\3\2\2\2\u0163\u0164\3\2\2\2\u0164\u0165\7\37\2\2\u0165S\3"+
-		"\2\2\2\u0166\u016c\7&\2\2\u0167\u0168\7&\2\2\u0168\u016c\7\2\2\3\u0169"+
-		"\u016c\6+\3\2\u016a\u016c\6+\4\2\u016b\u0166\3\2\2\2\u016b\u0167\3\2\2"+
-		"\2\u016b\u0169\3\2\2\2\u016b\u016a\3\2\2\2\u016cU\3\2\2\2-W[aex\u0080"+
-		"\u0087\u008c\u0094\u0097\u009d\u00a9\u00ae\u00b4\u00b9\u00c2\u00c9\u00cd"+
-		"\u00d2\u00d5\u00d9\u00de\u00e1\u00e4\u00e7\u00f3\u00fa\u00fc\u0104\u0107"+
-		"\u010d\u0115\u011a\u0126\u0132\u013c\u0140\u0147\u0152\u0156\u015c\u0162"+
-		"\u016b";
+		"\2\2\u00d5\u00d6\3\2\2\2\u00d6\u00d7\3\2\2\2\u00d7\u00d9\7#\2\2\u00d8"+
+		"\u00c8\3\2\2\2\u00d8\u00d9\3\2\2\2\u00d9%\3\2\2\2\u00da\u00db\7\r\2\2"+
+		"\u00db\u00dc\5(\25\2\u00dc\u00dd\5\66\34\2\u00dd\'\3\2\2\2\u00de\u00df"+
+		"\7$\2\2\u00df)\3\2\2\2\u00e0\u00e4\7\7\2\2\u00e1\u00e2\5 \21\2\u00e2\u00e3"+
+		"\7&\2\2\u00e3\u00e5\3\2\2\2\u00e4\u00e1\3\2\2\2\u00e4\u00e5\3\2\2\2\u00e5"+
+		"\u00e6\3\2\2\2\u00e6\u00e7\5\66\34\2\u00e7\u00ed\5\32\16\2\u00e8\u00eb"+
+		"\7\b\2\2\u00e9\u00ec\5*\26\2\u00ea\u00ec\5\32\16\2\u00eb\u00e9\3\2\2\2"+
+		"\u00eb\u00ea\3\2\2\2\u00ec\u00ee\3\2\2\2\u00ed\u00e8\3\2\2\2\u00ed\u00ee"+
+		"\3\2\2\2\u00ee+\3\2\2\2\u00ef\u00f0\5.\30\2\u00f0-\3\2\2\2\u00f1\u00f5"+
+		"\7\4\2\2\u00f2\u00f3\5 \21\2\u00f3\u00f4\7&\2\2\u00f4\u00f6\3\2\2\2\u00f5"+
+		"\u00f2\3\2\2\2\u00f5\u00f6\3\2\2\2\u00f6\u00f8\3\2\2\2\u00f7\u00f9\5\66"+
+		"\34\2\u00f8\u00f7\3\2\2\2\u00f8\u00f9\3\2\2\2\u00f9\u00fa\3\2\2\2\u00fa"+
+		"\u00fe\7 \2\2\u00fb\u00fd\5\60\31\2\u00fc\u00fb\3\2\2\2\u00fd\u0100\3"+
+		"\2\2\2\u00fe\u00fc\3\2\2\2\u00fe\u00ff\3\2\2\2\u00ff\u0101\3\2\2\2\u0100"+
+		"\u00fe\3\2\2\2\u0101\u0102\7!\2\2\u0102/\3\2\2\2\u0103\u0104\5\62\32\2"+
+		"\u0104\u0106\7\'\2\2\u0105\u0107\5\34\17\2\u0106\u0105\3\2\2\2\u0106\u0107"+
+		"\3\2\2\2\u0107\61\3\2\2\2\u0108\u0109\7\5\2\2\u0109\u010c\5\66\34\2\u010a"+
+		"\u010c\7\6\2\2\u010b\u0108\3\2\2\2\u010b\u010a\3\2\2\2\u010c\63\3\2\2"+
+		"\2\u010d\u010e\t\2\2\2\u010e\65\3\2\2\2\u010f\u0120\58\35\2\u0110\u0111"+
+		"\58\35\2\u0111\u0113\t\3\2\2\u0112\u0114\t\4\2\2\u0113\u0112\3\2\2\2\u0113"+
+		"\u0114\3\2\2\2\u0114\u0115\3\2\2\2\u0115\u0116\58\35\2\u0116\u0120\3\2"+
+		"\2\2\u0117\u0118\58\35\2\u0118\u0119\t\5\2\2\u0119\u011a\58\35\2\u011a"+
+		"\u0120\3\2\2\2\u011b\u011c\58\35\2\u011c\u011d\t\6\2\2\u011d\u011e\58"+
+		"\35\2\u011e\u0120\3\2\2\2\u011f\u010f\3\2\2\2\u011f\u0110\3\2\2\2\u011f"+
+		"\u0117\3\2\2\2\u011f\u011b\3\2\2\2\u0120\67\3\2\2\2\u0121\u0122\5:\36"+
+		"\2\u01229\3\2\2\2\u0123\u012a\5<\37\2\u0124\u012a\5B\"\2\u0125\u0126\7"+
+		"\36\2\2\u0126\u0127\5\66\34\2\u0127\u0128\7\37\2\2\u0128\u012a\3\2\2\2"+
+		"\u0129\u0123\3\2\2\2\u0129\u0124\3\2\2\2\u0129\u0125\3\2\2\2\u012a;\3"+
+		"\2\2\2\u012b\u012c\5> \2\u012c=\3\2\2\2\u012d\u0133\7\f\2\2\u012e\u0133"+
+		"\5@!\2\u012f\u0133\5D#\2\u0130\u0133\7@\2\2\u0131\u0133\7A\2\2\u0132\u012d"+
+		"\3\2\2\2\u0132\u012e\3\2\2\2\u0132\u012f\3\2\2\2\u0132\u0130\3\2\2\2\u0132"+
+		"\u0131\3\2\2\2\u0133?\3\2\2\2\u0134\u0135\t\7\2\2\u0135A\3\2\2\2\u0136"+
+		"\u0137\7\r\2\2\u0137C\3\2\2\2\u0138\u0139\t\b\2\2\u0139E\3\2\2\2\u013a"+
+		"\u013c\7\36\2\2\u013b\u013d\5\n\6\2\u013c\u013b\3\2\2\2\u013c\u013d\3"+
+		"\2\2\2\u013d\u013e\3\2\2\2\u013e\u013f\7\37\2\2\u013fG\3\2\2\2\u0140\u0146"+
+		"\7&\2\2\u0141\u0142\7&\2\2\u0142\u0146\7\2\2\3\u0143\u0146\6%\3\2\u0144"+
+		"\u0146\6%\4\2\u0145\u0140\3\2\2\2\u0145\u0141\3\2\2\2\u0145\u0143\3\2"+
+		"\2\2\u0145\u0144\3\2\2\2\u0146I\3\2\2\2)KOUYjry~\u0086\u0089\u008f\u0099"+
+		"\u009e\u00a4\u00a9\u00b2\u00b9\u00be\u00c3\u00c6\u00ca\u00cf\u00d2\u00d5"+
+		"\u00d8\u00e4\u00eb\u00ed\u00f5\u00f8\u00fe\u0106\u010b\u0113\u011f\u0129"+
+		"\u0132\u013c\u0145";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
