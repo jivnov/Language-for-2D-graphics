@@ -123,10 +123,32 @@ typeName
     | SHAPE
     ;
 
+relationDetailOp
+    : INNER
+    | OUTER
+    ;
+
+singleLevelRelationOp
+    : LEFT
+    | RIGHT
+    | TOP
+    | BOT
+    ;
+
+multiLevelRelationOp
+    : IN
+    | ON
+    | UNDER
+    ;
+
+relationExpr
+    : primaryExpr singleLevelRelationOp relationDetailOp? primaryExpr
+    | primaryExpr multiLevelRelationOp primaryExpr
+    ;
+
 expression
     : primaryExpr
-    | primaryExpr (LEFT | RIGHT | TOP | BOT) (INNER | OUTER)? primaryExpr
-    | primaryExpr (IN | ON | UNDER) primaryExpr
+    | relationExpr
     | primaryExpr ('+' | '-') primaryExpr
     ;
 
@@ -173,6 +195,5 @@ arguments
 eos
     : ';'
     | ';' EOF
-    | {self.lineTerminatorAhead()}?
     | {self.checkPreviousTokenText("}")}?
     ;

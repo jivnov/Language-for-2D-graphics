@@ -2,7 +2,9 @@ import uuid
 from enum import Enum
 from typing import Any, Dict, List, Set
 
-import graph
+
+class UndeclaredShapeError(NameError):
+    pass
 
 
 class Shape(Enum):
@@ -27,20 +29,47 @@ class Relation(Enum):
     ON = 4
     UNDER = -4
 
+    def __neg__(self):
+        return Relation(-self.value)
+
+    @staticmethod
+    def from_string(relation_name: str):
+        if relation_name.upper() == "LEFT":
+            return Relation.LEFT
+        elif relation_name.upper() == "RIGHT":
+            return Relation.RIGHT
+        elif relation_name.upper() == "TOP":
+            return Relation.TOP
+        elif relation_name.upper() == "BOT":
+            return Relation.BOT
+        elif relation_name.upper() == "IN":
+            return Relation.IN
+        elif relation_name.upper() == "CONTAINED":
+            return Relation.CONTAINED
+        elif relation_name.upper() == "ON":
+            return Relation.ON
+        elif relation_name.upper() == "UNDER":
+            return Relation.UNDER
+        else:
+            raise UndefinedRelationError
+
 
 class Vertex:
-    def __init__(self, parent_graph, var_name: str, shape: str, args: Any, content: graph.Graph):
+    def __init__(self, parent_graph, var_name: str, shape: str, args: Any, content=None):
+        """
+
+        :param parent_graph: Graph that contains this Vertex
+        :param var_name: Name of the variable referencing this shape in code
+        :param shape: Type of this variable
+        :param args: Arguments passed to the variable initialization in code
+        :param content: Type should be Graph or None; allows for comparison between graphs and shapes
+        """
         # DONE: Vertex should have a reference to its Graph to track some more "global" properties (e.x. the total
         # width and height of the drawing it is a part of)
         self.name = var_name
         self.shape = None
         self.bb_w = 0.0
         self.drawn = False
-
-        self.x = None
-        self.y = None
-        self.width = None
-        self.height = None
 
         self.content = None  # Should only be not-None if this Vertex is actually a Graph (this allows defining Vertex to Graph relations)
 
@@ -60,13 +89,13 @@ class Vertex:
 
         if shape == "rect":
             self.shape = Shape.RECT
-        if shape == "square":
+        elif shape == "square":
             self.shape = Shape.SQUARE
-        if shape == "circle":
+        elif shape == "circle":
             self.shape = Shape.CIRCLE
-        if shape == "triangle":
+        elif shape == "triangle":
             self.shape = Shape.TRIANGLE
-        if shape == "shape":
+        elif shape == "shape":
             self.shape = Shape.SHAPE
 
         # Determine Bounding Box fractional size through passed arguments
@@ -76,16 +105,26 @@ class Vertex:
                 self.bb_h = int(args.pop(0).replace('%', '')) / 100
             else:
                 self.bb_h = self.bb_w
+        else:
+            self.bb_w = 0.5
+            self.bb_h = 0.5
 
         # Adjust Bounding Box fractional size based on shape
         self.adjust_size_based_on_shape()
+
+        self.width = self.bb_w * parent_graph.width
+        self.height = self.bb_h * parent_graph.height
+
+        self.x = (1 - self.bb_w) * parent_graph.width / 2
+        self.y = (1 - self.bb_h) * parent_graph.height / 2
+
 
     def adjust_size_based_on_shape(self):
         # Adjust Bounding Box fractional size based on shape
         if self.shape == Shape.SQUARE or self.shape == Shape.CIRCLE:
             self.bb_h = self.bb_w = min(self.bb_h, self.bb_w)
 
-    def add_neighbour(self, v: graph.Vertex, relation: Relation):
+    def add_neighbour(self, v, relation: Relation):
         """
         Adds a new vertex with given relation to this one's neighbours and this one to the new vertex's with an opposite relation
         :param v: New vertex neighbour of self
@@ -95,18 +134,28 @@ class Vertex:
         if relation == Relation.LEFT:
             self.LEFT.add(v)
             v.RIGHT.add(self)
+            v.x = self.x - v.width
+            v.y = self.y
         elif relation == Relation.RIGHT:
             self.RIGHT.add(v)
             v.LEFT.add(self)
+            v.x = self.x + self.width
+            v.y = self.y
         elif relation == Relation.TOP:
             self.TOP.add(v)
             v.BOT.add(self)
+            v.x = self.x
+            v.y = self.y + v.height
         elif relation == Relation.BOT:
             self.BOT.add(v)
             v.TOP.add(self)
+            v.x = self.x
+            v.y = self.y - v.height
         elif relation == Relation.IN:
             self.IN = v
             v.CONTAINED.add(self)
+            v.x = self.x + self.width / 2
+            v.y = self.y + self.height / 2
         elif relation == Relation.CONTAINED:
             self.CONTAINED.add(v)
             v.IN = self
@@ -123,6 +172,8 @@ class Vertex:
 class Graph:
     def __init__(self):
         self.vertices = {}
+        self.x = None
+        self.y = None
         self.width = 0
         self.height = 0
 
@@ -130,11 +181,15 @@ class Graph:
         if v not in self.vertices.keys():
             self.vertices[v] = []
 
+    def center(self):
+        """
+        Shift all shapes of the graph equally so the bounding box of this graph is centered in its parent
+        :return:
+        """
+        pass
+
     def add_edge(self, v_from: Vertex, v_to: Vertex, r: Relation):
         # TODO: [NOT IMPORTANT RN] Use incidence matrix to store vertex relations in the Graph
-        self.add_vertex(v_from)
-        self.add_vertex(v_to)
-
         self.vertices[v_from].append((v_to, r))
         self.vertices[v_to].append((v_from, -r))
 
@@ -155,3 +210,4 @@ class Graph:
         for v in self.vertices.keys():
             if str(v.name) == str(vertex_name):
                 return v
+        return None

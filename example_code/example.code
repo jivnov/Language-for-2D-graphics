@@ -1,6 +1,9 @@
 #viewport 800 600;
 rect A [20%, 30%];
-circle C [35%, 50%];
+rect C [40%, 50%];
+rect D;
+C left A;
+D right A;
 shape B;
 //comment
 draw C;

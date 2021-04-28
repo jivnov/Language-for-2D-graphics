@@ -1,4 +1,4 @@
-# Generated from TwoDimParser.g4 by ANTLR 4.9.2
+# Generated from TwoDimParser.g4 by ANTLR 4.7.2
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .TwoDimParser import TwoDimParser
@@ -242,6 +242,42 @@ class TwoDimParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by TwoDimParser#relationDetailOp.
+    def enterRelationDetailOp(self, ctx:TwoDimParser.RelationDetailOpContext):
+        pass
+
+    # Exit a parse tree produced by TwoDimParser#relationDetailOp.
+    def exitRelationDetailOp(self, ctx:TwoDimParser.RelationDetailOpContext):
+        pass
+
+
+    # Enter a parse tree produced by TwoDimParser#singleLevelRelationOp.
+    def enterSingleLevelRelationOp(self, ctx:TwoDimParser.SingleLevelRelationOpContext):
+        pass
+
+    # Exit a parse tree produced by TwoDimParser#singleLevelRelationOp.
+    def exitSingleLevelRelationOp(self, ctx:TwoDimParser.SingleLevelRelationOpContext):
+        pass
+
+
+    # Enter a parse tree produced by TwoDimParser#multiLevelRelationOp.
+    def enterMultiLevelRelationOp(self, ctx:TwoDimParser.MultiLevelRelationOpContext):
+        pass
+
+    # Exit a parse tree produced by TwoDimParser#multiLevelRelationOp.
+    def exitMultiLevelRelationOp(self, ctx:TwoDimParser.MultiLevelRelationOpContext):
+        pass
+
+
+    # Enter a parse tree produced by TwoDimParser#relationExpr.
+    def enterRelationExpr(self, ctx:TwoDimParser.RelationExprContext):
+        pass
+
+    # Exit a parse tree produced by TwoDimParser#relationExpr.
+    def exitRelationExpr(self, ctx:TwoDimParser.RelationExprContext):
+        pass
+
+
     # Enter a parse tree produced by TwoDimParser#expression.
     def enterExpression(self, ctx:TwoDimParser.ExpressionContext):
         pass
@@ -332,5 +368,3 @@ class TwoDimParserListener(ParseTreeListener):
         pass
 
 
-
-del TwoDimParser
