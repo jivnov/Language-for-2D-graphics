@@ -57,6 +57,8 @@ def main(argv):
     walker = ParseTreeWalker()
     walker.walk(printer, tree)
 
+    # TODO: Add two-pass compilation (1st step: find Function definitions etc., store them as Graphs for later use; 2nd step: go through "normal" imperative code, use previously defined functions)
+
 
 if __name__ == '__main__':
     main(sys.argv)
