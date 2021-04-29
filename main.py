@@ -23,7 +23,7 @@ class MyTwoDimParserListener(TwoDimParserListener):
         print("I just entered the source file")
 
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
-        self.relations_graph.get_relations(self.relations_graph.find_vertex(ctx.IDENTIFIER()))
+        self.relations_graph.print_relations(self.relations_graph.find_vertex(ctx.IDENTIFIER()))
         self.res.draw(self.relations_graph.find_vertex(vertex_name = ctx.IDENTIFIER()))
         self.res.canvas.save(pretty = True)
         # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
@@ -48,7 +48,7 @@ class MyTwoDimParserListener(TwoDimParserListener):
         try:
             op1 = self.relations_graph.find_vertex(var_name1)
             op2 = self.relations_graph.find_vertex(var_name2)
-            self.relations_graph.add_edge(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+            self.relations_graph.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
         except UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
 

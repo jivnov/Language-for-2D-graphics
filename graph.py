@@ -11,6 +11,10 @@ class UndefinedShapeError(ValueError):
     pass
 
 
+class RedundantRelationError(NameError):
+    pass
+
+
 class Shape(Enum):
     SQUARE = 1
     CIRCLE = 2
@@ -39,6 +43,7 @@ class UndefinedRelationError(ValueError):
 
 
 class Relation(Enum):
+    # TODO: [Note for the future] For a relation to be true between a graph G and a vertex V it should be true between V and each vertex of graph G
     UNRELATED = 0
     LEFT = 1
     RIGHT = -1
@@ -76,6 +81,7 @@ class Relation(Enum):
 
 class Vertex:
     def __init__(self, parent_graph, var_name: str, shape: str, args: Any, content=None):
+        # TODO: Every vertex begins as its own graph which then merges with other graphs through relations
         """
 
         :param parent_graph: Graph that contains this Vertex
@@ -147,37 +153,29 @@ class Vertex:
             v.update_peers()
 
     def add_neighbour(self, v, relation: Relation):
+        # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph at all times
         """
         Adds a new vertex with given relation to this one's neighbours and this one to the new vertex's with an opposite relation
         :param v: New vertex neighbour of self
-        :param relation: Relation of self to neighbour vertex
+        :param relation: Relation of self to neighbour vertex; read: "self RELATION v", e.x. for relation=Relation.LEFT: "self LEFT v", so "v RIGHT self"
         :return:
         """
         if relation == Relation.LEFT:
             v.LEFT.add(self)
             self.RIGHT.add(v)
-            # v.x = self.x + self.width
-            # v.y = self.y
         elif relation == Relation.RIGHT:
             v.RIGHT.add(self)
             self.LEFT.add(v)
-            # v.x = self.x - v.width
-            # v.y = self.y
         elif relation == Relation.TOP:
-            self.TOP.add(v)
-            v.BOT.add(self)
-            v.x = self.x
-            v.y = self.y + v.height
+            v.TOP.add(self)
+            self.BOT.add(v)
+        # TODO: Rewrite below relations to conform to this method's docs in "param: relation"
         elif relation == Relation.BOT:
             self.BOT.add(v)
             v.TOP.add(self)
-            v.x = self.x
-            v.y = self.y - v.height
         elif relation == Relation.IN:
             self.IN = v
             v.CONTAINED.add(self)
-            v.x = self.x + self.width / 2
-            v.y = self.y + self.height / 2
         elif relation == Relation.CONTAINED:
             self.CONTAINED.add(v)
             v.IN = self
@@ -192,24 +190,101 @@ class Vertex:
 
 
 class Graph:
-    def __init__(self):
-        self.vertices = {}
-        self.x = None
-        self.y = None
-        self.width = 0
-        self.height = 0
+    def __init__(self, x=0, y=0, width=0, height=0):
+        self.vertices: Set[Vertex] = set()  # all unique vertices in a graph
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
 
-        self.relation_matrix_horizontal = {}
+        self.relation_matrix_horizontal: Dict[Vertex, Dict[Vertex, Relation]] = dict()  # all horizontal relations in the shape graph
 
     def add_vertex(self, v: Vertex):
-        if v not in self.vertices.keys():
-            self.vertices[v] = []
+        if v not in self.vertices:
+            # Add all relations to other vertices for the new vertex for all relation matrices
+            self.relation_matrix_horizontal[v] = {other_v: Relation.UNRELATED for other_v in self.vertices}
 
-    def deupdate_vertices(self):
+            # Add new vertex relation for all other vertices in all relation matrices
+            for key in self.relation_matrix_horizontal.keys():
+                if key is not v:
+                    self.relation_matrix_horizontal[key][v] = Relation.UNRELATED
+
+            # Add new vertex to vertices set
+            self.vertices.add(v)
+
+            # Give the vertex a reference to this Graph
+            v.graph = self
+
+    def add_relation(self, v_from: Vertex, v_to: Vertex, r: Relation):
         """
-        Should be called after all shapes have been updated to prep them for further updates; this is equivalent to graph node coloring
+        :param v_from:
+        :param v_to:
+        :param r:
+
+        :raises UndeclaredShapeError
+
         :return:
         """
+        if v_from is None or v_to is None:
+            raise UndeclaredShapeError
+
+        if v_from is v_to:
+            raise RedundantRelationError
+
+        # TODO: Implement incidence matrices for other relations
+        if r not in (Relation.LEFT, Relation.RIGHT):
+            # TODO: Change this when working on other types of relations
+            return
+
+        # Check if at least one of the shapes is a part of this graph, otherwise throw error
+        if v_from not in self.vertices and v_to not in self.vertices:
+            raise UndeclaredShapeError
+
+        # Handle shapes from different graphs
+        if v_from.graph is not v_to.graph:
+            # TODO: Support relations between 2 graphs;
+            if v_from.graph is self:
+                self.merge_with(v_to.graph)
+
+            elif v_to.graph is self:
+                self.merge_with(v_from.graph)
+            else:
+                # Just to be safe; this case should be handled in the previous checks
+                raise UndeclaredShapeError
+
+        # Modify relation in respective matrix; note that you need to modify it for both vertices
+        self.relation_matrix_horizontal[v_from][v_to] = r
+        self.relation_matrix_horizontal[v_to][v_from] = -r
+
+        # Give vertex info about new neighbour
+        # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph
+        v_from.add_neighbour(v_to, r)
+
+    def print_relations(self, v: Vertex) -> None:
+        # TODO generate SVG for provided parameters
+        if v not in self.vertices:
+            print("not in graph")
+        else:
+            print(f"Found vertex {v.name}")
+            for v2, relation in self.relation_matrix_horizontal[v].items():
+                vertex_name = v2.name
+                vertex_relation = relation
+                print(f"{v2.shape}:{vertex_name} {vertex_relation}")
+
+    def merge_with(self, other):
+        """
+        Merge vertices and relations of the other graph into this one
+        :param other: Other Graph
+        :return:
+        """
+        # Add all new vertices
+        for vertex in other.vertices:
+            self.add_vertex(vertex)
+
+        # Add all new relations
+        for v1, relation_dict in other.relation_matrix_horizontal.items():
+            for v2, relation in relation_dict.items():
+                self.add_relation(v1, v2, relation)
 
     def center(self):
         """
@@ -218,26 +293,8 @@ class Graph:
         """
         pass
 
-    def add_edge(self, v_from: Vertex, v_to: Vertex, r: Relation):
-        # TODO: [NOT IMPORTANT RN] Use incidence matrix to store vertex relations in the Graph
-        self.vertices[v_from].append((v_to, r))
-        self.vertices[v_to].append((v_from, Relation(-r.value)))
-
-        v_from.add_neighbour(v_to, r)
-
-    def get_relations(self, v: Vertex) -> None:
-        # TODO generate SVG for provided parameters
-        if v not in self.vertices:
-            print("not in graph")
-        else:
-            print("found vertex...")
-            for el in self.vertices[v]:
-                vertex_name = el[0].name
-                vertex_relation = el[1]
-                print(f"{el[0].shape}:{vertex_name} {vertex_relation}")
-
     def find_vertex(self, vertex_name: str) -> Vertex:
-        for v in self.vertices.keys():
-            if str(v.name) == str(vertex_name):
-                return v
-        return None
+        for vertex in self.vertices:
+            if str(vertex.name) == str(vertex_name):
+                return vertex
+        raise UndeclaredShapeError

@@ -1,10 +1,10 @@
 #viewport 1000 1000;
 rect A [40%, 40%];
 rect C [50%, 50%];
-C left A;
 rect D [30%];
-D left C;
 
+C left A;
+D left C;
 D right A;
-//comment
+
 draw A;
