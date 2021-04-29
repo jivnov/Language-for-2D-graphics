@@ -1,6 +1,6 @@
 import uuid
 from enum import Enum
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Set, Tuple
 
 
 class UndeclaredShapeError(NameError):
@@ -152,6 +152,12 @@ class Vertex:
             v.updated = True
             v.update_peers()
 
+    def is_left(self, v) -> bool:
+        return self.x <= v.x - self.width
+
+    def is_right(self, v) -> bool:
+        return self.x >= v.x + v.width
+
     def add_neighbour(self, v, relation: Relation):
         # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph at all times
         """
@@ -286,15 +292,30 @@ class Graph:
             for v2, relation in relation_dict.items():
                 self.add_relation(v1, v2, relation)
 
+    def find_vertex(self, vertex_name: str) -> Vertex:
+        for vertex in self.vertices:
+            if str(vertex.name) == str(vertex_name):
+                return vertex
+        raise UndeclaredShapeError
+
+    def check_horizontal(self) -> Tuple[Vertex, Vertex, Relation, Relation]:
+        """
+        Check if all relations in horizontal incidence matrix are valid
+        :return:
+        """
+        # TODO: Return a set of changes that need to be applied in order to make this Graph valid
+        for v1, relation_map in self.relation_matrix_horizontal.items():
+            for v2, relation in relation_map:
+                if relation is Relation.LEFT:
+                    v1.is_left(v2)
+                elif relation is Relation.RIGHT:
+                    v1.is_right(v2)
+        return
+        return (v1, v2, current_relation, desired_relation)
+
     def center(self):
         """
         Shift all shapes of the graph equally so the bounding box of this graph is centered in its parent
         :return:
         """
         pass
-
-    def find_vertex(self, vertex_name: str) -> Vertex:
-        for vertex in self.vertices:
-            if str(vertex.name) == str(vertex_name):
-                return vertex
-        raise UndeclaredShapeError
