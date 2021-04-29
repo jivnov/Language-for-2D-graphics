@@ -7,6 +7,10 @@ class UndeclaredShapeError(NameError):
     pass
 
 
+class UndefinedShapeError(ValueError):
+    pass
+
+
 class Shape(Enum):
     SQUARE = 1
     CIRCLE = 2
@@ -14,12 +18,28 @@ class Shape(Enum):
     TRIANGLE = 4
     SHAPE = 5
 
+    @staticmethod
+    def from_string(shape_name: str):
+        if shape_name.lower() == "rect":
+            return Shape.RECT
+        elif shape_name.lower() == "square":
+            return Shape.SQUARE
+        elif shape_name.lower() == "circle":
+            return Shape.CIRCLE
+        elif shape_name.lower() == "triangle":
+            return Shape.TRIANGLE
+        elif shape_name.lower() == "shape":
+            return Shape.SHAPE
+        else:
+            raise UndefinedShapeError
+
 
 class UndefinedRelationError(ValueError):
     pass
 
 
 class Relation(Enum):
+    UNRELATED = 0
     LEFT = 1
     RIGHT = -1
     TOP = 2
@@ -67,8 +87,10 @@ class Vertex:
         # DONE: Vertex should have a reference to its Graph to track some more "global" properties (e.x. the total
         # width and height of the drawing it is a part of)
         self.name = var_name
-        self.shape = None
+        self.shape = Shape.from_string(shape)
         self.bb_w = 0.0
+
+        self.updated = False
         self.drawn = False
 
         self.content = None  # Should only be not-None if this Vertex is actually a Graph (this allows defining Vertex to Graph relations)
@@ -87,17 +109,6 @@ class Vertex:
         # program can reference any shape by its unique ID or at least try to make a unique variable for each unique ID
         # TODO: Opening SVG files for editing (e.x. after calling draw() you want to add some more shapes to the picture)
 
-        if shape == "rect":
-            self.shape = Shape.RECT
-        elif shape == "square":
-            self.shape = Shape.SQUARE
-        elif shape == "circle":
-            self.shape = Shape.CIRCLE
-        elif shape == "triangle":
-            self.shape = Shape.TRIANGLE
-        elif shape == "shape":
-            self.shape = Shape.SHAPE
-
         # Determine Bounding Box fractional size through passed arguments
         if isinstance(args, list) and len(args) > 0:
             self.bb_w = int(args.pop(0).replace('%', '')) / 100
@@ -112,17 +123,28 @@ class Vertex:
         # Adjust Bounding Box fractional size based on shape
         self.adjust_size_based_on_shape()
 
-        self.width = self.bb_w * parent_graph.width
-        self.height = self.bb_h * parent_graph.height
+        self.width = self.bb_w * 1000
+        self.height = self.bb_h * 1000
 
-        self.x = (1 - self.bb_w) * parent_graph.width / 2
-        self.y = (1 - self.bb_h) * parent_graph.height / 2
-
+        self.x = (1 - self.bb_w) * 500
+        self.y = (1 - self.bb_h) * 500
 
     def adjust_size_based_on_shape(self):
         # Adjust Bounding Box fractional size based on shape
         if self.shape == Shape.SQUARE or self.shape == Shape.CIRCLE:
             self.bb_h = self.bb_w = min(self.bb_h, self.bb_w)
+
+    def update_peers(self):
+        if self.updated:
+            return
+        for v in self.LEFT:
+            v.x = self.x - v.width
+            v.updated = True
+            v.update_peers()
+        for v in self.RIGHT:
+            v.x = self.x + self.width
+            v.updated = True
+            v.update_peers()
 
     def add_neighbour(self, v, relation: Relation):
         """
@@ -132,15 +154,15 @@ class Vertex:
         :return:
         """
         if relation == Relation.LEFT:
-            self.LEFT.add(v)
-            v.RIGHT.add(self)
-            v.x = self.x - v.width
-            v.y = self.y
-        elif relation == Relation.RIGHT:
-            self.RIGHT.add(v)
             v.LEFT.add(self)
-            v.x = self.x + self.width
-            v.y = self.y
+            self.RIGHT.add(v)
+            # v.x = self.x + self.width
+            # v.y = self.y
+        elif relation == Relation.RIGHT:
+            v.RIGHT.add(self)
+            self.LEFT.add(v)
+            # v.x = self.x - v.width
+            # v.y = self.y
         elif relation == Relation.TOP:
             self.TOP.add(v)
             v.BOT.add(self)
@@ -177,9 +199,17 @@ class Graph:
         self.width = 0
         self.height = 0
 
+        self.relation_matrix_horizontal = {}
+
     def add_vertex(self, v: Vertex):
         if v not in self.vertices.keys():
             self.vertices[v] = []
+
+    def deupdate_vertices(self):
+        """
+        Should be called after all shapes have been updated to prep them for further updates; this is equivalent to graph node coloring
+        :return:
+        """
 
     def center(self):
         """
@@ -191,7 +221,7 @@ class Graph:
     def add_edge(self, v_from: Vertex, v_to: Vertex, r: Relation):
         # TODO: [NOT IMPORTANT RN] Use incidence matrix to store vertex relations in the Graph
         self.vertices[v_from].append((v_to, r))
-        self.vertices[v_to].append((v_from, -r))
+        self.vertices[v_to].append((v_from, Relation(-r.value)))
 
         v_from.add_neighbour(v_to, r)
 
