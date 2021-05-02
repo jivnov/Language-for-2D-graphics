@@ -11,6 +11,12 @@ from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
 
 
+def center_graph(d2d: drawing.Drawing2d, g: graph.Graph):
+    if g.x != (desired_x := (d2d.viewport_width // 2 - g.width // 2)):
+        g.move_horizontal(desired_x - g.x)
+    # TODO: Add vertical centering
+
+
 class MyTwoDimParserListener(TwoDimParserListener):
     def __init__(self):
         super().__init__()
@@ -24,10 +30,12 @@ class MyTwoDimParserListener(TwoDimParserListener):
 
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
         self.relations_graph.print_relations(self.relations_graph.find_vertex(ctx.IDENTIFIER()))
+        center_graph(self.res, self.relations_graph)
         self.res.draw(self.relations_graph.find_vertex(vertex_name = ctx.IDENTIFIER()))
         self.res.canvas.save(pretty = True)
         # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
-        print(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")  
+        print(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")
+        print(f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=}")
 
     def enterShapeSpec(self, ctx: TwoDimParser.ShapeSpecContext):
         for i, var_name in enumerate(ctx.IDENTIFIER()):

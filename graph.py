@@ -15,6 +15,10 @@ class RedundantRelationError(NameError):
     pass
 
 
+class UndefinedRelationError(ValueError):
+    pass
+
+
 class Shape(Enum):
     SQUARE = 1
     CIRCLE = 2
@@ -36,10 +40,6 @@ class Shape(Enum):
             return Shape.SHAPE
         else:
             raise UndefinedShapeError
-
-
-class UndefinedRelationError(ValueError):
-    pass
 
 
 class Relation(Enum):
@@ -152,11 +152,27 @@ class Vertex:
             v.updated = True
             v.update_peers()
 
-    def is_left(self, v) -> bool:
-        return self.x <= v.x - self.width
+    def is_left(self, other) -> bool:
+        return self.x <= other.x - self.width
 
-    def is_right(self, v) -> bool:
-        return self.x >= v.x + v.width
+    def is_right(self, other) -> bool:
+        return self.x >= other.x + other.width
+
+    def to_left_of(self, other):
+        """
+        Move this vertex to the left side of other vertex
+        :param other:
+        :return:
+        """
+        self.x = other.x - self.width
+
+    def to_right_of(self, other):
+        """
+        Move this vertex to the right side of other vertex
+        :param other:
+        :return:
+        """
+        self.x = other.x + other.width
 
     def add_neighbour(self, v, relation: Relation):
         # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph at all times
@@ -198,19 +214,24 @@ class Vertex:
 class Graph:
     def __init__(self, x=0, y=0, width=0, height=0):
         self.vertices: Set[Vertex] = set()  # all unique vertices in a graph
+
+        # Position of the top-left corner of this graph's bounding box
         self.x = x
         self.y = y
+
+        # Width and height of this graph's bounding box (width in the widest point and height in the highest point)
         self.width = width
         self.height = height
 
-        self.relation_matrix_horizontal: Dict[Vertex, Dict[Vertex, Relation]] = dict()  # all horizontal relations in the shape graph
+        self.relation_matrix_horizontal: Dict[
+            Vertex, Dict[Vertex, Relation]] = dict()  # all horizontal relations in the shape graph
 
     def add_vertex(self, v: Vertex):
         if v not in self.vertices:
-            # Add all relations to other vertices for the new vertex for all relation matrices
+            # Add relations between this new vertex and other old vertices
             self.relation_matrix_horizontal[v] = {other_v: Relation.UNRELATED for other_v in self.vertices}
 
-            # Add new vertex relation for all other vertices in all relation matrices
+            # Add relations between other old vertices and this new vertex
             for key in self.relation_matrix_horizontal.keys():
                 if key is not v:
                     self.relation_matrix_horizontal[key][v] = Relation.UNRELATED
@@ -220,6 +241,12 @@ class Graph:
 
             # Give the vertex a reference to this Graph
             v.graph = self
+
+            if v.x < v.graph.x:
+                self._update_left_boundary(v)
+            # TODO: Add vertical checks
+            if v.x + v.width > v.graph.x + v.graph.width:
+                self._update_right_boundary(v)
 
     def add_relation(self, v_from: Vertex, v_to: Vertex, r: Relation):
         """
@@ -231,39 +258,26 @@ class Graph:
 
         :return:
         """
-        if v_from is None or v_to is None:
+        # Both shapes should have already been added to this graph before defining relations between them
+        if v_from is None or v_to is None or v_from not in self.vertices or v_to not in self.vertices:
             raise UndeclaredShapeError
 
         if v_from is v_to:
             raise RedundantRelationError
 
-        # TODO: Implement incidence matrices for other relations
-        if r not in (Relation.LEFT, Relation.RIGHT):
-            # TODO: Change this when working on other types of relations
+        # Modify relation in respective matrix; note that you need to modify it for both vertices
+        if r in (Relation.LEFT, Relation.RIGHT):
+            self.relation_matrix_horizontal[v_from][v_to] = r
+            self.relation_matrix_horizontal[v_to][v_from] = -r
+
+            # Adjust shape positions in X axiss
+            self.sort_horizontal()
+            # TODO: Implement incidence matrices for other relations
+        else:
             return
 
-        # Check if at least one of the shapes is a part of this graph, otherwise throw error
-        if v_from not in self.vertices and v_to not in self.vertices:
-            raise UndeclaredShapeError
-
-        # Handle shapes from different graphs
-        if v_from.graph is not v_to.graph:
-            # TODO: Support relations between 2 graphs;
-            if v_from.graph is self:
-                self.merge_with(v_to.graph)
-
-            elif v_to.graph is self:
-                self.merge_with(v_from.graph)
-            else:
-                # Just to be safe; this case should be handled in the previous checks
-                raise UndeclaredShapeError
-
-        # Modify relation in respective matrix; note that you need to modify it for both vertices
-        self.relation_matrix_horizontal[v_from][v_to] = r
-        self.relation_matrix_horizontal[v_to][v_from] = -r
-
-        # Give vertex info about new neighbour
         # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph
+        # Give vertex info about new neighbour
         v_from.add_neighbour(v_to, r)
 
     def print_relations(self, v: Vertex) -> None:
@@ -277,9 +291,11 @@ class Graph:
                 vertex_relation = relation
                 print(f"{v2.shape}:{vertex_name} {vertex_relation}")
 
-    def merge_with(self, other):
+    def merge_with(self, other, r: Relation = Relation.UNRELATED):
+        # TODO: Parameter "r" taken into account (as stated in docstring)
         """
         Merge vertices and relations of the other graph into this one
+        :param r: [optional] Make all self.vertices satisfy relation "r" with all other.vertices
         :param other: Other Graph
         :return:
         """
@@ -291,6 +307,10 @@ class Graph:
         for v1, relation_dict in other.relation_matrix_horizontal.items():
             for v2, relation in relation_dict.items():
                 self.add_relation(v1, v2, relation)
+
+        # Clear vertex data from other Graph (they are now a part of this one)
+        other.vertices.clear()
+        other.relation_matrix_horizontal.clear()
 
     def find_vertex(self, vertex_name: str) -> Vertex:
         for vertex in self.vertices:
@@ -305,7 +325,7 @@ class Graph:
         """
         # TODO: Return a set of changes that need to be applied in order to make this Graph valid
         for v1, relation_map in self.relation_matrix_horizontal.items():
-            for v2, relation in relation_map:
+            for v2, relation in relation_map.items():
                 if relation is Relation.LEFT:
                     v1.is_left(v2)
                 elif relation is Relation.RIGHT:
@@ -313,9 +333,75 @@ class Graph:
         return
         return (v1, v2, current_relation, desired_relation)
 
-    def center(self):
+    def sort_horizontal(self):
         """
-        Shift all shapes of the graph equally so the bounding box of this graph is centered in its parent
+        Make sure all horizontal relations are valid
         :return:
         """
-        pass
+        for v1, relation_map in self.relation_matrix_horizontal.items():
+            for v2, relation in relation_map.items():
+                v2_was_leftmost = self.x == v2.x
+                v2_was_rightmost = self.x + self.width == v2.x + v2.width
+
+                # ALWAYS MOVE THE OTHER VERTEX
+                if relation is Relation.LEFT and not v1.is_left(v2):
+                    v2.to_right_of(v1)
+                elif relation is Relation.RIGHT and not v1.is_right(v2):
+                    v2.to_left_of(v1)
+
+                # UPDATE GRAPH BOUNDING BOX VALUES
+                if v2.x + v2.width > self.x + self.width:
+                    # Expand right
+                    self._update_right_boundary(v2)
+                if v2.x < self.x:
+                    # Expand left
+                    self._update_left_boundary(v2)
+
+                if v2_was_leftmost and v2.x > self.x:
+                    # Shrink from left
+                    self._update_left_boundary(v2)
+                if v2_was_rightmost and v2.x + v2.width < self.x + self.width:
+                    # Shrink from right
+                    self._update_right_boundary(v2)
+
+    def _update_left_boundary(self, v: Vertex):
+        """
+        Only call on vertices that used to be left-most vertices of the graph; helper method of sort_horizontal()
+        :param v: Vertex that is violating the left boundary
+        :return:
+        """
+        diff = v.x - self.x
+        self.width -= diff
+        self.x += diff
+
+    def _update_right_boundary(self, v: Vertex):
+        """
+        Only call on vertices that used to be right-most vertices of the graph; helper method of sort_horizontal()
+
+        :param v: Vertex that is violating the right boundary
+        :return:
+        """
+        diff = (v.x + v.width) - (self.x + self.width)
+        self.width += diff
+
+    def move_horizontal(self, dist: int):
+        """
+        Shift all shapes by the given distance in the X axis.
+
+        :param dist: Positive integer to move right, negative to move left
+        :return:
+        """
+        for v in self.vertices:
+            v.x += dist
+        self.x += dist
+
+    def move_vertical(self, dist: int):
+        """
+        Shift all shapes by the given distance in the Y axis.
+
+        :param dist: Positive integer to move down, negative to move up
+        :return:
+        """
+        for v in self.vertices:
+            v.y += dist
+        self.y += dist

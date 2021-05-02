@@ -1,9 +1,12 @@
 #viewport 1000 1000;
-rect A [40%, 40%];
-rect C [50%, 50%];
-rect D [30%];
 
-C left A;
+rect A [5%];
+rect B [10%];
+rect C [20%];
+rect D [50%];
+
+B left A;
+C left B;
 D left C;
 D right A;
 
