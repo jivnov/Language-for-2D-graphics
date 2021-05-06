@@ -70,6 +70,7 @@ statementList
 
 statement
     : declaration
+    |functionDecl
     | simpleStmt
     | block
     | ifStmt
