@@ -5,12 +5,12 @@ rect B [10%];
 rect C [20%];
 rect D [50%];
 
-func E(rect M, N){
+func E(rect M, N, P){
     N left M;
+    P left N;
 }
 
-E(A, B);
-C left B;
+E(A, B, C);
 D left C;
 D right A;
 

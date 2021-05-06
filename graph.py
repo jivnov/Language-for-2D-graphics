@@ -211,6 +211,7 @@ class Vertex:
             self.UNDER.add(v)
             v.ON.add(self)
         else:
+            print("rel: ", self.name, v.name, relation)
             raise UndefinedRelationError()
 
     def remove_neighbour(self, neighbour):
@@ -449,9 +450,10 @@ class Graph:
                     if v_to == vertex_to_replace:
                         rel = self.relation_matrix_horizontal[v_from][v_to]
                         self.add_relation(v_from = v_from, v_to = new_vertex, r = rel)
-                        v_from.add_neighbour(new_vertex, rel)
-                        v_from.remove_neighbour(vertex_to_replace)
-                        del self.relation_matrix_horizontal[v_from][vertex_to_replace]
+                        if rel != Relation.UNRELATED:
+                            v_from.add_neighbour(new_vertex, rel)
+                            v_from.remove_neighbour(vertex_to_replace)
+                        self.relation_matrix_horizontal[v_from].pop(vertex_to_replace)
 
         self.vertices.remove(vertex_to_replace)
         self.relation_matrix_horizontal.pop(vertex_to_replace)
@@ -478,12 +480,6 @@ class Graph:
 
         new_vertex.uid = vertex_to_replace.uid
         new_vertex.graph = vertex_to_replace.graph
-
-        new_vertex.width = vertex_to_replace.width
-        new_vertex.height = vertex_to_replace.height
-
-        new_vertex.x = vertex_to_replace.x
-        new_vertex.y = vertex_to_replace.y
-
+        
         new_vertex.adjust_size_based_on_shape()
 

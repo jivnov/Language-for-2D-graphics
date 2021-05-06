@@ -13,7 +13,9 @@ from TwoDimParserListener import TwoDimParserListener
 
 def center_graph(d2d: drawing.Drawing2d, g: graph.Graph):
     if g.x != (desired_x := (d2d.viewport_width // 2 - g.width // 2)):
+        print(f"{g.width=} {d2d.viewport_width}")
         g.move_horizontal(desired_x - g.x)
+        print(f"{g.x=} {desired_x}")
     # TODO: Add vertical centering
 
 class SecondPassTwoDimParserListener(TwoDimParserListener):
@@ -64,7 +66,6 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
 
     def enterFunctionDecl(self, ctx: TwoDimParser.FunctionDeclContext):
         del ctx.children[len(ctx.children)-1]
-        #ctx.children = []
         print(ctx.children)
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
