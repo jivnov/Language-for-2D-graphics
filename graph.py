@@ -321,7 +321,7 @@ class Graph:
             for v2, relation in self.relation_matrix_horizontal[v].items():
                 vertex_name = v2.name
                 vertex_relation = relation
-                print(f"{v2.shape}:{vertex_name} {vertex_relation}")
+                print(f"{v2.shape}:{vertex_name}")
 
     def merge_with(self, other, r: Relation = Relation.UNRELATED):
         # TODO: Parameter "r" taken into account (as stated in docstring)

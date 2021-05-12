@@ -1,17 +1,16 @@
 #viewport 1000 1000;
 
-rect A [5%];
-rect B [10%];
-rect C [20%];
-rect D [50%];
+rect A [50%];
 
-E(A, B, C);
-D left C;
-D right A;
+E(A);
 
-func E(rect M, N, P){
-    N left M;
-    P left N;
-}
+func E(rect M){
+    //TODO scope wewnetrzny
+    rect R [5%];
+    square Sq [30%];
+
+    Sq left M;
+    R right M;
+};
 
 draw A;

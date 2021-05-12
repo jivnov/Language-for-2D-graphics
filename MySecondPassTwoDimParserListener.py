@@ -13,9 +13,7 @@ from TwoDimParserListener import TwoDimParserListener
 
 def center_graph(d2d: drawing.Drawing2d, g: graph.Graph):
     if g.x != (desired_x := (d2d.viewport_width // 2 - g.width // 2)):
-        print(f"{g.width=} {d2d.viewport_width}")
         g.move_horizontal(desired_x - g.x)
-        print(f"{g.x=} {desired_x}")
     # TODO: Add vertical centering
 
 class SecondPassTwoDimParserListener(TwoDimParserListener):
@@ -46,7 +44,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             # TODO
             # At the moment assuming SIZE is the only argument
             self.relations_graph.add_vertex(
-                graph.Vertex(parent_graph=self.relations_graph, var_name=var_name, shape=ctx.typeName().getText(),
+                graph.Vertex(parent_graph=self.relations_graph, var_name=var_name.getText(), shape=ctx.typeName().getText(),
                              args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
             )
 
@@ -73,7 +71,8 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         args_for_check = []
         args_for_call = []
 
-        argument_ids = [opName.IDENTIFIER() for opName in ctx.operandName()]
+        argument_ids = [opName.IDENTIFIER().getText() for opName in ctx.operandName()]
+
         for id in argument_ids:
             v = self.relations_graph.find_vertex(id)
             shape = v.shape

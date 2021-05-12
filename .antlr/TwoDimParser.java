@@ -1015,6 +1015,9 @@ public class TwoDimParser extends TwoDimParserBase {
 		public FunctionDeclContext functionDecl() {
 			return getRuleContext(FunctionDeclContext.class,0);
 		}
+		public FunctionCallContext functionCall() {
+			return getRuleContext(FunctionCallContext.class,0);
+		}
 		public SimpleStmtContext simpleStmt() {
 			return getRuleContext(SimpleStmtContext.class,0);
 		}
@@ -1026,9 +1029,6 @@ public class TwoDimParser extends TwoDimParserBase {
 		}
 		public SwitchStmtContext switchStmt() {
 			return getRuleContext(SwitchStmtContext.class,0);
-		}
-		public FunctionCallContext functionCall() {
-			return getRuleContext(FunctionCallContext.class,0);
 		}
 		public StatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1061,35 +1061,35 @@ public class TwoDimParser extends TwoDimParserBase {
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(211);
-				simpleStmt();
+				functionCall();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
 				setState(212);
-				block();
+				simpleStmt();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
 				setState(213);
-				ifStmt();
+				block();
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(214);
-				switchStmt();
+				ifStmt();
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(215);
-				functionCall();
+				switchStmt();
 				}
 				break;
 			}
@@ -2507,8 +2507,8 @@ public class TwoDimParser extends TwoDimParserBase {
 		"\3\2\2\2\u00ca\u00cb\7!\2\2\u00cb\35\3\2\2\2\u00cc\u00cd\5 \21\2\u00cd"+
 		"\u00ce\5R*\2\u00ce\u00d0\3\2\2\2\u00cf\u00cc\3\2\2\2\u00d0\u00d1\3\2\2"+
 		"\2\u00d1\u00cf\3\2\2\2\u00d1\u00d2\3\2\2\2\u00d2\37\3\2\2\2\u00d3\u00db"+
-		"\5\6\4\2\u00d4\u00db\5\f\7\2\u00d5\u00db\5\"\22\2\u00d6\u00db\5\34\17"+
-		"\2\u00d7\u00db\5,\27\2\u00d8\u00db\5.\30\2\u00d9\u00db\5\24\13\2\u00da"+
+		"\5\6\4\2\u00d4\u00db\5\f\7\2\u00d5\u00db\5\24\13\2\u00d6\u00db\5\"\22"+
+		"\2\u00d7\u00db\5\34\17\2\u00d8\u00db\5,\27\2\u00d9\u00db\5.\30\2\u00da"+
 		"\u00d3\3\2\2\2\u00da\u00d4\3\2\2\2\u00da\u00d5\3\2\2\2\u00da\u00d6\3\2"+
 		"\2\2\u00da\u00d7\3\2\2\2\u00da\u00d8\3\2\2\2\u00da\u00d9\3\2\2\2\u00db"+
 		"!\3\2\2\2\u00dc\u00e0\5$\23\2\u00dd\u00e0\5(\25\2\u00de\u00e0\5\26\f\2"+

@@ -111,8 +111,8 @@ def serializedATN():
         buf.write("\2\u00cd\u00ce\5R*\2\u00ce\u00d0\3\2\2\2\u00cf\u00cc\3")
         buf.write("\2\2\2\u00d0\u00d1\3\2\2\2\u00d1\u00cf\3\2\2\2\u00d1\u00d2")
         buf.write("\3\2\2\2\u00d2\37\3\2\2\2\u00d3\u00db\5\6\4\2\u00d4\u00db")
-        buf.write("\5\f\7\2\u00d5\u00db\5\"\22\2\u00d6\u00db\5\34\17\2\u00d7")
-        buf.write("\u00db\5,\27\2\u00d8\u00db\5.\30\2\u00d9\u00db\5\24\13")
+        buf.write("\5\f\7\2\u00d5\u00db\5\24\13\2\u00d6\u00db\5\"\22\2\u00d7")
+        buf.write("\u00db\5\34\17\2\u00d8\u00db\5,\27\2\u00d9\u00db\5.\30")
         buf.write("\2\u00da\u00d3\3\2\2\2\u00da\u00d4\3\2\2\2\u00da\u00d5")
         buf.write("\3\2\2\2\u00da\u00d6\3\2\2\2\u00da\u00d7\3\2\2\2\u00da")
         buf.write("\u00d8\3\2\2\2\u00da\u00d9\3\2\2\2\u00db!\3\2\2\2\u00dc")
@@ -1397,6 +1397,10 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getTypedRuleContext(TwoDimParser.FunctionDeclContext,0)
 
 
+        def functionCall(self):
+            return self.getTypedRuleContext(TwoDimParser.FunctionCallContext,0)
+
+
         def simpleStmt(self):
             return self.getTypedRuleContext(TwoDimParser.SimpleStmtContext,0)
 
@@ -1411,10 +1415,6 @@ class TwoDimParser ( TwoDimParserBase ):
 
         def switchStmt(self):
             return self.getTypedRuleContext(TwoDimParser.SwitchStmtContext,0)
-
-
-        def functionCall(self):
-            return self.getTypedRuleContext(TwoDimParser.FunctionCallContext,0)
 
 
         def getRuleIndex(self):
@@ -1454,31 +1454,31 @@ class TwoDimParser ( TwoDimParserBase ):
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
                 self.state = 211
-                self.simpleStmt()
+                self.functionCall()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
                 self.state = 212
-                self.block()
+                self.simpleStmt()
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
                 self.state = 213
-                self.ifStmt()
+                self.block()
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 214
-                self.switchStmt()
+                self.ifStmt()
                 pass
 
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
                 self.state = 215
-                self.functionCall()
+                self.switchStmt()
                 pass
 
 

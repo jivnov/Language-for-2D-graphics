@@ -70,12 +70,12 @@ statementList
 
 statement
     : declaration
-    |functionDecl
+    | functionDecl
+    | functionCall
     | simpleStmt
     | block
     | ifStmt
     | switchStmt
-    | functionCall
     ;
 
 simpleStmt

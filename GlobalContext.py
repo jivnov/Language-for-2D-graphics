@@ -75,8 +75,8 @@ class GlobalContext:
         f = self._find_function_by_name(name)
         graph = Graph()
 
-        for i, name in enumerate(f.args_names):
-            graph.add_vertex(Vertex(graph, name, args[i].shape))
+        for i, vertex_name in enumerate(f.args_names):
+            graph.add_vertex(Vertex(graph, vertex_name, args[i].shape))
 
         printer = FunctionParserListener(global_context = self, relations_graph = graph)
         walker = ParseTreeWalker()
@@ -84,10 +84,11 @@ class GlobalContext:
 
         for i in range(len(f.args_names)):
             graph.replace_vertex(vertex_to_replace = graph.find_vertex(f.args_names[i]), new_vertex = args[i])
+        
+        for v in list(graph.vertices):
+            if v.name not in [_.name for _ in list(args)]:
+                v.name = f"{name}_{v.name}"
 
-        for v in graph.vertices:
-            graph.print_relations(v)
-            
         return graph
 
     

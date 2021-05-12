@@ -22,7 +22,7 @@ class FunctionParserListener(TwoDimParserListener):
             # TODO
             # At the moment assuming SIZE is the only argument
             self.relations_graph.add_vertex(
-                graph.Vertex(parent_graph=self.relations_graph, var_name=var_name, shape=ctx.typeName().getText(),
+                graph.Vertex(parent_graph=self.relations_graph, var_name=var_name.getText(), shape=ctx.typeName().getText(),
                              args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
             )
 
@@ -40,7 +40,9 @@ class FunctionParserListener(TwoDimParserListener):
         #checking function call for correctness
         args_for_check = []
         args_for_call = []
-        argument_ids = [opName.IDENTIFIER() for opName in ctx.operandName()]
+
+        argument_ids = [opName.IDENTIFIER().getText() for opName in ctx.operandName()]
+
         for id in argument_ids:
             v = self.relations_graph.find_vertex(id)
             shape = v.shape
@@ -57,6 +59,8 @@ class FunctionParserListener(TwoDimParserListener):
         if not self.context.check_call(function_called):
             raise FunctionSignatureError(function_called.name)
 
-        self.context.call_function(name = ctx.IDENTIFIER(), args = args_for_call)
+        function_result = self.context.call_function(parser = self.parser, name = ctx.IDENTIFIER(), args = args_for_call)   
+ 
+        self.relations_graph.merge_with(function_result)
         
 
