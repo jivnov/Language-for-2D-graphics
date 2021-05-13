@@ -151,18 +151,27 @@ class Vertex:
         if self.shape == Shape.SQUARE or self.shape == Shape.CIRCLE:
             self.bb_h = self.bb_w = min(self.bb_h, self.bb_w)
 
-    def update_peers(self):
-        if self.updated:
-            return
-        for v in self.LEFT:
-            v.x = self.x - v.width
-            v.updated = True
-            v.update_peers()
-        for v in self.RIGHT:
-            v.x = self.x + self.width
-            v.updated = True
-            v.update_peers()
+    # def update_peers(self):
+    #     if self.updated:
+    #         return
+    #     for v in self.LEFT:
+    #         v.x = self.x - v.width
+    #         v.updated = True
+    #         v.update_peers()
+    #     for v in self.RIGHT:
+    #         v.x = self.x + self.width
+    #         v.updated = True
+    #         v.update_peers()
+    #     for v in self.TOP:
+    #         v.y = self.y - v.height
+    #         v.updated = True
+    #         v.update_peers()
+    #     for v in self.BOT:
+    #         v.y = self.y + self.height
+    #         v.updated = True
+    #         v.update_peers()
 
+    # HORIZONTAL RELATIONS
     def is_left(self, other) -> bool:
         return self.x <= other.x - self.width
 
@@ -185,6 +194,29 @@ class Vertex:
         """
         self.x = other.x + other.width
 
+    # VERTICAL RELATIONS
+    def is_top(self, other) -> bool:
+        return self.y <= other.y - self.height
+
+    def is_bot(self, other) -> bool:
+        return self.y >= other.y + other.height
+
+    def to_top_of(self, other):
+        """
+        Move this vertex to the left side of other vertex
+        :param other:
+        :return:
+        """
+        self.y = other.y - self.height
+
+    def to_bot_of(self, other):
+        """
+        Move this vertex to the right side of other vertex
+        :param other:
+        :return:
+        """
+        self.y = other.y + other.height
+
     def add_neighbour(self, v, relation: Relation):
         # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph at all times
         """
@@ -202,22 +234,21 @@ class Vertex:
         elif relation == Relation.TOP:
             v.TOP.add(self)
             self.BOT.add(v)
-        # TODO: Rewrite below relations to conform to this method's docs in "param: relation"
         elif relation == Relation.BOT:
-            self.BOT.add(v)
-            v.TOP.add(self)
+            v.BOT.add(self)
+            self.TOP.add(v)
         elif relation == Relation.IN:
-            self.IN = v
-            v.CONTAINED.add(self)
-        elif relation == Relation.CONTAINED:
-            self.CONTAINED.add(v)
             v.IN = self
+            self.CONTAINED.add(v)
+        elif relation == Relation.CONTAINED:
+            v.CONTAINED.add(self)
+            self.IN = v
         elif relation == Relation.ON:
-            self.ON.add(v)
-            v.UNDER.add(self)
-        elif relation == Relation.UNDER:
-            self.UNDER.add(v)
             v.ON.add(self)
+            self.UNDER.add(v)
+        elif relation == Relation.UNDER:
+            v.UNDER.add(self)
+            self.ON.add(v)
         else:
             print("rel: ", self.name, v.name, relation)
             raise UndefinedRelationError()
@@ -232,7 +263,6 @@ class Vertex:
         elif neighbour in self.TOP:
             self.TOP.remove(neighbour)
             neighbour.BOT.remove(self)
-        # TODO: Rewrite below relations to conform to this method's docs in "param: relation"
         elif neighbour in self.BOT:
             self.BOT.remove(neighbour)
             neighbour.TOP.remove(self)
@@ -265,15 +295,23 @@ class Graph:
         self.relation_matrix_horizontal: Dict[
             Vertex, Dict[Vertex, Relation]] = dict()  # all horizontal relations in the shape graph
 
+        self.relation_matrix_vertical: Dict[
+            Vertex, Dict[Vertex, Relation]] = dict()  # all vertical relations in the shape graph
+
     def add_vertex(self, v: Vertex):
         if v not in self.vertices:
             # Add relations between this new vertex and other old vertices
             self.relation_matrix_horizontal[v] = {other_v: Relation.UNRELATED for other_v in self.vertices}
+            self.relation_matrix_vertical[v] = {other_v: Relation.UNRELATED for other_v in self.vertices}
 
             # Add relations between other old vertices and this new vertex
             for key in self.relation_matrix_horizontal.keys():
                 if key is not v:
                     self.relation_matrix_horizontal[key][v] = Relation.UNRELATED
+
+            for key in self.relation_matrix_vertical.keys():
+                if key is not v:
+                    self.relation_matrix_vertical[key][v] = Relation.UNRELATED
 
             # Add new vertex to vertices set
             self.vertices.add(v)
@@ -281,11 +319,17 @@ class Graph:
             # Give the vertex a reference to this Graph
             v.graph = self
 
+            # GRAPH HORIZONTAL CHANGES
             if v.x < v.graph.x:
                 self._update_left_boundary(v)
-            # TODO: Add vertical checks
             if v.x + v.width > v.graph.x + v.graph.width:
                 self._update_right_boundary(v)
+
+            # GRAPH VERTICAL CHANGES
+            if v.y < v.graph.y:
+                self._update_top_boundary(v)
+            if v.y + v.height > v.graph.y + v.graph.height:
+                self._update_bot_boundary(v)
 
     def add_relation(self, v_from: Vertex, v_to: Vertex, r: Relation):
         """
@@ -317,6 +361,15 @@ class Graph:
 
             # Adjust shape positions in X axis
             self.sort_horizontal()
+        elif r in (Relation.TOP, Relation.BOT):
+            self.relation_matrix_vertical[v_from][v_to] = r
+            self.relation_matrix_vertical[v_to][v_from] = -r
+
+            if self._invalid_vertical_relations():
+                raise CyclicRelationsError(f"Relation {r=} between {v_from.name=} and {v_to.name=} causes a cycle in vertical relations")
+
+            # Adjust shape positions in X axis
+            self.sort_vertical()
             # TODO: Implement incidence matrices for other relations
         else:
             return
@@ -325,7 +378,7 @@ class Graph:
         # Give vertex info about new neighbour
         v_from.add_neighbour(v_to, r)
 
-    def _is_cyclic_util(self, v: Vertex, visited: Dict[Vertex, bool], rec_stack: Dict[Vertex, bool]) -> bool:
+    def _is_cyclic_horizontal_util(self, v: Vertex, visited: Dict[Vertex, bool], rec_stack: Dict[Vertex, bool]) -> bool:
         """
         Visit vertex "v" and check if any neighbour was visited previously
         :param v: Vertex to check
@@ -344,7 +397,7 @@ class Graph:
         # NOTE: Only check LEFT relation
         for neighbour in (neigh for neigh, relation in self.relation_matrix_horizontal[v].items() if relation == Relation.LEFT):
             if not visited[neighbour]:
-                if self._is_cyclic_util(neighbour, visited, rec_stack):
+                if self._is_cyclic_horizontal_util(neighbour, visited, rec_stack):
                     return True
             elif rec_stack[neighbour]:
                 return True
@@ -363,7 +416,49 @@ class Graph:
         rec_stack = {v: False for v in self.vertices}
         for node in self.vertices:
             if not visited[node]:
-                if self._is_cyclic_util(node, visited, rec_stack):
+                if self._is_cyclic_horizontal_util(node, visited, rec_stack):
+                    return True
+        return False
+
+    def _is_cyclic_vertical_util(self, v: Vertex, visited: Dict[Vertex, bool], rec_stack: Dict[Vertex, bool]) -> bool:
+        """
+        Visit vertex "v" and check if any neighbour was visited previously
+        :param v: Vertex to check
+        :param visited: Dictionary of vertices, keys are vertices, values are True if visited
+        :param rec_stack: Keys are vertices, values are True if scheduled for visit
+        :return:
+        """
+        # Mark current node as visited and
+        # adds to recursion stack
+        visited[v] = True
+        rec_stack[v] = True
+
+        # Recur for all neighbours
+        # if any neighbour is visited and in
+        # rec_stack then graph is cyclic
+        # NOTE: Only check TOP relation
+        for neighbour in (neigh for neigh, relation in self.relation_matrix_vertical[v].items() if relation == Relation.TOP):
+            if not visited[neighbour]:
+                if self._is_cyclic_vertical_util(neighbour, visited, rec_stack):
+                    return True
+            elif rec_stack[neighbour]:
+                return True
+
+        # The node needs to be popped from
+        # recursion stack before function ends
+        rec_stack[v] = False
+        return False
+
+    def _invalid_vertical_relations(self) -> bool:
+        """
+        Check if there is a cycle in the vertical relations graph
+        :return: True if vertical relations graph is cyclic
+        """
+        visited = {v: False for v in self.vertices}
+        rec_stack = {v: False for v in self.vertices}
+        for node in self.vertices:
+            if not visited[node]:
+                if self._is_cyclic_vertical_util(node, visited, rec_stack):
                     return True
         return False
 
@@ -450,6 +545,37 @@ class Graph:
                     # Shrink from right
                     self._update_right_boundary(v2)
 
+    def sort_vertical(self):
+        """
+        Make sure all vertical relations are valid
+        :return:
+        """
+        for v1, relation_map in self.relation_matrix_vertical.items():
+            for v2, relation in relation_map.items():
+                v2_was_topmost = self.x == v2.x
+                v2_was_botmost = self.x + self.width == v2.x + v2.width
+
+                # ALWAYS MOVE THE OTHER VERTEX
+                if relation is Relation.TOP and not v1.is_top(v2):
+                    v2.to_bot_of(v1)
+                elif relation is Relation.BOT and not v1.is_bot(v2):
+                    v2.to_top_of(v1)
+
+                # UPDATE GRAPH BOUNDING BOX VALUES
+                if v2.x + v2.width > self.x + self.width:
+                    # Expand bot
+                    self._update_bot_boundary(v2)
+                if v2.x < self.x:
+                    # Expand top
+                    self._update_top_boundary(v2)
+
+                if v2_was_topmost and v2.x > self.x:
+                    # Shrink from top
+                    self._update_top_boundary(v2)
+                if v2_was_botmost and v2.x + v2.width < self.x + self.width:
+                    # Shrink from bot
+                    self._update_bot_boundary(v2)
+
     def _update_left_boundary(self, v: Vertex):
         """
         Only call on vertices that used to be left-most vertices of the graph; helper method of sort_horizontal()
@@ -469,6 +595,26 @@ class Graph:
         """
         diff = (v.x + v.width) - (self.x + self.width)
         self.width += diff
+
+    def _update_top_boundary(self, v: Vertex):
+        """
+        Only call on vertices that used to be top-most vertices of the graph; helper method of sort_vertical()
+        :param v: Vertex that is violating the top boundary
+        :return:
+        """
+        diff = v.y - self.y
+        self.height -= diff
+        self.y += diff
+
+    def _update_bot_boundary(self, v: Vertex):
+        """
+        Only call on vertices that used to be bottom-most vertices of the graph; helper method of sort_vertical()
+
+        :param v: Vertex that is violating the bottom boundary
+        :return:
+        """
+        diff = (v.y + v.height) - (self.y + self.height)
+        self.height += diff
 
     def move_horizontal(self, dist: int):
         """
@@ -492,7 +638,6 @@ class Graph:
             v.y += dist
         self.y += dist
 
-    
     def replace_vertex(self, vertex_to_replace: Vertex, new_vertex: Vertex):
         
         self._copy_contents(vertex_to_replace, new_vertex)
@@ -510,11 +655,27 @@ class Graph:
                             v_from.remove_neighbour(vertex_to_replace)
                         self.relation_matrix_horizontal[v_from].pop(vertex_to_replace)
 
+        for v_from in self.relation_matrix_vertical.keys():
+            if v_from != new_vertex and v_from in self.vertices:
+                for v_to in list(self.relation_matrix_vertical[v_from].keys()):
+                    if v_to == vertex_to_replace:
+                        rel = self.relation_matrix_vertical[v_from][v_to]
+                        self.add_relation(v_from = v_from, v_to = new_vertex, r = rel)
+                        if rel != Relation.UNRELATED:
+                            v_from.add_neighbour(new_vertex, rel)
+                            v_from.remove_neighbour(vertex_to_replace)
+                        self.relation_matrix_vertical[v_from].pop(vertex_to_replace)
+
+        # Remove from graph in general
         self.vertices.remove(vertex_to_replace)
+
+        # Remove from horizontal graph
         self.relation_matrix_horizontal.pop(vertex_to_replace)
         self.relation_matrix_horizontal[new_vertex].pop(vertex_to_replace)
 
-
+        # Remove from vertical graph
+        self.relation_matrix_vertical.pop(vertex_to_replace)
+        self.relation_matrix_vertical[new_vertex].pop(vertex_to_replace)
 
     def _copy_contents(self, vertex_to_replace: Vertex, new_vertex: Vertex):
 
