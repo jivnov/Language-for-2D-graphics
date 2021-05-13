@@ -44,6 +44,10 @@ parameterDecl
     : typeName identifierList?
     ;
 
+functionCall
+    : IDENTIFIER WS? L_PAREN WS? operandName (COMMA WS? operandName)* R_PAREN
+    ;
+
 drawClause
     : DRAW IDENTIFIER
     ;
@@ -66,6 +70,8 @@ statementList
 
 statement
     : declaration
+    | functionDecl
+    | functionCall
     | simpleStmt
     | block
     | ifStmt
@@ -150,6 +156,7 @@ expression
     : primaryExpr
     | relationExpr
     | primaryExpr ('+' | '-') primaryExpr
+    | functionCall
     ;
 
 primaryExpr

@@ -80,7 +80,7 @@ class Relation(Enum):
 
 
 class Vertex:
-    def __init__(self, parent_graph, var_name: str, shape: str, args: Any, content=None):
+    def __init__(self, parent_graph, var_name: str, shape, args: Any = None, content=None):
         # TODO: Every vertex begins as its own graph which then merges with other graphs through relations
         """
 
@@ -93,7 +93,10 @@ class Vertex:
         # DONE: Vertex should have a reference to its Graph to track some more "global" properties (e.x. the total
         # width and height of the drawing it is a part of)
         self.name = var_name
-        self.shape = Shape.from_string(shape)
+        if isinstance(shape, Shape):
+            self.shape = shape
+        else:
+            self.shape = Shape.from_string(shape)
         self.bb_w = 0.0
 
         self.updated = False
@@ -208,7 +211,35 @@ class Vertex:
             self.UNDER.add(v)
             v.ON.add(self)
         else:
+            print("rel: ", self.name, v.name, relation)
             raise UndefinedRelationError()
+
+    def remove_neighbour(self, neighbour):
+        if neighbour in self.LEFT:
+            self.LEFT.remove(neighbour)
+            neighbour.RIGHT.remove(self)
+        elif neighbour in self.RIGHT:
+            self.RIGHT.remove(neighbour)
+            neighbour.LEFT.remove(self)
+        elif neighbour in self.TOP:
+            self.TOP.remove(neighbour)
+            neighbour.BOT.remove(self)
+        # TODO: Rewrite below relations to conform to this method's docs in "param: relation"
+        elif neighbour in self.BOT:
+            self.BOT.remove(neighbour)
+            neighbour.TOP.remove(self)
+        elif neighbour == self.IN:
+            self.IN = None
+            neighbour.CONTAINED.remove(self)
+        elif neighbour in self.CONTAINED:
+            self.CONTAINED.remove(neighbour)
+            neighbour.IN = None
+        elif neighbour in self.ON:
+            self.ON.add(neighbour)
+            neighbour.UNDER.remove(self)
+        elif neighbour in self.UNDER:
+            self.UNDER.remove(neighbour)
+            neighbour.ON.remove(self)
 
 
 class Graph:
@@ -260,6 +291,7 @@ class Graph:
         """
         # Both shapes should have already been added to this graph before defining relations between them
         if v_from is None or v_to is None or v_from not in self.vertices or v_to not in self.vertices:
+            print(f"v_from: {v_from} {v_from.name}")
             raise UndeclaredShapeError
 
         if v_from is v_to:
@@ -289,7 +321,7 @@ class Graph:
             for v2, relation in self.relation_matrix_horizontal[v].items():
                 vertex_name = v2.name
                 vertex_relation = relation
-                print(f"{v2.shape}:{vertex_name} {vertex_relation}")
+                print(f"{v2.shape}:{vertex_name}")
 
     def merge_with(self, other, r: Relation = Relation.UNRELATED):
         # TODO: Parameter "r" taken into account (as stated in docstring)
@@ -330,7 +362,6 @@ class Graph:
                     v1.is_left(v2)
                 elif relation is Relation.RIGHT:
                     v1.is_right(v2)
-        return
         return (v1, v2, current_relation, desired_relation)
 
     def sort_horizontal(self):
@@ -405,3 +436,50 @@ class Graph:
         for v in self.vertices:
             v.y += dist
         self.y += dist
+
+    
+    def replace_vertex(self, vertex_to_replace: Vertex, new_vertex: Vertex):
+        
+        self._copy_contents(vertex_to_replace, new_vertex)
+
+        self.add_vertex(new_vertex)
+
+        for v_from in self.relation_matrix_horizontal.keys():
+            if v_from != new_vertex and v_from in self.vertices:
+                for v_to in list(self.relation_matrix_horizontal[v_from].keys()):
+                    if v_to == vertex_to_replace:
+                        rel = self.relation_matrix_horizontal[v_from][v_to]
+                        self.add_relation(v_from = v_from, v_to = new_vertex, r = rel)
+                        if rel != Relation.UNRELATED:
+                            v_from.add_neighbour(new_vertex, rel)
+                            v_from.remove_neighbour(vertex_to_replace)
+                        self.relation_matrix_horizontal[v_from].pop(vertex_to_replace)
+
+        self.vertices.remove(vertex_to_replace)
+        self.relation_matrix_horizontal.pop(vertex_to_replace)
+        self.relation_matrix_horizontal[new_vertex].pop(vertex_to_replace)
+
+
+
+    def _copy_contents(self, vertex_to_replace: Vertex, new_vertex: Vertex):
+
+        new_vertex.bb_w = vertex_to_replace.bb_w
+        new_vertex.bb_h = vertex_to_replace.bb_h
+
+        new_vertex.updated = vertex_to_replace.updated
+        new_vertex.drawn = vertex_to_replace.drawn
+        new_vertex.content = vertex_to_replace.content
+
+        new_vertex.LEFT = vertex_to_replace.LEFT
+        new_vertex.RIGHT = vertex_to_replace.RIGHT
+        new_vertex.TOP = vertex_to_replace.TOP
+        new_vertex.IN = vertex_to_replace.IN
+        new_vertex.CONTAINED = vertex_to_replace.CONTAINED
+        new_vertex.ON = vertex_to_replace.ON
+        new_vertex.UNDER = vertex_to_replace.UNDER
+
+        new_vertex.uid = vertex_to_replace.uid
+        new_vertex.graph = vertex_to_replace.graph
+        
+        new_vertex.adjust_size_based_on_shape()
+

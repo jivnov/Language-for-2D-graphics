@@ -37,7 +37,6 @@ class Drawing2d:
         #     # Determine drawing size (in px) using viewport dimensions only
         #     v.width = v.bb_w * self.viewport_width
         #     v.height = v.bb_h * self.viewport_height
-
         draw_shape = None
         draw_color = tuple(random.randint(0, 256) for _ in range(3))
         if v.shape == Shape.RECT:
