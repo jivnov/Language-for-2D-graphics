@@ -1,12 +1,7 @@
 import sys
 import drawing
 import graph
-from GlobalContext import GlobalContext, Function, FunctionSignatureError
-
-from antlr4 import *
-from antlr4.tree.Trees import Trees
-
-from TwoDimLexer import TwoDimLexer
+from GlobalContext import Function, FunctionSignatureError
 from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
 

@@ -1,14 +1,19 @@
 #viewport 1000 1000;
 
-rect A [50%];
+rect R [50%];
 
-E(A);
-
-func E(rect M){
-    //TODO scope wewnetrzny
-    rect R [15%];
+func SmallSquareRight(rect M){
+    rect R [5%];
     R right M;
-    E(R);
 };
 
-draw A;
+VerySmallSquareLeft(R);
+
+func VerySmallSquareLeft(rect M){
+    rect R [2%];
+    R left M;
+};
+
+SmallSquareRight(R);
+
+draw R;

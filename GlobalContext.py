@@ -2,7 +2,6 @@ from typing import List
 from graph import Shape, Graph, Vertex
 from FunctionParserListener import FunctionParserListener
 
-
 from antlr4 import *
 
 
@@ -25,7 +24,8 @@ class FunctionNotExistsError(Exception):
 
 
 class Function:
-    def __init__(self, name: str, args: List, args_names: List = None, body = None): #expecting to receive list of pairs [Shape, Int] where Int is a counter for provided shape
+    def __init__(self, name: str, args: List, args_names: List = None, body=None):
+        # expecting to receive list of pairs [Shape, Int] where Int is a counter for provided shape
         self.name = name
         self.args = []
         self.args_names = args_names
@@ -44,7 +44,7 @@ class Function:
             self.args.append((shape, count))
 
         self.body = body
-    
+
 
 class GlobalContext:
     def __init__(self):
@@ -74,26 +74,20 @@ class GlobalContext:
         for i, vertex_name in enumerate(f.args_names):
             graph.add_vertex(Vertex(graph, vertex_name, args[i].shape))
 
-        printer = FunctionParserListener(global_context = self, relations_graph = graph)
+        printer = FunctionParserListener(global_context=self, relations_graph=graph)
         walker = ParseTreeWalker()
         walker.walk(printer, f.body)
 
         for i in range(len(f.args_names)):
-            graph.replace_vertex(vertex_to_replace = graph.find_vertex(f.args_names[i]), new_vertex = args[i])
-        
-        for v in list(graph.vertices):
-            if v.name not in [_.name for _ in list(args)]:
-                v.name = f"{name}_{v.name}"
-                v.unreachable = True
+            graph.replace_vertex(vertex_to_replace=graph.find_vertex(f.args_names[i]), new_vertex=args[i])
+
+        for v in graph.vertices:
+            if v.unreachable:
+                v.name = f"{name}_{v.name}_{v.uid}"
 
         return graph
 
-    
     def _find_function_by_name(self, name: str):
         functions_list = list(self.functions_list)
         function_names = [str(f.name) for f in functions_list]
         return functions_list[function_names.index(str(name))]
-        
-
-
-        

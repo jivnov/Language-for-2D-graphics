@@ -439,9 +439,8 @@ class Graph:
             v.y += dist
         self.y += dist
 
-    
     def replace_vertex(self, vertex_to_replace: Vertex, new_vertex: Vertex):
-        
+
         self._copy_contents(vertex_to_replace, new_vertex)
 
         self.add_vertex(new_vertex)
@@ -451,7 +450,7 @@ class Graph:
                 for v_to in list(self.relation_matrix_horizontal[v_from].keys()):
                     if v_to == vertex_to_replace:
                         rel = self.relation_matrix_horizontal[v_from][v_to]
-                        self.add_relation(v_from = v_from, v_to = new_vertex, r = rel)
+                        self.add_relation(v_from=v_from, v_to=new_vertex, r=rel)
                         if rel != Relation.UNRELATED:
                             v_from.add_neighbour(new_vertex, rel)
                             v_from.remove_neighbour(vertex_to_replace)
@@ -460,8 +459,6 @@ class Graph:
         self.vertices.remove(vertex_to_replace)
         self.relation_matrix_horizontal.pop(vertex_to_replace)
         self.relation_matrix_horizontal[new_vertex].pop(vertex_to_replace)
-
-
 
     def _copy_contents(self, vertex_to_replace: Vertex, new_vertex: Vertex):
 
@@ -472,16 +469,22 @@ class Graph:
         new_vertex.drawn = vertex_to_replace.drawn
         new_vertex.content = vertex_to_replace.content
 
-        new_vertex.LEFT = vertex_to_replace.LEFT
-        new_vertex.RIGHT = vertex_to_replace.RIGHT
-        new_vertex.TOP = vertex_to_replace.TOP
-        new_vertex.IN = vertex_to_replace.IN
-        new_vertex.CONTAINED = vertex_to_replace.CONTAINED
-        new_vertex.ON = vertex_to_replace.ON
-        new_vertex.UNDER = vertex_to_replace.UNDER
+        #TODO: add IN relation
+
+        relation_set_pairs = zip(
+            [new_vertex.LEFT, new_vertex.RIGHT, new_vertex.TOP, new_vertex.BOT,
+             new_vertex.CONTAINED, new_vertex.ON, new_vertex.UNDER],
+            [vertex_to_replace.LEFT, vertex_to_replace.RIGHT, vertex_to_replace.TOP, vertex_to_replace.BOT,
+             vertex_to_replace.CONTAINED, vertex_to_replace.ON, vertex_to_replace.UNDER]
+        )
+
+        for new_relation, replaced_relation in relation_set_pairs:
+            if new_relation is not None:
+                new_relation.update(replaced_relation)
+            else:
+                new_relation = replaced_relation
 
         new_vertex.uid = vertex_to_replace.uid
         new_vertex.graph = vertex_to_replace.graph
-        
-        new_vertex.adjust_size_based_on_shape()
 
+        new_vertex.adjust_size_based_on_shape()
