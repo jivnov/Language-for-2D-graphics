@@ -5,10 +5,6 @@ from FunctionParserListener import FunctionParserListener
 
 from antlr4 import *
 
-from TwoDimLexer import TwoDimLexer
-from TwoDimParser import TwoDimParser
-from TwoDimParserListener import TwoDimParserListener
-from TwoDimParserVisitor import TwoDimParserVisitor
 
 class FunctionSignatureError(Exception):
 
@@ -88,6 +84,7 @@ class GlobalContext:
         for v in list(graph.vertices):
             if v.name not in [_.name for _ in list(args)]:
                 v.name = f"{name}_{v.name}"
+                v.unreachable = True
 
         return graph
 

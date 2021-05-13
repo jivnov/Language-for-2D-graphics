@@ -6,11 +6,9 @@ E(A);
 
 func E(rect M){
     //TODO scope wewnetrzny
-    rect R [5%];
-    square Sq [30%];
-
-    Sq left M;
+    rect R [15%];
     R right M;
+    E(R);
 };
 
 draw A;

@@ -59,12 +59,11 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             op1 = self.relations_graph.find_vertex(var_name1)
             op2 = self.relations_graph.find_vertex(var_name2)
             self.relations_graph.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-        except UndeclaredShapeError:
+        except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
 
     def enterFunctionDecl(self, ctx: TwoDimParser.FunctionDeclContext):
         del ctx.children[len(ctx.children)-1]
-        print(ctx.children)
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
         #checking function call for correctness
@@ -81,6 +80,11 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
                 args_for_check.append([shape, 1])
             else:
                 args_for_check[len(args_for_check) - 1][1] += 1
+
+            if (v.unreachable):
+                print(f"Undeclared shape {v.name}")
+                raise graph.UndeclaredShapeError
+                
 
             args_for_call.append(v)
 

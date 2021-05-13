@@ -138,6 +138,8 @@ class Vertex:
         self.x = (1 - self.bb_w) * 500
         self.y = (1 - self.bb_h) * 500
 
+        self.unreachable = False
+
     def adjust_size_based_on_shape(self):
         # Adjust Bounding Box fractional size based on shape
         if self.shape == Shape.SQUARE or self.shape == Shape.CIRCLE:

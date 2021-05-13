@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="1000" version="1.1" width="1000">
   <defs/>
-  <rect fill="rgb(52, 242, 128)" height="500.0" width="500.0" x="375.0" y="250.0"/>
-  <rect fill="rgb(179, 179, 113)" height="50.0" width="50.0" x="875.0" y="475.0"/>
-  <rect height="300.0" width="300.0" x="75.0" y="350.0"/>
+  <rect fill="rgb(219, 220, 84)" height="500.0" width="500.0" x="300.0" y="250.0"/>
+  <rect fill="rgb(14, 10, 92)" height="150.0" width="150.0" x="800.0" y="425.0"/>
 </svg>
