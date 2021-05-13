@@ -19,6 +19,14 @@ class UndefinedRelationError(ValueError):
     pass
 
 
+class RedefiningExplicitRelationError(ValueError):
+    pass
+
+
+class CyclicRelationsError(ValueError):
+    pass
+
+
 class Shape(Enum):
     SQUARE = 1
     CIRCLE = 2
@@ -286,12 +294,14 @@ class Graph:
         :param r:
 
         :raises UndeclaredShapeError
+        :raises RedundantRelationError
+        :raises CyclicRelationsError
 
         :return:
         """
         # Both shapes should have already been added to this graph before defining relations between them
         if v_from is None or v_to is None or v_from not in self.vertices or v_to not in self.vertices:
-            print(f"v_from: {v_from} {v_from.name}")
+            print(f"{v_from=} {v_to=}")
             raise UndeclaredShapeError
 
         if v_from is v_to:
@@ -302,7 +312,10 @@ class Graph:
             self.relation_matrix_horizontal[v_from][v_to] = r
             self.relation_matrix_horizontal[v_to][v_from] = -r
 
-            # Adjust shape positions in X axiss
+            if self._invalid_horizontal_relations():
+                raise CyclicRelationsError(f"Relation {r=} between {v_from.name=} and {v_to.name=} causes a cycle in horizontal relations")
+
+            # Adjust shape positions in X axis
             self.sort_horizontal()
             # TODO: Implement incidence matrices for other relations
         else:
@@ -311,6 +324,48 @@ class Graph:
         # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph
         # Give vertex info about new neighbour
         v_from.add_neighbour(v_to, r)
+
+    def _is_cyclic_util(self, v: Vertex, visited: Dict[Vertex, bool], rec_stack: Dict[Vertex, bool]) -> bool:
+        """
+        Visit vertex "v" and check if any neighbour was visited previously
+        :param v: Vertex to check
+        :param visited: Dictionary of vertices, keys are vertices, values are True if visited
+        :param rec_stack: Keys are vertices, values are True if scheduled for visit
+        :return:
+        """
+        # Mark current node as visited and
+        # adds to recursion stack
+        visited[v] = True
+        rec_stack[v] = True
+
+        # Recur for all neighbours
+        # if any neighbour is visited and in
+        # rec_stack then graph is cyclic
+        # NOTE: Only check LEFT relation
+        for neighbour in (neigh for neigh, relation in self.relation_matrix_horizontal[v].items() if relation == Relation.LEFT):
+            if not visited[neighbour]:
+                if self._is_cyclic_util(neighbour, visited, rec_stack):
+                    return True
+            elif rec_stack[neighbour]:
+                return True
+
+        # The node needs to be popped from
+        # recursion stack before function ends
+        rec_stack[v] = False
+        return False
+
+    def _invalid_horizontal_relations(self) -> bool:
+        """
+        Check if there is a cycle in the horizontal relations graph
+        :return: True if horizontal relations graph is cyclic
+        """
+        visited = {v: False for v in self.vertices}
+        rec_stack = {v: False for v in self.vertices}
+        for node in self.vertices:
+            if not visited[node]:
+                if self._is_cyclic_util(node, visited, rec_stack):
+                    return True
+        return False
 
     def print_relations(self, v: Vertex) -> None:
         # TODO generate SVG for provided parameters
