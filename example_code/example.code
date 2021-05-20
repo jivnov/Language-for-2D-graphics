@@ -5,13 +5,12 @@ rect R [50%];
 func SmallSquareRight(rect M){
     rect R [5%];
     R right M;
+    VerySmallSquareRight(R);
 };
 
-VerySmallSquareLeft(R);
-
-func VerySmallSquareLeft(rect M){
+func VerySmallSquareRight(rect M){
     rect R [2%];
-    R left M;
+    R right M;
 };
 
 SmallSquareRight(R);

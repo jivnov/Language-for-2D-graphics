@@ -1,7 +1,6 @@
-import sys
 import drawing
 import graph
-from GlobalContext import Function, FunctionSignatureError
+from Function import Function, FunctionSignatureError
 from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
 
@@ -88,6 +87,6 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         if not self.context.check_call(function_called):
             raise FunctionSignatureError(function_called.name)
 
-        function_result = self.context.call_function(parser = self.parser, name = ctx.IDENTIFIER(), args = args_for_call)   
+        function_result = self.context.call_function(global_graph=self.relations_graph, name = ctx.IDENTIFIER(), args = args_for_call)
  
         self.relations_graph.merge_with(function_result)
