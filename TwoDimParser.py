@@ -1,18 +1,14 @@
-# Generated from TwoDimParser.g4 by ANTLR 4.9.2
+# Generated from TwoDimParser.g4 by ANTLR 4.7.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
+from typing.io import TextIO
 import sys
-if sys.version_info[1] > 5:
-	from typing import TextIO
-else:
-	from typing.io import TextIO
 
 if __name__ is not None and "." in __name__:
     from .TwoDimParserBase import TwoDimParserBase
 else:
     from TwoDimParserBase import TwoDimParserBase
-
 
 def serializedATN():
     with StringIO() as buf:
@@ -350,15 +346,13 @@ class TwoDimParser ( TwoDimParserBase ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.9.2")
+        self.checkVersion("4.7.2")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
 
 
-
     class SourceFileContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -407,6 +401,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitSourceFile" ):
                 listener.exitSourceFile(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSourceFile" ):
+                return visitor.visitSourceFile(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -471,9 +471,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ViewportClauseContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -503,6 +501,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitViewportClause" ):
                 listener.exitViewportClause(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitViewportClause" ):
+                return visitor.visitViewportClause(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -528,9 +532,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class DeclarationContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -551,6 +553,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitDeclaration" ):
                 listener.exitDeclaration(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDeclaration" ):
+                return visitor.visitDeclaration(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -570,9 +578,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class IdentifierListContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -600,6 +606,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitIdentifierList" ):
                 listener.exitIdentifierList(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitIdentifierList" ):
+                return visitor.visitIdentifierList(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -633,9 +645,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExpressionListContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -664,6 +674,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitExpressionList" ):
                 listener.exitExpressionList(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpressionList" ):
+                return visitor.visitExpressionList(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -697,9 +713,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class FunctionDeclContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -729,6 +743,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitFunctionDecl" ):
                 listener.exitFunctionDecl(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitFunctionDecl" ):
+                return visitor.visitFunctionDecl(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -762,9 +782,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class SignatureContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -784,6 +802,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitSignature" ):
                 listener.exitSignature(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSignature" ):
+                return visitor.visitSignature(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -821,9 +845,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ParametersContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -858,6 +880,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitParameters" ):
                 listener.exitParameters(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitParameters" ):
+                return visitor.visitParameters(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -901,9 +929,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ParameterDeclContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -927,6 +953,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitParameterDecl" ):
                 listener.exitParameterDecl(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitParameterDecl" ):
+                return visitor.visitParameterDecl(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -956,9 +988,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class FunctionCallContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1062,9 +1092,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class DrawClauseContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1087,6 +1115,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitDrawClause" ):
                 listener.exitDrawClause(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitDrawClause" ):
+                return visitor.visitDrawClause(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1108,9 +1142,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ShapeDeclContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1131,6 +1163,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitShapeDecl" ):
                 listener.exitShapeDecl(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitShapeDecl" ):
+                return visitor.visitShapeDecl(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1150,9 +1188,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ShapeSpecContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1197,6 +1233,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitShapeSpec" ):
                 listener.exitShapeSpec(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitShapeSpec" ):
+                return visitor.visitShapeSpec(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1253,9 +1295,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class BlockContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1281,6 +1321,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitBlock" ):
                 listener.exitBlock(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBlock" ):
+                return visitor.visitBlock(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1312,9 +1358,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class StatementListContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1344,6 +1388,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitStatementList" ):
                 listener.exitStatementList(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitStatementList" ):
+                return visitor.visitStatementList(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1378,9 +1428,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class StatementContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1424,6 +1472,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitStatement" ):
                 listener.exitStatement(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitStatement" ):
+                return visitor.visitStatement(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1487,9 +1541,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class SimpleStmtContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1517,6 +1569,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitSimpleStmt" ):
                 listener.exitSimpleStmt(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSimpleStmt" ):
+                return visitor.visitSimpleStmt(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1556,9 +1614,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExpressionStmtContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1579,6 +1635,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitExpressionStmt" ):
                 listener.exitExpressionStmt(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpressionStmt" ):
+                return visitor.visitExpressionStmt(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1598,9 +1660,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ShapeArgumentsContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1641,6 +1701,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitShapeArguments" ):
                 listener.exitShapeArguments(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitShapeArguments" ):
+                return visitor.visitShapeArguments(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1722,9 +1788,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class AssignmentContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1752,6 +1816,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitAssignment" ):
                 listener.exitAssignment(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAssignment" ):
+                return visitor.visitAssignment(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1775,9 +1845,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class Assign_opContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1796,6 +1864,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitAssign_op" ):
                 listener.exitAssign_op(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitAssign_op" ):
+                return visitor.visitAssign_op(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1816,9 +1890,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class IfStmtContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1862,6 +1934,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitIfStmt" ):
                 listener.exitIfStmt(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitIfStmt" ):
+                return visitor.visitIfStmt(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -1918,9 +1996,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class SwitchStmtContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1941,6 +2017,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitSwitchStmt" ):
                 listener.exitSwitchStmt(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSwitchStmt" ):
+                return visitor.visitSwitchStmt(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -1960,9 +2042,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExprSwitchStmtContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2005,6 +2085,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitExprSwitchStmt" ):
                 listener.exitExprSwitchStmt(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprSwitchStmt" ):
+                return visitor.visitExprSwitchStmt(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2058,9 +2144,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExprCaseClauseContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2087,6 +2171,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitExprCaseClause" ):
                 listener.exitExprCaseClause(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprCaseClause" ):
+                return visitor.visitExprCaseClause(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2118,9 +2208,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExprSwitchCaseContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2146,6 +2234,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitExprSwitchCase" ):
                 listener.exitExprSwitchCase(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExprSwitchCase" ):
+                return visitor.visitExprSwitchCase(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2181,9 +2275,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class TypeNameContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2215,6 +2307,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitTypeName" ):
                 listener.exitTypeName(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitTypeName" ):
+                return visitor.visitTypeName(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2240,9 +2338,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class RelationDetailOpContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2264,6 +2360,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitRelationDetailOp" ):
                 listener.exitRelationDetailOp(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitRelationDetailOp" ):
+                return visitor.visitRelationDetailOp(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2290,9 +2392,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class SingleLevelRelationOpContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2321,6 +2421,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitSingleLevelRelationOp" ):
                 listener.exitSingleLevelRelationOp(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitSingleLevelRelationOp" ):
+                return visitor.visitSingleLevelRelationOp(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2346,9 +2452,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class MultiLevelRelationOpContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2373,6 +2477,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitMultiLevelRelationOp" ):
                 listener.exitMultiLevelRelationOp(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitMultiLevelRelationOp" ):
+                return visitor.visitMultiLevelRelationOp(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2399,9 +2509,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class RelationExprContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2436,6 +2544,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitRelationExpr" ):
                 listener.exitRelationExpr(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitRelationExpr" ):
+                return visitor.visitRelationExpr(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2486,9 +2600,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExpressionContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2525,6 +2637,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitExpression" ):
                 listener.exitExpression(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitExpression" ):
+                return visitor.visitExpression(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2580,9 +2698,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class PrimaryExprContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2603,6 +2719,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitPrimaryExpr" ):
                 listener.exitPrimaryExpr(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitPrimaryExpr" ):
+                return visitor.visitPrimaryExpr(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2622,9 +2744,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class OperandContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2658,6 +2778,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitOperand" ):
                 listener.exitOperand(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitOperand" ):
+                return visitor.visitOperand(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2700,9 +2826,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class LiteralContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2723,6 +2847,12 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitLiteral" ):
                 listener.exitLiteral(self)
 
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitLiteral" ):
+                return visitor.visitLiteral(self)
+            else:
+                return visitor.visitChildren(self)
+
 
 
 
@@ -2742,9 +2872,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class BasicLitContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2777,6 +2905,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitBasicLit" ):
                 listener.exitBasicLit(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitBasicLit" ):
+                return visitor.visitBasicLit(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2828,9 +2962,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class IntegerContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2852,6 +2984,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitInteger" ):
                 listener.exitInteger(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitInteger" ):
+                return visitor.visitInteger(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2878,9 +3016,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class OperandNameContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2899,6 +3035,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitOperandName" ):
                 listener.exitOperandName(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitOperandName" ):
+                return visitor.visitOperandName(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2919,9 +3061,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class String_Context(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2943,6 +3083,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitString_" ):
                 listener.exitString_(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitString_" ):
+                return visitor.visitString_(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -2969,9 +3115,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ArgumentsContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -2997,6 +3141,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitArguments" ):
                 listener.exitArguments(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitArguments" ):
+                return visitor.visitArguments(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
@@ -3028,9 +3178,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class EosContext(ParserRuleContext):
-        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -3052,6 +3200,12 @@ class TwoDimParser ( TwoDimParserBase ):
         def exitRule(self, listener:ParseTreeListener):
             if hasattr( listener, "exitEos" ):
                 listener.exitEos(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitEos" ):
+                return visitor.visitEos(self)
+            else:
+                return visitor.visitChildren(self)
 
 
 
