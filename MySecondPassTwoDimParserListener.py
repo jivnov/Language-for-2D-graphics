@@ -11,6 +11,7 @@ def center_graph(d2d: drawing.Drawing2d, g: graph.Graph):
         g.move_horizontal(desired_x - g.x)
     # TODO: Add vertical centering
 
+
 class SecondPassTwoDimParserListener(TwoDimParserListener):
 
     def __init__(self, global_context, parser):
@@ -27,9 +28,10 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
 
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
         self.relations_graph.print_relations(self.relations_graph.find_vertex(ctx.IDENTIFIER()))
-        center_graph(self.res, self.relations_graph)
+        self.relations_graph.center(self.res.viewport_width, self.res.viewport_height)
         self.res.draw(self.relations_graph.find_vertex(vertex_name = ctx.IDENTIFIER()))
         self.res.canvas.save(pretty = True)
+
         # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
         print(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")
         print(f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=}")
