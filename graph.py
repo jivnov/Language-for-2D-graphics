@@ -490,20 +490,6 @@ class Graph:
                 return vertex
         raise UndeclaredShapeError(vertex_name)
 
-    def check_horizontal(self) -> Tuple[Vertex, Vertex, Relation, Relation]:
-        """
-        Check if all relations in horizontal incidence matrix are valid
-        :return:
-        """
-        # TODO: Return a set of changes that need to be applied in order to make this Graph valid
-        for v1, relation_map in self.relation_matrix_horizontal.items():
-            for v2, relation in relation_map.items():
-                if relation is Relation.LEFT:
-                    v1.is_left(v2)
-                elif relation is Relation.RIGHT:
-                    v1.is_right(v2)
-        return (v1, v2, current_relation, desired_relation)
-
     def sort_horizontal(self):
         """
         Make sure all horizontal relations are valid
