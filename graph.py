@@ -319,17 +319,7 @@ class Graph:
             # Give the vertex a reference to this Graph
             v.graph = self
 
-            # GRAPH HORIZONTAL CHANGES
-            if v.x < v.graph.x:
-                self._update_left_boundary(v)
-            if v.x + v.width > v.graph.x + v.graph.width:
-                self._update_right_boundary(v)
-
-            # GRAPH VERTICAL CHANGES
-            if v.y < v.graph.y:
-                self._update_top_boundary(v)
-            if v.y + v.height > v.graph.y + v.graph.height:
-                self._update_bot_boundary(v)
+            self.update_position_and_size()
 
     def add_relation(self, v_from: Vertex, v_to: Vertex, r: Relation):
         """
@@ -498,7 +488,7 @@ class Graph:
         for vertex in self.vertices:
             if str(vertex.name) == str(vertex_name):
                 return vertex
-        raise UndeclaredShapeError
+        raise UndeclaredShapeError(vertex_name)
 
     def check_horizontal(self) -> Tuple[Vertex, Vertex, Relation, Relation]:
         """
@@ -531,19 +521,7 @@ class Graph:
                     v2.to_left_of(v1)
 
                 # UPDATE GRAPH BOUNDING BOX VALUES
-                if v2.x + v2.width > self.x + self.width:
-                    # Expand right
-                    self._update_right_boundary(v2)
-                if v2.x < self.x:
-                    # Expand left
-                    self._update_left_boundary(v2)
-
-                if v2_was_leftmost and v2.x > self.x:
-                    # Shrink from left
-                    self._update_left_boundary(v2)
-                if v2_was_rightmost and v2.x + v2.width < self.x + self.width:
-                    # Shrink from right
-                    self._update_right_boundary(v2)
+                self._update_horizontal()
 
     def sort_vertical(self):
         """
@@ -552,8 +530,8 @@ class Graph:
         """
         for v1, relation_map in self.relation_matrix_vertical.items():
             for v2, relation in relation_map.items():
-                v2_was_topmost = self.x == v2.x
-                v2_was_botmost = self.x + self.width == v2.x + v2.width
+                v2_was_topmost = self.y == v2.y
+                v2_was_botmost = self.y + self.height == v2.y + v2.height
 
                 # ALWAYS MOVE THE OTHER VERTEX
                 if relation is Relation.TOP and not v1.is_top(v2):
@@ -562,59 +540,29 @@ class Graph:
                     v2.to_top_of(v1)
 
                 # UPDATE GRAPH BOUNDING BOX VALUES
-                if v2.x + v2.width > self.x + self.width:
-                    # Expand bot
-                    self._update_bot_boundary(v2)
-                if v2.x < self.x:
-                    # Expand top
-                    self._update_top_boundary(v2)
+                self._update_vertical()
 
-                if v2_was_topmost and v2.x > self.x:
-                    # Shrink from top
-                    self._update_top_boundary(v2)
-                if v2_was_botmost and v2.x + v2.width < self.x + self.width:
-                    # Shrink from bot
-                    self._update_bot_boundary(v2)
+    def _update_x(self):
+        self.x = min(v.x for v in self.vertices)
 
-    def _update_left_boundary(self, v: Vertex):
+    def _update_y(self):
+        self.y = min(v.y for v in self.vertices)
+
+    def _update_horizontal(self):
+        self._update_x()
+        self.width = max(v.x + v.width for v in self.vertices) - self.x
+
+    def _update_vertical(self):
+        self._update_y()
+        self.height = max(v.y + v.height for v in self.vertices) - self.y
+
+    def update_position_and_size(self):
         """
-        Only call on vertices that used to be left-most vertices of the graph; helper method of sort_horizontal()
-        :param v: Vertex that is violating the left boundary
+        Recalculate graph's X, Y, width and height based on its vertices
         :return:
         """
-        diff = v.x - self.x
-        self.width -= diff
-        self.x += diff
-
-    def _update_right_boundary(self, v: Vertex):
-        """
-        Only call on vertices that used to be right-most vertices of the graph; helper method of sort_horizontal()
-
-        :param v: Vertex that is violating the right boundary
-        :return:
-        """
-        diff = (v.x + v.width) - (self.x + self.width)
-        self.width += diff
-
-    def _update_top_boundary(self, v: Vertex):
-        """
-        Only call on vertices that used to be top-most vertices of the graph; helper method of sort_vertical()
-        :param v: Vertex that is violating the top boundary
-        :return:
-        """
-        diff = v.y - self.y
-        self.height -= diff
-        self.y += diff
-
-    def _update_bot_boundary(self, v: Vertex):
-        """
-        Only call on vertices that used to be bottom-most vertices of the graph; helper method of sort_vertical()
-
-        :param v: Vertex that is violating the bottom boundary
-        :return:
-        """
-        diff = (v.y + v.height) - (self.y + self.height)
-        self.height += diff
+        self._update_horizontal()
+        self._update_vertical()
 
     def move_horizontal(self, dist: int):
         """
@@ -637,6 +585,25 @@ class Graph:
         for v in self.vertices:
             v.y += dist
         self.y += dist
+
+    def center(self, pw, ph, px: int = 0, py: int = 0):
+        """
+        Center this graph in given parent dimensions
+        :param pw: Parent width
+        :param ph: Parent height
+        :param px: Parent X; 0 for viewport
+        :param py: Parent Y; 0 for viewport
+        :return:
+        """
+        target_x = (pw - self.width) // 2 + px
+        target_y = (ph - self.height) // 2 + py
+        self.move_to(target_x, target_y)
+
+    def move_to(self, x, y):
+        if self.x != x:
+            self.move_horizontal(x - self.x)
+        if self.y != y:
+            self.move_vertical(y - self.y)
 
     def replace_vertex(self, vertex_to_replace: Vertex, new_vertex: Vertex):
         
