@@ -1,12 +1,7 @@
 import sys
 import drawing
 import graph
-from GlobalContext import GlobalContext, Function, FunctionSignatureError
-
-from antlr4 import *
-from antlr4.tree.Trees import Trees
-
-from TwoDimLexer import TwoDimLexer
+from GlobalContext import Function, FunctionSignatureError
 from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
 
@@ -66,7 +61,6 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
 
     def enterFunctionDecl(self, ctx: TwoDimParser.FunctionDeclContext):
         del ctx.children[len(ctx.children)-1]
-        print(ctx.children)
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
         #checking function call for correctness
@@ -83,6 +77,11 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
                 args_for_check.append([shape, 1])
             else:
                 args_for_check[len(args_for_check) - 1][1] += 1
+
+            if (v.unreachable):
+                print(f"Undeclared shape {v.name}")
+                raise graph.UndeclaredShapeError
+                
 
             args_for_call.append(v)
 

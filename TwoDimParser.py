@@ -1033,15 +1033,6 @@ class TwoDimParser ( TwoDimParserBase ):
             if hasattr( listener, "exitFunctionCall" ):
                 listener.exitFunctionCall(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFunctionCall" ):
-                return visitor.visitFunctionCall(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
     def functionCall(self):
 
         localctx = TwoDimParser.FunctionCallContext(self, self._ctx, self.state)
