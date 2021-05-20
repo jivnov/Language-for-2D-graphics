@@ -31,7 +31,7 @@ class GlobalContext:
         graph = Graph()
 
         for i, vertex_name in enumerate(f.args_names):
-            graph.add_vertex(Vertex(graph, vertex_name, args[i].shape))
+            graph.add_vertex(Vertex(graph, vertex_name, args[i].shape, args=args[i].size_args))
 
         printer = FunctionParserListener(global_context=self, relations_graph=global_graph, func_relations_graph=graph)
         walker = ParseTreeWalker()

@@ -1,4 +1,5 @@
 import uuid
+import copy
 from enum import Enum
 from typing import Any, Dict, List, Set, Tuple
 
@@ -125,6 +126,9 @@ class Vertex:
         self.uid = uuid.uuid1()  # This will allow editting svg files after calling draw() on parts of the graph; the
         # program can reference any shape by its unique ID or at least try to make a unique variable for each unique ID
         # TODO: Opening SVG files for editing (e.x. after calling draw() you want to add some more shapes to the picture)
+
+        # Saving it here to use in functions
+        self.size_args = copy.copy(args)
 
         # Determine Bounding Box fractional size through passed arguments
         if isinstance(args, list) and len(args) > 0:

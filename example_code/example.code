@@ -1,18 +1,24 @@
 #viewport 1000 1000;
 
-rect R [50%];
+rect Origin [5%];
 
-func SmallSquareRight(rect M){
-    rect R [5%];
-    R right M;
-    VerySmallSquareRight(R);
+func EightInRow(rect R0){
+    rect R1 [10%];
+    rect R2 [10%];
+    rect R3 [10%];
+    rect R4 [10%];
+    rect R5 [10%];
+    rect R6 [10%];
+    rect R7 [10%];
+    R1 right R0;
+    R2 right R1;
+    R3 right R2;
+    R4 right R3;
+    R5 right R4;
+    R6 right R5;
+    R7 right R6;
 };
 
-func VerySmallSquareRight(rect M){
-    rect R [2%];
-    R right M;
-};
+EightInRow(Origin);
 
-SmallSquareRight(R);
-
-draw R;
+draw Origin;

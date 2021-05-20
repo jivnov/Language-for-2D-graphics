@@ -10,6 +10,7 @@ def center_graph(d2d: drawing.Drawing2d, g: graph.Graph):
         g.move_horizontal(desired_x - g.x)
     # TODO: Add vertical centering
 
+
 class SecondPassTwoDimParserListener(TwoDimParserListener):
 
     def __init__(self, global_context, parser):
@@ -27,18 +28,20 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
         self.relations_graph.print_relations(self.relations_graph.find_vertex(ctx.IDENTIFIER()))
         center_graph(self.res, self.relations_graph)
-        self.res.draw(self.relations_graph.find_vertex(vertex_name = ctx.IDENTIFIER()))
-        self.res.canvas.save(pretty = True)
+        self.res.draw(self.relations_graph.find_vertex(vertex_name=ctx.IDENTIFIER()))
+        self.res.canvas.save(pretty=True)
         # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
         print(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")
-        print(f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=}")
+        print(
+            f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=}")
 
     def enterShapeSpec(self, ctx: TwoDimParser.ShapeSpecContext):
         for i, var_name in enumerate(ctx.IDENTIFIER()):
             # TODO
             # At the moment assuming SIZE is the only argument
             self.relations_graph.add_vertex(
-                graph.Vertex(parent_graph=self.relations_graph, var_name=var_name.getText(), shape=ctx.typeName().getText(),
+                graph.Vertex(parent_graph=self.relations_graph, var_name=var_name.getText(),
+                             shape=ctx.typeName().getText(),
                              args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
             )
 
@@ -52,15 +55,16 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         try:
             op1 = self.relations_graph.find_vertex(var_name1)
             op2 = self.relations_graph.find_vertex(var_name2)
-            self.relations_graph.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+            self.relations_graph.add_relation(op1, op2,
+                                              graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
 
     def enterFunctionDecl(self, ctx: TwoDimParser.FunctionDeclContext):
-        del ctx.children[len(ctx.children)-1]
+        del ctx.children[len(ctx.children) - 1]
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
-        #checking function call for correctness
+        # checking function call for correctness
         args_for_check = []
         args_for_call = []
 
@@ -70,7 +74,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             v = self.relations_graph.find_vertex(id)
             shape = v.shape
 
-            if len(args_for_check) == 0 or args_for_check[len(args_for_check)-1][0] != shape:
+            if len(args_for_check) == 0 or args_for_check[len(args_for_check) - 1][0] != shape:
                 args_for_check.append([shape, 1])
             else:
                 args_for_check[len(args_for_check) - 1][1] += 1
@@ -78,15 +82,15 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             if (v.unreachable):
                 print(f"Undeclared shape {v.name}")
                 raise graph.UndeclaredShapeError
-                
 
             args_for_call.append(v)
 
-        function_called = Function(name = ctx.IDENTIFIER(), args = args_for_check)
+        function_called = Function(name=ctx.IDENTIFIER(), args=args_for_check)
 
         if not self.context.check_call(function_called):
             raise FunctionSignatureError(function_called.name)
 
-        function_result = self.context.call_function(global_graph=self.relations_graph, name = ctx.IDENTIFIER(), args = args_for_call)
- 
+        function_result = self.context.call_function(global_graph=self.relations_graph, name=ctx.IDENTIFIER(),
+                                                     args=args_for_call)
+
         self.relations_graph.merge_with(function_result)
