@@ -54,6 +54,11 @@ class TwoDimParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by TwoDimParser#functionCall.
+    def visitFunctionCall(self, ctx:TwoDimParser.FunctionCallContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by TwoDimParser#drawClause.
     def visitDrawClause(self, ctx:TwoDimParser.DrawClauseContext):
         return self.visitChildren(ctx)
