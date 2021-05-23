@@ -1,0 +1,18 @@
+#viewport 1000 1000
+
+rect LeftBorder [1%, 100%];
+rect Nav [100%, 10%];
+rect LeftMenu [25%, 90%];
+rect RightMenu [25%, 90%];
+rect SiteBody [50%, 90%];
+
+
+LeftMenu left SiteBody;
+RightMenu right SiteBody;
+LeftBorder left LeftMenu;
+Nav top LeftMenu;
+Nav top RightMenu;
+Nav top SiteBody;
+
+
+draw SiteBody;

@@ -34,6 +34,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
         print(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")
         print(f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=}")
+        print(f"{self.relations_graph.relation_matrix_vertical=} {self.relations_graph.relation_matrix_horizontal=}")
 
     def enterShapeSpec(self, ctx: TwoDimParser.ShapeSpecContext):
         for i, var_name in enumerate(ctx.IDENTIFIER()):

@@ -1,0 +1,16 @@
+#viewport 1000 1000
+
+func FourInRow(rect Root) {
+    rect R2 [12%];
+    rect R3 [12%];
+    rect R4 [12%];
+    Root left R2;
+    R2 left R3;
+    R3 left R4;
+};
+
+rect Origin [1%];
+
+FourInRow(Origin);
+
+draw Origin;

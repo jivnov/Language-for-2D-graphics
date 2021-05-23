@@ -40,12 +40,12 @@ class Drawing2d:
         draw_shape = None
         draw_color = tuple(random.randint(0, 256) for _ in range(3))
         if v.shape == Shape.RECT:
-            draw_shape = self.canvas.rect(insert=(v.x, v.y),
-                                          size=(v.width, v.height), fill="rgb" + str(draw_color))
+            draw_shape = self.canvas.rect(insert=(v.x_perc, v.y_perc),
+                                          size=(v.width_perc, v.height_perc), fill="rgb" + str(draw_color))
         if v.shape == Shape.SQUARE:
             x = (1 - v.bb_w) * self.viewport_width / 2
             y = self.viewport_height / 2 - (v.bb_h * self.viewport_width / 2)
-            draw_shape = self.canvas.rect(insert=(v.x, v.y),
+            draw_shape = self.canvas.rect(insert=(v.x_perc, v.y_perc),
                                           size=(v.bb_w * self.viewport_width, v.bb_h * self.viewport_width))
         if v.shape == Shape.CIRCLE:
             x = self.viewport_width / 2

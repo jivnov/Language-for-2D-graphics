@@ -2,6 +2,10 @@ import uuid
 from enum import Enum
 from typing import Any, Dict, List, Set, Tuple
 
+import random
+from svgwrite.shapes import Rect
+from svgwrite.container import SVG
+
 
 class UndeclaredShapeError(NameError):
     pass
@@ -128,50 +132,114 @@ class Vertex:
 
         # Determine Bounding Box fractional size through passed arguments
         if isinstance(args, list) and len(args) > 0:
-            self.bb_w = int(args.pop(0).replace('%', '')) / 100
+            self.bb_w = float(args.pop(0).replace('%', ''))
             if len(args) > 0:
-                self.bb_h = int(args.pop(0).replace('%', '')) / 100
+                self.bb_h = float(args.pop(0).replace('%', ''))
             else:
                 self.bb_h = self.bb_w
         else:
-            self.bb_w = 0.5
-            self.bb_h = 0.5
+            self.bb_w = 50.0
+            self.bb_h = 50.0
 
         # Adjust Bounding Box fractional size based on shape
         self.adjust_size_based_on_shape()
 
-        self.width = self.bb_w * 1000
-        self.height = self.bb_h * 1000
+        width = self.bb_w
+        height = self.bb_h
 
-        self.x = (1 - self.bb_w) * 500
-        self.y = (1 - self.bb_h) * 500
+        x = 100.0 - self.bb_w
+        y = 100.0 - self.bb_h
 
         self.unreachable = False
+
+        # Use svgwrite features for shape properties
+        if self.shape == Shape.RECT:
+            draw_color = tuple(random.randint(0, 256) for _ in range(3))
+            self.content = Rect(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"), fill="rgb" + str(draw_color))
+        elif self.shape == Shape.SHAPE:
+            self.content = SVG(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"))
+        else:
+            raise UndefinedShapeError(f"Specified shape type is not supported: {self.shape}")
+
+    def draw(self, drawing):
+        if self.shape == Shape.SHAPE:
+            drawing.add()
+
+    @property
+    def x_perc(self):
+        return self.content['x']
+
+    @property
+    def x(self):
+        return float(self.content['x'].replace("%", ""))
+
+    @x.setter
+    def x(self, val):
+        self.content['x'] = f"{val}%"
+
+    @property
+    def y_perc(self):
+        return self.content['y']
+
+    @property
+    def y(self):
+        return float(self.content['y'].replace("%", ""))
+
+    @y.setter
+    def y(self, val):
+        self.content['y'] = f"{val}%"
+
+    @property
+    def width_perc(self):
+        return self.content['width']
+
+    @property
+    def width(self):
+        return float(self.content['width'].replace("%", ""))
+
+    @width.setter
+    def width(self, val):
+        self.content['width'] = f"{val}%"
+
+    @property
+    def height_perc(self):
+        return self.content['height']
+
+    @property
+    def height(self):
+        return float(self.content['height'].replace("%", ""))
+
+    @height.setter
+    def height(self, val):
+        self.content['height'] = f"{val}%"
 
     def adjust_size_based_on_shape(self):
         # Adjust Bounding Box fractional size based on shape
         if self.shape == Shape.SQUARE or self.shape == Shape.CIRCLE:
             self.bb_h = self.bb_w = min(self.bb_h, self.bb_w)
 
-    # def update_peers(self):
-    #     if self.updated:
-    #         return
-    #     for v in self.LEFT:
-    #         v.x = self.x - v.width
-    #         v.updated = True
-    #         v.update_peers()
-    #     for v in self.RIGHT:
-    #         v.x = self.x + self.width
-    #         v.updated = True
-    #         v.update_peers()
-    #     for v in self.TOP:
-    #         v.y = self.y - v.height
-    #         v.updated = True
-    #         v.update_peers()
-    #     for v in self.BOT:
-    #         v.y = self.y + self.height
-    #         v.updated = True
-    #         v.update_peers()
+    def is_relation_to(self, other, relation: Relation):
+        if relation == Relation.LEFT:
+            return self.is_left(other)
+        elif relation == Relation.RIGHT:
+            return self.is_right(other)
+        elif relation == Relation.TOP:
+            return self.is_top(other)
+        elif relation == Relation.BOT:
+            return self.is_bot(other)
+        elif relation == Relation.IN:
+            return None
+        elif relation == Relation.CONTAINED:
+            return None
+        elif relation == Relation.ON:
+            return None
+        elif relation == Relation.UNDER:
+            return None
+        elif relation == Relation.UNRELATED:
+            return True
+        else:
+            print("rel: ", self.name, other.name, relation)
+            raise UndefinedRelationError()
 
     # HORIZONTAL RELATIONS
     def is_left(self, other) -> bool:
@@ -282,8 +350,78 @@ class Vertex:
             neighbour.ON.remove(self)
 
 
+class RelationalSVG(SVG):
+    def __init__(self):
+        super().__init__()
+
+    @property
+    def x(self):
+        return float(self['x'].replace("%", ""))
+
+    @x.setter
+    def x(self, val):
+        self['x'] = f"{val}%"
+
+    @property
+    def y(self):
+        return float(self['y'].replace("%", ""))
+
+    @y.setter
+    def y(self, val):
+        self['y'] = f"{val}%"
+
+    def _element_minx(self):
+        return min(float(element['x'].replace("%", "")) for element in self.elements if 'x' in element.attribs.keys())
+
+    def _element_miny(self):
+        return min(float(element['y'].replace("%", "")) for element in self.elements if 'y' in element.attribs.keys())
+
+    @property
+    def element_total_width(self):
+        minx = self._element_minx()
+        max_right_bound = max(float(element['x'].replace("%", "")) + float(element['width'].replace("%", "")) for element in self.elements if 'x' in element.attribs.keys() and 'width' in element.attribs.keys())
+        return max_right_bound - minx
+
+    @property
+    def element_total_height(self):
+        miny = self._element_miny()
+        max_right_bound = max(
+            float(element['y'].replace("%", "")) + float(element['height'].replace("%", "")) for element in self.elements
+            if 'y' in element.attribs.keys() and 'height' in element.attribs.keys())
+        return max_right_bound - miny
+
+    @property
+    def width(self):
+        return float(self['width'].replace("%", ""))
+
+    @width.setter
+    def width(self, val):
+        self['width'] = f"{val}%"
+
+    @property
+    def height(self):
+        return float(self['height'].replace("%", ""))
+
+    @height.setter
+    def height(self, val):
+        self['height'] = f"{val}%"
+
+    def center_elements(self):
+        x_target = self.x + (self.width - self.element_total_width) / 2
+        x_offset = x_target - self._element_minx()
+        for element in self.elements:
+            if 'x' in element.attribs.keys():
+                element['x'] = f"{float(element['x'].replace('%', '')) + x_offset}"
+
+        y_target = self.y + (self.height - self.element_total_height) / 2
+        y_offset = y_target - self._element_miny()
+        for element in self.elements:
+            if 'y' in element.attribs.keys():
+                element['y'] = f"{float(element['y'].replace('%', '')) + y_offset}"
+
+
 class Graph:
-    def __init__(self, x=0, y=0, width=0, height=0):
+    def __init__(self, x=0, y=0, width=0, height=0, px=0, py=0, pw=100, ph=100):
         self.vertices: Set[Vertex] = set()  # all unique vertices in a graph
 
         # Position of the top-left corner of this graph's bounding box
@@ -329,6 +467,10 @@ class Graph:
         :param v_to:
         :param r:
 
+    @property
+    def y_perc(self):
+        return self.content['y']
+
         :raises UndeclaredShapeError
         :raises RedundantRelationError
         :raises CyclicRelationsError
@@ -351,24 +493,37 @@ class Graph:
             if self._invalid_horizontal_relations():
                 raise CyclicRelationsError(f"Relation {r=} between {v_from.name=} and {v_to.name=} causes a cycle in horizontal relations")
 
-            # Adjust shape positions in X axis
-            self.sort_horizontal()
         elif r in (Relation.TOP, Relation.BOT):
             self.relation_matrix_vertical[v_from][v_to] = r
             self.relation_matrix_vertical[v_to][v_from] = -r
 
             if self._invalid_vertical_relations():
                 raise CyclicRelationsError(f"Relation {r=} between {v_from.name=} and {v_to.name=} causes a cycle in vertical relations")
-
-            # Adjust shape positions in X axis
-            self.sort_vertical()
             # TODO: Implement incidence matrices for other relations
         else:
             return
 
+        # Adjust shape positions in X axis
+        self.sort_horizontal()
+
+        # Adjust shape positions in Y axis
+        self.sort_vertical()
+
         # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph
         # Give vertex info about new neighbour
         v_from.add_neighbour(v_to, r)
+
+    def _all_relations_valid(self):
+        for v1, relation_map in self.relation_matrix_horizontal.items():
+            for v2, relation in relation_map.items():
+                if not v1.is_relation_to(v2, relation):
+                    return False
+
+        for v1, relation_map in self.relation_matrix_vertical.items():
+            for v2, relation in relation_map.items():
+                if not v1.is_relation_to(v2, relation):
+                    return False
+        return True
 
     def _is_cyclic_horizontal_util(self, v: Vertex, visited: Dict[Vertex, bool], rec_stack: Dict[Vertex, bool]) -> bool:
         """
@@ -485,6 +640,7 @@ class Graph:
         # Clear vertex data from other Graph (they are now a part of this one)
         other.vertices.clear()
         other.relation_matrix_horizontal.clear()
+        other.update_position_and_size()
 
     def find_vertex(self, vertex_name: str) -> Vertex:
         for vertex in self.vertices:
@@ -545,18 +701,22 @@ class Graph:
                 self._update_vertical()
 
     def _update_x(self):
-        self.x = min(v.x for v in self.vertices)
+        if len(self.vertices) != 0:
+            self.x = min(v.x for v in self.vertices)
 
     def _update_y(self):
-        self.y = min(v.y for v in self.vertices)
+        if len(self.vertices) != 0:
+            self.y = min(v.y for v in self.vertices)
 
     def _update_horizontal(self):
-        self._update_x()
-        self.width = max(v.x + v.width for v in self.vertices) - self.x
+        if len(self.vertices) != 0:
+            self._update_x()
+            self.width = max(v.x + v.width for v in self.vertices) - self.x
 
     def _update_vertical(self):
-        self._update_y()
-        self.height = max(v.y + v.height for v in self.vertices) - self.y
+        if len(self.vertices) != 0:
+            self._update_y()
+            self.height = max(v.y + v.height for v in self.vertices) - self.y
 
     def update_position_and_size(self):
         """
@@ -674,3 +834,5 @@ class Graph:
         new_vertex.graph = vertex_to_replace.graph
 
         new_vertex.adjust_size_based_on_shape()
+
+        new_vertex.graph.update_position_and_size()
