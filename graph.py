@@ -2,6 +2,8 @@ import uuid
 from enum import Enum
 from typing import Any, Dict, List, Set, Tuple
 
+import random
+
 
 class UndeclaredShapeError(NameError):
     pass
@@ -147,6 +149,14 @@ class Vertex:
         self.y = (1 - self.bb_h) * 500
 
         self.unreachable = False
+
+    def draw(self, canvas):
+        """
+        Pass drawing responsibility to parent graph;
+        :param canvas:
+        :return:
+        """
+        self.graph.draw(canvas)
 
     def adjust_size_based_on_shape(self):
         # Adjust Bounding Box fractional size based on shape
@@ -342,18 +352,12 @@ class Graph:
 
             if self._invalid_horizontal_relations():
                 raise CyclicRelationsError(f"Relation {r=} between {v_from.name=} and {v_to.name=} causes a cycle in horizontal relations")
-
-            # Adjust shape positions in X axis
-            self.sort_horizontal()
         elif r in (Relation.TOP, Relation.BOT):
             self.relation_matrix_vertical[v_from][v_to] = r
             self.relation_matrix_vertical[v_to][v_from] = -r
 
             if self._invalid_vertical_relations():
                 raise CyclicRelationsError(f"Relation {r=} between {v_from.name=} and {v_to.name=} causes a cycle in vertical relations")
-
-            # Adjust shape positions in X axis
-            self.sort_vertical()
             # TODO: Implement incidence matrices for other relations
         else:
             return
@@ -652,3 +656,47 @@ class Graph:
         new_vertex.graph = vertex_to_replace.graph
 
         new_vertex.adjust_size_based_on_shape()
+
+    def _draw_vertex(self, v: Vertex, canvas):
+        # TODO: Draw all neighbours and neighbours' neighbours etc.
+        """
+        Basic algo:
+        1. Go "up" (check the IN reference) until you reach the root of the graph
+        NOTE: When adding a neighbour A to a Vertex B CONTAINED in some shape X, you should add "A IN X" relation automatically as well
+        2. Draw root shape parent_graphX
+        3. Call algo for each of X's neighbours until there are no neighbours to draw
+        :param parent: Parent of the vertex; if None, assume this is the root
+        :param v:
+        :return:
+        """
+        if v.drawn:
+            return
+
+        draw_shape = None
+        draw_color = tuple(random.randint(0, 256) for _ in range(3))
+        if v.shape == Shape.RECT:
+            draw_shape = canvas.rect(insert=(v.x, v.y),
+                                          size=(v.width, v.height), fill="rgb" + str(draw_color))
+        elif v.shape == Shape.SQUARE:
+            x = (1 - v.bb_w) * canvas['width'] / 2
+            y = canvas['height'] / 2 - (v.bb_h * canvas['width'] / 2)
+            draw_shape = canvas.rect(insert=(v.x, v.y),
+                                          size=(v.bb_w * canvas['width'], v.bb_h * canvas['width']))
+        elif v.shape == Shape.CIRCLE:
+            x = canvas['width'] / 2
+            y = canvas['height'] / 2
+            draw_shape = canvas.circle(center=(v.x, v.y), r=(v.bb_w * canvas['width'] / 2))
+
+        elif v.shape == Shape.SHAPE:
+            pass
+
+        canvas.add(draw_shape)
+        v.drawn = True
+
+    def draw(self, canvas):
+        self.sort_horizontal()
+        self.sort_vertical()
+        map(Vertex.center_if_legal, self.vertices)
+        for v in self.vertices:
+            self._draw_vertex(v, canvas)
+        canvas.save()
