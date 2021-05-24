@@ -153,32 +153,24 @@ class Vertex:
         if self.shape == Shape.SQUARE or self.shape == Shape.CIRCLE:
             self.bb_h = self.bb_w = min(self.bb_h, self.bb_w)
 
-    # def update_peers(self):
-    #     if self.updated:
-    #         return
-    #     for v in self.LEFT:
-    #         v.x = self.x - v.width
-    #         v.updated = True
-    #         v.update_peers()
-    #     for v in self.RIGHT:
-    #         v.x = self.x + self.width
-    #         v.updated = True
-    #         v.update_peers()
-    #     for v in self.TOP:
-    #         v.y = self.y - v.height
-    #         v.updated = True
-    #         v.update_peers()
-    #     for v in self.BOT:
-    #         v.y = self.y + self.height
-    #         v.updated = True
-    #         v.update_peers()
-
     # HORIZONTAL RELATIONS
     def is_left(self, other) -> bool:
         return self.x <= other.x - self.width
 
     def is_right(self, other) -> bool:
         return self.x >= other.x + other.width
+
+    def center_horizontally_if_legal(self):
+        if len(self.LEFT) == 0 and len(self.RIGHT) == 0:
+            self.x = self.graph.x + self.graph.width / 2
+
+    def center_vertically_if_legal(self):
+        if len(self.TOP) == 0 and len(self.BOT) == 0:
+            self.y = self.graph.y + self.graph.height / 2
+
+    def center_if_legal(self):
+        self.center_horizontally_if_legal()
+        self.center_vertically_if_legal()
 
     def to_left_of(self, other):
         """

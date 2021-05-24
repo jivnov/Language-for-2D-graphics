@@ -8,6 +8,5 @@ rect D [50%];
 B left A;
 C left B;
 D left C;
-D right A;
 
 draw A;
