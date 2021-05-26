@@ -1,0 +1,5 @@
+#viewport 500 500
+
+rect A [50%];
+
+draw A;

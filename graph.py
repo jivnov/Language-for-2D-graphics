@@ -2,7 +2,14 @@ import uuid
 from enum import Enum
 from typing import Any, Dict, List, Set, Tuple
 
+from svgwrite.container import SVG
+from svgwrite.shapes import Rect
+
 import random
+
+
+class DisconnectedGraphError(AssertionError):
+    pass
 
 
 class UndeclaredShapeError(NameError):
@@ -90,7 +97,7 @@ class Relation(Enum):
 
 
 class Vertex:
-    def __init__(self, parent_graph, var_name: str, shape, args: Any = None, content=None):
+    def __init__(self, var_name: str, shape, args: Any = None, content=None, parent_graph=None):
         # TODO: Every vertex begins as its own graph which then merges with other graphs through relations
         """
 
@@ -100,8 +107,6 @@ class Vertex:
         :param args: Arguments passed to the variable initialization in code
         :param content: Type should be Graph or None; allows for comparison between graphs and shapes
         """
-        # DONE: Vertex should have a reference to its Graph to track some more "global" properties (e.x. the total
-        # width and height of the drawing it is a part of)
         self.name = var_name
         if isinstance(shape, Shape):
             self.shape = shape
@@ -130,25 +135,38 @@ class Vertex:
 
         # Determine Bounding Box fractional size through passed arguments
         if isinstance(args, list) and len(args) > 0:
-            self.bb_w = int(args.pop(0).replace('%', '')) / 100
+            self.bb_w = float(args.pop(0).replace('%', ''))
             if len(args) > 0:
-                self.bb_h = int(args.pop(0).replace('%', '')) / 100
+                self.bb_h = float(args.pop(0).replace('%', ''))
             else:
                 self.bb_h = self.bb_w
         else:
-            self.bb_w = 0.5
-            self.bb_h = 0.5
+            self.bb_w = 50.0
+            self.bb_h = 50.0
 
         # Adjust Bounding Box fractional size based on shape
         self.adjust_size_based_on_shape()
 
-        self.width = self.bb_w * 1000
-        self.height = self.bb_h * 1000
-
-        self.x = (1 - self.bb_w) * 500
-        self.y = (1 - self.bb_h) * 500
-
         self.unreachable = False
+
+        width = self.bb_w
+        height = self.bb_h
+
+        x = 100.0 - self.bb_w
+        y = 100.0 - self.bb_h
+
+        # Use svgwrite features for shape properties
+        if self.shape == Shape.RECT:
+            draw_color = tuple(random.randint(0, 256) for _ in range(3))
+            self.content = Rect(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"), fill="rgb" + str(draw_color))
+        elif self.shape == Shape.SHAPE:
+            self.content = SVG(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"))
+        else:
+            raise UndefinedShapeError(f"Specified shape type is not supported: {self.shape}")
+
+    @property
+    def neighbours(self):
+        return self.LEFT | self.RIGHT | self.TOP | self.BOT
 
     def draw(self, canvas):
         """
@@ -156,12 +174,64 @@ class Vertex:
         :param canvas:
         :return:
         """
-        self.graph.draw(canvas)
+        self.graph.draw(canvas, caller_vertex=self)
 
     def adjust_size_based_on_shape(self):
         # Adjust Bounding Box fractional size based on shape
         if self.shape == Shape.SQUARE or self.shape == Shape.CIRCLE:
             self.bb_h = self.bb_w = min(self.bb_h, self.bb_w)
+
+    # Getters and setters for SVG element position - you should only be passing and receiving floats from these parameters (instead of strings like "10.5%")
+    @property
+    def x_perc(self):
+        """
+        :return: Element's 'x' coordinate in a string formatted like: "10.5%" "25%" etc.
+        """
+        return self.content['x']
+
+    @property
+    def x(self):
+        return float(self.content['x'].replace("%", ""))
+
+    @x.setter
+    def x(self, val):
+        self.content['x'] = f"{val}%"
+
+    @property
+    def y_perc(self):
+        return self.content['y']
+
+    @property
+    def y(self):
+        return float(self.content['y'].replace("%", ""))
+
+    @y.setter
+    def y(self, val):
+        self.content['y'] = f"{val}%"
+
+    @property
+    def width_perc(self):
+        return self.content['width']
+
+    @property
+    def width(self):
+        return float(self.content['width'].replace("%", ""))
+
+    @width.setter
+    def width(self, val):
+        self.content['width'] = f"{val}%"
+
+    @property
+    def height_perc(self):
+        return self.content['height']
+
+    @property
+    def height(self):
+        return float(self.content['height'].replace("%", ""))
+
+    @height.setter
+    def height(self, val):
+        self.content['height'] = f"{val}%"
 
     # HORIZONTAL RELATIONS
     def is_left(self, other) -> bool:
@@ -285,7 +355,7 @@ class Vertex:
 
 
 class Graph:
-    def __init__(self, x=0, y=0, width=0, height=0):
+    def __init__(self, x=0, y=0, width=100, height=100):
         self.vertices: Set[Vertex] = set()  # all unique vertices in a graph
 
         # Position of the top-left corner of this graph's bounding box
@@ -296,11 +366,22 @@ class Graph:
         self.width = width
         self.height = height
 
+        # SVG elem that contains this graph's elements
+        self.svg_elem = SVG(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"))
+
         self.relation_matrix_horizontal: Dict[
             Vertex, Dict[Vertex, Relation]] = dict()  # all horizontal relations in the shape graph
 
         self.relation_matrix_vertical: Dict[
             Vertex, Dict[Vertex, Relation]] = dict()  # all vertical relations in the shape graph
+
+    @property
+    def content_width(self):
+        return max(v.x + v.width for v in self.vertices) - self.x
+
+    @property
+    def content_height(self):
+        return max(v.y + v.height for v in self.vertices) - self.y
 
     def add_vertex(self, v: Vertex):
         if v not in self.vertices:
@@ -570,7 +651,7 @@ class Graph:
             v.y += dist
         self.y += dist
 
-    def center(self, pw, ph, px: int = 0, py: int = 0):
+    def center(self, pw=100, ph=100, px: int = 0, py: int = 0):
         """
         Center this graph in given parent dimensions
         :param pw: Parent width
@@ -582,6 +663,12 @@ class Graph:
         target_x = (pw - self.width) // 2 + px
         target_y = (ph - self.height) // 2 + py
         self.move_to(target_x, target_y)
+
+    def center_content(self):
+        """
+        Center contents of this graph within this graph's bounds
+        :return:
+        """
 
     def move_to(self, x, y):
         if self.x != x:
@@ -657,7 +744,21 @@ class Graph:
 
         new_vertex.adjust_size_based_on_shape()
 
-    def _draw_vertex(self, v: Vertex, canvas):
+    @property
+    def disconnected(self):
+        visited = set()
+        tbv = set()  # To Be Visited
+
+        tbv.add(next(iter(self.vertices)))  # Take any element of the graph
+        while len(tbv) > 0:
+            curr = tbv.pop()
+            visited.add(curr)
+            for n in curr.neighbours:
+                if n not in visited and n not in tbv:
+                    tbv.add(n)
+        return visited != self.vertices
+
+    def _draw_vertex(self, v: Vertex, from_caller=False):
         # TODO: Draw all neighbours and neighbours' neighbours etc.
         """
         Basic algo:
@@ -665,38 +766,39 @@ class Graph:
         NOTE: When adding a neighbour A to a Vertex B CONTAINED in some shape X, you should add "A IN X" relation automatically as well
         2. Draw root shape parent_graphX
         3. Call algo for each of X's neighbours until there are no neighbours to draw
-        :param parent: Parent of the vertex; if None, assume this is the root
         :param v:
+        :param from_caller:
         :return:
         """
         if v.drawn:
             return
 
-        draw_shape = None
-        draw_color = tuple(random.randint(0, 256) for _ in range(3))
-        if v.shape == Shape.RECT:
-            draw_shape = canvas.rect(insert=(v.x, v.y),
-                                          size=(v.width, v.height), fill="rgb" + str(draw_color))
-        elif v.shape == Shape.SQUARE:
-            x = (1 - v.bb_w) * canvas['width'] / 2
-            y = canvas['height'] / 2 - (v.bb_h * canvas['width'] / 2)
-            draw_shape = canvas.rect(insert=(v.x, v.y),
-                                          size=(v.bb_w * canvas['width'], v.bb_h * canvas['width']))
-        elif v.shape == Shape.CIRCLE:
-            x = canvas['width'] / 2
-            y = canvas['height'] / 2
-            draw_shape = canvas.circle(center=(v.x, v.y), r=(v.bb_w * canvas['width'] / 2))
-
-        elif v.shape == Shape.SHAPE:
-            pass
-
-        canvas.add(draw_shape)
+        self.svg_elem.add(v.content)
         v.drawn = True
 
-    def draw(self, canvas):
+        if from_caller:
+            for n in v.neighbours:
+                self._draw_vertex(n, from_caller=True)
+
+    def draw(self, canvas, caller_vertex: Vertex = None):
+        """
+        :param canvas:
+        :param caller_vertex: In 2Dim you can draw a graph itself via Graph.draw(), or Graph.draw() can be called by its child vertex; in latter case only the vertices connected to caller or its neighbours or their neighbours etc. are drawn
+        :return:
+        """
+        if self.disconnected:
+            raise DisconnectedGraphError("Some shapes have no clear relations to each other. Aborting drawing")
+
         self.sort_horizontal()
         self.sort_vertical()
         map(Vertex.center_if_legal, self.vertices)
-        for v in self.vertices:
-            self._draw_vertex(v, canvas)
+
+        if caller_vertex is not None:
+            # Only draw vertices connected to the caller of Graph.draw()
+            self._draw_vertex(caller_vertex, from_caller=True)
+        else:
+            # Draw all vertices (might produce a disjointed graph)
+            for v in self.vertices:
+                self._draw_vertex(v, from_caller=False)
+        canvas.add(self.svg_elem)
         canvas.save()

@@ -3,13 +3,12 @@
 rect LeftMenu [25%, 90%];
 rect Body [50%, 90%];
 rect RightMenu [25%, 90%];
-
 rect AppBar [100%, 10%];
 
 LeftMenu left Body;
 Body left RightMenu;
-
 AppBar top Body;
+
 
 
 

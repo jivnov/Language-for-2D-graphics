@@ -28,7 +28,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
 
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
         self.relations_graph.print_relations(self.relations_graph.find_vertex(ctx.IDENTIFIER()))
-        self.relations_graph.center(self.res.viewport_width, self.res.viewport_height)
+        self.relations_graph.center()
         self.res.draw(self.relations_graph.find_vertex(vertex_name = ctx.IDENTIFIER()))
         self.res.canvas.save(pretty = True)
 
