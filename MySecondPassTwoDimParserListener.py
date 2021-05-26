@@ -1,7 +1,7 @@
 import sys
 import drawing
 import graph
-from GlobalContext import Function, FunctionSignatureError
+from Function import Function, FunctionSignatureError
 from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
 
@@ -28,22 +28,25 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
 
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
         self.relations_graph.print_relations(self.relations_graph.find_vertex(ctx.IDENTIFIER()))
-        self.relations_graph.center()
-        self.res.draw(self.relations_graph.find_vertex(vertex_name = ctx.IDENTIFIER()))
-        self.res.canvas.save(pretty = True)
+        self.relations_graph.center(self.res.viewport_width, self.res.viewport_height)
+        self.res.draw(self.relations_graph.find_vertex(vertex_name=ctx.IDENTIFIER()))
+        self.res.canvas.save(pretty=True)
 
         # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
         print(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")
-        print(f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=}")
+        print(
+            f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=}")
 
     def enterShapeSpec(self, ctx: TwoDimParser.ShapeSpecContext):
         for i, var_name in enumerate(ctx.IDENTIFIER()):
             # TODO
             # At the moment assuming SIZE is the only argument
-            self.relations_graph.add_vertex(
-                graph.Vertex(parent_graph=self.relations_graph, var_name=var_name.getText(), shape=ctx.typeName().getText(),
+
+            v = graph.Vertex(parent_graph=self.relations_graph, var_name=var_name.getText(),
+                             shape=ctx.typeName().getText(),
                              args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
-            )
+            self.context.variables.add_variable(tag=var_name.getText(), name=v.uid, content=v)
+            self.relations_graph.add_vertex(v)
 
     def enterViewportClause(self, ctx: TwoDimParser.ViewportClauseContext):
         # now was here for testing purposes
@@ -55,7 +58,8 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         try:
             op1 = self.relations_graph.find_vertex(var_name1)
             op2 = self.relations_graph.find_vertex(var_name2)
-            self.relations_graph.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+            self.relations_graph.add_relation(op1, op2,
+                                              graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
 
@@ -63,7 +67,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         del ctx.children[len(ctx.children)-1]
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
-        #checking function call for correctness
+        # checking function call for correctness
         args_for_check = []
         args_for_call = []
 
@@ -85,11 +89,11 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
 
             args_for_call.append(v)
 
-        function_called = Function(name = ctx.IDENTIFIER(), args = args_for_check)
+        function_called = Function(name=ctx.IDENTIFIER(), args=args_for_check)
 
         if not self.context.check_call(function_called):
             raise FunctionSignatureError(function_called.name)
 
-        function_result = self.context.call_function(parser = self.parser, name = ctx.IDENTIFIER(), args = args_for_call)   
- 
+        function_result = self.context.call_function(global_graph=self.relations_graph, name=ctx.IDENTIFIER(), args=args_for_call)
+
         self.relations_graph.merge_with(function_result)

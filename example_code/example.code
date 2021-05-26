@@ -1,19 +1,33 @@
 #viewport 1000 1000;
 
-rect R [50%];
+rect Origin [10%];
 
-func SmallSquareRight(rect M){
-    rect R [5%];
-    R right M;
+func FourInCol(rect R0){
+    rect R1 [10%];
+    rect R2 [10%];
+    rect R3 [10%];
+
+    R1 bot R0;
+    R2 bot R1;
+    R3 bot R2;
+
+    FourInRow(R0);
+    FourInRow(R1);
+    FourInRow(R2);
+    FourInRow(R3);
 };
 
-VerySmallSquareLeft(R);
+func FourInRow(rect R0){
+    rect R1 [10%];
+    rect R2 [10%];
+    rect R3 [10%];
 
-func VerySmallSquareLeft(rect M){
-    rect R [2%];
-    R left M;
+    R1 right R0;
+    R2 right R1;
+    R3 right R2;
+    R0 left R1;
 };
 
-SmallSquareRight(R);
+FourInCol(Origin);
 
-draw R;
+draw Origin;
