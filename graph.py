@@ -98,7 +98,6 @@ class Relation(Enum):
 
 class Vertex:
     def __init__(self, var_name: str, shape, args: Any = None, content=None, parent_graph=None):
-        # TODO: Every vertex begins as its own graph which then merges with other graphs through relations
         """
 
         :param parent_graph: Graph that contains this Vertex
@@ -107,17 +106,11 @@ class Vertex:
         :param args: Arguments passed to the variable initialization in code
         :param content: Type should be Graph or None; allows for comparison between graphs and shapes
         """
-        self.name = var_name
-        if isinstance(shape, Shape):
-            self.shape = shape
-        else:
-            self.shape = Shape.from_string(shape)
-        self.bb_w = 0.0
+        self.uid = uuid.uuid1() # This will allow editting svg files after calling draw() on parts of the graph; the
+        # program can reference any shape by its unique ID or at least try to make a unique variable for each unique ID
 
         self.updated = False
         self.drawn = False
-
-        self.content = None  # Should only be not-None if this Vertex is actually a Graph (this allows defining Vertex to Graph relations)
 
         self.LEFT: Set[Vertex] = set()
         self.RIGHT: Set[Vertex] = set()
@@ -128,41 +121,49 @@ class Vertex:
         self.ON: Set[Vertex] = set()
         self.UNDER: Set[Vertex] = set()
 
-        self.graph = parent_graph  # Graph that this shape is a part of
-        self.uid = uuid.uuid1()  # This will allow editting svg files after calling draw() on parts of the graph; the
-        # program can reference any shape by its unique ID or at least try to make a unique variable for each unique ID
-        # TODO: Opening SVG files for editing (e.x. after calling draw() you want to add some more shapes to the picture)
-
-        # Determine Bounding Box fractional size through passed arguments
-        if isinstance(args, list) and len(args) > 0:
-            self.bb_w = float(args.pop(0).replace('%', ''))
-            if len(args) > 0:
-                self.bb_h = float(args.pop(0).replace('%', ''))
-            else:
-                self.bb_h = self.bb_w
-        else:
-            self.bb_w = 50.0
-            self.bb_h = 50.0
-
-        # Adjust Bounding Box fractional size based on shape
-        self.adjust_size_based_on_shape()
-
         self.unreachable = False
 
-        width = self.bb_w
-        height = self.bb_h
+        self.graph = parent_graph  # Graph that this shape is a part of
 
-        x = 100.0 - self.bb_w
-        y = 100.0 - self.bb_h
+        self.name = var_name  # TODO: remove this parameter
 
-        # Use svgwrite features for shape properties
-        if self.shape == Shape.RECT:
-            draw_color = tuple(random.randint(0, 256) for _ in range(3))
-            self.content = Rect(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"), fill="rgb" + str(draw_color))
-        elif self.shape == Shape.SHAPE:
-            self.content = SVG(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"))
-        else:
-            raise UndefinedShapeError(f"Specified shape type is not supported: {self.shape}")
+        self.content = content
+
+        if content is None:
+            if isinstance(shape, Shape):
+                self.shape = shape
+            else:
+                self.shape = Shape.from_string(shape)
+            self.bb_w = 0.0
+
+            # Determine Bounding Box fractional size through passed arguments
+            if isinstance(args, list) and len(args) > 0:
+                self.bb_w = float(args.pop(0).replace('%', ''))
+                if len(args) > 0:
+                    self.bb_h = float(args.pop(0).replace('%', ''))
+                else:
+                    self.bb_h = self.bb_w
+            else:
+                self.bb_w = 50.0
+                self.bb_h = 50.0
+
+            # Adjust Bounding Box fractional size based on shape
+            self.adjust_size_based_on_shape()
+
+            width = self.bb_w
+            height = self.bb_h
+
+            x = 100.0 - self.bb_w
+            y = 100.0 - self.bb_h
+
+            # Use svgwrite features for shape properties
+            if self.shape == Shape.RECT:
+                draw_color = tuple(random.randint(0, 256) for _ in range(3))
+                self.content = Rect(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"), fill="rgb" + str(draw_color))
+            elif self.shape == Shape.SHAPE:
+                self.content = SVG(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"))
+            else:
+                raise UndefinedShapeError(f"Specified shape type is not supported: {self.shape}")
 
     @property
     def neighbours(self):
@@ -779,6 +780,11 @@ class Graph:
         if from_caller:
             for n in v.neighbours:
                 self._draw_vertex(n, from_caller=True)
+
+    def export_as_vertex(self, var_name) -> Vertex:  # TODO: var_name is only for backwards compatibility; should be removed
+        for v in self.vertices:
+            self.svg_elem.add(v)
+        return Vertex(var_name=var_name, shape=Shape.SHAPE, content=self.svg_elem.copy())
 
     def draw(self, canvas, caller_vertex: Vertex = None):
         """
