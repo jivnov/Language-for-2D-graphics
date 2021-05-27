@@ -29,7 +29,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
         self.relations_graph.print_relations(self.relations_graph.find_vertex(ctx.IDENTIFIER()))
         self.relations_graph.center(self.res.viewport_width, self.res.viewport_height)
-        self.res.draw(self.relations_graph.find_vertex(vertex_name=ctx.IDENTIFIER()))
+        self.res.draw(self.relations_graph.find_vertex(vertex_name=ctx.IDENTIFIER().getText()))
         self.res.canvas.save(pretty=True)
 
         # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)

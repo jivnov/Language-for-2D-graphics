@@ -36,7 +36,7 @@ class GlobalContext:
         graph = Graph()
 
         for i, vertex_name in enumerate(f.args_names):
-            v = Vertex(graph, vertex_name, args[i].shape)
+            v = Vertex(vertex_name.getText(), args[i].shape, parent_graph=graph)
             graph.add_vertex(v)
             self.variables.add_variable(tag=vertex_name.getText(), name=v.uid, content=v, scope=call_id)
 
