@@ -60,11 +60,32 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             op2 = self.context.variables.find_var_by_tag(var_name2).data
             self.relations_graph.add_relation(op1, op2,
                                               graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+
+            graph_to_return = graph.Graph()
+            graph_to_return.add_vertex(op1)
+            graph_to_return.add_vertex(op2)
+            graph_to_return.add_relation(op1, op2,
+                                              graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+            return graph_to_return
+
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
 
     def enterFunctionDecl(self, ctx: TwoDimParser.FunctionDeclContext):
         del ctx.children[len(ctx.children)-1]
+
+    def enterAssignment(self, ctx:TwoDimParser.AssignmentContext):
+        data = None
+        if ctx.expression().functionCall() is not None:
+            data = self.enterFunctionCall(ctx.expression().functionCall())
+        elif ctx.expression().relationExpr() is not None:
+            data = self.enterRelationExpr(ctx.expression().relationExpr())
+        elif ctx.expression().primaryExpr() is not None:
+            data = self.context.variables.find_var_by_tag(
+                ctx.expression().primaryExpr()[0].operand().operandName().IDENTIFIER().getText()
+            ).data
+        self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data = data
+        print("!")
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
         # checking function call for correctness
@@ -97,4 +118,6 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         function_result = self.context.call_function(global_graph=self.relations_graph, name=ctx.IDENTIFIER(), args=args_for_call)
 
         self.relations_graph.merge_with(function_result)
+
+        return function_result
 
