@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="1000" version="1.1" width="1000">
   <defs/>
-  <rect fill="rgb(9, 116, 213)" height="100.0" width="100.0" x="300.0" y="450.0"/>
-  <rect fill="rgb(68, 64, 75)" height="100.0" width="100.0" x="400.0" y="450.0"/>
-  <rect fill="rgb(178, 201, 231)" height="100.0" width="100.0" x="500.0" y="450.0"/>
-  <rect fill="rgb(169, 193, 19)" height="100.0" width="100.0" x="600.0" y="450.0"/>
-  <rect fill="rgb(158, 131, 143)" height="100.0" width="100.0" x="300.0" y="550.0"/>
-  <rect fill="rgb(195, 53, 133)" height="100.0" width="100.0" x="300.0" y="650.0"/>
-  <rect fill="rgb(123, 121, 36)" height="100.0" width="100.0" x="300.0" y="750.0"/>
-  <rect fill="rgb(174, 8, 156)" height="100.0" width="100.0" x="400.0" y="450.0"/>
-  <rect fill="rgb(10, 75, 22)" height="100.0" width="100.0" x="500.0" y="450.0"/>
-  <rect fill="rgb(200, 170, 60)" height="100.0" width="100.0" x="600.0" y="450.0"/>
-  <rect fill="rgb(245, 26, 41)" height="100.0" width="100.0" x="400.0" y="450.0"/>
-  <rect fill="rgb(252, 91, 169)" height="100.0" width="100.0" x="500.0" y="450.0"/>
-  <rect fill="rgb(186, 122, 240)" height="100.0" width="100.0" x="600.0" y="450.0"/>
-  <rect fill="rgb(129, 246, 121)" height="100.0" width="100.0" x="400.0" y="450.0"/>
-  <rect fill="rgb(159, 15, 117)" height="100.0" width="100.0" x="500.0" y="450.0"/>
-  <rect fill="rgb(137, 116, 225)" height="100.0" width="100.0" x="600.0" y="450.0"/>
+  <svg height="100%" width="100%" x="0%" y="0%">
+    <defs/>
+    <rect fill="rgb(97, 151, 141)" height="40.0%" width="20.0%" x="45.0%" y="30.0%"/>
+    <rect fill="rgb(173, 34, 66)" height="30.0%" width="30.0%" x="65.0%" y="40.0%"/>
+  </svg>
 </svg>

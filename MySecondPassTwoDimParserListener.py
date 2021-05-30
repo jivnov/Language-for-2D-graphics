@@ -29,7 +29,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
         self.relations_graph.print_relations(self.relations_graph.find_vertex(ctx.IDENTIFIER()))
         self.relations_graph.center(self.res.viewport_width, self.res.viewport_height)
-        self.res.draw(self.relations_graph.find_vertex(vertex_name=ctx.IDENTIFIER().getText()))
+        self.res.draw(self.context.variables.find_var_by_tag(tag=ctx.IDENTIFIER().getText()).data)
         self.res.canvas.save(pretty=True)
 
         # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
@@ -56,8 +56,8 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         var_name1 = ctx.primaryExpr(0).operand().operandName().getText()
         var_name2 = ctx.primaryExpr(1).operand().operandName().getText()
         try:
-            op1 = self.relations_graph.find_vertex(var_name1)
-            op2 = self.relations_graph.find_vertex(var_name2)
+            op1 = self.context.variables.find_var_by_tag(var_name1).data
+            op2 = self.context.variables.find_var_by_tag(var_name2).data
             self.relations_graph.add_relation(op1, op2,
                                               graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
         except graph.UndeclaredShapeError:
@@ -74,7 +74,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         argument_ids = [opName.IDENTIFIER().getText() for opName in ctx.operandName()]
 
         for id in argument_ids:
-            v = self.relations_graph.find_vertex(id)
+            v = self.context.variables.find_var_by_tag(id).data
             shape = v.shape
 
             if len(args_for_check) == 0 or args_for_check[len(args_for_check)-1][0] != shape:
@@ -97,3 +97,4 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         function_result = self.context.call_function(global_graph=self.relations_graph, name=ctx.IDENTIFIER(), args=args_for_call)
 
         self.relations_graph.merge_with(function_result)
+

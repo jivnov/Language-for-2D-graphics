@@ -117,6 +117,8 @@ class Vertex:
         self.updated = False
         self.drawn = False
 
+        self.parent_graph = parent_graph
+
         self.content = None  # Should only be not-None if this Vertex is actually a Graph (this allows defining Vertex to Graph relations)
 
         self.LEFT: Set[Vertex] = set()
@@ -355,7 +357,7 @@ class Vertex:
 
 
 class Graph:
-    def __init__(self, x=0, y=0, width=100, height=100):
+    def __init__(self, x=0, y=0, width=100, height=100, viewport_size=None):
         self.vertices: Set[Vertex] = set()  # all unique vertices in a graph
 
         # Position of the top-left corner of this graph's bounding box
@@ -374,6 +376,8 @@ class Graph:
 
         self.relation_matrix_vertical: Dict[
             Vertex, Dict[Vertex, Relation]] = dict()  # all vertical relations in the shape graph
+
+        self.viewport_size = (-1, -1)
 
     @property
     def content_width(self):
@@ -629,7 +633,7 @@ class Graph:
         self._update_horizontal()
         self._update_vertical()
 
-    def move_horizontal(self, dist: int):
+    def move_horizontal(self, dist: int, parent_width=1):
         """
         Shift all shapes by the given distance in the X axis.
 
@@ -660,8 +664,10 @@ class Graph:
         :param py: Parent Y; 0 for viewport
         :return:
         """
-        target_x = (pw - self.width) // 2 + px
-        target_y = (ph - self.height) // 2 + py
+
+        target_x = (1 - self.width / 100) / 2 * 100
+        target_y = (1 - self.height / 100) / 2 * 100
+
         self.move_to(target_x, target_y)
 
     def center_content(self):

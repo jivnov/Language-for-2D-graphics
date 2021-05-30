@@ -26,8 +26,8 @@ class FunctionParserListener(TwoDimParserListener):
         var_name1 = ctx.primaryExpr(0).operand().operandName().getText()
         var_name2 = ctx.primaryExpr(1).operand().operandName().getText()
         try:
-            op1 = self.func_relations_graph.find_vertex(var_name1)
-            op2 = self.func_relations_graph.find_vertex(var_name2)
+            op1 = self.context.variables.find_var_by_tag(tag=var_name1, scope=self.function_call_id).data
+            op2 = self.context.variables.find_var_by_tag(tag=var_name2, scope=self.function_call_id).data
             self.func_relations_graph.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
@@ -42,7 +42,7 @@ class FunctionParserListener(TwoDimParserListener):
 
         for id in argument_ids:
             try:
-                v = self.func_relations_graph.find_vertex(id)
+                v = self.context.variables.find_var_by_tag(tag=id, scope=self.function_call_id)
 
                 shape = v.shape
 
@@ -57,7 +57,7 @@ class FunctionParserListener(TwoDimParserListener):
 
                 args_for_call.append(v)
             except:
-                v = self.relations_graph.find_vertex(id)
+                v = self.context.variables.find_var_by_tag(tag=id, scope=self.function_call_id)
                 shape = v.shape
 
                 if len(args_for_check) == 0 or args_for_check[len(args_for_check) - 1][0] != shape:
