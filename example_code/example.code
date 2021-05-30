@@ -1,12 +1,8 @@
 #viewport 1000 1000;
 
 rect A [20%, 40%];
-rect B [30%];
+shape S;
 
-func L(rect R1, R2) {
-    R1 left R2;
-};
+S = A;
 
-L(B, A);
-
-draw A;
+draw S;
