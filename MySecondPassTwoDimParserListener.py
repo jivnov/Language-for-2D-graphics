@@ -85,7 +85,6 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
                 ctx.expression().primaryExpr()[0].operand().operandName().IDENTIFIER().getText()
             ).data
         self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data = data
-        print("!")
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
         # checking function call for correctness
