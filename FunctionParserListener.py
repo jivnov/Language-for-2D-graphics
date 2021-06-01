@@ -22,7 +22,6 @@ class FunctionParserListener(TwoDimParserListener):
             self.func_relations_graph.add_vertex(v)
             self.context.variables.add_variable(tag=v.name, name=v.uid, content=v, scope=self.function_call_id)
 
-
     def enterAssignment(self, ctx:TwoDimParser.AssignmentContext):
         data = None
         if ctx.expression().functionCall() is not None:
