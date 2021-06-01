@@ -112,6 +112,8 @@ class Vertex:
         self.updated = False
         self.drawn = False
 
+        self.graph = parent_graph # Graph that this shape is a part of
+  
         self.LEFT: Set[Vertex] = set()
         self.RIGHT: Set[Vertex] = set()
         self.TOP: Set[Vertex] = set()
@@ -121,9 +123,7 @@ class Vertex:
         self.ON: Set[Vertex] = set()
         self.UNDER: Set[Vertex] = set()
 
-        self.unreachable = False
-
-        self.graph = parent_graph  # Graph that this shape is a part of
+        self.unreachable = False 
 
         self.name = var_name  # TODO: remove this parameter
 
@@ -356,7 +356,7 @@ class Vertex:
 
 
 class Graph:
-    def __init__(self, x=0, y=0, width=100, height=100):
+    def __init__(self, x=0, y=0, width=100, height=100, viewport_size=None):
         self.vertices: Set[Vertex] = set()  # all unique vertices in a graph
 
         # Position of the top-left corner of this graph's bounding box
@@ -375,6 +375,8 @@ class Graph:
 
         self.relation_matrix_vertical: Dict[
             Vertex, Dict[Vertex, Relation]] = dict()  # all vertical relations in the shape graph
+
+        self.viewport_size = (-1, -1)
 
     @property
     def content_width(self):
@@ -630,7 +632,7 @@ class Graph:
         self._update_horizontal()
         self._update_vertical()
 
-    def move_horizontal(self, dist: int):
+    def move_horizontal(self, dist: int, parent_width=1):
         """
         Shift all shapes by the given distance in the X axis.
 
@@ -661,8 +663,10 @@ class Graph:
         :param py: Parent Y; 0 for viewport
         :return:
         """
-        target_x = (pw - self.width) // 2 + px
-        target_y = (ph - self.height) // 2 + py
+
+        target_x = (1 - self.width / 100) / 2 * 100
+        target_y = (1 - self.height / 100) / 2 * 100
+
         self.move_to(target_x, target_y)
 
     def center_content(self):
@@ -758,6 +762,25 @@ class Graph:
                 if n not in visited and n not in tbv:
                     tbv.add(n)
         return visited != self.vertices
+
+    def export_to_vertex(self, parent_graph=None) -> Vertex:
+        """
+        :param parent_graph:
+        :param canvas:
+        :param caller_vertex: In 2Dim you can draw a graph itself via Graph.draw(), or Graph.draw() can be called by its child vertex; in latter case only the vertices connected to caller or its neighbours or their neighbours etc. are drawn
+        :return:
+        """
+        if self.disconnected:
+            raise DisconnectedGraphError("Some shapes have no clear relations to each other. Aborting drawing")
+
+        self.sort_horizontal()
+        self.sort_vertical()
+        map(Vertex.center_if_legal, self.vertices)
+
+        for v in self.vertices:
+            self.svg_elem.add(v.content)
+
+        return Vertex(var_name="Return_val", shape=Shape.SHAPE, content=self.svg_elem.copy(), parent_graph=parent_graph)
 
     def _draw_vertex(self, v: Vertex, from_caller=False):
         # TODO: Draw all neighbours and neighbours' neighbours etc.

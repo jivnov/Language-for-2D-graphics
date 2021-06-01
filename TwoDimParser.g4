@@ -196,7 +196,7 @@ string_
     ;
 
 arguments
-    : '(' (expressionList)? ')'
+    : '{' WS* (expressionList)? WS* '}'
     ;
 
 eos

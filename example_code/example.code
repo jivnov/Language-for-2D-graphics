@@ -1,19 +1,8 @@
 #viewport 1000 1000;
 
-rect R [50%];
+rect A [20%, 40%];
+shape S;
 
-func SmallSquareRight(rect M){
-    rect R [5%];
-    R right M;
-};
+S = A;
 
-VerySmallSquareLeft(R);
-
-func VerySmallSquareLeft(rect M){
-    rect R [2%];
-    R left M;
-};
-
-SmallSquareRight(R);
-
-draw R;
+draw S;
