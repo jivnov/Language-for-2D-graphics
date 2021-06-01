@@ -17,10 +17,10 @@ class FunctionParserListener(TwoDimParserListener):
         for i, var_name in enumerate(ctx.IDENTIFIER()):
             # TODO
             # At the moment assuming SIZE is the only argument
-            v = graph.Vertex(parent_graph=self.func_relations_graph, var_name=var_name.getText(), shape=ctx.typeName().getText(),
+            v = graph.Vertex(parent_graph=self.func_relations_graph, shape=ctx.typeName().getText(),
                              args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
             self.func_relations_graph.add_vertex(v)
-            self.context.variables.add_variable(tag=v.name, name=v.uid, content=v, scope=self.function_call_id)
+            self.context.variables.add_variable(tag=var_name.getText(), name=v.uid, content=v, scope=self.function_call_id)
 
     def enterAssignment(self, ctx:TwoDimParser.AssignmentContext):
         data = None
@@ -101,12 +101,7 @@ class FunctionParserListener(TwoDimParserListener):
                                                      name=ctx.IDENTIFIER().getText(), args=args_for_call,
                                                      parent_id=self.function_call_id)
 
-        for v in function_result.vertices:
-            if v not in args_for_call:
-                v.unreachable = True
-                v.name = f"{ctx.IDENTIFIER()}_{v.name}_{v.uid}"
-
-        self.func_relations_graph.merge_with(function_result)
+        #self.func_relations_graph.add_vertex(function_result)
 
         return function_result
 

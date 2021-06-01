@@ -57,7 +57,7 @@ class Shape(Enum):
         elif shape_name.lower() == "shape":
             return Shape.SHAPE
         else:
-            raise UndefinedShapeError
+            raise UndefinedShapeError(f"Specified shape type is not supported: {shape_name}")
 
 
 class Relation(Enum):
@@ -98,11 +98,10 @@ class Relation(Enum):
 
 
 class Vertex:
-    def __init__(self, var_name: str, shape, args: Any = None, content=None, parent_graph=None):
+    def __init__(self, shape, args: Any = None, content=None, parent_graph=None):
         """
 
         :param parent_graph: Graph that contains this Vertex
-        :param var_name: Name of the variable referencing this shape in code
         :param shape: Type of this variable
         :param args: Arguments passed to the variable initialization in code
         :param content: Type should be Graph or None; allows for comparison between graphs and shapes
@@ -124,9 +123,7 @@ class Vertex:
         self.ON: OrderedDict[Vertex, Any] = OrderedDict()
         self.UNDER: OrderedDict[Vertex, Any] = OrderedDict()
 
-        self.unreachable = False 
-
-        self.name = var_name  # TODO: remove this parameter
+        self.unreachable = False
 
         self.content = content
 
@@ -165,10 +162,18 @@ class Vertex:
                 self.content = SVG(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"))
             else:
                 raise UndefinedShapeError(f"Specified shape type is not supported: {self.shape}")
+        else:
+            self.shape = Shape.SHAPE
+
+    def __repr__(self):
+        return f"{self.shape} [{self.width_perc}, {self.height_perc}]"
 
     @property
     def neighbours(self):
-        return self.LEFT | self.RIGHT | self.TOP | self.BOT
+        result = OrderedDict()
+        for d in (self.LEFT, self.RIGHT, self.TOP, self.BOT):
+            result.update(d)
+        return result
 
     def draw(self, canvas):
         """
@@ -326,7 +331,7 @@ class Vertex:
             v.UNDER[self] = None
             self.ON[v] = None
         else:
-            print("rel: ", self.name, v.name, relation)
+            print("rel: ", relation)
             raise UndefinedRelationError()
 
     def remove_neighbour(self, neighbour):
@@ -434,13 +439,13 @@ class Graph:
             self.relation_matrix_horizontal[v_to][v_from] = -r
 
             if self._invalid_horizontal_relations():
-                raise CyclicRelationsError(f"Relation {r=} between {v_from.name=} and {v_to.name=} causes a cycle in horizontal relations")
+                raise CyclicRelationsError(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in horizontal relations")
         elif r in (Relation.TOP, Relation.BOT):
             self.relation_matrix_vertical[v_from][v_to] = r
             self.relation_matrix_vertical[v_to][v_from] = -r
 
             if self._invalid_vertical_relations():
-                raise CyclicRelationsError(f"Relation {r=} between {v_from.name=} and {v_to.name=} causes a cycle in vertical relations")
+                raise CyclicRelationsError(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in vertical relations")
             # TODO: Implement incidence matrices for other relations
         else:
             return
@@ -538,9 +543,9 @@ class Graph:
         if v not in self.vertices.keys():
             print("not in graph")
         else:
-            print(f"Found vertex {v.name}")
+            print(f"Found vertex {v.uid}")
             for v2, relation in self.relation_matrix_horizontal[v].items():
-                vertex_name = v2.name
+                vertex_name = v2.uid
                 vertex_relation = relation
                 print(f"{v2.shape}:{vertex_name}")
 
@@ -565,9 +570,9 @@ class Graph:
         other.vertices.clear()
         other.relation_matrix_horizontal.clear()
 
-    def find_vertex(self, vertex_name: str) -> Vertex:
+    def find_vertex(self, vertex_id: str) -> Vertex:
         for vertex in self.vertices.keys():
-            if str(vertex.name) == str(vertex_name):
+            if str(vertex.uid) == str(vertex_id):
                 return vertex
         raise UndeclaredShapeError(vertex_id)
 
@@ -788,25 +793,6 @@ class Graph:
                     tbv[n] = None
         return visited.keys() != self.vertices.keys()
 
-    def export_to_vertex(self, parent_graph=None) -> Vertex:
-        """
-        :param parent_graph:
-        :param canvas:
-        :param caller_vertex: In 2Dim you can draw a graph itself via Graph.draw(), or Graph.draw() can be called by its child vertex; in latter case only the vertices connected to caller or its neighbours or their neighbours etc. are drawn
-        :return:
-        """
-        if self.disconnected:
-            raise DisconnectedGraphError("Some shapes have no clear relations to each other. Aborting drawing")
-
-        self.sort_horizontal()
-        self.sort_vertical()
-        map(Vertex.center_if_legal, self.vertices.keys())
-
-        for v in self.vertices.keys():
-            self.svg_elem.add(v.content)
-
-        return Vertex(var_name="Return_val", shape=Shape.SHAPE, content=self.svg_elem.copy(), parent_graph=parent_graph)
-
     def _draw_vertex(self, v: Vertex, from_caller=False):
         # TODO: Draw all neighbours and neighbours' neighbours etc.
         """
@@ -829,9 +815,9 @@ class Graph:
             for n in v.neighbours:
                 self._draw_vertex(n, from_caller=True)
 
-    def export_as_vertex(self, var_name) -> Vertex:  # TODO: var_name is only for backwards compatibility; should be removed
+    def export_as_vertex(self) -> Vertex:
         for v in self.vertices.keys():
-            self.svg_elem.add(v)
+            self.svg_elem.add(v.content)
         return Vertex(shape=Shape.SHAPE, content=self.svg_elem.copy())
 
     def draw(self, canvas, caller_vertex: Vertex = None):
@@ -841,7 +827,7 @@ class Graph:
         :return:
         """
         if self.disconnected:
-            raise DisconnectedGraphError("Some shapes have no clear relations to each other. Aborting drawing")
+            raise DisconnectedGraphError(f"Some shapes have no clear relations to each other. Aborting drawing\n{self.relation_matrix_horizontal=}\n{self.relation_matrix_vertical=}")
 
         self.sort_horizontal()
         self.sort_vertical()

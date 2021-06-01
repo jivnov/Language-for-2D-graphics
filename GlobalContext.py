@@ -36,7 +36,7 @@ class GlobalContext:
         graph = Graph()
 
         for i, vertex_name in enumerate(f.args_names):
-            v = Vertex(vertex_name.getText(), args[i].shape, parent_graph=graph)
+            v = Vertex(shape=args[i].shape, parent_graph=graph)
             graph.add_vertex(v)
             self.variables.add_variable(tag=vertex_name.getText(), name=v.uid, content=v, scope=call_id)
 
@@ -46,7 +46,7 @@ class GlobalContext:
         walker.walk(printer, f.body)
 
         # Some randomish vertex name
-        return graph.export_as_vertex(f"{name}_{call_id}")
+        return graph.export_as_vertex()
 
     def _find_function_by_name(self, name: str):
         functions_list = list(self.functions_list)

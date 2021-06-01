@@ -44,7 +44,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             # TODO
             # At the moment assuming SIZE is the only argument
 
-            v = graph.Vertex(parent_graph=self.relations_graph, var_name=var_name.getText(),
+            v = graph.Vertex(parent_graph=self.relations_graph,
                              shape=ctx.typeName().getText(),
                              args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
             self.context.variables.add_variable(tag=var_name.getText(), name=v.uid, content=v)
