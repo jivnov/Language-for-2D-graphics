@@ -1,4 +1,5 @@
 import sys
+import uuid
 from copy import copy
 
 import drawing
@@ -87,7 +88,9 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             ).data
 
         self.relations_graph.remove_vertex(self.relations_graph.find_vertex(self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data.uid))
-        self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data = copy(data)
+        self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data = graph.Vertex(shape=data.shape)
+        self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data.width = data.width
+        self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data.height = data.height
         self.relations_graph.add_vertex(self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data)
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
@@ -119,8 +122,6 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             raise FunctionSignatureError(function_called.name)
 
         function_result = self.context.call_function(global_graph=self.relations_graph, name=ctx.IDENTIFIER(), args=args_for_call)
-
-        self.relations_graph.add_vertex(function_result)
 
         return function_result
 

@@ -168,7 +168,7 @@ class Vertex:
             self.shape = Shape.SHAPE
 
     def __repr__(self):
-        return f"{self.shape} [{self.width_perc}, {self.height_perc}]"
+        return f"{self.shape} [{self.width_perc}, {self.height_perc}, {self.uid}]"
 
     @property
     def neighbours(self):
@@ -592,7 +592,7 @@ class Graph:
                     del self.relation_matrix_vertical[key][v]
 
             # Remove from vertices list
-            self.vertices.remove(v)
+            self.vertices.pop(v)
             self.update_position_and_size()
 
     def sort_horizontal(self):

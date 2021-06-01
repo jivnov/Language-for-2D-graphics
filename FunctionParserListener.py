@@ -1,3 +1,4 @@
+import uuid
 from copy import copy
 
 import graph
@@ -27,8 +28,6 @@ class FunctionParserListener(TwoDimParserListener):
         data = None
         if ctx.expression().functionCall() is not None:
             data = self.enterFunctionCall(ctx.expression().functionCall())
-        elif ctx.expression().relationExpr() is not None:
-            data = self.enterRelationExpr(ctx.expression().relationExpr())
         elif ctx.expression().primaryExpr() is not None:
             data = self.context.variables.find_var_by_tag(
                 tag=ctx.expression().primaryExpr()[0].operand().operandName().IDENTIFIER().getText(),
@@ -38,7 +37,9 @@ class FunctionParserListener(TwoDimParserListener):
         self.func_relations_graph.remove_vertex(
             self.func_relations_graph.find_vertex(self.context.variables.find_var_by_tag(
                 tag=ctx.IDENTIFIER().getText(), scope=self.function_call_id).data.uid))
-        self.context.variables.find_var_by_tag(tag=ctx.IDENTIFIER().getText(), scope=self.function_call_id).data = copy(data)
+        self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText(), scope=self.function_call_id).data = graph.Vertex(shape=data.shape)
+        self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText(), scope=self.function_call_id).data.width = data.width
+        self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText(), scope=self.function_call_id).data.height = data.height
         self.func_relations_graph.add_vertex(
             self.context.variables.find_var_by_tag(tag=ctx.IDENTIFIER().getText(), scope=self.function_call_id).data)
 
@@ -49,14 +50,7 @@ class FunctionParserListener(TwoDimParserListener):
             op1 = self.context.variables.find_var_by_tag(tag=var_name1, scope=self.function_call_id).data
             op2 = self.context.variables.find_var_by_tag(tag=var_name2, scope=self.function_call_id).data
             self.func_relations_graph\
-                .add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-
-            graph_to_return = graph.Graph()
-            graph_to_return.add_vertex(op1)
-            graph_to_return.add_vertex(op2)
-            graph_to_return.add_relation(op1, op2,
-                                         graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-            return graph_to_return.export_as_vertex()
+                .add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText())) #!!!!!!!!!!!!!!
 
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
