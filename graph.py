@@ -377,8 +377,6 @@ class Graph:
         self.relation_matrix_vertical: Dict[
             Vertex, Dict[Vertex, Relation]] = OrderedDict()  # all vertical relations in the shape graph
 
-        self.viewport_size = (-1, -1)
-
     @property
     def content_width(self):
         return 0 if len(self.vertices) == 0 else max(v.x + v.width for v in self.vertices.keys()) - self.x
@@ -571,7 +569,30 @@ class Graph:
         for vertex in self.vertices.keys():
             if str(vertex.name) == str(vertex_name):
                 return vertex
-        raise UndeclaredShapeError(vertex_name)
+        raise UndeclaredShapeError(vertex_id)
+
+    def remove_vertex(self, v: Vertex):
+        if v in self.vertices:
+            # Add relations between this new vertex and other old vertices
+            self.relation_matrix_horizontal.pop(v)
+            self.relation_matrix_vertical.pop(v)
+
+            # Add relations between other old vertices and this new vertex
+            for key in self.relation_matrix_horizontal.keys():
+                if key is not v:
+                    del self.relation_matrix_horizontal[key][v]
+
+            for key in self.relation_matrix_vertical.keys():
+                if key is not v:
+                    self.relation_matrix_vertical[key][v] = Relation.UNRELATED
+
+            # Add new vertex to vertices set
+            self.vertices.add(v)
+
+            # Give the vertex a reference to this Graph
+            v.graph = self
+
+            self.update_position_and_size()
 
     def sort_horizontal(self):
         """
@@ -811,7 +832,7 @@ class Graph:
     def export_as_vertex(self, var_name) -> Vertex:  # TODO: var_name is only for backwards compatibility; should be removed
         for v in self.vertices.keys():
             self.svg_elem.add(v)
-        return Vertex(var_name=var_name, shape=Shape.SHAPE, content=self.svg_elem.copy())
+        return Vertex(shape=Shape.SHAPE, content=self.svg_elem.copy())
 
     def draw(self, canvas, caller_vertex: Vertex = None):
         """

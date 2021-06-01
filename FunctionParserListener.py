@@ -22,6 +22,19 @@ class FunctionParserListener(TwoDimParserListener):
             self.func_relations_graph.add_vertex(v)
             self.context.variables.add_variable(tag=v.name, name=v.uid, content=v, scope=self.function_call_id)
 
+    def enterAssignment(self, ctx:TwoDimParser.AssignmentContext):
+        data = None
+        if ctx.expression().functionCall() is not None:
+            data = self.enterFunctionCall(ctx.expression().functionCall())
+        elif ctx.expression().relationExpr() is not None:
+            data = self.enterRelationExpr(ctx.expression().relationExpr())
+        elif ctx.expression().primaryExpr() is not None:
+            data = self.context.variables.find_var_by_tag(
+                tag=ctx.expression().primaryExpr()[0].operand().operandName().IDENTIFIER().getText(),
+                scope=self.function_call_id
+            ).data
+        self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText(), self.function_call_id).data = data
+
     def enterRelationExpr(self, ctx: TwoDimParser.RelationExprContext):
         var_name1 = ctx.primaryExpr(0).operand().operandName().getText()
         var_name2 = ctx.primaryExpr(1).operand().operandName().getText()
@@ -29,6 +42,14 @@ class FunctionParserListener(TwoDimParserListener):
             op1 = self.context.variables.find_var_by_tag(tag=var_name1, scope=self.function_call_id).data
             op2 = self.context.variables.find_var_by_tag(tag=var_name2, scope=self.function_call_id).data
             self.func_relations_graph.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+
+            graph_to_return = graph.Graph()
+            graph_to_return.add_vertex(op1)
+            graph_to_return.add_vertex(op2)
+            graph_to_return.add_relation(op1, op2,
+                                         graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+            return graph_to_return
+
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
 
@@ -86,5 +107,7 @@ class FunctionParserListener(TwoDimParserListener):
                 v.name = f"{ctx.IDENTIFIER()}_{v.name}_{v.uid}"
 
         self.func_relations_graph.merge_with(function_result)
+
+        return function_result
 
 

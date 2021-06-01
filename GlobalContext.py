@@ -45,12 +45,8 @@ class GlobalContext:
         walker = ParseTreeWalker()
         walker.walk(printer, f.body)
 
-        for i in range(len(f.args_names)):
-            graph.replace_vertex(vertex_to_replace=graph.find_vertex(f.args_names[i]), new_vertex=args[i])
-            graph.sort_horizontal()
-            graph.sort_vertical()
-
-        return graph
+        # Some randomish vertex name
+        return graph.export_as_vertex(f"{name}_{call_id}")
 
     def _find_function_by_name(self, name: str):
         functions_list = list(self.functions_list)
