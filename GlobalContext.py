@@ -36,12 +36,13 @@ class GlobalContext:
         graph = Graph()
 
         for i, vertex_name in enumerate(f.args_names):
-            v = Vertex(shape=args[i].shape, parent_graph=graph)
+            v = Vertex(args[i].shape, parent_graph=graph)
+            v.width = args[i].width
+            v.height = args[i].height
             graph.add_vertex(v)
             self.variables.add_variable(tag=vertex_name.getText(), name=v.uid, content=v, scope=call_id)
 
-        printer = FunctionParserListener(global_context=self, relations_graph=global_graph, func_relations_graph=graph,
-                                         call_id=call_id)
+        printer = FunctionParserListener(global_context=self, func_relations_graph=graph, call_id=call_id)
         walker = ParseTreeWalker()
         walker.walk(printer, f.body)
 
