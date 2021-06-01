@@ -97,11 +97,10 @@ class Relation(Enum):
 
 
 class Vertex:
-    def __init__(self, var_name: str, shape, args: Any = None, content=None, parent_graph=None):
+    def __init__(self, shape, args: Any = None, content=None, parent_graph=None):
         """
 
         :param parent_graph: Graph that contains this Vertex
-        :param var_name: Name of the variable referencing this shape in code
         :param shape: Type of this variable
         :param args: Arguments passed to the variable initialization in code
         :param content: Type should be Graph or None; allows for comparison between graphs and shapes
@@ -123,11 +122,11 @@ class Vertex:
         self.ON: Set[Vertex] = set()
         self.UNDER: Set[Vertex] = set()
 
-        self.unreachable = False 
-
-        self.name = var_name  # TODO: remove this parameter
+        self.unreachable = False
 
         self.content = content
+
+        self.shape = Shape.SHAPE
 
         if content is None:
             if isinstance(shape, Shape):
@@ -537,11 +536,9 @@ class Graph:
         if v not in self.vertices:
             print("not in graph")
         else:
-            print(f"Found vertex {v.name}")
+            print(f"Found vertex {v.shape}:{v.uid}")
             for v2, relation in self.relation_matrix_horizontal[v].items():
-                vertex_name = v2.name
-                vertex_relation = relation
-                print(f"{v2.shape}:{vertex_name}")
+                print(f"{v2.shape}:{v2.uid}")
 
     def merge_with(self, other, r: Relation = Relation.UNRELATED):
         # TODO: Parameter "r" taken into account (as stated in docstring)
@@ -583,14 +580,10 @@ class Graph:
 
             for key in self.relation_matrix_vertical.keys():
                 if key is not v:
-                    self.relation_matrix_vertical[key][v] = Relation.UNRELATED
+                    del self.relation_matrix_vertical[key][v]
 
-            # Add new vertex to vertices set
-            self.vertices.add(v)
-
-            # Give the vertex a reference to this Graph
-            v.graph = self
-
+            # Remove from vertices list
+            self.vertices.remove(v)
             self.update_position_and_size()
 
     def sort_horizontal(self):
@@ -827,7 +820,7 @@ class Graph:
 
     def export_as_vertex(self) -> Vertex:  # TODO: var_name is only for backwards compatibility; should be removed
         for v in self.vertices:
-            self.svg_elem.add(v)
+            self.svg_elem.add(v.content)
         return Vertex(shape=Shape.SHAPE, content=self.svg_elem.copy())
 
     def draw(self, canvas, caller_vertex: Vertex = None):

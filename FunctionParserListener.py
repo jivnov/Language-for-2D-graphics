@@ -1,3 +1,5 @@
+from copy import copy
+
 import graph
 
 from TwoDimParser import TwoDimParser
@@ -6,9 +8,8 @@ from Function import Function, FunctionSignatureError
 
 class FunctionParserListener(TwoDimParserListener):
 
-    def __init__(self, global_context, relations_graph, func_relations_graph, call_id=None):
+    def __init__(self, global_context, func_relations_graph, call_id=None):
         super().__init__()
-        self.relations_graph = relations_graph
         self.func_relations_graph = func_relations_graph
         self.context = global_context
         self.function_call_id = call_id
@@ -17,10 +18,10 @@ class FunctionParserListener(TwoDimParserListener):
         for i, var_name in enumerate(ctx.IDENTIFIER()):
             # TODO
             # At the moment assuming SIZE is the only argument
-            v = graph.Vertex(parent_graph=self.func_relations_graph, var_name=var_name.getText(), shape=ctx.typeName().getText(),
+            v = graph.Vertex(parent_graph=self.func_relations_graph, shape=ctx.typeName().getText(),
                              args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
             self.func_relations_graph.add_vertex(v)
-            self.context.variables.add_variable(tag=v.name, name=v.uid, content=v, scope=self.function_call_id)
+            self.context.variables.add_variable(tag=var_name.getText(), name=v.uid, content=v, scope=self.function_call_id)
 
     def enterAssignment(self, ctx:TwoDimParser.AssignmentContext):
         data = None
@@ -34,6 +35,12 @@ class FunctionParserListener(TwoDimParserListener):
                 scope=self.function_call_id
             ).data
         self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText(), self.function_call_id).data = data
+        self.func_relations_graph.remove_vertex(
+            self.func_relations_graph.find_vertex(self.context.variables.find_var_by_tag(
+                tag=ctx.IDENTIFIER().getText(), scope=self.function_call_id).data.uid))
+        self.context.variables.find_var_by_tag(tag=ctx.IDENTIFIER().getText(), scope=self.function_call_id).data = copy(data)
+        self.func_relations_graph.add_vertex(
+            self.context.variables.find_var_by_tag(tag=ctx.IDENTIFIER().getText(), scope=self.function_call_id).data)
 
     def enterRelationExpr(self, ctx: TwoDimParser.RelationExprContext):
         var_name1 = ctx.primaryExpr(0).operand().operandName().getText()
@@ -41,14 +48,15 @@ class FunctionParserListener(TwoDimParserListener):
         try:
             op1 = self.context.variables.find_var_by_tag(tag=var_name1, scope=self.function_call_id).data
             op2 = self.context.variables.find_var_by_tag(tag=var_name2, scope=self.function_call_id).data
-            self.func_relations_graph.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+            self.func_relations_graph\
+                .add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
 
             graph_to_return = graph.Graph()
             graph_to_return.add_vertex(op1)
             graph_to_return.add_vertex(op2)
             graph_to_return.add_relation(op1, op2,
                                          graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-            return graph_to_return
+            return graph_to_return.export_as_vertex()
 
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
@@ -101,12 +109,7 @@ class FunctionParserListener(TwoDimParserListener):
                                                      name=ctx.IDENTIFIER().getText(), args=args_for_call,
                                                      parent_id=self.function_call_id)
 
-        for v in function_result.vertices:
-            if v not in args_for_call:
-                v.unreachable = True
-                v.name = f"{ctx.IDENTIFIER()}_{v.name}_{v.uid}"
-
-        self.func_relations_graph.merge_with(function_result)
+        self.func_relations_graph.add_vertex(function_result)
 
         return function_result
 

@@ -29,7 +29,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         print("I just entered the source file for the 2nd time")
 
     def enterDrawClause(self, ctx: TwoDimParser.DrawClauseContext):
-        self.relations_graph.print_relations(self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()))
+        self.relations_graph.print_relations(self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data)
         self.relations_graph.center(self.res.viewport_width, self.res.viewport_height)
         self.res.draw(self.context.variables.find_var_by_tag(tag=ctx.IDENTIFIER().getText()).data)
         self.res.canvas.save(pretty=True)
@@ -44,7 +44,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             # TODO
             # At the moment assuming SIZE is the only argument
 
-            v = graph.Vertex(parent_graph=self.relations_graph, var_name=var_name.getText(),
+            v = graph.Vertex(parent_graph=self.relations_graph,
                              shape=ctx.typeName().getText(),
                              args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
             self.context.variables.add_variable(tag=var_name.getText(), name=v.uid, content=v)
@@ -67,7 +67,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             graph_to_return.add_vertex(op1)
             graph_to_return.add_vertex(op2)
             graph_to_return.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-            return graph_to_return
+            return graph_to_return.export_as_vertex()
 
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
@@ -85,7 +85,8 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             data = self.context.variables.find_var_by_tag(
                 ctx.expression().primaryExpr()[0].operand().operandName().IDENTIFIER().getText()
             ).data
-        # self.relations_graph.find_vertex(self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data.uid)
+
+        self.relations_graph.remove_vertex(self.relations_graph.find_vertex(self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data.uid))
         self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data = copy(data)
         self.relations_graph.add_vertex(self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data)
 
