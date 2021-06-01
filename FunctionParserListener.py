@@ -86,7 +86,7 @@ class FunctionParserListener(TwoDimParserListener):
 
                 args_for_call.append(v)
             except:
-                v = self.context.variables.find_var_by_tag(tag=id, scope=self.function_call_id)
+                v = self.context.variables.find_var_by_tag(tag=id, scope=self.function_call_id).data
                 shape = v.shape
 
                 if len(args_for_check) == 0 or args_for_check[len(args_for_check) - 1][0] != shape:
@@ -108,8 +108,6 @@ class FunctionParserListener(TwoDimParserListener):
         function_result = self.context.call_function(global_graph=self.func_relations_graph,
                                                      name=ctx.IDENTIFIER().getText(), args=args_for_call,
                                                      parent_id=self.function_call_id)
-
-        self.func_relations_graph.add_vertex(function_result)
 
         return function_result
 
