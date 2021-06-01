@@ -356,7 +356,7 @@ class Vertex:
 
 
 class Graph:
-    def __init__(self, x=0, y=0, width=100, height=100, viewport_size=None):
+    def __init__(self, x=0, y=0, width=100, height=100):
         self.vertices: Set[Vertex] = set()  # all unique vertices in a graph
 
         # Position of the top-left corner of this graph's bounding box
@@ -375,8 +375,6 @@ class Graph:
 
         self.relation_matrix_vertical: Dict[
             Vertex, Dict[Vertex, Relation]] = dict()  # all vertical relations in the shape graph
-
-        self.viewport_size = (-1, -1)
 
     @property
     def content_width(self):
