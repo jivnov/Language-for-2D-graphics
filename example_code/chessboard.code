@@ -1,0 +1,52 @@
+#viewport 1000 1000;
+
+rect Origin [10%];
+
+func EightInRow(rect R0){
+    rect R1 [10%];
+    rect R2 [10%];
+    rect R3 [10%];
+    rect R4 [10%];
+    rect R5 [10%];
+    rect R6 [10%];
+    rect R7 [10%];
+
+    R1 right R0;
+    R2 right R1;
+    R3 right R2;
+    R4 right R3;
+    R5 right R4;
+    R6 right R5;
+    R7 right R6;
+
+    EightInColumn(R0);
+    EightInColumn(R1);
+    EightInColumn(R2);
+    EightInColumn(R3);
+    EightInColumn(R4);
+    EightInColumn(R5);
+    EightInColumn(R6);
+    EightInColumn(R7);
+};
+
+func EightInColumn(rect R0){
+    rect R1 [10%];
+    rect R2 [10%];
+    rect R3 [10%];
+    rect R4 [10%];
+    rect R5 [10%];
+    rect R6 [10%];
+    rect R7 [10%];
+
+    R1 bot R0;
+    R2 bot R1;
+    R3 bot R2;
+    R4 bot R3;
+    R5 bot R4;
+    R6 bot R5;
+    R7 bot R6;
+}
+
+EightInRow(Origin);
+
+draw Origin;

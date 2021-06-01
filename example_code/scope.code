@@ -1,0 +1,18 @@
+#viewport 1000 1000;
+
+rect R [10%];
+
+B(R);
+
+func A(rect M){
+    rect R [20%];
+    R right M;
+};
+
+func B(rect M){
+    rect R [2%];
+    R left M;
+    A(M);
+};
+
+draw R;
