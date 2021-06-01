@@ -764,6 +764,25 @@ class Graph:
                     tbv.add(n)
         return visited != self.vertices
 
+    def export_to_vertex(self, parent_graph=None) -> Vertex:
+        """
+        :param parent_graph:
+        :param canvas:
+        :param caller_vertex: In 2Dim you can draw a graph itself via Graph.draw(), or Graph.draw() can be called by its child vertex; in latter case only the vertices connected to caller or its neighbours or their neighbours etc. are drawn
+        :return:
+        """
+        if self.disconnected:
+            raise DisconnectedGraphError("Some shapes have no clear relations to each other. Aborting drawing")
+
+        self.sort_horizontal()
+        self.sort_vertical()
+        map(Vertex.center_if_legal, self.vertices)
+
+        for v in self.vertices:
+            self.svg_elem.add(v.content)
+
+        return Vertex(var_name="Return_val", shape=Shape.SHAPE, content=self.svg_elem.copy(), parent_graph=parent_graph)
+
     def _draw_vertex(self, v: Vertex, from_caller=False):
         # TODO: Draw all neighbours and neighbours' neighbours etc.
         """
