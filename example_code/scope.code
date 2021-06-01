@@ -12,7 +12,7 @@ func A(rect M){
 func B(rect M){
     rect R [2%];
     R left M;
-    A(M)l
+    A(M);
 };
 
 draw R;

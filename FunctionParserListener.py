@@ -78,7 +78,7 @@ class FunctionParserListener(TwoDimParserListener):
 
                 args_for_call.append(v)
             except:
-                v = self.context.variables.find_var_by_tag(tag=id, scope=self.function_call_id)
+                v = self.context.variables.find_var_by_tag(tag=id, scope=self.function_call_id).data
                 shape = v.shape
 
                 if len(args_for_check) == 0 or args_for_check[len(args_for_check) - 1][0] != shape:
