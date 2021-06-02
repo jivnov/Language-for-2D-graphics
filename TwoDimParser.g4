@@ -26,7 +26,6 @@ expressionList
     ;
 
 // Function declarations
-
 functionDecl
     : 'func' IDENTIFIER (signature block?)
     ;
@@ -45,7 +44,7 @@ parameterDecl
     ;
 
 functionCall
-    : IDENTIFIER WS? L_PAREN WS? operandName (COMMA WS? operandName)* R_PAREN
+    : IDENTIFIER WS? L_PAREN WS? operandName? (COMMA WS? operandName)* R_PAREN
     ;
 
 drawClause
@@ -61,7 +60,7 @@ shapeSpec
     ;
 
 block
-    : '{' statementList? '}'
+    : '{' TERMINATOR? statementList? '}'
     ;
 
 statementList
@@ -73,7 +72,6 @@ statement
     | functionDecl
     | functionCall
     | simpleStmt
-    | block
     | ifStmt
     | switchStmt
     | assignmentDeclarationStmt

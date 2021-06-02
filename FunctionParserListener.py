@@ -23,24 +23,19 @@ class FunctionParserListener(TwoDimParserListener):
             self.func_relations_graph.add_vertex(v)
             self.context.variables.add_variable(tag=var_name.getText(), name=v.uid, content=v, scope=self.function_call_id)
 
-    def enterAssignment(self, ctx:TwoDimParser.AssignmentContext):
-        data = None
-        if ctx.expression().functionCall() is not None:
-            data = self.enterFunctionCall(ctx.expression().functionCall())
-        elif ctx.expression().relationExpr() is not None:
-            data = self.enterRelationExpr(ctx.expression().relationExpr())
-        elif ctx.expression().primaryExpr() is not None:
-            data = self.context.variables.find_var_by_tag(
-                tag=ctx.expression().primaryExpr()[0].operand().operandName().IDENTIFIER().getText(),
-                scope=self.function_call_id
-            ).data
-        self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText(), self.function_call_id).data = data
-        self.func_relations_graph.remove_vertex(
-            self.func_relations_graph.find_vertex(self.context.variables.find_var_by_tag(
-                tag=ctx.IDENTIFIER().getText(), scope=self.function_call_id).data.uid))
-        self.context.variables.find_var_by_tag(tag=ctx.IDENTIFIER().getText(), scope=self.function_call_id).data = copy(data)
-        self.func_relations_graph.add_vertex(
-            self.context.variables.find_var_by_tag(tag=ctx.IDENTIFIER().getText(), scope=self.function_call_id).data)
+    def enterAssignmentDeclarationStmt(self, ctx: TwoDimParser.AssignmentDeclarationStmtContext):
+        v_from_func: graph.Vertex = self.enterFunctionCall(ctx.functionCall())
+
+        # Remove the function call after calculating its output so the Walker doesn't enter it a second time
+        ctx.removeLastChild()
+
+        # TODO: At the moment assuming SIZE is the only argument
+        v = graph.Vertex(parent_graph=self.func_relations_graph,
+                         shape='shape',
+                         args=[size_lit.getText() for size_lit in ctx.shapeArguments().SIZE_LIT()],
+                         content=v_from_func.content)
+        self.func_relations_graph.add_vertex(v)
+        self.context.variables.add_variable(tag=ctx.IDENTIFIER().getText(), name=v.uid, content=v)
 
     def enterRelationExpr(self, ctx: TwoDimParser.RelationExprContext):
         var_name1 = ctx.primaryExpr(0).operand().operandName().getText()

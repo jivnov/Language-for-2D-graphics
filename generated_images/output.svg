@@ -3,13 +3,96 @@
   <defs/>
   <svg height="100%" width="100%" x="0%" y="0%">
     <defs/>
-    <svg height="80.0%" width="100.0%" x="0.0%" y="25.0%">
+    <svg height="100.0%" width="100.0%" x="0%" y="0%">
       <defs/>
-      <rect fill="rgb(59, 196, 140)" height="100.0%" width="30.0%" x="0.0%" y="0.0%"/>
-      <rect fill="rgb(20, 61, 155)" height="100.0%" width="40.0%" x="30.0%" y="0.0%"/>
-      <rect fill="rgb(121, 31, 95)" height="100.0%" width="30.0%" x="70.0%" y="0.0%"/>
+      <svg height="10.0%" width="100.0%" x="0.0%" y="10.0%">
+        <defs/>
+        <rect fill="rgb(235, 74, 254)" height="100.0%" width="10.0%" x="10.0%" y="0.0%"/>
+        <rect fill="rgb(215, 71, 70)" height="100.0%" width="10.0%" x="20.0%" y="0.0%"/>
+        <rect fill="rgb(55, 202, 33)" height="100.0%" width="10.0%" x="30.0%" y="0.0%"/>
+        <rect fill="rgb(256, 97, 206)" height="100.0%" width="10.0%" x="40.0%" y="0.0%"/>
+        <rect fill="rgb(86, 23, 106)" height="100.0%" width="10.0%" x="50.0%" y="0.0%"/>
+        <rect fill="rgb(161, 80, 110)" height="100.0%" width="10.0%" x="60.0%" y="0.0%"/>
+        <rect fill="rgb(219, 186, 134)" height="100.0%" width="10.0%" x="70.0%" y="0.0%"/>
+        <rect fill="rgb(237, 29, 150)" height="100.0%" width="10.0%" x="80.0%" y="0.0%"/>
+      </svg>
+      <svg height="10.0%" width="100.0%" x="0.0%" y="20.0%">
+        <defs/>
+        <rect fill="rgb(37, 224, 10)" height="100.0%" width="10.0%" x="10.0%" y="0.0%"/>
+        <rect fill="rgb(51, 2, 239)" height="100.0%" width="10.0%" x="20.0%" y="0.0%"/>
+        <rect fill="rgb(162, 7, 153)" height="100.0%" width="10.0%" x="30.0%" y="0.0%"/>
+        <rect fill="rgb(191, 89, 19)" height="100.0%" width="10.0%" x="40.0%" y="0.0%"/>
+        <rect fill="rgb(229, 217, 233)" height="100.0%" width="10.0%" x="50.0%" y="0.0%"/>
+        <rect fill="rgb(145, 21, 67)" height="100.0%" width="10.0%" x="60.0%" y="0.0%"/>
+        <rect fill="rgb(191, 194, 168)" height="100.0%" width="10.0%" x="70.0%" y="0.0%"/>
+        <rect fill="rgb(254, 76, 109)" height="100.0%" width="10.0%" x="80.0%" y="0.0%"/>
+      </svg>
+      <svg height="10.0%" width="100.0%" x="0.0%" y="30.0%">
+        <defs/>
+        <rect fill="rgb(18, 94, 16)" height="100.0%" width="10.0%" x="10.0%" y="0.0%"/>
+        <rect fill="rgb(148, 91, 124)" height="100.0%" width="10.0%" x="20.0%" y="0.0%"/>
+        <rect fill="rgb(121, 43, 62)" height="100.0%" width="10.0%" x="30.0%" y="0.0%"/>
+        <rect fill="rgb(11, 214, 57)" height="100.0%" width="10.0%" x="40.0%" y="0.0%"/>
+        <rect fill="rgb(135, 119, 178)" height="100.0%" width="10.0%" x="50.0%" y="0.0%"/>
+        <rect fill="rgb(216, 49, 202)" height="100.0%" width="10.0%" x="60.0%" y="0.0%"/>
+        <rect fill="rgb(136, 108, 247)" height="100.0%" width="10.0%" x="70.0%" y="0.0%"/>
+        <rect fill="rgb(104, 37, 256)" height="100.0%" width="10.0%" x="80.0%" y="0.0%"/>
+      </svg>
+      <svg height="10.0%" width="100.0%" x="0.0%" y="40.0%">
+        <defs/>
+        <rect fill="rgb(94, 87, 13)" height="100.0%" width="10.0%" x="10.0%" y="0.0%"/>
+        <rect fill="rgb(10, 207, 23)" height="100.0%" width="10.0%" x="20.0%" y="0.0%"/>
+        <rect fill="rgb(141, 234, 107)" height="100.0%" width="10.0%" x="30.0%" y="0.0%"/>
+        <rect fill="rgb(99, 22, 157)" height="100.0%" width="10.0%" x="40.0%" y="0.0%"/>
+        <rect fill="rgb(195, 190, 64)" height="100.0%" width="10.0%" x="50.0%" y="0.0%"/>
+        <rect fill="rgb(245, 182, 43)" height="100.0%" width="10.0%" x="60.0%" y="0.0%"/>
+        <rect fill="rgb(94, 101, 140)" height="100.0%" width="10.0%" x="70.0%" y="0.0%"/>
+        <rect fill="rgb(106, 251, 213)" height="100.0%" width="10.0%" x="80.0%" y="0.0%"/>
+      </svg>
+      <svg height="10.0%" width="100.0%" x="0.0%" y="50.0%">
+        <defs/>
+        <rect fill="rgb(230, 48, 108)" height="100.0%" width="10.0%" x="10.0%" y="0.0%"/>
+        <rect fill="rgb(146, 94, 227)" height="100.0%" width="10.0%" x="20.0%" y="0.0%"/>
+        <rect fill="rgb(156, 171, 253)" height="100.0%" width="10.0%" x="30.0%" y="0.0%"/>
+        <rect fill="rgb(150, 149, 94)" height="100.0%" width="10.0%" x="40.0%" y="0.0%"/>
+        <rect fill="rgb(31, 46, 136)" height="100.0%" width="10.0%" x="50.0%" y="0.0%"/>
+        <rect fill="rgb(131, 192, 132)" height="100.0%" width="10.0%" x="60.0%" y="0.0%"/>
+        <rect fill="rgb(225, 70, 169)" height="100.0%" width="10.0%" x="70.0%" y="0.0%"/>
+        <rect fill="rgb(41, 145, 40)" height="100.0%" width="10.0%" x="80.0%" y="0.0%"/>
+      </svg>
+      <svg height="10.0%" width="100.0%" x="0.0%" y="60.0%">
+        <defs/>
+        <rect fill="rgb(45, 107, 176)" height="100.0%" width="10.0%" x="10.0%" y="0.0%"/>
+        <rect fill="rgb(124, 256, 244)" height="100.0%" width="10.0%" x="20.0%" y="0.0%"/>
+        <rect fill="rgb(239, 171, 173)" height="100.0%" width="10.0%" x="30.0%" y="0.0%"/>
+        <rect fill="rgb(157, 168, 182)" height="100.0%" width="10.0%" x="40.0%" y="0.0%"/>
+        <rect fill="rgb(54, 207, 91)" height="100.0%" width="10.0%" x="50.0%" y="0.0%"/>
+        <rect fill="rgb(1, 171, 244)" height="100.0%" width="10.0%" x="60.0%" y="0.0%"/>
+        <rect fill="rgb(201, 214, 247)" height="100.0%" width="10.0%" x="70.0%" y="0.0%"/>
+        <rect fill="rgb(75, 204, 207)" height="100.0%" width="10.0%" x="80.0%" y="0.0%"/>
+      </svg>
+      <svg height="10.0%" width="100.0%" x="0.0%" y="70.0%">
+        <defs/>
+        <rect fill="rgb(190, 137, 2)" height="100.0%" width="10.0%" x="10.0%" y="0.0%"/>
+        <rect fill="rgb(52, 188, 158)" height="100.0%" width="10.0%" x="20.0%" y="0.0%"/>
+        <rect fill="rgb(133, 198, 43)" height="100.0%" width="10.0%" x="30.0%" y="0.0%"/>
+        <rect fill="rgb(232, 28, 32)" height="100.0%" width="10.0%" x="40.0%" y="0.0%"/>
+        <rect fill="rgb(30, 222, 114)" height="100.0%" width="10.0%" x="50.0%" y="0.0%"/>
+        <rect fill="rgb(225, 84, 157)" height="100.0%" width="10.0%" x="60.0%" y="0.0%"/>
+        <rect fill="rgb(109, 232, 102)" height="100.0%" width="10.0%" x="70.0%" y="0.0%"/>
+        <rect fill="rgb(173, 57, 211)" height="100.0%" width="10.0%" x="80.0%" y="0.0%"/>
+      </svg>
+      <svg height="10.0%" width="100.0%" x="0.0%" y="80.0%">
+        <defs/>
+        <rect fill="rgb(207, 8, 233)" height="100.0%" width="10.0%" x="10.0%" y="0.0%"/>
+        <rect fill="rgb(183, 233, 48)" height="100.0%" width="10.0%" x="20.0%" y="0.0%"/>
+        <rect fill="rgb(176, 204, 98)" height="100.0%" width="10.0%" x="30.0%" y="0.0%"/>
+        <rect fill="rgb(172, 114, 239)" height="100.0%" width="10.0%" x="40.0%" y="0.0%"/>
+        <rect fill="rgb(29, 20, 137)" height="100.0%" width="10.0%" x="50.0%" y="0.0%"/>
+        <rect fill="rgb(14, 87, 21)" height="100.0%" width="10.0%" x="60.0%" y="0.0%"/>
+        <rect fill="rgb(0, 24, 188)" height="100.0%" width="10.0%" x="70.0%" y="0.0%"/>
+        <rect fill="rgb(22, 216, 168)" height="100.0%" width="10.0%" x="80.0%" y="0.0%"/>
+      </svg>
     </svg>
-    <rect fill="rgb(239, 78, 245)" height="10.0%" width="100.0%" x="0.0%" y="15.0%"/>
-    <rect fill="rgb(34, 234, 54)" height="20.0%" width="100.0%" x="0.0%" y="-5.0%"/>
   </svg>
 </svg>
