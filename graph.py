@@ -133,11 +133,10 @@ class Vertex:
             self.shape = Shape.from_string(shape)
 
         # Determine Bounding Box fractional size through passed arguments
-        self.bb_w = 50.0
-        self.bb_h = 50.0
+        self.bb_w = 100.0
+        self.bb_h = 100.0
         if isinstance(args, list) and len(args) > 0:
             self.bb_w = float(args.pop(0).replace('%', ''))
-            self.bb_h = self.bb_w
 
             # If second dimension was passed use it for height
             if len(args) > 0:
@@ -166,13 +165,13 @@ class Vertex:
         else:
             raise UndefinedShapeError(f"Specified shape type is not supported: {self.shape}")
 
-    def __repr__(self):
-        return f"{self.shape} [{self.width_perc}, {self.height_perc}]"
+    def __str__(self):
+        return f"{self.shape} [{self.width_perc}, {self.height_perc}] at: (x={self.x_perc}, y={self.y_perc})"
 
     @property
-    def neighbours(self):
-        result = OrderedDict()
-        for d in (self.LEFT, self.RIGHT, self.TOP, self.BOT):
+    def neighbours(self) -> OrderedDict:
+        result = self.LEFT.copy()
+        for d in (self.RIGHT, self.TOP, self.BOT):
             result.update(d)
         return result
 
@@ -250,11 +249,11 @@ class Vertex:
 
     def center_horizontally_if_legal(self):
         if len(self.LEFT) == 0 and len(self.RIGHT) == 0:
-            self.x = self.graph.x + self.graph.width / 2
+            self.x = self.graph.x + (self.graph.width - self.width) / 2
 
     def center_vertically_if_legal(self):
         if len(self.TOP) == 0 and len(self.BOT) == 0:
-            self.y = self.graph.y + self.graph.height / 2
+            self.y = self.graph.y + (self.graph.height - self.height) / 2
 
     def center_if_legal(self):
         self.center_horizontally_if_legal()
@@ -385,11 +384,19 @@ class Graph:
 
     @property
     def content_width(self):
-        return 0 if len(self.vertices) == 0 else max(v.x + v.width for v in self.vertices.keys()) - self.x
+        return 0 if len(self.vertices) == 0 else max(v.x + v.width for v in self.vertices.keys()) - min(v.x for v in self.vertices.keys())
 
     @property
     def content_height(self):
-        return 0 if len(self.vertices) == 0 else max(v.y + v.height for v in self.vertices.keys()) - self.y
+        return 0 if len(self.vertices) == 0 else max(v.y + v.height for v in self.vertices.keys()) - min(v.y for v in self.vertices.keys())
+
+    @property
+    def content_x(self):
+        return 0 if len(self.vertices) == 0 else min(v.x for v in self.vertices.keys())
+
+    @property
+    def content_y(self):
+        return 0 if len(self.vertices) == 0 else min(v.y for v in self.vertices.keys())
 
     def add_vertex(self, v: Vertex):
         if v not in self.vertices.keys():
@@ -411,8 +418,6 @@ class Graph:
 
             # Give the vertex a reference to this Graph
             v.graph = self
-
-            self.update_position_and_size()
 
     def add_relation(self, v_from: Vertex, v_to: Vertex, r: Relation):
         """
@@ -592,7 +597,6 @@ class Graph:
 
             # Remove from vertices list
             self.vertices.pop(v)
-            self.update_position_and_size()
 
     def sort_horizontal(self):
         """
@@ -610,8 +614,8 @@ class Graph:
                 elif relation is Relation.RIGHT and not v1.is_right(v2):
                     v2.to_left_of(v1)
 
-                # UPDATE GRAPH BOUNDING BOX VALUES
-                self._update_horizontal()
+                # # UPDATE GRAPH BOUNDING BOX VALUES
+                # self._update_horizontal()
 
     def sort_vertical(self):
         """
@@ -628,9 +632,10 @@ class Graph:
                     v2.to_bot_of(v1)
                 elif relation is Relation.BOT and not v1.is_bot(v2):
                     v2.to_top_of(v1)
-
-                # UPDATE GRAPH BOUNDING BOX VALUES
-                self._update_vertical()
+                #
+                # # UPDATE GRAPH BOUNDING BOX VALUES
+                # self._update_vertical()
+                # self._update_horizontal()
 
     def _update_x(self):
         self.x = min(v.x for v in self.vertices.keys())
@@ -654,7 +659,7 @@ class Graph:
         self._update_horizontal()
         self._update_vertical()
 
-    def move_horizontal(self, dist: int, parent_width=1):
+    def content_move_horizontal(self, dist: int, parent_width=1):
         """
         Shift all shapes by the given distance in the X axis.
 
@@ -665,7 +670,7 @@ class Graph:
             v.x += dist
         self.x += dist
 
-    def move_vertical(self, dist: int):
+    def content_move_vertical(self, dist: int):
         """
         Shift all shapes by the given distance in the Y axis.
 
@@ -685,23 +690,23 @@ class Graph:
         :param py: Parent Y; 0 for viewport
         :return:
         """
-
         target_x = (1 - self.width / 100) / 2 * 100
         target_y = (1 - self.height / 100) / 2 * 100
 
-        self.move_to(target_x, target_y)
+        self.x = target_x
+        self.y = target_y
 
-    def center_content(self):
-        """
-        Center contents of this graph within this graph's bounds
-        :return:
-        """
+    def content_center_in_self(self):
+        target_x = (100 - self.content_width) / 2
+        target_y = (100 - self.content_height) / 2
+        if self.content_x != target_x:
+            self.content_move_to(target_x, self.content_y)
+        if self.content_y != target_y:
+            self.content_move_to(self.content_x, target_y)
 
-    def move_to(self, x, y):
-        if self.x != x:
-            self.move_horizontal(x - self.x)
-        if self.y != y:
-            self.move_vertical(y - self.y)
+    def content_move_to(self, x, y):
+        self.content_move_horizontal(x - self.content_x)
+        self.content_move_vertical(y - self.content_y)
             
     def replace_vertex(self, vertex_to_replace: Vertex, new_vertex: Vertex):
 
@@ -784,9 +789,9 @@ class Graph:
             curr, _ = tbv.popitem()
             visited[curr] = None
             for n in curr.neighbours:
-                if n not in visited and n not in tbv:
+                if n not in visited.keys() and n not in tbv.keys():
                     tbv[n] = None
-        return visited.keys() != self.vertices.keys()
+        return len(visited.keys()) != len(self.vertices.keys())
 
     def _draw_vertex(self, v: Vertex, from_caller=False):
         # TODO: Draw all neighbours and neighbours' neighbours etc.
@@ -811,9 +816,16 @@ class Graph:
                 self._draw_vertex(n, from_caller=True)
 
     def export_as_vertex(self) -> Vertex:
+        if self.disconnected:
+            raise DisconnectedGraphError(f"Some shapes have no clear relations to each other. Aborting drawing\n{self.relation_matrix_horizontal=}\n{self.relation_matrix_vertical=}")
+
+        self.sort_horizontal()
+        self.sort_vertical()
+        self.content_center_in_self()
+
         for v in self.vertices.keys():
             self.svg_elem.add(v.content)
-        return Vertex(shape=Shape.SHAPE, content=self.svg_elem.copy())
+        return Vertex(content=self.svg_elem.copy())
 
     def draw(self, canvas, caller_vertex: Vertex = None):
         """
@@ -826,7 +838,7 @@ class Graph:
 
         self.sort_horizontal()
         self.sort_vertical()
-        map(Vertex.center_if_legal, self.vertices.keys())
+        self.content_center_in_self()
 
         if caller_vertex is not None:
             # Only draw vertices connected to the caller of Graph.draw()

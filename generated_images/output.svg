@@ -3,6 +3,13 @@
   <defs/>
   <svg height="100%" width="100%" x="0%" y="0%">
     <defs/>
-    <rect fill="rgb(213, 69, 63)" height="40.0%" width="20.0%" x="40.0%" y="30.0%"/>
+    <svg height="80.0%" width="100.0%" x="0.0%" y="25.0%">
+      <defs/>
+      <rect fill="rgb(59, 196, 140)" height="100.0%" width="30.0%" x="0.0%" y="0.0%"/>
+      <rect fill="rgb(20, 61, 155)" height="100.0%" width="40.0%" x="30.0%" y="0.0%"/>
+      <rect fill="rgb(121, 31, 95)" height="100.0%" width="30.0%" x="70.0%" y="0.0%"/>
+    </svg>
+    <rect fill="rgb(239, 78, 245)" height="10.0%" width="100.0%" x="0.0%" y="15.0%"/>
+    <rect fill="rgb(34, 234, 54)" height="20.0%" width="100.0%" x="0.0%" y="-5.0%"/>
   </svg>
 </svg>

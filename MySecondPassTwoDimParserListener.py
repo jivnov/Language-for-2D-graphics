@@ -37,7 +37,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         # Here identifier is a single value as drawClause can have 0 or 1 IDENTIFIERs passed to it (check the TwoDimParser.g4 rule)
         print(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")
         print(
-            f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=}")
+            f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=},\n {self.relations_graph.content_x=}, {self.relations_graph.content_y=}, {self.relations_graph.content_width=}, {self.relations_graph.content_height=}")
 
     def enterShapeSpec(self, ctx: TwoDimParser.ShapeSpecContext):
         for i, var_name in enumerate(ctx.IDENTIFIER()):
@@ -63,11 +63,11 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             self.relations_graph.add_relation(op1, op2,
                                               graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
 
-            graph_to_return = graph.Graph()
-            graph_to_return.add_vertex(op1)
-            graph_to_return.add_vertex(op2)
-            graph_to_return.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-            return graph_to_return.export_as_vertex()
+            # graph_to_return = graph.Graph()
+            # graph_to_return.add_vertex(op1)
+            # graph_to_return.add_vertex(op2)
+            # graph_to_return.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+            # return graph_to_return.export_as_vertex()
 
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
@@ -91,7 +91,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         self.relations_graph.add_vertex(self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data)
 
     def enterAssignmentDeclarationStmt(self, ctx: TwoDimParser.AssignmentDeclarationStmtContext):
-        data = self.enterFunctionCall(ctx.functionCall())
+        v_from_func: graph.Vertex = self.enterFunctionCall(ctx.functionCall())
 
         # Remove the function call after calculating its output so the Walker doesn't enter it a second time
         ctx.removeLastChild()
@@ -100,10 +100,9 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         v = graph.Vertex(parent_graph=self.relations_graph,
                          shape='shape',
                          args=[size_lit.getText() for size_lit in ctx.shapeArguments().SIZE_LIT()],
-                         content=data.content)
-        self.context.variables.add_variable(tag=ctx.IDENTIFIER().getText(), name=v.uid, content=v)
+                         content=v_from_func.content)
         self.relations_graph.add_vertex(v)
-
+        self.context.variables.add_variable(tag=ctx.IDENTIFIER().getText(), name=v.uid, content=v)
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
         # checking function call for correctness

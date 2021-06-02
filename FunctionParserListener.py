@@ -50,13 +50,13 @@ class FunctionParserListener(TwoDimParserListener):
             op2 = self.context.variables.find_var_by_tag(tag=var_name2, scope=self.function_call_id).data
             self.func_relations_graph\
                 .add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-
-            graph_to_return = graph.Graph()
-            graph_to_return.add_vertex(op1)
-            graph_to_return.add_vertex(op2)
-            graph_to_return.add_relation(op1, op2,
-                                         graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-            return graph_to_return.export_as_vertex()
+            #
+            # graph_to_return = graph.Graph()
+            # graph_to_return.add_vertex(op1)
+            # graph_to_return.add_vertex(op2)
+            # graph_to_return.add_relation(op1, op2,
+            #                              graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+            # return graph_to_return.export_as_vertex()
 
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
