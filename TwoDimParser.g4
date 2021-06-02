@@ -151,7 +151,7 @@ multiLevelRelationOp
     ;
 
 relationExpr
-    : primaryExpr singleLevelRelationOp relationDetailOp? primaryExpr
+    : primaryExpr (singleLevelRelationOp relationDetailOp? primaryExpr)+
     | primaryExpr multiLevelRelationOp primaryExpr
     ;
 

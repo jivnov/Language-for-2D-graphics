@@ -55,20 +55,18 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         self.res = drawing.Drawing2d(int(ctx.DECIMAL_LIT(0).getText()), int(ctx.DECIMAL_LIT(1).getText()))
 
     def enterRelationExpr(self, ctx: TwoDimParser.RelationExprContext):
-        var_name1 = ctx.primaryExpr(0).operand().operandName().getText()
-        var_name2 = ctx.primaryExpr(1).operand().operandName().getText()
+        var_name1 = ''
+        var_name2 = ''
         try:
-            op1 = self.context.variables.find_var_by_tag(var_name1).data
-            op2 = self.context.variables.find_var_by_tag(var_name2).data
-            self.relations_graph.add_relation(op1, op2,
-                                              graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+            for relation_op_index in range(len(ctx.singleLevelRelationOp())):
+                var_name1 = ctx.primaryExpr(relation_op_index).operand().operandName().getText()
+                var_name2 = ctx.primaryExpr(relation_op_index + 1).operand().operandName().getText()
 
-            # graph_to_return = graph.Graph()
-            # graph_to_return.add_vertex(op1)
-            # graph_to_return.add_vertex(op2)
-            # graph_to_return.add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-            # return graph_to_return.export_as_vertex()
-
+                op1 = self.context.variables.find_var_by_tag(tag=var_name1).data
+                op2 = self.context.variables.find_var_by_tag(tag=var_name2).data
+                self.relations_graph \
+                    .add_relation(op1, op2,
+                                  graph.Relation.from_string(ctx.singleLevelRelationOp(relation_op_index).getText()))
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
 

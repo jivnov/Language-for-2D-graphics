@@ -38,21 +38,24 @@ class FunctionParserListener(TwoDimParserListener):
         self.context.variables.add_variable(tag=ctx.IDENTIFIER().getText(), name=v.uid, content=v)
 
     def enterRelationExpr(self, ctx: TwoDimParser.RelationExprContext):
-        var_name1 = ctx.primaryExpr(0).operand().operandName().getText()
-        var_name2 = ctx.primaryExpr(1).operand().operandName().getText()
+        var_name1 = ''
+        var_name2 = ''
         try:
-            op1 = self.context.variables.find_var_by_tag(tag=var_name1, scope=self.function_call_id).data
-            op2 = self.context.variables.find_var_by_tag(tag=var_name2, scope=self.function_call_id).data
-            self.func_relations_graph\
-                .add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-            #
-            # graph_to_return = graph.Graph()
-            # graph_to_return.add_vertex(op1)
-            # graph_to_return.add_vertex(op2)
-            # graph_to_return.add_relation(op1, op2,
-            #                              graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
-            # return graph_to_return.export_as_vertex()
+            for relation_op_index in range(len(ctx.singleLevelRelationOp())):
+                var_name1 = ctx.primaryExpr(relation_op_index).operand().operandName().getText()
+                var_name2 = ctx.primaryExpr(relation_op_index + 1).operand().operandName().getText()
 
+                op1 = self.context.variables.find_var_by_tag(tag=var_name1, scope=self.function_call_id).data
+                op2 = self.context.variables.find_var_by_tag(tag=var_name2, scope=self.function_call_id).data
+                self.func_relations_graph\
+                    .add_relation(op1, op2, graph.Relation.from_string(ctx.singleLevelRelationOp(relation_op_index).getText()))
+                    #
+                    # graph_to_return = graph.Graph()
+                    # graph_to_return.add_vertex(op1)
+                    # graph_to_return.add_vertex(op2)
+                    # graph_to_return.add_relation(op1, op2,
+                    #                              graph.Relation.from_string(ctx.singleLevelRelationOp().getText()))
+                    # return graph_to_return.export_as_vertex()
         except graph.UndeclaredShapeError:
             print(f"Undeclared shape {var_name1} or {var_name2}")
 
