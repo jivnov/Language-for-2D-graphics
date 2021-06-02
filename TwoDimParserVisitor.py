@@ -1,4 +1,4 @@
-# Generated from TwoDimParser.g4 by ANTLR 4.7.2
+# Generated from TwoDimParser.g4 by ANTLR 4.9.2
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .TwoDimParser import TwoDimParser
@@ -101,6 +101,11 @@ class TwoDimParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by TwoDimParser#shapeArguments.
     def visitShapeArguments(self, ctx:TwoDimParser.ShapeArgumentsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by TwoDimParser#assignmentDeclarationStmt.
+    def visitAssignmentDeclarationStmt(self, ctx:TwoDimParser.AssignmentDeclarationStmtContext):
         return self.visitChildren(ctx)
 
 

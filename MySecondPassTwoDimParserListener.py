@@ -90,6 +90,21 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
         self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data = copy(data)
         self.relations_graph.add_vertex(self.context.variables.find_var_by_tag(ctx.IDENTIFIER().getText()).data)
 
+    def enterAssignmentDeclarationStmt(self, ctx: TwoDimParser.AssignmentDeclarationStmtContext):
+        data = self.enterFunctionCall(ctx.functionCall())
+
+        # Remove the function call after calculating its output so the Walker doesn't enter it a second time
+        ctx.removeLastChild()
+
+        # TODO: At the moment assuming SIZE is the only argument
+        v = graph.Vertex(parent_graph=self.relations_graph,
+                         shape='shape',
+                         args=[size_lit.getText() for size_lit in ctx.shapeArguments().SIZE_LIT()],
+                         content=data.content)
+        self.context.variables.add_variable(tag=ctx.IDENTIFIER().getText(), name=v.uid, content=v)
+        self.relations_graph.add_vertex(v)
+
+
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
         # checking function call for correctness
         args_for_check = []
@@ -119,8 +134,6 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             raise FunctionSignatureError(function_called.name)
 
         function_result = self.context.call_function(global_graph=self.relations_graph, name=ctx.IDENTIFIER(), args=args_for_call)
-
-        self.relations_graph.add_vertex(function_result)
 
         return function_result
 

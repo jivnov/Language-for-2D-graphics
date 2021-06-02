@@ -76,6 +76,7 @@ statement
     | block
     | ifStmt
     | switchStmt
+    | assignmentDeclarationStmt
     ;
 
 simpleStmt
@@ -90,6 +91,10 @@ expressionStmt
 
 shapeArguments
     : arguments? WS? (L_BRACKET WS? SIZE_LIT (COMMA WS? SIZE_LIT)? WS? R_BRACKET)?
+    ;
+
+assignmentDeclarationStmt
+    : SHAPE IDENTIFIER WS? shapeArguments WS? assign_op WS? functionCall
     ;
 
 assignment

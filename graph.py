@@ -98,7 +98,7 @@ class Relation(Enum):
 
 
 class Vertex:
-    def __init__(self, shape, args: Any = None, content=None, parent_graph=None):
+    def __init__(self, shape: str = 'shape', args: Any = None, content = None, parent_graph = None):
         """
 
         :param parent_graph: Graph that contains this Vertex
@@ -127,45 +127,44 @@ class Vertex:
 
         self.content = content
 
-        self.shape = Shape.SHAPE
+        if isinstance(shape, Shape):
+            self.shape = shape
+        else:
+            self.shape = Shape.from_string(shape)
 
-        if content is None:
-            if isinstance(shape, Shape):
-                self.shape = shape
-            else:
-                self.shape = Shape.from_string(shape)
-            self.bb_w = 0.0
+        # Determine Bounding Box fractional size through passed arguments
+        self.bb_w = 50.0
+        self.bb_h = 50.0
+        if isinstance(args, list) and len(args) > 0:
+            self.bb_w = float(args.pop(0).replace('%', ''))
+            self.bb_h = self.bb_w
 
-            # Determine Bounding Box fractional size through passed arguments
-            if isinstance(args, list) and len(args) > 0:
-                self.bb_w = float(args.pop(0).replace('%', ''))
-                if len(args) > 0:
-                    self.bb_h = float(args.pop(0).replace('%', ''))
-                else:
-                    self.bb_h = self.bb_w
-            else:
-                self.bb_w = 50.0
-                self.bb_h = 50.0
+            # If second dimension was passed use it for height
+            if len(args) > 0:
+                self.bb_h = float(args.pop(0).replace('%', ''))
 
-            # Adjust Bounding Box fractional size based on shape
-            self.adjust_size_based_on_shape()
+        # Adjust Bounding Box fractional size based on shape
+        self.adjust_size_based_on_shape()
 
-            width = self.bb_w
-            height = self.bb_h
+        width = self.bb_w
+        height = self.bb_h
 
-            x = 100.0 - self.bb_w
-            y = 100.0 - self.bb_h
+        x = 100.0 - self.bb_w
+        y = 100.0 - self.bb_h
 
-            # Use svgwrite features for shape properties
-            if self.shape == Shape.RECT:
-                draw_color = tuple(random.randint(0, 256) for _ in range(3))
-                self.content = Rect(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"), fill="rgb" + str(draw_color))
-            elif self.shape == Shape.SHAPE:
+        # Use svgwrite features for shape properties
+        if self.shape == Shape.RECT:
+            draw_color = tuple(random.randint(0, 256) for _ in range(3))
+            self.content = Rect(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"), fill="rgb" + str(draw_color))
+        elif self.shape == Shape.SHAPE:
+            if self.content is None:
                 self.content = SVG(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"))
             else:
-                raise UndefinedShapeError(f"Specified shape type is not supported: {self.shape}")
+                # This is (probably) assignment declaration; constraint the content size but do not create new content
+                self.width = self.bb_w
+                self.height = self.bb_h
         else:
-            self.shape = Shape.SHAPE
+            raise UndefinedShapeError(f"Specified shape type is not supported: {self.shape}")
 
     def __repr__(self):
         return f"{self.shape} [{self.width_perc}, {self.height_perc}]"
@@ -430,7 +429,7 @@ class Graph:
         # Both shapes should have already been added to this graph before defining relations between them
         if v_from is None or v_to is None or v_from not in self.vertices.keys() or v_to not in self.vertices.keys():
             print(f"{v_from=} {v_to=}")
-            raise UndeclaredShapeError
+            raise UndeclaredShapeError(f"{v_from=} {v_to=}")
 
         if v_from is v_to:
             raise RedundantRelationError
@@ -592,7 +591,7 @@ class Graph:
                     del self.relation_matrix_vertical[key][v]
 
             # Remove from vertices list
-            self.vertices.remove(v)
+            self.vertices.pop(v)
             self.update_position_and_size()
 
     def sort_horizontal(self):
