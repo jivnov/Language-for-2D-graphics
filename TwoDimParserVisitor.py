@@ -74,6 +74,11 @@ class TwoDimParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by TwoDimParser#shapeColor.
+    def visitShapeColor(self, ctx:TwoDimParser.ShapeColorContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by TwoDimParser#block.
     def visitBlock(self, ctx:TwoDimParser.BlockContext):
         return self.visitChildren(ctx)

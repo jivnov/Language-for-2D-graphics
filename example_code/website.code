@@ -1,15 +1,30 @@
-#viewport 1000 1000
+#viewport 1920 1080
 
-rect LeftMenu [25%, 90%];
-rect Body [50%, 90%];
-rect RightMenu [25%, 90%];
-rect AppBar [100%, 10%];
+func BannerWithLogo() {
+    rect Logo [10%] <10, 200, 90>;
+    rect Banner [90%] <255, 255, 255>;
 
-LeftMenu left Body;
-Body left RightMenu;
-AppBar top Body;
+    Logo left Banner;
+}
 
+func NavBar() {
+    shape Banner [100%, 66%] = BannerWithLogo();
+    rect Nav [100%, 34%] <5,5,5>;
 
+    Banner top Nav;
+}
 
+func MainPart() {
+    rect LeftNav [15%] <220, 220, 220>;
+    rect Body [65%] <250, 250, 250>;
+    rect Advert [20%] <10,200,90>;
 
-draw Body;
+    LeftNav left Body left Advert;
+}
+
+shape Nav [100%, 15%] = NavBar();
+shape Main [100%, 85%] = MainPart();
+
+Nav top Main;
+
+draw Main;

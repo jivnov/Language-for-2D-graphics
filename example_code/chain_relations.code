@@ -1,7 +1,7 @@
 #viewport 1000 1000
 
 func Chain() {
-    rect R1 [10%];
+    rect R1 [10%] <0>;
     rect R2 [10%];
     rect R3 [10%];
     rect R4 [10%];

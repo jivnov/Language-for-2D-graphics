@@ -1,41 +1,42 @@
-#viewport 1000 1000
+#viewport 1234 1234
 
-func Row() {
-    rect R1 [10%];
-    rect R2 [10%];
-    rect R3 [10%];
-    rect R4 [10%];
-    rect R5 [10%];
-    rect R6 [10%];
-    rect R7 [10%];
-    rect R8 [10%];
+func RowStartsBlack() {
+    rect R1 [12%] <40, 20>;
+    rect R2 [12%] <235, 235, 205>;
+    rect R3 [12%] <40, 20>;
+    rect R4 [12%] <235, 235, 205>;
+    rect R5 [12%] <40, 20>;
+    rect R6 [12%] <235, 235, 205>;
+    rect R7 [12%] <40, 20>;
+    rect R8 [12%] <235, 235, 205>;
 
-    R1 left R2;
-    R2 left R3;
-    R3 left R4;
-    R4 left R5;
-    R5 left R6;
-    R6 left R7;
-    R7 left R8;
+    R1 left R2 left R3 left R4 left R5 left R6 left R7 left R8;
+}
+
+func RowStartsWhite() {
+    rect R1 [12%] <235, 235, 205>;
+    rect R2 [12%] <40, 20>;
+    rect R3 [12%] <235, 235, 205>;
+    rect R4 [12%] <40, 20>;
+    rect R5 [12%] <235, 235, 205>;
+    rect R6 [12%] <40, 20>;
+    rect R7 [12%] <235, 235, 205>;
+    rect R8 [12%] <40, 20>;
+
+    R1 left R2 left R3 left R4 left R5 left R6 left R7 left R8;
 }
 
 func Board() {
-    shape R1 [100%, 10%] = Row();
-    shape R2 [100%, 10%] = Row();
-    shape R3 [100%, 10%] = Row();
-    shape R4 [100%, 10%] = Row();
-    shape R5 [100%, 10%] = Row();
-    shape R6 [100%, 10%] = Row();
-    shape R7 [100%, 10%] = Row();
-    shape R8 [100%, 10%] = Row();
+    shape R1 [100%, 12%] = RowStartsWhite();
+    shape R2 [100%, 12%] = RowStartsBlack();
+    shape R3 [100%, 12%] = RowStartsWhite();
+    shape R4 [100%, 12%] = RowStartsBlack();
+    shape R5 [100%, 12%] = RowStartsWhite();
+    shape R6 [100%, 12%] = RowStartsBlack();
+    shape R7 [100%, 12%] = RowStartsWhite();
+    shape R8 [100%, 12%] = RowStartsBlack();
 
-    R1 top R2;
-    R2 top R3;
-    R3 top R4;
-    R4 top R5;
-    R5 top R6;
-    R6 top R7;
-    R7 top R8;
+    R1 top R2 top R3 top R4 top R5 top R6 top R7 top R8;
 }
 
 shape B1 = Board();

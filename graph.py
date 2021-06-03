@@ -98,7 +98,7 @@ class Relation(Enum):
 
 
 class Vertex:
-    def __init__(self, shape: str = 'shape', args: Any = None, content = None, parent_graph = None):
+    def __init__(self, shape: str = 'shape', args: Any = None, content = None, parent_graph = None, color: Tuple[int, ...] = None):
         """
 
         :param parent_graph: Graph that contains this Vertex
@@ -152,9 +152,18 @@ class Vertex:
         y = 100.0 - self.bb_h
 
         # Use svgwrite features for shape properties
+        if isinstance(color, tuple) and len(color) > 0:
+            if len(color) == 3:
+                self.color = color
+            elif len(color) > 3:
+                self.color = tuple(list(color)[:3])
+            else:
+                self.color = tuple(list(color) + [0] * (3 - len(color)))
+        else:
+            self.color = (0, 0, 0)
+
         if self.shape == Shape.RECT:
-            draw_color = tuple(random.randint(0, 256) for _ in range(3))
-            self.content = Rect(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"), fill="rgb" + str(draw_color))
+            self.content = Rect(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"), fill="rgb" + str(self.color))
         elif self.shape == Shape.SHAPE:
             if self.content is None:
                 self.content = SVG(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"))
@@ -249,11 +258,11 @@ class Vertex:
 
     def center_horizontally_if_legal(self):
         if len(self.LEFT) == 0 and len(self.RIGHT) == 0:
-            self.x = self.graph.x + (self.graph.width - self.width) / 2
+            self.x = (100 - self.width) / 2
 
     def center_vertically_if_legal(self):
         if len(self.TOP) == 0 and len(self.BOT) == 0:
-            self.y = self.graph.y + (self.graph.height - self.height) / 2
+            self.y = (100 - self.height) / 2
 
     def center_if_legal(self):
         self.center_horizontally_if_legal()
@@ -354,7 +363,7 @@ class Vertex:
             self.CONTAINED.pop(neighbour)
             neighbour.IN = None
         elif neighbour in self.ON:
-            self.ON[neighbour] = None
+            self.ON.pop(neighbour)
             neighbour.UNDER.pop(self)
         elif neighbour in self.UNDER:
             self.UNDER.pop(neighbour)
@@ -690,8 +699,8 @@ class Graph:
         :param py: Parent Y; 0 for viewport
         :return:
         """
-        target_x = (1 - self.width / 100) / 2 * 100
-        target_y = (1 - self.height / 100) / 2 * 100
+        target_x = (100 - self.width) / 2
+        target_y = (100 - self.height) / 2
 
         self.x = target_x
         self.y = target_y
@@ -824,6 +833,9 @@ class Graph:
         self.content_center_in_self()
 
         for v in self.vertices.keys():
+            v.center_if_legal()
+
+        for v in self.vertices.keys():
             self.svg_elem.add(v.content)
         return Vertex(content=self.svg_elem.copy())
 
@@ -839,6 +851,9 @@ class Graph:
         self.sort_horizontal()
         self.sort_vertical()
         self.content_center_in_self()
+
+        for v in self.vertices.keys():
+            v.center_if_legal()
 
         if caller_vertex is not None:
             # Only draw vertices connected to the caller of Graph.draw()

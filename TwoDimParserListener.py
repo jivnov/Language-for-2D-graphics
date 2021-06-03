@@ -125,6 +125,15 @@ class TwoDimParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by TwoDimParser#shapeColor.
+    def enterShapeColor(self, ctx:TwoDimParser.ShapeColorContext):
+        pass
+
+    # Exit a parse tree produced by TwoDimParser#shapeColor.
+    def exitShapeColor(self, ctx:TwoDimParser.ShapeColorContext):
+        pass
+
+
     # Enter a parse tree produced by TwoDimParser#block.
     def enterBlock(self, ctx:TwoDimParser.BlockContext):
         pass

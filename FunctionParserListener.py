@@ -18,8 +18,15 @@ class FunctionParserListener(TwoDimParserListener):
         for i, var_name in enumerate(ctx.IDENTIFIER()):
             # TODO
             # At the moment assuming SIZE is the only argument
-            v = graph.Vertex(parent_graph=self.func_relations_graph, shape=ctx.typeName().getText(),
-                             args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()])
+            color_vals = None
+            if ctx.shapeColor(i) is not None:
+                color_vals = tuple(int(decimal_lit.getText()) for decimal_lit in ctx.shapeColor(i).DECIMAL_LIT())
+
+            v = graph.Vertex(parent_graph=self.func_relations_graph,
+                             shape=ctx.typeName().getText(),
+                             args=[size_lit.getText() for size_lit in ctx.shapeArguments(i).SIZE_LIT()],
+                             color=color_vals
+                             )
             self.func_relations_graph.add_vertex(v)
             self.context.variables.add_variable(tag=var_name.getText(), name=v.uid, content=v, scope=self.function_call_id)
 

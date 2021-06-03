@@ -1,24 +1,25 @@
 #viewport 1000 1000
 
 func Def() {
-    rect A [20%];
-    rect B [80%];
+    rect A [20%] <0, 0, 255>;
+    rect B [80%] <0, 0, 255>;
     A left B;
 }
 
 func Abc() {
-    rect A [30%, 100%];
-    rect B [40%, 100%];
-    rect C [30%, 100%];
+    rect A [30%, 100%] <0, 255>;
+    rect B [40%, 100%] <0, 255>;
+    rect C [30%, 100%] <0, 255>;
     A left B;
     B left C;
 }
 
-shape DefTest [100%, 20%] = Def();
-shape A [100%, 40%] = Abc();
-shape B [100%, 30%] = Abc();
 
-DefTest bot B;
-A top B;
+shape A [10%] = Def();
+rect B [20%];
+shape C [30%] = Abc();
+shape D [40%] = Abc();
 
-draw DefTest;
+A left B left C left D;
+
+draw B;

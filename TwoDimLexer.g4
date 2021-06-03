@@ -95,7 +95,9 @@ AMPERSAND              : '&';
 
 // Number literals
 
-DECIMAL_LIT            : [1-9] [0-9]*;
+DECIMAL_LIT            : [1-9] [0-9]*
+                       | ('0')+
+                       ;
 
 FLOAT_LIT              : DECIMALS ('.' DECIMALS? EXPONENT? | EXPONENT)
                        | '.' DECIMALS EXPONENT?

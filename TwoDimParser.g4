@@ -56,7 +56,11 @@ shapeDecl
     ;
 
 shapeSpec
-    : typeName IDENTIFIER WS? shapeArguments (',' WS? IDENTIFIER shapeArguments)*  // e.x. 'square A(20%) [15%], B(30%) [15%]'
+    : typeName IDENTIFIER WS? shapeArguments shapeColor? (',' WS? IDENTIFIER shapeArguments shapeColor?)*  // e.x. 'square A(20%) [15%], B(30%) [15%]'
+    ;
+
+shapeColor
+    : '<' DECIMAL_LIT (',' WS? DECIMAL_LIT)* '>'
     ;
 
 block
