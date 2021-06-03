@@ -10,6 +10,8 @@ from TwoDimLexer import TwoDimLexer
 from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
 
+import logging
+
 
 class FirstPassTwoDimParserListener(TwoDimParserListener):
 
@@ -20,10 +22,10 @@ class FirstPassTwoDimParserListener(TwoDimParserListener):
     def enterSourceFile(self,
                         ctx: TwoDimParser.SourceFileContext):  # XYZContext classes are syntax trees; XYZ is the root
         # node; you can access all the child nodes and their values
-        print("I just entered the source file for the 1st time")
+        logging.info("I just entered the source file for the 1st time")
 
     def enterFunctionDecl(self, ctx: TwoDimParser.FunctionDeclContext):
-        print(f"Entered function declaration {ctx.IDENTIFIER()}")
+        logging.info(f"Entered function declaration {ctx.IDENTIFIER()}")
         function_args = []
         function_args_names = []
         params = ctx.signature().parameters().parameterDecl()

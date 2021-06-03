@@ -27,7 +27,7 @@ expressionList
 
 // Function declarations
 functionDecl
-    : 'func' IDENTIFIER (signature block?)
+    : FUNC IDENTIFIER (signature block?)
     ;
 
 signature

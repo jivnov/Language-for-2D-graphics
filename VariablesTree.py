@@ -21,10 +21,8 @@ class VariablesTree:
         '''
         if scope is None:
             self.tree.create_node(tag=tag, identifier=name, parent=self.tree.get_node(nid="GlobalVars"), data=content)
-            self.tree.show()
             return
         self.tree.create_node(tag=tag, identifier=name, parent=self.tree.get_node(nid=scope), data=content)
-        self.tree.show()
 
     def add_scope_subtree(self, tag, name, scope=None):
         '''
@@ -35,11 +33,9 @@ class VariablesTree:
         '''
         if scope is None:
             self.tree.create_node(tag=tag, identifier=name, parent=self.tree.get_node(nid="GlobalVars"))
-            self.tree.show()
             return
         self.tree.create_node(tag=tag, identifier=name, parent=self.tree.get_node(nid=scope))
 
-        self.tree.show()
 
     def find_var_by_tag(self, tag, scope=None):
         '''
@@ -64,6 +60,6 @@ class VariablesTree:
             vars_found = list(filter(lambda x: x.tag == tag, scope_vars))
 
         if len(vars_found) == 0:
-            raise VariableNotFoundError
+            raise VariableNotFoundError(tag)
 
         return vars_found[0]

@@ -6,14 +6,14 @@ import random
 
 
 class Drawing2d:
-    def __init__(self, w, h):
+    def __init__(self, w, h, output_path='generated_images/output.svg'):
         """
         :param w:
         :param h:
         """
         self.viewport_width = w
         self.viewport_height = h
-        self.canvas = svg.Drawing('generated_images/output.svg', (w, h))
+        self.canvas = svg.Drawing(output_path, (w, h))
 
     def draw(self, v: Vertex, parent: Vertex = None):
         # TODO: Draw all neighbours and neighbours' neighbours etc.

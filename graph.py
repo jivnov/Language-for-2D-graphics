@@ -8,32 +8,34 @@ from svgwrite.shapes import Rect
 
 import random
 
+import logging
 
-class DisconnectedGraphError(AssertionError):
+
+class DisconnectedGraphException(Exception):
     pass
 
 
-class UndeclaredShapeError(NameError):
+class UndeclaredShapeException(Exception):
     pass
 
 
-class UndefinedShapeError(ValueError):
+class UndefinedShapeException(Exception):
     pass
 
 
-class RedundantRelationError(NameError):
+class RedundantRelationException(Exception):
     pass
 
 
-class UndefinedRelationError(ValueError):
+class UndefinedRelationException(Exception):
     pass
 
 
-class RedefiningExplicitRelationError(ValueError):
+class RedefiningExplicitRelationException(Exception):
     pass
 
 
-class CyclicRelationsError(ValueError):
+class CyclicRelationsException(Exception):
     pass
 
 
@@ -57,7 +59,7 @@ class Shape(Enum):
         elif shape_name.lower() == "shape":
             return Shape.SHAPE
         else:
-            raise UndefinedShapeError(f"Specified shape type is not supported: {shape_name}")
+            raise UndefinedShapeException(f"Specified shape type is not supported: {shape_name}")
 
 
 class Relation(Enum):
@@ -94,7 +96,7 @@ class Relation(Enum):
         elif relation_name.upper() == "UNDER":
             return Relation.UNDER
         else:
-            raise UndefinedRelationError
+            raise UndefinedRelationException
 
 
 class Vertex:
@@ -172,7 +174,7 @@ class Vertex:
                 self.width = self.bb_w
                 self.height = self.bb_h
         else:
-            raise UndefinedShapeError(f"Specified shape type is not supported: {self.shape}")
+            raise UndefinedShapeException(f"Specified shape type is not supported: {self.shape}")
 
     def __str__(self):
         return f"{self.shape} [{self.width_perc}, {self.height_perc}] at: (x={self.x_perc}, y={self.y_perc})"
@@ -340,8 +342,7 @@ class Vertex:
             v.UNDER[self] = None
             self.ON[v] = None
         else:
-            print("rel: ", relation)
-            raise UndefinedRelationError()
+            raise UndefinedRelationException(str(relation))
 
     def remove_neighbour(self, neighbour):
         if neighbour in self.LEFT:
@@ -434,19 +435,19 @@ class Graph:
         :param v_to:
         :param r:
 
-        :raises UndeclaredShapeError
-        :raises RedundantRelationError
-        :raises CyclicRelationsError
+        :raises UndeclaredShapeException
+        :raises RedundantRelationException
+        :raises CyclicRelationsException
 
         :return:
         """
         # Both shapes should have already been added to this graph before defining relations between them
         if v_from is None or v_to is None or v_from not in self.vertices.keys() or v_to not in self.vertices.keys():
-            print(f"{v_from=} {v_to=}")
-            raise UndeclaredShapeError(f"{v_from=} {v_to=}")
+            logging.info(f"{v_from=} {v_to=}")
+            raise UndeclaredShapeException(f"{v_from=} {v_to=}")
 
         if v_from is v_to:
-            raise RedundantRelationError
+            raise RedundantRelationException
 
         # Modify relation in respective matrix; note that you need to modify it for both vertices
         if r in (Relation.LEFT, Relation.RIGHT):
@@ -454,13 +455,13 @@ class Graph:
             self.relation_matrix_horizontal[v_to][v_from] = -r
 
             if self._invalid_horizontal_relations():
-                raise CyclicRelationsError(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in horizontal relations")
+                raise CyclicRelationsException(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in horizontal relations")
         elif r in (Relation.TOP, Relation.BOT):
             self.relation_matrix_vertical[v_from][v_to] = r
             self.relation_matrix_vertical[v_to][v_from] = -r
 
             if self._invalid_vertical_relations():
-                raise CyclicRelationsError(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in vertical relations")
+                raise CyclicRelationsException(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in vertical relations")
             # TODO: Implement incidence matrices for other relations
         else:
             return
@@ -556,11 +557,11 @@ class Graph:
     def print_relations(self, v: Vertex) -> None:
         # TODO generate SVG for provided parameters
         if v not in self.vertices.keys():
-            print("not in graph")
+            logging.debug("Not in graph")
         else:
-            print(f"Found vertex {v.shape}:{v.uid}")
+            logging.info(f"Found vertex {v.shape}:{v.uid}")
             for v2, relation in self.relation_matrix_horizontal[v].items():
-                print(f"{v2.shape}:{v2.uid}")
+                logging.info(f"{v2.shape}:{v2.uid}")
 
     def merge_with(self, other, r: Relation = Relation.UNRELATED):
         # TODO: Parameter "r" taken into account (as stated in docstring)
@@ -587,7 +588,7 @@ class Graph:
         for vertex in self.vertices.keys():
             if str(vertex.uid) == str(vertex_id):
                 return vertex
-        raise UndeclaredShapeError(vertex_id)
+        raise UndeclaredShapeException(vertex_id)
 
     def remove_vertex(self, v: Vertex):
         if v in self.vertices:
@@ -826,7 +827,7 @@ class Graph:
 
     def export_as_vertex(self) -> Vertex:
         if self.disconnected:
-            raise DisconnectedGraphError(f"Some shapes have no clear relations to each other. Aborting drawing\n{self.relation_matrix_horizontal=}\n{self.relation_matrix_vertical=}")
+            raise DisconnectedGraphException(f"Some shapes have no clear relations to each other. Aborting drawing\n{self.relation_matrix_horizontal=}\n{self.relation_matrix_vertical=}")
 
         self.sort_horizontal()
         self.sort_vertical()
@@ -846,7 +847,7 @@ class Graph:
         :return:
         """
         if self.disconnected:
-            raise DisconnectedGraphError(f"Some shapes have no clear relations to each other. Aborting drawing\n{self.relation_matrix_horizontal=}\n{self.relation_matrix_vertical=}")
+            raise DisconnectedGraphException(f"Some shapes have no clear relations to each other. Aborting drawing\n{self.relation_matrix_horizontal=}\n{self.relation_matrix_vertical=}")
 
         self.sort_horizontal()
         self.sort_vertical()
