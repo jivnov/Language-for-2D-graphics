@@ -1,18 +1,18 @@
-#viewport 1920 1080
+#viewport 1920 1080;
 
 func BannerWithLogo() {
     rect Logo [10%] <10, 200, 90>;
     rect Banner [90%] <255, 255, 255>;
 
     Logo left Banner;
-}
+};
 
 func NavBar() {
     shape Banner [100%, 66%] = BannerWithLogo();
     rect Nav [100%, 34%] <5,5,5>;
 
     Banner top Nav;
-}
+};
 
 func MainPart() {
     rect LeftNav [15%] <220, 220, 220>;
@@ -20,7 +20,7 @@ func MainPart() {
     rect Advert [20%] <10,200,90>;
 
     LeftNav left Body left Advert;
-}
+};
 
 shape Nav [100%, 15%] = NavBar();
 shape Main [100%, 85%] = MainPart();

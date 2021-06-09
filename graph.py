@@ -430,6 +430,8 @@ class Graph:
             v.graph = self
 
     def add_relation(self, v_from: Vertex, v_to: Vertex, r: Relation):
+        # TODO: A |top B  - A jest powyżej od B, przylega do jego górnej krawędzi
+        # TODO: rect A [10%, EXPAND_TO_FILL]  - EXPAND_TO_FILL means 100% - the rest of the shapes
         """
         :param v_from:
         :param v_to:
