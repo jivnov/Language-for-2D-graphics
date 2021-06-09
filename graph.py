@@ -39,6 +39,10 @@ class CyclicRelationsException(Exception):
     pass
 
 
+class UnrelatedShapesException(Exception):
+    pass
+
+
 class Shape(Enum):
     SQUARE = 1
     CIRCLE = 2
@@ -73,9 +77,19 @@ class Relation(Enum):
     CONTAINED = -3  # Opposite of IN
     ON = 4
     UNDER = -4
+    ATLEFT = LEFT.value * 100
+    ATRIGHT = RIGHT.value * 100
+    ATTOP = TOP.value * 100
+    ATBOT = BOT.value * 100
 
     def __neg__(self):
         return Relation(-self.value)
+
+    def at(self):
+        if self.value % 100 == 0:
+            return self
+        else:
+            return Relation(self.value * 100)
 
     @staticmethod
     def from_string(relation_name: str):
@@ -95,6 +109,14 @@ class Relation(Enum):
             return Relation.ON
         elif relation_name.upper() == "UNDER":
             return Relation.UNDER
+        elif relation_name.upper() == "ATLEFT":
+            return Relation.ATLEFT
+        elif relation_name.upper() == "ATRIGHT":
+            return Relation.ATRIGHT
+        elif relation_name.upper() == "ATTOP":
+            return Relation.ATTOP
+        elif relation_name.upper() == "ATBOT":
+            return Relation.ATBOT
         else:
             raise UndefinedRelationException
 
@@ -120,6 +142,12 @@ class Vertex:
         self.RIGHT: OrderedDict[Vertex, Any] = OrderedDict()
         self.TOP: OrderedDict[Vertex, Any] = OrderedDict()
         self.BOT: OrderedDict[Vertex, Any] = OrderedDict()
+
+        self.ATLEFT: OrderedDict[Vertex, Any] = OrderedDict()
+        self.ATRIGHT: OrderedDict[Vertex, Any] = OrderedDict()
+        self.ATTOP: OrderedDict[Vertex, Any] = OrderedDict()
+        self.ATBOT: OrderedDict[Vertex, Any] = OrderedDict()
+
         self.IN: Vertex = None
         self.CONTAINED: OrderedDict[Vertex, Any] = OrderedDict()
         self.ON: OrderedDict[Vertex, Any] = OrderedDict()
@@ -182,7 +210,7 @@ class Vertex:
     @property
     def neighbours(self) -> OrderedDict:
         result = self.LEFT.copy()
-        for d in (self.RIGHT, self.TOP, self.BOT):
+        for d in (self.RIGHT, self.TOP, self.BOT, self.ATLEFT, self.ATRIGHT, self.ATTOP, self.ATBOT):
             result.update(d)
         return result
 
@@ -317,6 +345,7 @@ class Vertex:
         :param relation: Relation of self to neighbour vertex; read: "self RELATION v", e.x. for relation=Relation.LEFT: "self LEFT v", so "v RIGHT self"
         :return:
         """
+        # Basic 2D relations are antagonistic
         if relation == Relation.LEFT:
             v.LEFT[self] = None
             self.RIGHT[v] = None
@@ -329,6 +358,22 @@ class Vertex:
         elif relation == Relation.BOT:
             v.BOT[self] = None
             self.TOP[v] = None
+
+        # AT-xyz relations are mutual (bidirectional)
+        elif relation == Relation.ATLEFT:
+            v.ATLEFT[self] = None
+            self.ATLEFT[v] = None
+        elif relation == Relation.ATRIGHT:
+            v.ATRIGHT[self] = None
+            self.ATRIGHT[v] = None
+        elif relation == Relation.ATTOP:
+            v.ATTOP[self] = None
+            self.ATTOP[v] = None
+        elif relation == Relation.ATBOT:
+            v.ATBOT[self] = None
+            self.ATBOT[v] = None
+
+        # TODO: Z-axis relations
         elif relation == Relation.IN:
             v.IN = self
             self.CONTAINED[v] = None
@@ -344,7 +389,34 @@ class Vertex:
         else:
             raise UndefinedRelationException(str(relation))
 
+    def get_neighbours_by_relation(self, r: Relation):
+        if r == Relation.UNRELATED:
+            raise UnrelatedShapesException("You tried retrieving all shapes UNRELATED to this one which is an illegal operation")
+        elif r == Relation.LEFT:
+            return self.LEFT
+        elif r == Relation.RIGHT:
+            return self.RIGHT
+        elif r == Relation.TOP:
+            return self.TOP
+        elif r == Relation.BOT:
+            return self.BOT
+        elif r == Relation.ATLEFT:
+            return self.ATLEFT
+        elif r == Relation.ATRIGHT:
+            return self.ATRIGHT
+        elif r == Relation.ATTOP:
+            return self.ATTOP
+        elif r == Relation.ATBOT:
+            return self.ATBOT
+        else:
+            raise UndefinedRelationException(f"Relation denoted by {r} is not defined")
+
     def remove_neighbour(self, neighbour):
+        """
+        WARNING: This function is deprecated (for the time being); don't use it
+        :param neighbour:
+        :return:
+        """
         if neighbour in self.LEFT:
             self.LEFT.pop(neighbour)
             neighbour.RIGHT.pop(self)
@@ -452,15 +524,21 @@ class Graph:
             raise RedundantRelationException
 
         # Modify relation in respective matrix; note that you need to modify it for both vertices
-        if r in (Relation.LEFT, Relation.RIGHT):
+        if r in (Relation.LEFT, Relation.RIGHT, Relation.ATLEFT, Relation.ATRIGHT):
             self.relation_matrix_horizontal[v_from][v_to] = r
-            self.relation_matrix_horizontal[v_to][v_from] = -r
+
+            # Inline if is crucial - AT-xyz relations are bidirectional:
+            #       "A ATLEFT B" is the same as "B ATLEFT A"
+            self.relation_matrix_horizontal[v_to][v_from] = r if r in (Relation.ATLEFT, Relation.ATRIGHT) else -r
 
             if self._invalid_horizontal_relations():
                 raise CyclicRelationsException(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in horizontal relations")
-        elif r in (Relation.TOP, Relation.BOT):
+        elif r in (Relation.TOP, Relation.BOT, Relation.ATTOP, Relation.ATBOT):
             self.relation_matrix_vertical[v_from][v_to] = r
-            self.relation_matrix_vertical[v_to][v_from] = -r
+
+            # Inline if is crucial - AT-xyz relations are bidirectional:
+            #       "A ATTOP B" is the same as "B ATTOP A"
+            self.relation_matrix_vertical[v_to][v_from] = r if r in (Relation.ATTOP, Relation.ATBOT) else -r
 
             if self._invalid_vertical_relations():
                 raise CyclicRelationsException(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in vertical relations")
@@ -471,6 +549,20 @@ class Graph:
         # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph
         # Give vertex info about new neighbour
         v_from.add_neighbour(v_to, r)
+
+    def _cross_at_relations(self, v_from: Vertex, v_to: Vertex, r: Relation):
+        """
+        When "r" is ATx: add v_from and its ATx neighbours to v_to and all its ATx neighbours; and vice versa
+        :param v_from:
+        :param v_to:
+        :param r:
+        :return:
+        """
+        v_from_group = v_from.get_neighbours_by_relation(r.at()).copy()
+        v_from_group[v_from] = None
+
+        v_to_group = v_to.get_neighbours_by_relation(r.at()).copy()
+        v_to_group[v_to] = None
 
     def _is_cyclic_horizontal_util(self, v: Vertex, visited: Dict[Vertex, bool], rec_stack: Dict[Vertex, bool]) -> bool:
         """
