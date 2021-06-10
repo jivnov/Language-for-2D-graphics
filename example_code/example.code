@@ -1,11 +1,10 @@
 #viewport 1000 1000;
 
-rect A [20%, 40%];
+rec A [20%];
 
-func Foo(rect R){
-    shape S;
-    S = R;
-    S left R;
+func Foo(rect A){
+    rec B;
+    A left B;
 };
 
 Foo(A);

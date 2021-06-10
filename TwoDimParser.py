@@ -3,10 +3,11 @@
 from antlr4 import *
 from io import StringIO
 import sys
+
 if sys.version_info[1] > 5:
-	from typing import TextIO
+    from typing import TextIO
 else:
-	from typing.io import TextIO
+    from typing.io import TextIO
 
 if __name__ is not None and "." in __name__:
     from .TwoDimParserBase import TwoDimParserBase
@@ -221,41 +222,40 @@ def serializedATN():
         return buf.getvalue()
 
 
-class TwoDimParser ( TwoDimParserBase ):
-
+class TwoDimParser(TwoDimParserBase):
     grammarFileName = "TwoDimParser.g4"
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
-    decisionsToDFA = [ DFA(ds, i) for i, ds in enumerate(atn.decisionToState) ]
+    decisionsToDFA = [DFA(ds, i) for i, ds in enumerate(atn.decisionToState)]
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'func'", "'switch'", "'case'", "'default'", 
-                     "'if'", "'else'", "'type'", "'package'", "'import'", 
-                     "'nil'", "<INVALID>", "'square'", "'rect'", "'circle'", 
-                     "'triangle'", "'shape'", "'draw'", "'#viewport'", "'left'", 
-                     "'right'", "'top'", "'bot'", "'outer'", "'inner'", 
-                     "'on'", "'under'", "'in'", "'('", "')'", "'{'", "'}'", 
-                     "'['", "']'", "'='", "','", "';'", "':'", "'.'", "'++'", 
-                     "'--'", "'or'", "'and'", "'=='", "'!='", "'<'", "'<='", 
-                     "'>'", "'>='", "'|'", "'/'", "'%'", "'<<'", "'>>'", 
-                     "'&^'", "'!'", "'+'", "'-'", "'^'", "'*'", "'&'" ]
+    literalNames = ["<INVALID>", "'func'", "'switch'", "'case'", "'default'",
+                    "'if'", "'else'", "'type'", "'package'", "'import'",
+                    "'nil'", "<INVALID>", "'square'", "'rect'", "'circle'",
+                    "'triangle'", "'shape'", "'draw'", "'#viewport'", "'left'",
+                    "'right'", "'top'", "'bot'", "'outer'", "'inner'",
+                    "'on'", "'under'", "'in'", "'('", "')'", "'{'", "'}'",
+                    "'['", "']'", "'='", "','", "';'", "':'", "'.'", "'++'",
+                    "'--'", "'or'", "'and'", "'=='", "'!='", "'<'", "'<='",
+                    "'>'", "'>='", "'|'", "'/'", "'%'", "'<<'", "'>>'",
+                    "'&^'", "'!'", "'+'", "'-'", "'^'", "'*'", "'&'"]
 
-    symbolicNames = [ "<INVALID>", "FUNC", "SWITCH", "CASE", "DEFAULT", 
-                      "IF", "ELSE", "TYPE", "PACKAGE", "IMPORT", "NIL_LIT", 
-                      "IDENTIFIER", "SQUARE", "RECT", "CIRCLE", "TRIANGLE", 
-                      "SHAPE", "DRAW", "VIEWPORT", "LEFT", "RIGHT", "TOP", 
-                      "BOT", "OUTER", "INNER", "ON", "UNDER", "IN", "L_PAREN", 
-                      "R_PAREN", "L_CURLY", "R_CURLY", "L_BRACKET", "R_BRACKET", 
-                      "ASSIGN", "COMMA", "SEMI", "COLON", "DOT", "PLUS_PLUS", 
-                      "MINUS_MINUS", "LOGICAL_OR", "LOGICAL_AND", "EQUALS", 
-                      "NOT_EQUALS", "LESS", "LESS_OR_EQUALS", "GREATER", 
-                      "GREATER_OR_EQUALS", "OR", "DIV", "MOD", "LSHIFT", 
-                      "RSHIFT", "BIT_CLEAR", "EXCLAMATION", "PLUS", "MINUS", 
-                      "CARET", "STAR", "AMPERSAND", "DECIMAL_LIT", "FLOAT_LIT", 
-                      "RUNE_LIT", "RAW_STRING_LIT", "INTERPRETED_STRING_LIT", 
-                      "SIZE_LIT", "WS", "COMMENT", "TERMINATOR", "LINE_COMMENT" ]
+    symbolicNames = ["<INVALID>", "FUNC", "SWITCH", "CASE", "DEFAULT",
+                     "IF", "ELSE", "TYPE", "PACKAGE", "IMPORT", "NIL_LIT",
+                     "IDENTIFIER", "SQUARE", "RECT", "CIRCLE", "TRIANGLE",
+                     "SHAPE", "DRAW", "VIEWPORT", "LEFT", "RIGHT", "TOP",
+                     "BOT", "OUTER", "INNER", "ON", "UNDER", "IN", "L_PAREN",
+                     "R_PAREN", "L_CURLY", "R_CURLY", "L_BRACKET", "R_BRACKET",
+                     "ASSIGN", "COMMA", "SEMI", "COLON", "DOT", "PLUS_PLUS",
+                     "MINUS_MINUS", "LOGICAL_OR", "LOGICAL_AND", "EQUALS",
+                     "NOT_EQUALS", "LESS", "LESS_OR_EQUALS", "GREATER",
+                     "GREATER_OR_EQUALS", "OR", "DIV", "MOD", "LSHIFT",
+                     "RSHIFT", "BIT_CLEAR", "EXCLAMATION", "PLUS", "MINUS",
+                     "CARET", "STAR", "AMPERSAND", "DECIMAL_LIT", "FLOAT_LIT",
+                     "RUNE_LIT", "RAW_STRING_LIT", "INTERPRETED_STRING_LIT",
+                     "SIZE_LIT", "WS", "COMMENT", "TERMINATOR", "LINE_COMMENT"]
 
     RULE_sourceFile = 0
     RULE_viewportClause = 1
@@ -301,179 +301,166 @@ class TwoDimParser ( TwoDimParserBase ):
     RULE_arguments = 41
     RULE_eos = 42
 
-    ruleNames =  [ "sourceFile", "viewportClause", "declaration", "identifierList", 
-                   "expressionList", "functionDecl", "signature", "parameters", 
-                   "parameterDecl", "functionCall", "drawClause", "shapeDecl", 
-                   "shapeSpec", "shapeColor", "block", "statementList", 
-                   "statement", "simpleStmt", "expressionStmt", "shapeArguments", 
-                   "assignmentDeclarationStmt", "assignment", "assign_op", 
-                   "ifStmt", "switchStmt", "exprSwitchStmt", "exprCaseClause", 
-                   "exprSwitchCase", "typeName", "relationDetailOp", "singleLevelRelationOp", 
-                   "multiLevelRelationOp", "relationExpr", "expression", 
-                   "primaryExpr", "operand", "literal", "basicLit", "integer", 
-                   "operandName", "string_", "arguments", "eos" ]
+    ruleNames = ["sourceFile", "viewportClause", "declaration", "identifierList",
+                 "expressionList", "functionDecl", "signature", "parameters",
+                 "parameterDecl", "functionCall", "drawClause", "shapeDecl",
+                 "shapeSpec", "shapeColor", "block", "statementList",
+                 "statement", "simpleStmt", "expressionStmt", "shapeArguments",
+                 "assignmentDeclarationStmt", "assignment", "assign_op",
+                 "ifStmt", "switchStmt", "exprSwitchStmt", "exprCaseClause",
+                 "exprSwitchCase", "typeName", "relationDetailOp", "singleLevelRelationOp",
+                 "multiLevelRelationOp", "relationExpr", "expression",
+                 "primaryExpr", "operand", "literal", "basicLit", "integer",
+                 "operandName", "string_", "arguments", "eos"]
 
     EOF = Token.EOF
-    FUNC=1
-    SWITCH=2
-    CASE=3
-    DEFAULT=4
-    IF=5
-    ELSE=6
-    TYPE=7
-    PACKAGE=8
-    IMPORT=9
-    NIL_LIT=10
-    IDENTIFIER=11
-    SQUARE=12
-    RECT=13
-    CIRCLE=14
-    TRIANGLE=15
-    SHAPE=16
-    DRAW=17
-    VIEWPORT=18
-    LEFT=19
-    RIGHT=20
-    TOP=21
-    BOT=22
-    OUTER=23
-    INNER=24
-    ON=25
-    UNDER=26
-    IN=27
-    L_PAREN=28
-    R_PAREN=29
-    L_CURLY=30
-    R_CURLY=31
-    L_BRACKET=32
-    R_BRACKET=33
-    ASSIGN=34
-    COMMA=35
-    SEMI=36
-    COLON=37
-    DOT=38
-    PLUS_PLUS=39
-    MINUS_MINUS=40
-    LOGICAL_OR=41
-    LOGICAL_AND=42
-    EQUALS=43
-    NOT_EQUALS=44
-    LESS=45
-    LESS_OR_EQUALS=46
-    GREATER=47
-    GREATER_OR_EQUALS=48
-    OR=49
-    DIV=50
-    MOD=51
-    LSHIFT=52
-    RSHIFT=53
-    BIT_CLEAR=54
-    EXCLAMATION=55
-    PLUS=56
-    MINUS=57
-    CARET=58
-    STAR=59
-    AMPERSAND=60
-    DECIMAL_LIT=61
-    FLOAT_LIT=62
-    RUNE_LIT=63
-    RAW_STRING_LIT=64
-    INTERPRETED_STRING_LIT=65
-    SIZE_LIT=66
-    WS=67
-    COMMENT=68
-    TERMINATOR=69
-    LINE_COMMENT=70
+    FUNC = 1
+    SWITCH = 2
+    CASE = 3
+    DEFAULT = 4
+    IF = 5
+    ELSE = 6
+    TYPE = 7
+    PACKAGE = 8
+    IMPORT = 9
+    NIL_LIT = 10
+    IDENTIFIER = 11
+    SQUARE = 12
+    RECT = 13
+    CIRCLE = 14
+    TRIANGLE = 15
+    SHAPE = 16
+    DRAW = 17
+    VIEWPORT = 18
+    LEFT = 19
+    RIGHT = 20
+    TOP = 21
+    BOT = 22
+    OUTER = 23
+    INNER = 24
+    ON = 25
+    UNDER = 26
+    IN = 27
+    L_PAREN = 28
+    R_PAREN = 29
+    L_CURLY = 30
+    R_CURLY = 31
+    L_BRACKET = 32
+    R_BRACKET = 33
+    ASSIGN = 34
+    COMMA = 35
+    SEMI = 36
+    COLON = 37
+    DOT = 38
+    PLUS_PLUS = 39
+    MINUS_MINUS = 40
+    LOGICAL_OR = 41
+    LOGICAL_AND = 42
+    EQUALS = 43
+    NOT_EQUALS = 44
+    LESS = 45
+    LESS_OR_EQUALS = 46
+    GREATER = 47
+    GREATER_OR_EQUALS = 48
+    OR = 49
+    DIV = 50
+    MOD = 51
+    LSHIFT = 52
+    RSHIFT = 53
+    BIT_CLEAR = 54
+    EXCLAMATION = 55
+    PLUS = 56
+    MINUS = 57
+    CARET = 58
+    STAR = 59
+    AMPERSAND = 60
+    DECIMAL_LIT = 61
+    FLOAT_LIT = 62
+    RUNE_LIT = 63
+    RAW_STRING_LIT = 64
+    INTERPRETED_STRING_LIT = 65
+    SIZE_LIT = 66
+    WS = 67
+    COMMENT = 68
+    TERMINATOR = 69
+    LINE_COMMENT = 70
 
-    def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
+    def __init__(self, input: TokenStream, output: TextIO = sys.stdout):
         super().__init__(input, output)
         self.checkVersion("4.9.2")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
-
-
-
     class SourceFileContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def drawClause(self):
-            return self.getTypedRuleContext(TwoDimParser.DrawClauseContext,0)
+            return self.getTypedRuleContext(TwoDimParser.DrawClauseContext, 0)
 
-
-        def eos(self, i:int=None):
+        def eos(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.EosContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.EosContext,i)
-
+                return self.getTypedRuleContext(TwoDimParser.EosContext, i)
 
         def viewportClause(self):
-            return self.getTypedRuleContext(TwoDimParser.ViewportClauseContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ViewportClauseContext, 0)
 
         def statementList(self):
-            return self.getTypedRuleContext(TwoDimParser.StatementListContext,0)
+            return self.getTypedRuleContext(TwoDimParser.StatementListContext, 0)
 
-
-        def functionDecl(self, i:int=None):
+        def functionDecl(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.FunctionDeclContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.FunctionDeclContext,i)
+                return self.getTypedRuleContext(TwoDimParser.FunctionDeclContext, i)
 
-
-        def declaration(self, i:int=None):
+        def declaration(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.DeclarationContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.DeclarationContext,i)
-
+                return self.getTypedRuleContext(TwoDimParser.DeclarationContext, i)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_sourceFile
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSourceFile" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterSourceFile"):
                 listener.enterSourceFile(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSourceFile" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitSourceFile"):
                 listener.exitSourceFile(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSourceFile" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitSourceFile"):
                 return visitor.visitSourceFile(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def sourceFile(self):
 
         localctx = TwoDimParser.SourceFileContext(self, self._ctx, self.state)
         self.enterRule(localctx, 0, self.RULE_sourceFile)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 87
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==TwoDimParser.VIEWPORT:
+            if _la == TwoDimParser.VIEWPORT:
                 self.state = 86
                 self.viewportClause()
 
-
             self.state = 97
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,2,self._ctx)
-            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                if _alt==1:
+            _alt = self._interp.adaptivePredict(self._input, 2, self._ctx)
+            while _alt != 2 and _alt != ATN.INVALID_ALT_NUMBER:
+                if _alt == 1:
                     self.state = 91
                     self._errHandler.sync(self)
                     token = self._input.LA(1)
@@ -481,7 +468,8 @@ class TwoDimParser ( TwoDimParserBase ):
                         self.state = 89
                         self.functionDecl()
                         pass
-                    elif token in [TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE, TwoDimParser.SHAPE]:
+                    elif token in [TwoDimParser.SQUARE, TwoDimParser.RECT, TwoDimParser.CIRCLE, TwoDimParser.TRIANGLE,
+                                   TwoDimParser.SHAPE]:
                         self.state = 90
                         self.declaration()
                         pass
@@ -489,18 +477,17 @@ class TwoDimParser ( TwoDimParserBase ):
                         raise NoViableAltException(self)
 
                     self.state = 93
-                    self.eos() 
+                    self.eos()
                 self.state = 99
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,2,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input, 2, self._ctx)
 
             self.state = 101
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,3,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 3, self._ctx)
             if la_ == 1:
                 self.state = 100
                 self.statementList()
-
 
             self.state = 103
             self.drawClause()
@@ -514,46 +501,41 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ViewportClauseContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def VIEWPORT(self):
             return self.getToken(TwoDimParser.VIEWPORT, 0)
 
-        def DECIMAL_LIT(self, i:int=None):
+        def DECIMAL_LIT(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.DECIMAL_LIT)
             else:
                 return self.getToken(TwoDimParser.DECIMAL_LIT, i)
 
         def eos(self):
-            return self.getTypedRuleContext(TwoDimParser.EosContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.EosContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_viewportClause
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterViewportClause" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterViewportClause"):
                 listener.enterViewportClause(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitViewportClause" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitViewportClause"):
                 listener.exitViewportClause(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitViewportClause" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitViewportClause"):
                 return visitor.visitViewportClause(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def viewportClause(self):
 
@@ -577,37 +559,32 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class DeclarationContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def shapeDecl(self):
-            return self.getTypedRuleContext(TwoDimParser.ShapeDeclContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ShapeDeclContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_declaration
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDeclaration" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterDeclaration"):
                 listener.enterDeclaration(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDeclaration" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitDeclaration"):
                 listener.exitDeclaration(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitDeclaration" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitDeclaration"):
                 return visitor.visitDeclaration(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def declaration(self):
 
@@ -625,21 +602,20 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class IdentifierListContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def IDENTIFIER(self, i:int=None):
+        def IDENTIFIER(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.IDENTIFIER)
             else:
                 return self.getToken(TwoDimParser.IDENTIFIER, i)
 
-        def COMMA(self, i:int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.COMMA)
             else:
@@ -648,22 +624,19 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_identifierList
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterIdentifierList" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterIdentifierList"):
                 listener.enterIdentifierList(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitIdentifierList" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitIdentifierList"):
                 listener.exitIdentifierList(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitIdentifierList" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitIdentifierList"):
                 return visitor.visitIdentifierList(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def identifierList(self):
 
@@ -675,16 +648,16 @@ class TwoDimParser ( TwoDimParserBase ):
             self.match(TwoDimParser.IDENTIFIER)
             self.state = 118
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
-            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                if _alt==1:
+            _alt = self._interp.adaptivePredict(self._input, 4, self._ctx)
+            while _alt != 2 and _alt != ATN.INVALID_ALT_NUMBER:
+                if _alt == 1:
                     self.state = 114
                     self.match(TwoDimParser.COMMA)
                     self.state = 115
-                    self.match(TwoDimParser.IDENTIFIER) 
+                    self.match(TwoDimParser.IDENTIFIER)
                 self.state = 120
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input, 4, self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -694,22 +667,20 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExpressionListContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def expression(self, i:int=None):
+        def expression(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.ExpressionContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.ExpressionContext,i)
+                return self.getTypedRuleContext(TwoDimParser.ExpressionContext, i)
 
-
-        def COMMA(self, i:int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.COMMA)
             else:
@@ -718,28 +689,25 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_expressionList
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExpressionList" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterExpressionList"):
                 listener.enterExpressionList(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExpressionList" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitExpressionList"):
                 listener.exitExpressionList(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpressionList" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitExpressionList"):
                 return visitor.visitExpressionList(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def expressionList(self):
 
         localctx = TwoDimParser.ExpressionListContext(self, self._ctx, self.state)
         self.enterRule(localctx, 8, self.RULE_expressionList)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 121
@@ -747,7 +715,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 126
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==TwoDimParser.COMMA:
+            while _la == TwoDimParser.COMMA:
                 self.state = 122
                 self.match(TwoDimParser.COMMA)
                 self.state = 123
@@ -764,11 +732,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class FunctionDeclContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -779,32 +746,27 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getToken(TwoDimParser.IDENTIFIER, 0)
 
         def signature(self):
-            return self.getTypedRuleContext(TwoDimParser.SignatureContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.SignatureContext, 0)
 
         def block(self):
-            return self.getTypedRuleContext(TwoDimParser.BlockContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.BlockContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_functionDecl
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFunctionDecl" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterFunctionDecl"):
                 listener.enterFunctionDecl(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFunctionDecl" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitFunctionDecl"):
                 listener.exitFunctionDecl(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFunctionDecl" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitFunctionDecl"):
                 return visitor.visitFunctionDecl(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def functionDecl(self):
 
@@ -821,7 +783,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.signature()
             self.state = 133
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,6,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 6, self._ctx)
             if la_ == 1:
                 self.state = 132
                 self.block()
@@ -835,37 +797,32 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class SignatureContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def parameters(self):
-            return self.getTypedRuleContext(TwoDimParser.ParametersContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ParametersContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_signature
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSignature" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterSignature"):
                 listener.enterSignature(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSignature" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitSignature"):
                 listener.exitSignature(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSignature" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitSignature"):
                 return visitor.visitSignature(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def signature(self):
 
@@ -874,7 +831,7 @@ class TwoDimParser ( TwoDimParserBase ):
         try:
             self.state = 138
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,7,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 7, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 135
@@ -900,11 +857,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ParametersContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -914,14 +870,13 @@ class TwoDimParser ( TwoDimParserBase ):
         def R_PAREN(self):
             return self.getToken(TwoDimParser.R_PAREN, 0)
 
-        def parameterDecl(self, i:int=None):
+        def parameterDecl(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.ParameterDeclContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.ParameterDeclContext,i)
+                return self.getTypedRuleContext(TwoDimParser.ParameterDeclContext, i)
 
-
-        def COMMA(self, i:int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.COMMA)
             else:
@@ -930,28 +885,25 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_parameters
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterParameters" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterParameters"):
                 listener.enterParameters(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitParameters" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitParameters"):
                 listener.exitParameters(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitParameters" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitParameters"):
                 return visitor.visitParameters(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def parameters(self):
 
         localctx = TwoDimParser.ParametersContext(self, self._ctx, self.state)
         self.enterRule(localctx, 14, self.RULE_parameters)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 140
@@ -959,13 +911,15 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 149
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE))) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & (
+                    (1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (
+                    1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE))) != 0):
                 self.state = 141
                 self.parameterDecl()
                 self.state = 146
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                while _la==TwoDimParser.COMMA:
+                while _la == TwoDimParser.COMMA:
                     self.state = 142
                     self.match(TwoDimParser.COMMA)
                     self.state = 143
@@ -973,8 +927,6 @@ class TwoDimParser ( TwoDimParserBase ):
                     self.state = 148
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-
-
 
             self.state = 151
             self.match(TwoDimParser.R_PAREN)
@@ -986,47 +938,41 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ParameterDeclContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def typeName(self):
-            return self.getTypedRuleContext(TwoDimParser.TypeNameContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.TypeNameContext, 0)
 
         def identifierList(self):
-            return self.getTypedRuleContext(TwoDimParser.IdentifierListContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.IdentifierListContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_parameterDecl
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterParameterDecl" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterParameterDecl"):
                 listener.enterParameterDecl(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitParameterDecl" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitParameterDecl"):
                 listener.exitParameterDecl(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitParameterDecl" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitParameterDecl"):
                 return visitor.visitParameterDecl(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def parameterDecl(self):
 
         localctx = TwoDimParser.ParameterDeclContext(self, self._ctx, self.state)
         self.enterRule(localctx, 16, self.RULE_parameterDecl)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 153
@@ -1034,7 +980,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 155
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==TwoDimParser.IDENTIFIER:
+            if _la == TwoDimParser.IDENTIFIER:
                 self.state = 154
                 self.identifierList()
 
@@ -1047,11 +993,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class FunctionCallContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1064,20 +1009,19 @@ class TwoDimParser ( TwoDimParserBase ):
         def R_PAREN(self):
             return self.getToken(TwoDimParser.R_PAREN, 0)
 
-        def WS(self, i:int=None):
+        def WS(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.WS)
             else:
                 return self.getToken(TwoDimParser.WS, i)
 
-        def operandName(self, i:int=None):
+        def operandName(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.OperandNameContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.OperandNameContext,i)
+                return self.getTypedRuleContext(TwoDimParser.OperandNameContext, i)
 
-
-        def COMMA(self, i:int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.COMMA)
             else:
@@ -1086,28 +1030,25 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_functionCall
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterFunctionCall" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterFunctionCall"):
                 listener.enterFunctionCall(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitFunctionCall" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitFunctionCall"):
                 listener.exitFunctionCall(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFunctionCall" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitFunctionCall"):
                 return visitor.visitFunctionCall(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def functionCall(self):
 
         localctx = TwoDimParser.FunctionCallContext(self, self._ctx, self.state)
         self.enterRule(localctx, 18, self.RULE_functionCall)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 157
@@ -1115,42 +1056,38 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 159
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==TwoDimParser.WS:
+            if _la == TwoDimParser.WS:
                 self.state = 158
                 self.match(TwoDimParser.WS)
-
 
             self.state = 161
             self.match(TwoDimParser.L_PAREN)
             self.state = 163
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==TwoDimParser.WS:
+            if _la == TwoDimParser.WS:
                 self.state = 162
                 self.match(TwoDimParser.WS)
-
 
             self.state = 166
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==TwoDimParser.IDENTIFIER:
+            if _la == TwoDimParser.IDENTIFIER:
                 self.state = 165
                 self.operandName()
-
 
             self.state = 175
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==TwoDimParser.COMMA:
+            while _la == TwoDimParser.COMMA:
                 self.state = 168
                 self.match(TwoDimParser.COMMA)
                 self.state = 170
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==TwoDimParser.WS:
+                if _la == TwoDimParser.WS:
                     self.state = 169
                     self.match(TwoDimParser.WS)
-
 
                 self.state = 172
                 self.operandName()
@@ -1168,11 +1105,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class DrawClauseContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1185,22 +1121,19 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_drawClause
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterDrawClause" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterDrawClause"):
                 listener.enterDrawClause(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitDrawClause" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitDrawClause"):
                 listener.exitDrawClause(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitDrawClause" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitDrawClause"):
                 return visitor.visitDrawClause(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def drawClause(self):
 
@@ -1220,37 +1153,32 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ShapeDeclContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def shapeSpec(self):
-            return self.getTypedRuleContext(TwoDimParser.ShapeSpecContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ShapeSpecContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_shapeDecl
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterShapeDecl" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterShapeDecl"):
                 listener.enterShapeDecl(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitShapeDecl" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitShapeDecl"):
                 listener.exitShapeDecl(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitShapeDecl" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitShapeDecl"):
                 return visitor.visitShapeDecl(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def shapeDecl(self):
 
@@ -1268,45 +1196,41 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ShapeSpecContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def typeName(self):
-            return self.getTypedRuleContext(TwoDimParser.TypeNameContext,0)
+            return self.getTypedRuleContext(TwoDimParser.TypeNameContext, 0)
 
-
-        def IDENTIFIER(self, i:int=None):
+        def IDENTIFIER(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.IDENTIFIER)
             else:
                 return self.getToken(TwoDimParser.IDENTIFIER, i)
 
-        def shapeArguments(self, i:int=None):
+        def shapeArguments(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.ShapeArgumentsContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.ShapeArgumentsContext,i)
+                return self.getTypedRuleContext(TwoDimParser.ShapeArgumentsContext, i)
 
-
-        def WS(self, i:int=None):
+        def WS(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.WS)
             else:
                 return self.getToken(TwoDimParser.WS, i)
 
-        def shapeColor(self, i:int=None):
+        def shapeColor(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.ShapeColorContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.ShapeColorContext,i)
+                return self.getTypedRuleContext(TwoDimParser.ShapeColorContext, i)
 
-
-        def COMMA(self, i:int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.COMMA)
             else:
@@ -1315,28 +1239,25 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_shapeSpec
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterShapeSpec" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterShapeSpec"):
                 listener.enterShapeSpec(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitShapeSpec" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitShapeSpec"):
                 listener.exitShapeSpec(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitShapeSpec" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitShapeSpec"):
                 return visitor.visitShapeSpec(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def shapeSpec(self):
 
         localctx = TwoDimParser.ShapeSpecContext(self, self._ctx, self.state)
         self.enterRule(localctx, 24, self.RULE_shapeSpec)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 185
@@ -1345,36 +1266,33 @@ class TwoDimParser ( TwoDimParserBase ):
             self.match(TwoDimParser.IDENTIFIER)
             self.state = 188
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,16,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 16, self._ctx)
             if la_ == 1:
                 self.state = 187
                 self.match(TwoDimParser.WS)
-
 
             self.state = 190
             self.shapeArguments()
             self.state = 192
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,17,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 17, self._ctx)
             if la_ == 1:
                 self.state = 191
                 self.shapeColor()
 
-
             self.state = 205
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,20,self._ctx)
-            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                if _alt==1:
+            _alt = self._interp.adaptivePredict(self._input, 20, self._ctx)
+            while _alt != 2 and _alt != ATN.INVALID_ALT_NUMBER:
+                if _alt == 1:
                     self.state = 194
                     self.match(TwoDimParser.COMMA)
                     self.state = 196
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if _la==TwoDimParser.WS:
+                    if _la == TwoDimParser.WS:
                         self.state = 195
                         self.match(TwoDimParser.WS)
-
 
                     self.state = 198
                     self.match(TwoDimParser.IDENTIFIER)
@@ -1382,15 +1300,14 @@ class TwoDimParser ( TwoDimParserBase ):
                     self.shapeArguments()
                     self.state = 201
                     self._errHandler.sync(self)
-                    la_ = self._interp.adaptivePredict(self._input,19,self._ctx)
+                    la_ = self._interp.adaptivePredict(self._input, 19, self._ctx)
                     if la_ == 1:
                         self.state = 200
                         self.shapeColor()
 
-             
                 self.state = 207
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,20,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input, 20, self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1400,18 +1317,17 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ShapeColorContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def LESS(self):
             return self.getToken(TwoDimParser.LESS, 0)
 
-        def DECIMAL_LIT(self, i:int=None):
+        def DECIMAL_LIT(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.DECIMAL_LIT)
             else:
@@ -1420,13 +1336,13 @@ class TwoDimParser ( TwoDimParserBase ):
         def GREATER(self):
             return self.getToken(TwoDimParser.GREATER, 0)
 
-        def COMMA(self, i:int=None):
+        def COMMA(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.COMMA)
             else:
                 return self.getToken(TwoDimParser.COMMA, i)
 
-        def WS(self, i:int=None):
+        def WS(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.WS)
             else:
@@ -1435,28 +1351,25 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_shapeColor
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterShapeColor" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterShapeColor"):
                 listener.enterShapeColor(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitShapeColor" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitShapeColor"):
                 listener.exitShapeColor(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitShapeColor" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitShapeColor"):
                 return visitor.visitShapeColor(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def shapeColor(self):
 
         localctx = TwoDimParser.ShapeColorContext(self, self._ctx, self.state)
         self.enterRule(localctx, 26, self.RULE_shapeColor)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 208
@@ -1466,16 +1379,15 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 217
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==TwoDimParser.COMMA:
+            while _la == TwoDimParser.COMMA:
                 self.state = 210
                 self.match(TwoDimParser.COMMA)
                 self.state = 212
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==TwoDimParser.WS:
+                if _la == TwoDimParser.WS:
                     self.state = 211
                     self.match(TwoDimParser.WS)
-
 
                 self.state = 214
                 self.match(TwoDimParser.DECIMAL_LIT)
@@ -1493,11 +1405,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class BlockContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -1511,34 +1422,30 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getToken(TwoDimParser.TERMINATOR, 0)
 
         def statementList(self):
-            return self.getTypedRuleContext(TwoDimParser.StatementListContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.StatementListContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_block
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBlock" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterBlock"):
                 listener.enterBlock(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBlock" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitBlock"):
                 listener.exitBlock(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitBlock" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitBlock"):
                 return visitor.visitBlock(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def block(self):
 
         localctx = TwoDimParser.BlockContext(self, self._ctx, self.state)
         self.enterRule(localctx, 28, self.RULE_block)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 222
@@ -1546,18 +1453,22 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 224
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==TwoDimParser.TERMINATOR:
+            if _la == TwoDimParser.TERMINATOR:
                 self.state = 223
                 self.match(TwoDimParser.TERMINATOR)
-
 
             self.state = 227
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.FUNC) | (1 << TwoDimParser.SWITCH) | (1 << TwoDimParser.IF) | (1 << TwoDimParser.NIL_LIT) | (1 << TwoDimParser.IDENTIFIER) | (1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE) | (1 << TwoDimParser.DRAW) | (1 << TwoDimParser.L_PAREN) | (1 << TwoDimParser.DECIMAL_LIT) | (1 << TwoDimParser.FLOAT_LIT) | (1 << TwoDimParser.RUNE_LIT))) != 0) or _la==TwoDimParser.RAW_STRING_LIT or _la==TwoDimParser.INTERPRETED_STRING_LIT:
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & (
+                    (1 << TwoDimParser.FUNC) | (1 << TwoDimParser.SWITCH) | (1 << TwoDimParser.IF) | (
+                    1 << TwoDimParser.NIL_LIT) | (1 << TwoDimParser.IDENTIFIER) | (1 << TwoDimParser.SQUARE) | (
+                            1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (
+                            1 << TwoDimParser.SHAPE) | (1 << TwoDimParser.DRAW) | (1 << TwoDimParser.L_PAREN) | (
+                            1 << TwoDimParser.DECIMAL_LIT) | (1 << TwoDimParser.FLOAT_LIT) | (
+                            1 << TwoDimParser.RUNE_LIT))) != 0) or _la == TwoDimParser.RAW_STRING_LIT or _la == TwoDimParser.INTERPRETED_STRING_LIT:
                 self.state = 226
                 self.statementList()
-
 
             self.state = 229
             self.match(TwoDimParser.R_CURLY)
@@ -1569,47 +1480,41 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class StatementListContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def statement(self, i:int=None):
+        def statement(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.StatementContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.StatementContext,i)
+                return self.getTypedRuleContext(TwoDimParser.StatementContext, i)
 
-
-        def eos(self, i:int=None):
+        def eos(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.EosContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.EosContext,i)
-
+                return self.getTypedRuleContext(TwoDimParser.EosContext, i)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_statementList
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStatementList" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterStatementList"):
                 listener.enterStatementList(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStatementList" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitStatementList"):
                 listener.exitStatementList(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStatementList" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitStatementList"):
                 return visitor.visitStatementList(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def statementList(self):
 
@@ -1617,10 +1522,10 @@ class TwoDimParser ( TwoDimParserBase ):
         self.enterRule(localctx, 30, self.RULE_statementList)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 234 
+            self.state = 234
             self._errHandler.sync(self)
             _alt = 1
-            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+            while _alt != 2 and _alt != ATN.INVALID_ALT_NUMBER:
                 if _alt == 1:
                     self.state = 231
                     self.statement()
@@ -1629,9 +1534,9 @@ class TwoDimParser ( TwoDimParserBase ):
 
                 else:
                     raise NoViableAltException(self)
-                self.state = 236 
+                self.state = 236
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,25,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input, 25, self._ctx)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -1641,61 +1546,50 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class StatementContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def declaration(self):
-            return self.getTypedRuleContext(TwoDimParser.DeclarationContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.DeclarationContext, 0)
 
         def functionDecl(self):
-            return self.getTypedRuleContext(TwoDimParser.FunctionDeclContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.FunctionDeclContext, 0)
 
         def functionCall(self):
-            return self.getTypedRuleContext(TwoDimParser.FunctionCallContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.FunctionCallContext, 0)
 
         def simpleStmt(self):
-            return self.getTypedRuleContext(TwoDimParser.SimpleStmtContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.SimpleStmtContext, 0)
 
         def ifStmt(self):
-            return self.getTypedRuleContext(TwoDimParser.IfStmtContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.IfStmtContext, 0)
 
         def switchStmt(self):
-            return self.getTypedRuleContext(TwoDimParser.SwitchStmtContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.SwitchStmtContext, 0)
 
         def assignmentDeclarationStmt(self):
-            return self.getTypedRuleContext(TwoDimParser.AssignmentDeclarationStmtContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.AssignmentDeclarationStmtContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_statement
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterStatement" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterStatement"):
                 listener.enterStatement(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitStatement" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitStatement"):
                 listener.exitStatement(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStatement" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitStatement"):
                 return visitor.visitStatement(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def statement(self):
 
@@ -1704,7 +1598,7 @@ class TwoDimParser ( TwoDimParserBase ):
         try:
             self.state = 245
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,26,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 26, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 238
@@ -1756,45 +1650,38 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class SimpleStmtContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def expressionStmt(self):
-            return self.getTypedRuleContext(TwoDimParser.ExpressionStmtContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ExpressionStmtContext, 0)
 
         def assignment(self):
-            return self.getTypedRuleContext(TwoDimParser.AssignmentContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.AssignmentContext, 0)
 
         def drawClause(self):
-            return self.getTypedRuleContext(TwoDimParser.DrawClauseContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.DrawClauseContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_simpleStmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSimpleStmt" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterSimpleStmt"):
                 listener.enterSimpleStmt(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSimpleStmt" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitSimpleStmt"):
                 listener.exitSimpleStmt(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSimpleStmt" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitSimpleStmt"):
                 return visitor.visitSimpleStmt(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def simpleStmt(self):
 
@@ -1803,7 +1690,7 @@ class TwoDimParser ( TwoDimParserBase ):
         try:
             self.state = 250
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,27,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 27, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 247
@@ -1831,37 +1718,32 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExpressionStmtContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def expression(self):
-            return self.getTypedRuleContext(TwoDimParser.ExpressionContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ExpressionContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_expressionStmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExpressionStmt" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterExpressionStmt"):
                 listener.enterExpressionStmt(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExpressionStmt" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitExpressionStmt"):
                 listener.exitExpressionStmt(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpressionStmt" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitExpressionStmt"):
                 return visitor.visitExpressionStmt(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def expressionStmt(self):
 
@@ -1879,19 +1761,17 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ShapeArgumentsContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def arguments(self):
-            return self.getTypedRuleContext(TwoDimParser.ArgumentsContext,0)
+            return self.getTypedRuleContext(TwoDimParser.ArgumentsContext, 0)
 
-
-        def WS(self, i:int=None):
+        def WS(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.WS)
             else:
@@ -1900,7 +1780,7 @@ class TwoDimParser ( TwoDimParserBase ):
         def L_BRACKET(self):
             return self.getToken(TwoDimParser.L_BRACKET, 0)
 
-        def SIZE_LIT(self, i:int=None):
+        def SIZE_LIT(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.SIZE_LIT)
             else:
@@ -1915,87 +1795,78 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_shapeArguments
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterShapeArguments" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterShapeArguments"):
                 listener.enterShapeArguments(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitShapeArguments" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitShapeArguments"):
                 listener.exitShapeArguments(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitShapeArguments" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitShapeArguments"):
                 return visitor.visitShapeArguments(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def shapeArguments(self):
 
         localctx = TwoDimParser.ShapeArgumentsContext(self, self._ctx, self.state)
         self.enterRule(localctx, 38, self.RULE_shapeArguments)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 255
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,28,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 28, self._ctx)
             if la_ == 1:
                 self.state = 254
                 self.arguments()
 
-
             self.state = 258
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,29,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 29, self._ctx)
             if la_ == 1:
                 self.state = 257
                 self.match(TwoDimParser.WS)
 
-
             self.state = 276
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,34,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 34, self._ctx)
             if la_ == 1:
                 self.state = 260
                 self.match(TwoDimParser.L_BRACKET)
                 self.state = 262
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==TwoDimParser.WS:
+                if _la == TwoDimParser.WS:
                     self.state = 261
                     self.match(TwoDimParser.WS)
-
 
                 self.state = 264
                 self.match(TwoDimParser.SIZE_LIT)
                 self.state = 270
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==TwoDimParser.COMMA:
+                if _la == TwoDimParser.COMMA:
                     self.state = 265
                     self.match(TwoDimParser.COMMA)
                     self.state = 267
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
-                    if _la==TwoDimParser.WS:
+                    if _la == TwoDimParser.WS:
                         self.state = 266
                         self.match(TwoDimParser.WS)
-
 
                     self.state = 269
                     self.match(TwoDimParser.SIZE_LIT)
 
-
                 self.state = 273
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
-                if _la==TwoDimParser.WS:
+                if _la == TwoDimParser.WS:
                     self.state = 272
                     self.match(TwoDimParser.WS)
-
 
                 self.state = 275
                 self.match(TwoDimParser.R_BRACKET)
@@ -2009,11 +1880,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class AssignmentDeclarationStmtContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2024,18 +1894,15 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getToken(TwoDimParser.IDENTIFIER, 0)
 
         def shapeArguments(self):
-            return self.getTypedRuleContext(TwoDimParser.ShapeArgumentsContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ShapeArgumentsContext, 0)
 
         def assign_op(self):
-            return self.getTypedRuleContext(TwoDimParser.Assign_opContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.Assign_opContext, 0)
 
         def functionCall(self):
-            return self.getTypedRuleContext(TwoDimParser.FunctionCallContext,0)
+            return self.getTypedRuleContext(TwoDimParser.FunctionCallContext, 0)
 
-
-        def WS(self, i:int=None):
+        def WS(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.WS)
             else:
@@ -2044,28 +1911,25 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_assignmentDeclarationStmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAssignmentDeclarationStmt" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterAssignmentDeclarationStmt"):
                 listener.enterAssignmentDeclarationStmt(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAssignmentDeclarationStmt" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitAssignmentDeclarationStmt"):
                 listener.exitAssignmentDeclarationStmt(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAssignmentDeclarationStmt" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitAssignmentDeclarationStmt"):
                 return visitor.visitAssignmentDeclarationStmt(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def assignmentDeclarationStmt(self):
 
         localctx = TwoDimParser.AssignmentDeclarationStmtContext(self, self._ctx, self.state)
         self.enterRule(localctx, 40, self.RULE_assignmentDeclarationStmt)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 278
@@ -2074,31 +1938,28 @@ class TwoDimParser ( TwoDimParserBase ):
             self.match(TwoDimParser.IDENTIFIER)
             self.state = 281
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,35,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 35, self._ctx)
             if la_ == 1:
                 self.state = 280
                 self.match(TwoDimParser.WS)
-
 
             self.state = 283
             self.shapeArguments()
             self.state = 285
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==TwoDimParser.WS:
+            if _la == TwoDimParser.WS:
                 self.state = 284
                 self.match(TwoDimParser.WS)
-
 
             self.state = 287
             self.assign_op()
             self.state = 289
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==TwoDimParser.WS:
+            if _la == TwoDimParser.WS:
                 self.state = 288
                 self.match(TwoDimParser.WS)
-
 
             self.state = 291
             self.functionCall()
@@ -2110,11 +1971,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class AssignmentContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2122,32 +1982,27 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getToken(TwoDimParser.IDENTIFIER, 0)
 
         def assign_op(self):
-            return self.getTypedRuleContext(TwoDimParser.Assign_opContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.Assign_opContext, 0)
 
         def expression(self):
-            return self.getTypedRuleContext(TwoDimParser.ExpressionContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ExpressionContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_assignment
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAssignment" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterAssignment"):
                 listener.enterAssignment(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAssignment" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitAssignment"):
                 listener.exitAssignment(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAssignment" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitAssignment"):
                 return visitor.visitAssignment(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def assignment(self):
 
@@ -2169,11 +2024,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class Assign_opContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2183,22 +2037,19 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_assign_op
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterAssign_op" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterAssign_op"):
                 listener.enterAssign_op(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitAssign_op" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitAssign_op"):
                 listener.exitAssign_op(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAssign_op" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitAssign_op"):
                 return visitor.visitAssign_op(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def assign_op(self):
 
@@ -2216,11 +2067,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class IfStmtContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2228,19 +2078,16 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getToken(TwoDimParser.IF, 0)
 
         def expression(self):
-            return self.getTypedRuleContext(TwoDimParser.ExpressionContext,0)
+            return self.getTypedRuleContext(TwoDimParser.ExpressionContext, 0)
 
-
-        def block(self, i:int=None):
+        def block(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.BlockContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.BlockContext,i)
-
+                return self.getTypedRuleContext(TwoDimParser.BlockContext, i)
 
         def simpleStmt(self):
-            return self.getTypedRuleContext(TwoDimParser.SimpleStmtContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.SimpleStmtContext, 0)
 
         def SEMI(self):
             return self.getToken(TwoDimParser.SEMI, 0)
@@ -2249,28 +2096,24 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getToken(TwoDimParser.ELSE, 0)
 
         def ifStmt(self):
-            return self.getTypedRuleContext(TwoDimParser.IfStmtContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.IfStmtContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_ifStmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterIfStmt" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterIfStmt"):
                 listener.enterIfStmt(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitIfStmt" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitIfStmt"):
                 listener.exitIfStmt(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitIfStmt" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitIfStmt"):
                 return visitor.visitIfStmt(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def ifStmt(self):
 
@@ -2282,13 +2125,12 @@ class TwoDimParser ( TwoDimParserBase ):
             self.match(TwoDimParser.IF)
             self.state = 303
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,38,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 38, self._ctx)
             if la_ == 1:
                 self.state = 300
                 self.simpleStmt()
                 self.state = 301
                 self.match(TwoDimParser.SEMI)
-
 
             self.state = 305
             self.expression()
@@ -2296,7 +2138,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.block()
             self.state = 312
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,40,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 40, self._ctx)
             if la_ == 1:
                 self.state = 307
                 self.match(TwoDimParser.ELSE)
@@ -2324,37 +2166,32 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class SwitchStmtContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def exprSwitchStmt(self):
-            return self.getTypedRuleContext(TwoDimParser.ExprSwitchStmtContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ExprSwitchStmtContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_switchStmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSwitchStmt" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterSwitchStmt"):
                 listener.enterSwitchStmt(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSwitchStmt" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitSwitchStmt"):
                 listener.exitSwitchStmt(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSwitchStmt" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitSwitchStmt"):
                 return visitor.visitSwitchStmt(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def switchStmt(self):
 
@@ -2372,11 +2209,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExprSwitchStmtContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2390,76 +2226,73 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getToken(TwoDimParser.R_CURLY, 0)
 
         def simpleStmt(self):
-            return self.getTypedRuleContext(TwoDimParser.SimpleStmtContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.SimpleStmtContext, 0)
 
         def SEMI(self):
             return self.getToken(TwoDimParser.SEMI, 0)
 
         def expression(self):
-            return self.getTypedRuleContext(TwoDimParser.ExpressionContext,0)
+            return self.getTypedRuleContext(TwoDimParser.ExpressionContext, 0)
 
-
-        def exprCaseClause(self, i:int=None):
+        def exprCaseClause(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.ExprCaseClauseContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.ExprCaseClauseContext,i)
-
+                return self.getTypedRuleContext(TwoDimParser.ExprCaseClauseContext, i)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_exprSwitchStmt
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprSwitchStmt" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterExprSwitchStmt"):
                 listener.enterExprSwitchStmt(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprSwitchStmt" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitExprSwitchStmt"):
                 listener.exitExprSwitchStmt(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprSwitchStmt" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitExprSwitchStmt"):
                 return visitor.visitExprSwitchStmt(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def exprSwitchStmt(self):
 
         localctx = TwoDimParser.ExprSwitchStmtContext(self, self._ctx, self.state)
         self.enterRule(localctx, 50, self.RULE_exprSwitchStmt)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 316
             self.match(TwoDimParser.SWITCH)
             self.state = 320
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,41,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 41, self._ctx)
             if la_ == 1:
                 self.state = 317
                 self.simpleStmt()
                 self.state = 318
                 self.match(TwoDimParser.SEMI)
 
-
             self.state = 323
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)))) != 0):
+            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & (
+                    (1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (
+                    1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (
+                            1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (
+                            1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (
+                            1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)))) != 0):
                 self.state = 322
                 self.expression()
-
 
             self.state = 325
             self.match(TwoDimParser.L_CURLY)
             self.state = 329
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==TwoDimParser.CASE or _la==TwoDimParser.DEFAULT:
+            while _la == TwoDimParser.CASE or _la == TwoDimParser.DEFAULT:
                 self.state = 326
                 self.exprCaseClause()
                 self.state = 331
@@ -2476,50 +2309,44 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExprCaseClauseContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def exprSwitchCase(self):
-            return self.getTypedRuleContext(TwoDimParser.ExprSwitchCaseContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ExprSwitchCaseContext, 0)
 
         def COLON(self):
             return self.getToken(TwoDimParser.COLON, 0)
 
         def statementList(self):
-            return self.getTypedRuleContext(TwoDimParser.StatementListContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.StatementListContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_exprCaseClause
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprCaseClause" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterExprCaseClause"):
                 listener.enterExprCaseClause(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprCaseClause" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitExprCaseClause"):
                 listener.exitExprCaseClause(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprCaseClause" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitExprCaseClause"):
                 return visitor.visitExprCaseClause(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def exprCaseClause(self):
 
         localctx = TwoDimParser.ExprCaseClauseContext(self, self._ctx, self.state)
         self.enterRule(localctx, 52, self.RULE_exprCaseClause)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 334
@@ -2529,7 +2356,13 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 337
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.FUNC) | (1 << TwoDimParser.SWITCH) | (1 << TwoDimParser.IF) | (1 << TwoDimParser.NIL_LIT) | (1 << TwoDimParser.IDENTIFIER) | (1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE) | (1 << TwoDimParser.DRAW) | (1 << TwoDimParser.L_PAREN) | (1 << TwoDimParser.DECIMAL_LIT) | (1 << TwoDimParser.FLOAT_LIT) | (1 << TwoDimParser.RUNE_LIT))) != 0) or _la==TwoDimParser.RAW_STRING_LIT or _la==TwoDimParser.INTERPRETED_STRING_LIT:
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & (
+                    (1 << TwoDimParser.FUNC) | (1 << TwoDimParser.SWITCH) | (1 << TwoDimParser.IF) | (
+                    1 << TwoDimParser.NIL_LIT) | (1 << TwoDimParser.IDENTIFIER) | (1 << TwoDimParser.SQUARE) | (
+                            1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (
+                            1 << TwoDimParser.SHAPE) | (1 << TwoDimParser.DRAW) | (1 << TwoDimParser.L_PAREN) | (
+                            1 << TwoDimParser.DECIMAL_LIT) | (1 << TwoDimParser.FLOAT_LIT) | (
+                            1 << TwoDimParser.RUNE_LIT))) != 0) or _la == TwoDimParser.RAW_STRING_LIT or _la == TwoDimParser.INTERPRETED_STRING_LIT:
                 self.state = 336
                 self.statementList()
 
@@ -2542,11 +2375,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExprSwitchCaseContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2554,8 +2386,7 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getToken(TwoDimParser.CASE, 0)
 
         def expression(self):
-            return self.getTypedRuleContext(TwoDimParser.ExpressionContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ExpressionContext, 0)
 
         def DEFAULT(self):
             return self.getToken(TwoDimParser.DEFAULT, 0)
@@ -2563,22 +2394,19 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_exprSwitchCase
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExprSwitchCase" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterExprSwitchCase"):
                 listener.enterExprSwitchCase(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExprSwitchCase" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitExprSwitchCase"):
                 listener.exitExprSwitchCase(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExprSwitchCase" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitExprSwitchCase"):
                 return visitor.visitExprSwitchCase(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def exprSwitchCase(self):
 
@@ -2611,11 +2439,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class TypeNameContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2637,33 +2464,32 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_typeName
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterTypeName" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterTypeName"):
                 listener.enterTypeName(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitTypeName" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitTypeName"):
                 listener.exitTypeName(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitTypeName" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitTypeName"):
                 return visitor.visitTypeName(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def typeName(self):
 
         localctx = TwoDimParser.TypeNameContext(self, self._ctx, self.state)
         self.enterRule(localctx, 56, self.RULE_typeName)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 344
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & (
+                    (1 << TwoDimParser.SQUARE) | (1 << TwoDimParser.RECT) | (1 << TwoDimParser.CIRCLE) | (
+                    1 << TwoDimParser.TRIANGLE) | (1 << TwoDimParser.SHAPE))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2676,11 +2502,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class RelationDetailOpContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2693,33 +2518,30 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_relationDetailOp
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterRelationDetailOp" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterRelationDetailOp"):
                 listener.enterRelationDetailOp(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitRelationDetailOp" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitRelationDetailOp"):
                 listener.exitRelationDetailOp(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitRelationDetailOp" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitRelationDetailOp"):
                 return visitor.visitRelationDetailOp(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def relationDetailOp(self):
 
         localctx = TwoDimParser.RelationDetailOpContext(self, self._ctx, self.state)
         self.enterRule(localctx, 58, self.RULE_relationDetailOp)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 346
             _la = self._input.LA(1)
-            if not(_la==TwoDimParser.OUTER or _la==TwoDimParser.INNER):
+            if not (_la == TwoDimParser.OUTER or _la == TwoDimParser.INNER):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2732,11 +2554,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class SingleLevelRelationOpContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2755,33 +2576,32 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_singleLevelRelationOp
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterSingleLevelRelationOp" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterSingleLevelRelationOp"):
                 listener.enterSingleLevelRelationOp(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitSingleLevelRelationOp" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitSingleLevelRelationOp"):
                 listener.exitSingleLevelRelationOp(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSingleLevelRelationOp" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitSingleLevelRelationOp"):
                 return visitor.visitSingleLevelRelationOp(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def singleLevelRelationOp(self):
 
         localctx = TwoDimParser.SingleLevelRelationOpContext(self, self._ctx, self.state)
         self.enterRule(localctx, 60, self.RULE_singleLevelRelationOp)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 348
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.LEFT) | (1 << TwoDimParser.RIGHT) | (1 << TwoDimParser.TOP) | (1 << TwoDimParser.BOT))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & (
+                    (1 << TwoDimParser.LEFT) | (1 << TwoDimParser.RIGHT) | (1 << TwoDimParser.TOP) | (
+                    1 << TwoDimParser.BOT))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2794,11 +2614,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class MultiLevelRelationOpContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -2814,33 +2633,31 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_multiLevelRelationOp
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMultiLevelRelationOp" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterMultiLevelRelationOp"):
                 listener.enterMultiLevelRelationOp(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMultiLevelRelationOp" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitMultiLevelRelationOp"):
                 listener.exitMultiLevelRelationOp(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitMultiLevelRelationOp" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitMultiLevelRelationOp"):
                 return visitor.visitMultiLevelRelationOp(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def multiLevelRelationOp(self):
 
         localctx = TwoDimParser.MultiLevelRelationOpContext(self, self._ctx, self.state)
         self.enterRule(localctx, 62, self.RULE_multiLevelRelationOp)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 350
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << TwoDimParser.ON) | (1 << TwoDimParser.UNDER) | (1 << TwoDimParser.IN))) != 0)):
+            if not ((((_la) & ~0x3f) == 0 and (
+                    (1 << _la) & ((1 << TwoDimParser.ON) | (1 << TwoDimParser.UNDER) | (1 << TwoDimParser.IN))) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -2853,95 +2670,86 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class RelationExprContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def primaryExpr(self, i:int=None):
+        def primaryExpr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.PrimaryExprContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.PrimaryExprContext,i)
+                return self.getTypedRuleContext(TwoDimParser.PrimaryExprContext, i)
 
-
-        def singleLevelRelationOp(self, i:int=None):
+        def singleLevelRelationOp(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.SingleLevelRelationOpContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.SingleLevelRelationOpContext,i)
+                return self.getTypedRuleContext(TwoDimParser.SingleLevelRelationOpContext, i)
 
-
-        def relationDetailOp(self, i:int=None):
+        def relationDetailOp(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.RelationDetailOpContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.RelationDetailOpContext,i)
-
+                return self.getTypedRuleContext(TwoDimParser.RelationDetailOpContext, i)
 
         def multiLevelRelationOp(self):
-            return self.getTypedRuleContext(TwoDimParser.MultiLevelRelationOpContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.MultiLevelRelationOpContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_relationExpr
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterRelationExpr" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterRelationExpr"):
                 listener.enterRelationExpr(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitRelationExpr" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitRelationExpr"):
                 listener.exitRelationExpr(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitRelationExpr" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitRelationExpr"):
                 return visitor.visitRelationExpr(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def relationExpr(self):
 
         localctx = TwoDimParser.RelationExprContext(self, self._ctx, self.state)
         self.enterRule(localctx, 64, self.RULE_relationExpr)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.state = 367
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,48,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 48, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 352
                 self.primaryExpr()
-                self.state = 359 
+                self.state = 359
                 self._errHandler.sync(self)
                 _alt = 1
-                while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
+                while _alt != 2 and _alt != ATN.INVALID_ALT_NUMBER:
                     if _alt == 1:
                         self.state = 353
                         self.singleLevelRelationOp()
                         self.state = 355
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
-                        if _la==TwoDimParser.OUTER or _la==TwoDimParser.INNER:
+                        if _la == TwoDimParser.OUTER or _la == TwoDimParser.INNER:
                             self.state = 354
                             self.relationDetailOp()
-
 
                         self.state = 357
                         self.primaryExpr()
 
                     else:
                         raise NoViableAltException(self)
-                    self.state = 361 
+                    self.state = 361
                     self._errHandler.sync(self)
-                    _alt = self._interp.adaptivePredict(self._input,47,self._ctx)
+                    _alt = self._interp.adaptivePredict(self._input, 47, self._ctx)
 
                 pass
 
@@ -2964,24 +2772,21 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ExpressionContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def primaryExpr(self, i:int=None):
+        def primaryExpr(self, i: int = None):
             if i is None:
                 return self.getTypedRuleContexts(TwoDimParser.PrimaryExprContext)
             else:
-                return self.getTypedRuleContext(TwoDimParser.PrimaryExprContext,i)
-
+                return self.getTypedRuleContext(TwoDimParser.PrimaryExprContext, i)
 
         def relationExpr(self):
-            return self.getTypedRuleContext(TwoDimParser.RelationExprContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.RelationExprContext, 0)
 
         def PLUS(self):
             return self.getToken(TwoDimParser.PLUS, 0)
@@ -2990,38 +2795,34 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getToken(TwoDimParser.MINUS, 0)
 
         def functionCall(self):
-            return self.getTypedRuleContext(TwoDimParser.FunctionCallContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.FunctionCallContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_expression
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterExpression" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterExpression"):
                 listener.enterExpression(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitExpression" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitExpression"):
                 listener.exitExpression(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitExpression"):
                 return visitor.visitExpression(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def expression(self):
 
         localctx = TwoDimParser.ExpressionContext(self, self._ctx, self.state)
         self.enterRule(localctx, 66, self.RULE_expression)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.state = 376
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,49,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 49, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 369
@@ -3040,7 +2841,7 @@ class TwoDimParser ( TwoDimParserBase ):
                 self.primaryExpr()
                 self.state = 372
                 _la = self._input.LA(1)
-                if not(_la==TwoDimParser.PLUS or _la==TwoDimParser.MINUS):
+                if not (_la == TwoDimParser.PLUS or _la == TwoDimParser.MINUS):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
@@ -3064,37 +2865,32 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class PrimaryExprContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def operand(self):
-            return self.getTypedRuleContext(TwoDimParser.OperandContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.OperandContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_primaryExpr
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterPrimaryExpr" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterPrimaryExpr"):
                 listener.enterPrimaryExpr(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitPrimaryExpr" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitPrimaryExpr"):
                 listener.exitPrimaryExpr(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPrimaryExpr" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitPrimaryExpr"):
                 return visitor.visitPrimaryExpr(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def primaryExpr(self):
 
@@ -3112,28 +2908,24 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class OperandContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def literal(self):
-            return self.getTypedRuleContext(TwoDimParser.LiteralContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.LiteralContext, 0)
 
         def operandName(self):
-            return self.getTypedRuleContext(TwoDimParser.OperandNameContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.OperandNameContext, 0)
 
         def L_PAREN(self):
             return self.getToken(TwoDimParser.L_PAREN, 0)
 
         def expression(self):
-            return self.getTypedRuleContext(TwoDimParser.ExpressionContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ExpressionContext, 0)
 
         def R_PAREN(self):
             return self.getToken(TwoDimParser.R_PAREN, 0)
@@ -3141,22 +2933,19 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_operand
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterOperand" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterOperand"):
                 listener.enterOperand(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitOperand" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitOperand"):
                 listener.exitOperand(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitOperand" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitOperand"):
                 return visitor.visitOperand(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def operand(self):
 
@@ -3166,7 +2955,8 @@ class TwoDimParser ( TwoDimParserBase ):
             self.state = 386
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [TwoDimParser.NIL_LIT, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT, TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT]:
+            if token in [TwoDimParser.NIL_LIT, TwoDimParser.DECIMAL_LIT, TwoDimParser.FLOAT_LIT, TwoDimParser.RUNE_LIT,
+                         TwoDimParser.RAW_STRING_LIT, TwoDimParser.INTERPRETED_STRING_LIT]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 380
                 self.literal()
@@ -3196,37 +2986,32 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class LiteralContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
         def basicLit(self):
-            return self.getTypedRuleContext(TwoDimParser.BasicLitContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.BasicLitContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_literal
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterLiteral" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterLiteral"):
                 listener.enterLiteral(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitLiteral" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitLiteral"):
                 listener.exitLiteral(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLiteral" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitLiteral"):
                 return visitor.visitLiteral(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def literal(self):
 
@@ -3244,11 +3029,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class BasicLitContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3256,12 +3040,10 @@ class TwoDimParser ( TwoDimParserBase ):
             return self.getToken(TwoDimParser.NIL_LIT, 0)
 
         def integer(self):
-            return self.getTypedRuleContext(TwoDimParser.IntegerContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.IntegerContext, 0)
 
         def string_(self):
-            return self.getTypedRuleContext(TwoDimParser.String_Context,0)
-
+            return self.getTypedRuleContext(TwoDimParser.String_Context, 0)
 
         def FLOAT_LIT(self):
             return self.getToken(TwoDimParser.FLOAT_LIT, 0)
@@ -3272,22 +3054,19 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_basicLit
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterBasicLit" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterBasicLit"):
                 listener.enterBasicLit(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitBasicLit" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitBasicLit"):
                 listener.exitBasicLit(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitBasicLit" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitBasicLit"):
                 return visitor.visitBasicLit(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def basicLit(self):
 
@@ -3296,7 +3075,7 @@ class TwoDimParser ( TwoDimParserBase ):
         try:
             self.state = 395
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,51,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 51, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 390
@@ -3336,11 +3115,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class IntegerContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3353,33 +3131,30 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_integer
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterInteger" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterInteger"):
                 listener.enterInteger(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitInteger" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitInteger"):
                 listener.exitInteger(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInteger" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitInteger"):
                 return visitor.visitInteger(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def integer(self):
 
         localctx = TwoDimParser.IntegerContext(self, self._ctx, self.state)
         self.enterRule(localctx, 76, self.RULE_integer)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 397
             _la = self._input.LA(1)
-            if not(_la==TwoDimParser.DECIMAL_LIT or _la==TwoDimParser.RUNE_LIT):
+            if not (_la == TwoDimParser.DECIMAL_LIT or _la == TwoDimParser.RUNE_LIT):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -3392,11 +3167,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class OperandNameContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3406,22 +3180,19 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_operandName
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterOperandName" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterOperandName"):
                 listener.enterOperandName(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitOperandName" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitOperandName"):
                 listener.exitOperandName(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitOperandName" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitOperandName"):
                 return visitor.visitOperandName(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def operandName(self):
 
@@ -3439,11 +3210,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class String_Context(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3456,33 +3226,30 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_string_
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterString_" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterString_"):
                 listener.enterString_(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitString_" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitString_"):
                 listener.exitString_(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitString_" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitString_"):
                 return visitor.visitString_(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def string_(self):
 
         localctx = TwoDimParser.String_Context(self, self._ctx, self.state)
         self.enterRule(localctx, 80, self.RULE_string_)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 401
             _la = self._input.LA(1)
-            if not(_la==TwoDimParser.RAW_STRING_LIT or _la==TwoDimParser.INTERPRETED_STRING_LIT):
+            if not (_la == TwoDimParser.RAW_STRING_LIT or _la == TwoDimParser.INTERPRETED_STRING_LIT):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -3495,11 +3262,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class ArgumentsContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3509,68 +3275,68 @@ class TwoDimParser ( TwoDimParserBase ):
         def R_CURLY(self):
             return self.getToken(TwoDimParser.R_CURLY, 0)
 
-        def WS(self, i:int=None):
+        def WS(self, i: int = None):
             if i is None:
                 return self.getTokens(TwoDimParser.WS)
             else:
                 return self.getToken(TwoDimParser.WS, i)
 
         def expressionList(self):
-            return self.getTypedRuleContext(TwoDimParser.ExpressionListContext,0)
-
+            return self.getTypedRuleContext(TwoDimParser.ExpressionListContext, 0)
 
         def getRuleIndex(self):
             return TwoDimParser.RULE_arguments
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterArguments" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterArguments"):
                 listener.enterArguments(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitArguments" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitArguments"):
                 listener.exitArguments(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitArguments" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitArguments"):
                 return visitor.visitArguments(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def arguments(self):
 
         localctx = TwoDimParser.ArgumentsContext(self, self._ctx, self.state)
         self.enterRule(localctx, 82, self.RULE_arguments)
-        self._la = 0 # Token type
+        self._la = 0  # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 403
             self.match(TwoDimParser.L_CURLY)
             self.state = 407
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,52,self._ctx)
-            while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                if _alt==1:
+            _alt = self._interp.adaptivePredict(self._input, 52, self._ctx)
+            while _alt != 2 and _alt != ATN.INVALID_ALT_NUMBER:
+                if _alt == 1:
                     self.state = 404
-                    self.match(TwoDimParser.WS) 
+                    self.match(TwoDimParser.WS)
                 self.state = 409
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,52,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input, 52, self._ctx)
 
             self.state = 411
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & ((1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)))) != 0):
+            if ((((_la - 10)) & ~0x3f) == 0 and ((1 << (_la - 10)) & (
+                    (1 << (TwoDimParser.NIL_LIT - 10)) | (1 << (TwoDimParser.IDENTIFIER - 10)) | (
+                    1 << (TwoDimParser.L_PAREN - 10)) | (1 << (TwoDimParser.DECIMAL_LIT - 10)) | (
+                            1 << (TwoDimParser.FLOAT_LIT - 10)) | (1 << (TwoDimParser.RUNE_LIT - 10)) | (
+                            1 << (TwoDimParser.RAW_STRING_LIT - 10)) | (
+                            1 << (TwoDimParser.INTERPRETED_STRING_LIT - 10)))) != 0):
                 self.state = 410
                 self.expressionList()
-
 
             self.state = 416
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==TwoDimParser.WS:
+            while _la == TwoDimParser.WS:
                 self.state = 413
                 self.match(TwoDimParser.WS)
                 self.state = 418
@@ -3587,11 +3353,10 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
     class EosContext(ParserRuleContext):
         __slots__ = 'parser'
 
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+        def __init__(self, parser, parent: ParserRuleContext = None, invokingState: int = -1):
             super().__init__(parent, invokingState)
             self.parser = parser
 
@@ -3604,22 +3369,19 @@ class TwoDimParser ( TwoDimParserBase ):
         def getRuleIndex(self):
             return TwoDimParser.RULE_eos
 
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterEos" ):
+        def enterRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "enterEos"):
                 listener.enterEos(self)
 
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitEos" ):
+        def exitRule(self, listener: ParseTreeListener):
+            if hasattr(listener, "exitEos"):
                 listener.exitEos(self)
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitEos" ):
+        def accept(self, visitor: ParseTreeVisitor):
+            if hasattr(visitor, "visitEos"):
                 return visitor.visitEos(self)
             else:
                 return visitor.visitChildren(self)
-
-
-
 
     def eos(self):
 
@@ -3628,7 +3390,7 @@ class TwoDimParser ( TwoDimParserBase ):
         try:
             self.state = 425
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,55,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input, 55, self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 421
@@ -3660,9 +3422,7 @@ class TwoDimParser ( TwoDimParserBase ):
             self.exitRule()
         return localctx
 
-
-
-    def sempred(self, localctx:RuleContext, ruleIndex:int, predIndex:int):
+    def sempred(self, localctx: RuleContext, ruleIndex: int, predIndex: int):
         if self._predicates == None:
             self._predicates = dict()
         self._predicates[6] = self.signature_sempred
@@ -3673,16 +3433,10 @@ class TwoDimParser ( TwoDimParserBase ):
         else:
             return pred(localctx, predIndex)
 
-    def signature_sempred(self, localctx:SignatureContext, predIndex:int):
-            if predIndex == 0:
-                return self.noTerminatorAfterParams(1)
-         
+    def signature_sempred(self, localctx: SignatureContext, predIndex: int):
+        if predIndex == 0:
+            return self.noTerminatorAfterParams(1)
 
-    def eos_sempred(self, localctx:EosContext, predIndex:int):
-            if predIndex == 1:
-                return self.checkPreviousTokenText("}")
-         
-
-
-
-
+    def eos_sempred(self, localctx: EosContext, predIndex: int):
+        if predIndex == 1:
+            return self.checkPreviousTokenText("}")

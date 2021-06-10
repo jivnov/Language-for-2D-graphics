@@ -10,7 +10,7 @@ import random
 
 import logging
 
-
+'''
 class DisconnectedGraphException(Exception):
     pass
 
@@ -38,7 +38,7 @@ class RedefiningExplicitRelationException(Exception):
 class CyclicRelationsException(Exception):
     pass
 
-
+'''
 class Shape(Enum):
     SQUARE = 1
     CIRCLE = 2

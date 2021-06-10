@@ -4,7 +4,8 @@ import graph
 
 from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
-from Function import Function, FunctionSignatureError
+from Function import Function
+from exceptions import FunctionSignatureError
 
 class FunctionParserListener(TwoDimParserListener):
 

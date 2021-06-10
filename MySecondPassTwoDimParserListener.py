@@ -3,7 +3,8 @@ from copy import copy
 
 import drawing
 import graph
-from Function import Function, FunctionSignatureError
+from Function import Function
+from exceptions import FunctionSignatureError
 from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
 

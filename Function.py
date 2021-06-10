@@ -1,24 +1,6 @@
 from typing import List
 from graph import Shape
 
-class FunctionSignatureError(Exception):
-
-    def __init__(self, function_name):
-        self.function_name = function_name
-
-    def __str__(self):
-        return f"Function {self.function_name}() signature does not match the declaration."
-
-
-class FunctionNotExistsError(Exception):
-
-    def __init__(self, function_name):
-        self.function_name = function_name
-
-    def __str__(self):
-        return f"Function {self.function_name}() is not defined."
-
-
 class Function:
     def __init__(self, name: str, args: List, args_names: List = None, body=None):
         # expecting to receive list of pairs [Shape, Int] where Int is a counter for provided shape

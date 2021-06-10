@@ -2,7 +2,8 @@ import uuid
 from typing import List
 from graph import Shape, Graph, Vertex
 from FunctionParserListener import FunctionParserListener
-from Function import Function, FunctionNotExistsError
+from Function import Function
+from exceptions import FunctionNotExistsError, MultipleDeclarationsError
 import VariablesTree
 
 from antlr4 import *
@@ -13,7 +14,10 @@ class GlobalContext:
         self.variables = VariablesTree.VariablesTree()
 
     def add_function(self, foo: Function):
-        self.functions_list.add(foo)
+        if self._find_function_by_name(foo.name) is None:
+            self.functions_list.add(foo)
+        else:
+            raise MultipleDeclarationsError(foo.name.getText())
 
     def check_call(self, foo: Function) -> bool:
         f = self._find_function_by_name(foo.name)
@@ -46,10 +50,13 @@ class GlobalContext:
         walker = ParseTreeWalker()
         walker.walk(printer, f.body)
 
-        # Some randomish vertex name
         return graph.export_as_vertex()
 
     def _find_function_by_name(self, name: str):
         functions_list = list(self.functions_list)
         function_names = [str(f.name) for f in functions_list]
-        return functions_list[function_names.index(str(name))]
+        try:
+            i = function_names.index(str(name))
+        except:
+            i = -1
+        return functions_list[i] if i >= 0 else None
