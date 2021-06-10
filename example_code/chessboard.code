@@ -1,4 +1,4 @@
-#viewport 1234 1234
+#viewport 1234 1234;
 
 func RowStartsBlack() {
     rect R1 [12%] <40, 20>;
@@ -11,7 +11,7 @@ func RowStartsBlack() {
     rect R8 [12%] <235, 235, 205>;
 
     R1 left R2 left R3 left R4 left R5 left R6 left R7 left R8;
-}
+};
 
 func RowStartsWhite() {
     rect R1 [12%] <235, 235, 205>;
@@ -24,7 +24,7 @@ func RowStartsWhite() {
     rect R8 [12%] <40, 20>;
 
     R1 left R2 left R3 left R4 left R5 left R6 left R7 left R8;
-}
+};
 
 func Board() {
     shape R1 [100%, 12%] = RowStartsWhite();
@@ -37,7 +37,7 @@ func Board() {
     shape R8 [100%, 12%] = RowStartsBlack();
 
     R1 top R2 top R3 top R4 top R5 top R6 top R7 top R8;
-}
+};
 
 shape B1 = Board();
 

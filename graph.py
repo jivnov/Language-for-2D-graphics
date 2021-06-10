@@ -8,6 +8,10 @@ from svgwrite.shapes import Rect
 
 import random
 
+from exceptions import DisconnectedGraphException, UndeclaredShapeException, UndefinedShapeException, \
+    RedundantRelationException, UndefinedRelationException, RedefiningExplicitRelationException, \
+    CyclicRelationsException
+
 import logging
 
 '''
@@ -39,6 +43,8 @@ class CyclicRelationsException(Exception):
     pass
 
 '''
+
+
 class Shape(Enum):
     SQUARE = 1
     CIRCLE = 2
@@ -100,7 +106,8 @@ class Relation(Enum):
 
 
 class Vertex:
-    def __init__(self, shape: str = 'shape', args: Any = None, content = None, parent_graph = None, color: Tuple[int, ...] = None):
+    def __init__(self, shape: str = 'shape', args: Any = None, content=None, parent_graph=None,
+                 color: Tuple[int, ...] = None):
         """
 
         :param parent_graph: Graph that contains this Vertex
@@ -108,14 +115,14 @@ class Vertex:
         :param args: Arguments passed to the variable initialization in code
         :param content: Type should be Graph or None; allows for comparison between graphs and shapes
         """
-        self.uid = uuid.uuid1() # This will allow editting svg files after calling draw() on parts of the graph; the
+        self.uid = uuid.uuid1()  # This will allow editting svg files after calling draw() on parts of the graph; the
         # program can reference any shape by its unique ID or at least try to make a unique variable for each unique ID
 
         self.updated = False
         self.drawn = False
 
-        self.graph = parent_graph # Graph that this shape is a part of
-  
+        self.graph = parent_graph  # Graph that this shape is a part of
+
         self.LEFT: OrderedDict[Vertex, Any] = OrderedDict()
         self.RIGHT: OrderedDict[Vertex, Any] = OrderedDict()
         self.TOP: OrderedDict[Vertex, Any] = OrderedDict()
@@ -165,7 +172,8 @@ class Vertex:
             self.color = (0, 0, 0)
 
         if self.shape == Shape.RECT:
-            self.content = Rect(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"), fill="rgb" + str(self.color))
+            self.content = Rect(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"),
+                                fill="rgb" + str(self.color))
         elif self.shape == Shape.SHAPE:
             if self.content is None:
                 self.content = SVG(insert=(f"{x}%", f"{y}%"), size=(f"{width}%", f"{height}%"))
@@ -394,11 +402,13 @@ class Graph:
 
     @property
     def content_width(self):
-        return 0 if len(self.vertices) == 0 else max(v.x + v.width for v in self.vertices.keys()) - min(v.x for v in self.vertices.keys())
+        return 0 if len(self.vertices) == 0 else max(v.x + v.width for v in self.vertices.keys()) - min(
+            v.x for v in self.vertices.keys())
 
     @property
     def content_height(self):
-        return 0 if len(self.vertices) == 0 else max(v.y + v.height for v in self.vertices.keys()) - min(v.y for v in self.vertices.keys())
+        return 0 if len(self.vertices) == 0 else max(v.y + v.height for v in self.vertices.keys()) - min(
+            v.y for v in self.vertices.keys())
 
     @property
     def content_x(self):
@@ -442,9 +452,16 @@ class Graph:
         :return:
         """
         # Both shapes should have already been added to this graph before defining relations between them
-        if v_from is None or v_to is None or v_from not in self.vertices.keys() or v_to not in self.vertices.keys():
-            logging.info(f"{v_from=} {v_to=}")
-            raise UndeclaredShapeException(f"{v_from=} {v_to=}")
+        if v_from is None:  # or v_from not in self.vertices.keys()
+            raise UndeclaredShapeException(f"Shape {v_from} not declared.")
+        if v_to is None:  # or v_to not in self.vertices.keys()
+            raise UndeclaredShapeException(f"Shape {v_to} not declared.")
+
+        if v_from not in self.vertices.keys():
+            self.add_vertex(v_from)
+
+        if v_to not in self.vertices.keys():
+            self.add_vertex(v_to)
 
         if v_from is v_to:
             raise RedundantRelationException
@@ -455,13 +472,15 @@ class Graph:
             self.relation_matrix_horizontal[v_to][v_from] = -r
 
             if self._invalid_horizontal_relations():
-                raise CyclicRelationsException(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in horizontal relations")
+                raise CyclicRelationsException(
+                    f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in horizontal relations")
         elif r in (Relation.TOP, Relation.BOT):
             self.relation_matrix_vertical[v_from][v_to] = r
             self.relation_matrix_vertical[v_to][v_from] = -r
 
             if self._invalid_vertical_relations():
-                raise CyclicRelationsException(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in vertical relations")
+                raise CyclicRelationsException(
+                    f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in vertical relations")
             # TODO: Implement incidence matrices for other relations
         else:
             return
@@ -487,7 +506,8 @@ class Graph:
         # if any neighbour is visited and in
         # rec_stack then graph is cyclic
         # NOTE: Only check LEFT relation
-        for neighbour in (neigh for neigh, relation in self.relation_matrix_horizontal[v].items() if relation == Relation.LEFT):
+        for neighbour in (neigh for neigh, relation in self.relation_matrix_horizontal[v].items() if
+                          relation == Relation.LEFT):
             if not visited[neighbour]:
                 if self._is_cyclic_horizontal_util(neighbour, visited, rec_stack):
                     return True
@@ -529,7 +549,8 @@ class Graph:
         # if any neighbour is visited and in
         # rec_stack then graph is cyclic
         # NOTE: Only check TOP relation
-        for neighbour in (neigh for neigh, relation in self.relation_matrix_vertical[v].items() if relation == Relation.TOP):
+        for neighbour in (neigh for neigh, relation in self.relation_matrix_vertical[v].items() if
+                          relation == Relation.TOP):
             if not visited[neighbour]:
                 if self._is_cyclic_vertical_util(neighbour, visited, rec_stack):
                     return True
@@ -717,7 +738,7 @@ class Graph:
     def content_move_to(self, x, y):
         self.content_move_horizontal(x - self.content_x)
         self.content_move_vertical(y - self.content_y)
-            
+
     def replace_vertex(self, vertex_to_replace: Vertex, new_vertex: Vertex):
 
         self._copy_contents(vertex_to_replace, new_vertex)
@@ -740,7 +761,7 @@ class Graph:
                 for v_to in list(self.relation_matrix_vertical[v_from].keys()):
                     if v_to == vertex_to_replace:
                         rel = self.relation_matrix_vertical[v_from][v_to]
-                        self.add_relation(v_from = v_from, v_to = new_vertex, r = rel)
+                        self.add_relation(v_from=v_from, v_to=new_vertex, r=rel)
                         if rel != Relation.UNRELATED:
                             v_from.add_neighbour(new_vertex, rel)
                             v_from.remove_neighbour(vertex_to_replace)
@@ -766,7 +787,7 @@ class Graph:
         new_vertex.drawn = vertex_to_replace.drawn
         new_vertex.content = vertex_to_replace.content
 
-        #TODO: add IN relation
+        # TODO: add IN relation
 
         relation_set_pairs = zip(
             [new_vertex.LEFT, new_vertex.RIGHT, new_vertex.TOP, new_vertex.BOT,
@@ -827,7 +848,8 @@ class Graph:
 
     def export_as_vertex(self) -> Vertex:
         if self.disconnected:
-            raise DisconnectedGraphException(f"Some shapes have no clear relations to each other. Aborting drawing\n{self.relation_matrix_horizontal=}\n{self.relation_matrix_vertical=}")
+            raise DisconnectedGraphException(
+                f"Some shapes have no clear relations to each other. Aborting drawing\n{self.relation_matrix_horizontal=}\n{self.relation_matrix_vertical=}")
 
         self.sort_horizontal()
         self.sort_vertical()
@@ -847,7 +869,8 @@ class Graph:
         :return:
         """
         if self.disconnected:
-            raise DisconnectedGraphException(f"Some shapes have no clear relations to each other. Aborting drawing\n{self.relation_matrix_horizontal=}\n{self.relation_matrix_vertical=}")
+            raise DisconnectedGraphException(
+                f"Some shapes have no clear relations to each other. Aborting drawing\n{self.relation_matrix_horizontal=}\n{self.relation_matrix_vertical=}")
 
         self.sort_horizontal()
         self.sort_vertical()

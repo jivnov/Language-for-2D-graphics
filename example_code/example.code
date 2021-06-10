@@ -1,12 +1,12 @@
 #viewport 1000 1000;
 
-rec A [20%];
+rect A [50%, 50%];
+rect B [20%, 20%];
 
-func Foo(rect A){
-    rec B;
-    A left B;
+func Foo(rect C){
+    C left;
 };
 
 Foo(A);
 
-draw A;
+draw B;

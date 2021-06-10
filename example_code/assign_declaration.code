@@ -1,10 +1,10 @@
-#viewport 1000 1000
+#viewport 1000 1000;
 
 func Def() {
     rect A [20%] <0, 0, 255>;
     rect B [80%] <0, 0, 255>;
     A left B;
-}
+};
 
 func Abc() {
     rect A [30%, 100%] <0, 255>;
@@ -12,7 +12,7 @@ func Abc() {
     rect C [30%, 100%] <0, 255>;
     A left B;
     B left C;
-}
+};
 
 
 shape A [10%] = Def();
@@ -20,6 +20,6 @@ rect B [20%];
 shape C [30%] = Abc();
 shape D [40%] = Abc();
 
-A left B left C left D left G;
+A left B left C left D;
 
 draw B;

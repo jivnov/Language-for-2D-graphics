@@ -1,4 +1,4 @@
-#viewport 500 500
+#viewport 500 500;
 
 rect A [50%];
 
