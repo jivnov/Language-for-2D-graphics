@@ -17,18 +17,28 @@ class SyntaxErrorListener(ErrorListener):
         super(SyntaxErrorListener, self).__init__()
 
     def syntaxError(self, recognizer, offending_symbol, line, column, msg, e):
+        if e.input.tokens[offending_symbol.tokenIndex-1].text.upper() in ["RIGHT", "LEFT", "TOP", "BOT", "IN"] or (e.input.tokens[offending_symbol.tokenIndex-1].text.upper()==" " and e.input.tokens[offending_symbol.tokenIndex-2].text.upper() in ["RIGHT", "LEFT", "TOP", "BOT", "IN"]):
+            raise SyntaxError(f"Syntax error in relational operation at line {line} column {column}. Check the operation declaration.")
         raise SyntaxError(f"Symbol \"{offending_symbol.text}\" at line {line} column {column} not recognized. \n"
                           f"Tip: If \"{offending_symbol.text}\" is what you meant here, check if preceding symbols"
                           f" are also correct and conforms with syntax. Also check if there is a semicolon in "
-                          f"the preceding line.")
+                          f"the preceding line.")  # e.input.tokenSource.inputStream.strdata[:offending_symbol.start]
 
 class LexerErrorListener(ErrorListener):
     def __init__(self):
         super(LexerErrorListener, self).__init__()
 
     def syntaxError(self, recognizer, offending_token, line, column, msg, e):
-        offending_token = str(e.input.strdata)[e.startIndex:e.input.index]
-        raise SyntaxError(f"Syntax Error: token \"{offending_token}\" not recognozed at line {line}")
+        endIndex = e.input.index
+        offset = len(str(e.input.strdata)) - e.input.index
+        for c in [' ', ';', '(', ')', '[', ']', '{', '}', '<', '>', ',']:
+            if str(e.input.strdata)[e.input.index:].find(c) >= 0 and str(e.input.strdata)[e.input.index:].find(c) < offset:
+                offset = str(e.input.strdata)[e.input.index:].find(c)
+        endIndex += offset
+
+        offending_token = str(e.input.strdata)[e.startIndex:endIndex]
+        raise SyntaxError(f"Syntax Error: failed to parse token \"{offending_token}\" at line {line} column {column}."
+                          f"Check if it fits in syntax rules, is typed correctly and the register used is appropriate.")
 
 
 def main(argv):
@@ -75,6 +85,10 @@ def main(argv):
         # Walk the generated tree with our listener attached
         walker = ParseTreeWalker()
         walker.walk(printer, tree)
+    except IndexError as e:
+        logging.error(e)
+        if len(argv) < 2:
+            logging.error("Not all necessary arguments have been provided.")
     except FileNotFoundError as e:
         logging.error(e)
     except Exception as e:
@@ -83,4 +97,7 @@ def main(argv):
         logging.error(message)
 
 if __name__ == '__main__':
-    main(sys.argv)
+    try:
+        main(sys.argv)
+    except:
+        print("fuyfllgkg")

@@ -57,6 +57,6 @@ class VariablesTree:
 
         if len(vars_found) == 0:
             raise VariableNotFoundError(f"Failed to find variable \"{tag}\". Variable name \"{tag}\" contains"
-                                        f" a typo or is unavailable from this scope.")
+                                        f" a typo or the variable is unavailable from this scope.")
 
         return vars_found[0]

@@ -53,7 +53,7 @@ class FunctionSignatureError(Exception):
 
     def __str__(self):
         return f"Function {self.function_name}() signature does not match the declaration. " \
-               f"Check if arguments in the call correspond to declaration"
+               f"Check if arguments in the call correspond to declaration."
 
 
 class FunctionNotExistsError(Exception):
