@@ -37,7 +37,7 @@ class LexerErrorListener(ErrorListener):
         endIndex += offset
 
         offending_token = str(e.input.strdata)[e.startIndex:endIndex]
-        raise SyntaxError(f"Syntax Error: failed to parse token \"{offending_token}\" at line {line} column {column}."
+        raise SyntaxError(f"Syntax Error (Incorrect lexeme): failed to parse token \"{offending_token}\" at line {line} column {column}."
                           f"Check if it fits in syntax rules, is typed correctly and the register used is appropriate.")
 
 

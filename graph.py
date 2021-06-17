@@ -14,37 +14,6 @@ from exceptions import DisconnectedGraphException, UndeclaredShapeException, Und
 
 import logging
 
-'''
-class DisconnectedGraphException(Exception):
-    pass
-
-
-class UndeclaredShapeException(Exception):
-    pass
-
-
-class UndefinedShapeException(Exception):
-    pass
-
-
-class RedundantRelationException(Exception):
-    pass
-
-
-class UndefinedRelationException(Exception):
-    pass
-
-
-class RedefiningExplicitRelationException(Exception):
-    pass
-
-
-class CyclicRelationsException(Exception):
-    pass
-
-'''
-
-
 class Shape(Enum):
     SQUARE = 1
     CIRCLE = 2
@@ -464,7 +433,7 @@ class Graph:
             self.add_vertex(v_to)
 
         if v_from is v_to:
-            raise RedundantRelationException
+            raise RedundantRelationException(f"Trying to define a redundant relation {r} on shape {v_from}. (Defining a relation is impossible when it leads to the same object)")
 
         # Modify relation in respective matrix; note that you need to modify it for both vertices
         if r in (Relation.LEFT, Relation.RIGHT):

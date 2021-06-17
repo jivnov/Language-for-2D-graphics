@@ -2,10 +2,13 @@
 
 rect A [50%, 50%] <255, 0, 0>;
 rect B [20%, 20%] <0, 255, 0>;
-rect C [10%, 10%] <0, 0, 255>;
 
 A right B;
+
+rect C [10%, 10%] <0, 0, 255>;
+
+C right A;
+
 B right C;
-A right C;
 
 draw A;
