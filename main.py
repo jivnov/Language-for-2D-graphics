@@ -19,8 +19,7 @@ class SyntaxErrorListener(ErrorListener):
 
     def syntaxError(self, recognizer, offending_symbol, line, column, msg, e):
         try:
-            if e.input.tokens[offending_symbol.tokenIndex - 1].text.upper() in ["RIGHT", "LEFT", "TOP", "BOT",
-                                                                                "IN"] or (
+            if e.input.tokens[offending_symbol.tokenIndex - 1].text.upper() in ["RIGHT", "LEFT", "TOP", "BOT", "IN"] or (
                     e.input.tokens[offending_symbol.tokenIndex - 1].text.upper() == " " and e.input.tokens[
                 offending_symbol.tokenIndex - 2].text.upper() in ["RIGHT", "LEFT", "TOP", "BOT", "IN"]):
                 raise SyntaxError(
@@ -114,4 +113,7 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    main(sys.argv)
+    try:
+        main(sys.argv)
+    except:
+        print("fuyfllgkg")
