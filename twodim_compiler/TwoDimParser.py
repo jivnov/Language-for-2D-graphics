@@ -1,4 +1,4 @@
-# Generated from TwoDimParser.g4 by ANTLR 4.9.2
+# Generated from ../twodim_grammar/TwoDimParser.g4 by ANTLR 4.9.2
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
