@@ -1,8 +1,6 @@
 import treelib
 
-
-class VariableNotFoundError(Exception):
-    pass
+from exceptions import VariableNotFoundError
 
 
 class VariablesTree:
@@ -60,6 +58,7 @@ class VariablesTree:
             vars_found = list(filter(lambda x: x.tag == tag, scope_vars))
 
         if len(vars_found) == 0:
-            raise VariableNotFoundError(tag)
+            raise VariableNotFoundError(f"Failed to find variable \"{tag}\". Variable name \"{tag}\" contains"
+                                        f" a typo or the variable is unavailable from this scope.")
 
         return vars_found[0]

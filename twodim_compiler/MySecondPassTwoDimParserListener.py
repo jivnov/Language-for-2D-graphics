@@ -1,13 +1,13 @@
-import sys
+import logging
+import os
 from copy import copy
 
 import drawing
 import graph
-from Function import Function, FunctionSignatureError
+from Function import Function
 from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
-
-import logging
+from exceptions import FunctionSignatureError
 
 
 def center_graph(d2d: drawing.Drawing2d, g: graph.Graph):
@@ -42,6 +42,9 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             logging.info(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")
             logging.info(
                 f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=},\n {self.relations_graph.content_x=}, {self.relations_graph.content_y=}, {self.relations_graph.content_width=}, {self.relations_graph.content_height=}")
+        except FileNotFoundError as e:
+            logging.error(os.getcwd())
+            raise FileNotFoundError(e.filename)
         except Exception as e:
             message = f"Line {ctx.start.line}, {type(e).__name__}: {'' if len(e.args) == 0 else e.args[0]}"
             exception_type = e.__class__
@@ -68,6 +71,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             exception_type = e.__class__
             raise exception_type(message)
 
+
     def enterViewportClause(self, ctx: TwoDimParser.ViewportClauseContext):
         self.res = drawing.Drawing2d(int(ctx.DECIMAL_LIT(0).getText()), int(ctx.DECIMAL_LIT(1).getText()), self.output_path)
 
@@ -90,7 +94,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             raise exception_type(message)
 
     def enterFunctionDecl(self, ctx: TwoDimParser.FunctionDeclContext):
-        del ctx.children[len(ctx.children)-1]
+        del ctx.children[len(ctx.children) - 1]
 
     def enterAssignment(self, ctx: TwoDimParser.AssignmentContext):
         data = None
@@ -127,6 +131,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             raise exception_type(message)
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
+
         try:
             # checking function call for correctness
             args_for_check = []
@@ -150,10 +155,12 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
 
             function_called = Function(name=ctx.IDENTIFIER(), args=args_for_check)
 
+
             if not self.context.check_call(function_called):
                 raise FunctionSignatureError(function_called.name)
 
             function_result = self.context.call_function(global_graph=self.relations_graph, name=ctx.IDENTIFIER(), args=args_for_call)
+
 
             return function_result
         except Exception as e:

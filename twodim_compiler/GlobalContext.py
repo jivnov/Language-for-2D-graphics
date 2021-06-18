@@ -1,11 +1,15 @@
+
 import uuid
 from typing import List
-from graph import Shape, Graph, Vertex
-from FunctionParserListener import FunctionParserListener
-from Function import Function, FunctionNotExistsError
-import VariablesTree
 
 from antlr4 import *
+
+import VariablesTree
+from Function import Function
+from FunctionParserListener import FunctionParserListener
+from exceptions import FunctionNotExistsError, MultipleDeclarationsError
+from graph import Graph, Vertex
+
 
 class GlobalContext:
     def __init__(self):
@@ -13,7 +17,10 @@ class GlobalContext:
         self.variables = VariablesTree.VariablesTree()
 
     def add_function(self, foo: Function):
-        self.functions_list.add(foo)
+        if self._find_function_by_name(foo.name) is None:
+            self.functions_list.add(foo)
+        else:
+            raise MultipleDeclarationsError(foo.name.getText())
 
     def check_call(self, foo: Function) -> bool:
         f = self._find_function_by_name(foo.name)
@@ -29,7 +36,9 @@ class GlobalContext:
                 return False
         return True
 
+
     def call_function(self, global_graph, name: str, args: List, parent_id=None):
+
         f = self._find_function_by_name(name)
         call_id = uuid.uuid1()
         self.variables.add_scope_subtree(tag=f.name.getText(), name=call_id, scope=parent_id)
@@ -43,13 +52,17 @@ class GlobalContext:
             self.variables.add_variable(tag=vertex_name.getText(), name=v.uid, content=v, scope=call_id)
 
         printer = FunctionParserListener(global_context=self, func_relations_graph=graph, call_id=call_id)
+
         walker = ParseTreeWalker()
         walker.walk(printer, f.body)
 
-        # Some randomish vertex name
         return graph.export_as_vertex()
 
     def _find_function_by_name(self, name: str):
         functions_list = list(self.functions_list)
         function_names = [str(f.name) for f in functions_list]
-        return functions_list[function_names.index(str(name))]
+        try:
+            i = function_names.index(str(name))
+        except:
+            i = -1
+        return functions_list[i] if i >= 0 else None

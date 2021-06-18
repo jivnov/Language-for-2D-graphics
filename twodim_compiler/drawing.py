@@ -1,8 +1,6 @@
-import sys
 import svgwrite as svg
-from graph import Shape, Vertex, Relation, Graph
 
-import random
+from graph import Vertex, Graph
 
 
 class Drawing2d:
