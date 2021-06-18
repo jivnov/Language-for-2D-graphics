@@ -1,9 +1,9 @@
-# Generated from /home/pbilko/Desktop/SZKOŁA/KOMPILATORY/Language-for-2D-graphics/TwoDimLexer.g4 by ANTLR 4.9.1
-import sys
+# Generated from /home/liza/TKK/projekt/Language-for-2D-graphics/twodim_grammar/TwoDimLexer.g4 by ANTLR 4.9.1
+from antlr4 import *
 from io import StringIO
 from typing.io import TextIO
+import sys
 
-from antlr4 import *
 
 
 def serializedATN():
