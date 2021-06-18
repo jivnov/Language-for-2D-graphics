@@ -1,6 +1,8 @@
 
 from typing import List
+
 from graph import Shape
+
 
 class Function:
     def __init__(self, name: str, args: List, args_names: List = None, body=None):

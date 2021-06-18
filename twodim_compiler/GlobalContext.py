@@ -1,15 +1,15 @@
 
 import uuid
 from typing import List
-from graph import Shape, Graph, Vertex
-from typing import List
-from FunctionParserListener import FunctionParserListener
-
-from Function import Function
-from exceptions import FunctionNotExistsError, MultipleDeclarationsError
-import VariablesTree
 
 from antlr4 import *
+
+import VariablesTree
+from Function import Function
+from FunctionParserListener import FunctionParserListener
+from exceptions import FunctionNotExistsError, MultipleDeclarationsError
+from graph import Graph, Vertex
+
 
 class GlobalContext:
     def __init__(self):

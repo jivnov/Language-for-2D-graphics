@@ -1,6 +1,9 @@
-from antlr4 import *
 from typing import List
+
+from antlr4 import *
+
 from TwoDimLexer import TwoDimLexer
+
 
 class TwoDimParserBase ( Parser ):
     def __init__(self, _input: BufferedTokenStream, output):

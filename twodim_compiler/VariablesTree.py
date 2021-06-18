@@ -1,5 +1,7 @@
 import treelib
+
 from exceptions import VariableNotFoundError
+
 
 class VariablesTree:
 

@@ -1,16 +1,8 @@
-import sys
-import drawing
-import graph
+import logging
+
 import GlobalContext
-
-from antlr4 import *
-from antlr4.tree.Trees import Trees
-
-from TwoDimLexer import TwoDimLexer
 from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
-
-import logging
 
 
 class FirstPassTwoDimParserListener(TwoDimParserListener):

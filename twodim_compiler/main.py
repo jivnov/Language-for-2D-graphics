@@ -1,16 +1,15 @@
+import logging
+import os
 import sys
 
 from antlr4 import *
-from antlr4.tree.Trees import Trees
 from antlr4.error.ErrorListener import ErrorListener
+from antlr4.tree.Trees import Trees
 
 from MyFirstPassTwoDimParserListener import FirstPassTwoDimParserListener
 from MySecondPassTwoDimParserListener import SecondPassTwoDimParserListener
 from TwoDimLexer import TwoDimLexer
 from TwoDimParser import TwoDimParser
-
-import logging
-import os
 
 
 class SyntaxErrorListener(ErrorListener):
@@ -19,7 +18,8 @@ class SyntaxErrorListener(ErrorListener):
 
     def syntaxError(self, recognizer, offending_symbol, line, column, msg, e):
         try:
-            if e.input.tokens[offending_symbol.tokenIndex - 1].text.upper() in ["RIGHT", "LEFT", "TOP", "BOT", "IN"] or (
+            if e.input.tokens[offending_symbol.tokenIndex - 1].text.upper() in ["RIGHT", "LEFT", "TOP", "BOT","IN"] \
+                    or (
                     e.input.tokens[offending_symbol.tokenIndex - 1].text.upper() == " " and e.input.tokens[
                 offending_symbol.tokenIndex - 2].text.upper() in ["RIGHT", "LEFT", "TOP", "BOT", "IN"]):
                 raise SyntaxError(
@@ -95,7 +95,7 @@ def main(argv):
             printer = SecondPassTwoDimParserListener(global_context=global_context, parser=parser, output_path=argv[2])
         else:
             printer = SecondPassTwoDimParserListener(global_context=global_context, parser=parser,
-                                                     output_path='generated_images/output.svg')
+                                                     output_path='./generated_images/output.svg')
 
         # Walk the generated tree with our listener attached
         walker = ParseTreeWalker()

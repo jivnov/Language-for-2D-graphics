@@ -1,15 +1,13 @@
-
-import sys
+import logging
+import os
 from copy import copy
 
 import drawing
 import graph
 from Function import Function
-from exceptions import FunctionSignatureError
 from TwoDimParser import TwoDimParser
 from TwoDimParserListener import TwoDimParserListener
-
-import logging
+from exceptions import FunctionSignatureError
 
 
 def center_graph(d2d: drawing.Drawing2d, g: graph.Graph):
@@ -20,7 +18,7 @@ def center_graph(d2d: drawing.Drawing2d, g: graph.Graph):
 
 class SecondPassTwoDimParserListener(TwoDimParserListener):
 
-    def __init__(self, global_context, parser, output_path='generated_images/output.svg'):
+    def __init__(self, global_context, parser, output_path='./generated_images/output.svg'):
         super().__init__()
         self.relations_graph = graph.Graph()
         self.output_path = output_path
@@ -44,6 +42,9 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             logging.info(f"Entered draw clause! Drawing shape {ctx.IDENTIFIER()}")
             logging.info(
                 f"Drawing graph: {self.relations_graph.x=}, {self.relations_graph.y=}; {self.relations_graph.width=}, {self.relations_graph.height=},\n {self.relations_graph.content_x=}, {self.relations_graph.content_y=}, {self.relations_graph.content_width=}, {self.relations_graph.content_height=}")
+        except FileNotFoundError as e:
+            logging.error(os.getcwd())
+            raise FileNotFoundError(e.filename)
         except Exception as e:
             message = f"Line {ctx.start.line}, {type(e).__name__}: {'' if len(e.args) == 0 else e.args[0]}"
             exception_type = e.__class__

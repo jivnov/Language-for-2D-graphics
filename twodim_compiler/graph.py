@@ -1,19 +1,16 @@
-import uuid
 import copy
-from enum import Enum
-from typing import Any, Dict, List, Tuple
+import logging
+import uuid
 from collections import OrderedDict
+from enum import Enum
+from typing import Any, Dict, Tuple
 
 from svgwrite.container import SVG
 from svgwrite.shapes import Rect
 
-import random
-
 from exceptions import DisconnectedGraphException, UndeclaredShapeException, UndefinedShapeException, \
-    RedundantRelationException, UndefinedRelationException, RedefiningExplicitRelationException, \
-    CyclicRelationsException
+    RedundantRelationException, UndefinedRelationException, CyclicRelationsException
 
-import logging
 
 class Shape(Enum):
     SQUARE = 1

@@ -4,7 +4,7 @@
   <svg height="100%" width="100%" x="0%" y="0%">
     <defs/>
     <rect fill="rgb(255, 0, 0)" height="50.0%" width="50.0%" x="40.0%" y="25.0%"/>
-    <rect fill="rgb(0, 255, 0)" height="20.0%" width="20.0%" x="20.0%" y="40.0%"/>
+    <rect fill="rgb(0, 100, 0)" height="20.0%" width="20.0%" x="20.0%" y="40.0%"/>
     <rect fill="rgb(0, 0, 255)" height="10.0%" width="10.0%" x="10.0%" y="45.0%"/>
   </svg>
 </svg>
