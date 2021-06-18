@@ -77,7 +77,7 @@ class Relation(Enum):
     CONTAINED = -3  # Opposite of IN
     ON = 4
     UNDER = -4
-    ATLEFT = LEFT.value * 100
+    ATLEFT = LEFT.value * 100  # Meaning: Align the left border of these two shapes
     ATRIGHT = RIGHT.value * 100
     ATTOP = TOP.value * 100
     ATBOT = BOT.value * 100
@@ -118,7 +118,7 @@ class Relation(Enum):
         elif relation_name.upper() == "ATBOT":
             return Relation.ATBOT
         else:
-            raise UndefinedRelationException
+            raise UndefinedRelationException(f"Relation named \"{relation_name}\" doesn\'t exist")
 
 
 class Vertex:
@@ -279,13 +279,6 @@ class Vertex:
     def height(self, val):
         self.content['height'] = f"{val}%"
 
-    # HORIZONTAL RELATIONS
-    def is_left(self, other) -> bool:
-        return self.x <= other.x - self.width
-
-    def is_right(self, other) -> bool:
-        return self.x >= other.x + other.width
-
     def center_horizontally_if_legal(self):
         if len(self.LEFT) == 0 and len(self.RIGHT) == 0:
             self.x = (100 - self.width) / 2
@@ -297,6 +290,13 @@ class Vertex:
     def center_if_legal(self):
         self.center_horizontally_if_legal()
         self.center_vertically_if_legal()
+
+    # HORIZONTAL RELATIONS
+    def is_left(self, other) -> bool:
+        return self.x <= other.x - self.width
+
+    def is_right(self, other) -> bool:
+        return self.x >= other.x + other.width
 
     def to_left_of(self, other):
         """
@@ -313,6 +313,19 @@ class Vertex:
         :return:
         """
         self.x = other.x + other.width
+
+    # HORIZONTAL "ALIGN/AT" RELATIONS
+    def is_atleft(self, other) -> bool:
+        return self.x == other.x
+
+    def is_atright(self, other) -> bool:
+        return self.x + self.width == other.x + other.width
+
+    def to_atleft_of(self, other):
+        self.x = other.x
+
+    def to_atright_of(self, other):
+        self.x = other.x + other.width - self.width
 
     # VERTICAL RELATIONS
     def is_top(self, other) -> bool:
@@ -526,6 +539,81 @@ class Graph:
         # Modify relation in respective matrix; note that you need to modify it for both vertices
         if r in (Relation.LEFT, Relation.RIGHT, Relation.ATLEFT, Relation.ATRIGHT):
             self.relation_matrix_horizontal[v_from][v_to] = r
+
+            if r == Relation.LEFT:
+                # Add this relation to all ATRIGHT neighbours of v_from and opposite to all ATLEFT of v_to
+                for atr in v_from.ATRIGHT.keys():
+                    self.relation_matrix_horizontal[atr][v_to] = r
+                    self.relation_matrix_horizontal[v_to][atr] = -r
+                    atr.add_neighbour(v_to, r)
+
+                for atl in v_to.ATLEFT.keys():
+                    self.relation_matrix_horizontal[atl][v_from] = -r
+                    self.relation_matrix_horizontal[v_from][atl] = r
+                    atl.add_neighbour(v_from, -r)
+
+                for atl in v_to.ATLEFT.keys():
+                    for atr, _ in v_from.ATRIGHT.keys():
+                        self.relation_matrix_horizontal[atr][atl] = r
+                        self.relation_matrix_horizontal[atl][atr] = -r
+                        atr.add_neighbour(atl, r)
+
+            elif r == Relation.RIGHT:
+                # Add this relation to all ATLEFT neighbours of v_from and opposite to all ATRIGHT of v_to
+                for atl in v_from.ATLEFT.keys():
+                    self.relation_matrix_horizontal[atl][v_to] = r
+                    self.relation_matrix_horizontal[v_to][atl] = -r
+                    atl.add_neighbour(v_to, r)
+
+                for atr in v_to.ATRIGHT.keys():
+                    self.relation_matrix_horizontal[atr][v_from] = -r
+                    self.relation_matrix_horizontal[v_from][atr] = r
+                    atr.add_neighbour(v_from, -r)
+
+                for atr in v_to.ATRIGHT.keys():
+                    for atl, _ in v_from.ATLEFT.keys():
+                        self.relation_matrix_horizontal[atr][atl] = -r
+                        self.relation_matrix_horizontal[atl][atr] = r
+                        atr.add_neighbour(atl, -r)
+
+            elif r == Relation.ATLEFT:
+                # Snapshot pre-changes sets of neighbours so we don't mutate structures that we work on
+                atla = v_from.ATLEFT.copy()
+                atlb = v_to.ATLEFT.copy()
+                la = v_from.LEFT.copy()
+                lb = v_to.LEFT.copy()
+                for atl in atla.keys():
+                    self.relation_matrix_horizontal[atl][v_to] = r
+                    self.relation_matrix_horizontal[v_to][atl] = r
+                    atl.add_neighbour(v_to, r)
+
+                for atl in atlb.keys():
+                    self.relation_matrix_horizontal[atl][v_from] = r
+                    self.relation_matrix_horizontal[v_from][atl] = r
+                    atl.add_neighbour(v_from, r)
+
+                for aatl in atla.keys():
+                    for batl in atlb.keys():
+                        self.relation_matrix_horizontal[aatl][batl] = r
+                        self.relation_matrix_horizontal[batl][aatl] = r
+                        aatl.add_neighbour(batl, r)
+
+                for l in la.keys():
+                    self.relation_matrix_horizontal[l][v_to] = Relation.LEFT
+                    self.relation_matrix_horizontal[v_to][l] = Relation.RIGHT
+                    l.add_neighbour(v_to, Relation.LEFT)
+
+                for l in lb.keys():
+                    self.relation_matrix_horizontal[l][v_from] = Relation.LEFT
+                    self.relation_matrix_horizontal[v_from][l] = Relation.RIGHT
+                    l.add_neighbour(v_from, Relation.LEFT)
+
+                for al in la.keys():
+                    for bl in lb.keys():
+                        self.relation_matrix_horizontal[al][bl] = (-r).at()
+                        self.relation_matrix_horizontal[bl][al] = (-r).at()
+                        al.add_neighbour(bl, (-r).at())
+
 
             # Inline if is crucial - AT-xyz relations are bidirectional:
             #       "A ATLEFT B" is the same as "B ATLEFT A"
