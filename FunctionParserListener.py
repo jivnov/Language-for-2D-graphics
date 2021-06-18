@@ -11,11 +11,13 @@ class FunctionParserListener(TwoDimParserListener):
 
     def __init__(self, global_context, func_relations_graph, call_id=None):
         super().__init__()
+
         self.func_relations_graph = func_relations_graph
         self.context = global_context
         self.function_call_id = call_id
 
     def enterShapeSpec(self, ctx: TwoDimParser.ShapeSpecContext):
+
         try:
             for i, var_name in enumerate(ctx.IDENTIFIER()):
                 # TODO
@@ -54,6 +56,7 @@ class FunctionParserListener(TwoDimParserListener):
             message = f"Line {ctx.start.line}, {type(e).__name__}: {'' if len(e.args) == 0 else e.args[0]}"
             exception_type = e.__class__
             raise exception_type(message)
+
 
     def enterRelationExpr(self, ctx: TwoDimParser.RelationExprContext):
         var_name1 = ''
@@ -123,6 +126,5 @@ class FunctionParserListener(TwoDimParserListener):
             message = f"Line {ctx.start.line}, {type(e).__name__}: {'' if len(e.args) == 0 else e.args[0]}"
             exception_type = e.__class__
             raise exception_type(message)
-
 
 

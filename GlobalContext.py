@@ -1,7 +1,10 @@
+
 import uuid
 from typing import List
 from graph import Shape, Graph, Vertex
+from typing import List
 from FunctionParserListener import FunctionParserListener
+
 from Function import Function
 from exceptions import FunctionNotExistsError, MultipleDeclarationsError
 import VariablesTree
@@ -33,7 +36,9 @@ class GlobalContext:
                 return False
         return True
 
+
     def call_function(self, global_graph, name: str, args: List, parent_id=None):
+
         f = self._find_function_by_name(name)
         call_id = uuid.uuid1()
         self.variables.add_scope_subtree(tag=f.name.getText(), name=call_id, scope=parent_id)
@@ -47,6 +52,7 @@ class GlobalContext:
             self.variables.add_variable(tag=vertex_name.getText(), name=v.uid, content=v, scope=call_id)
 
         printer = FunctionParserListener(global_context=self, func_relations_graph=graph, call_id=call_id)
+
         walker = ParseTreeWalker()
         walker.walk(printer, f.body)
 

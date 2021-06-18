@@ -1,3 +1,4 @@
+
 from typing import List
 from graph import Shape
 
@@ -22,3 +23,4 @@ class Function:
             self.args.append((shape, count))
 
         self.body = body
+

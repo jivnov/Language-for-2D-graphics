@@ -1,3 +1,4 @@
+
 import sys
 from copy import copy
 
@@ -69,6 +70,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             exception_type = e.__class__
             raise exception_type(message)
 
+
     def enterViewportClause(self, ctx: TwoDimParser.ViewportClauseContext):
         self.res = drawing.Drawing2d(int(ctx.DECIMAL_LIT(0).getText()), int(ctx.DECIMAL_LIT(1).getText()), self.output_path)
 
@@ -91,7 +93,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             raise exception_type(message)
 
     def enterFunctionDecl(self, ctx: TwoDimParser.FunctionDeclContext):
-        del ctx.children[len(ctx.children)-1]
+        del ctx.children[len(ctx.children) - 1]
 
     def enterAssignment(self, ctx: TwoDimParser.AssignmentContext):
         data = None
@@ -128,6 +130,7 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
             raise exception_type(message)
 
     def enterFunctionCall(self, ctx: TwoDimParser.FunctionCallContext):
+
         try:
             # checking function call for correctness
             args_for_check = []
@@ -151,10 +154,12 @@ class SecondPassTwoDimParserListener(TwoDimParserListener):
 
             function_called = Function(name=ctx.IDENTIFIER(), args=args_for_check)
 
+
             if not self.context.check_call(function_called):
                 raise FunctionSignatureError(function_called.name)
 
             function_result = self.context.call_function(global_graph=self.relations_graph, name=ctx.IDENTIFIER(), args=args_for_call)
+
 
             return function_result
         except Exception as e:
