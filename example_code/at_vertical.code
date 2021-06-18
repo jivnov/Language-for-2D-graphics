@@ -7,10 +7,10 @@ rect B [50%, 50%];
 
 rect C [30%, 30%] <255, 120, 120>;
 
-MiniA atright A;
+MiniA atbot A;
 B right A;
 
-C atbot B;
+C attop B;
 
 
 draw A;

@@ -350,6 +350,19 @@ class Vertex:
         """
         self.y = other.y + other.height
 
+    # VERTICAL "ALIGN/AT" RELATIONS
+    def is_attop(self, other) -> bool:
+        return self.y == other.y
+
+    def is_atbot(self, other) -> bool:
+        return self.y + self.height == other.y + other.height
+
+    def to_attop_of(self, other):
+        self.y = other.y
+
+    def to_atbot_of(self, other):
+        self.y = other.y + other.height - self.height
+
     def add_neighbour(self, v, relation: Relation):
         # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph at all times
         """
@@ -614,6 +627,44 @@ class Graph:
                         self.relation_matrix_horizontal[bl][al] = (-r).at()
                         al.add_neighbour(bl, (-r).at())
 
+            elif r == Relation.ATRIGHT:
+                # Snapshot pre-changes sets of neighbours so we don't mutate structures that we work on
+                atra = v_from.ATRIGHT.copy()
+                atrb = v_to.ATRIGHT.copy()
+                ra = v_from.RIGHT.copy()
+                rb = v_to.RIGHT.copy()
+                for atr in atra.keys():
+                    self.relation_matrix_horizontal[atr][v_to] = r
+                    self.relation_matrix_horizontal[v_to][atr] = r
+                    atr.add_neighbour(v_to, r)
+
+                for atr in atrb.keys():
+                    self.relation_matrix_horizontal[atr][v_from] = r
+                    self.relation_matrix_horizontal[v_from][atr] = r
+                    atr.add_neighbour(v_from, r)
+
+                for aatr in atra.keys():
+                    for batr in atrb.keys():
+                        self.relation_matrix_horizontal[aatr][batr] = r
+                        self.relation_matrix_horizontal[batr][aatr] = r
+                        aatr.add_neighbour(batr, r)
+
+                for rr in ra.keys():
+                    self.relation_matrix_horizontal[rr][v_to] = Relation.RIGHT
+                    self.relation_matrix_horizontal[v_to][rr] = Relation.LEFT
+                    rr.add_neighbour(v_to, Relation.RIGHT)
+
+                for rr in rb.keys():
+                    self.relation_matrix_horizontal[rr][v_from] = Relation.RIGHT
+                    self.relation_matrix_horizontal[v_from][rr] = Relation.LEFT
+                    rr.add_neighbour(v_from, Relation.RIGHT)
+
+                for ar in ra.keys():
+                    for br in rb.keys():
+                        self.relation_matrix_horizontal[ar][br] = (-r).at()
+                        self.relation_matrix_horizontal[br][ar] = (-r).at()
+                        ar.add_neighbour(br, (-r).at())
+
 
             # Inline if is crucial - AT-xyz relations are bidirectional:
             #       "A ATLEFT B" is the same as "B ATLEFT A"
@@ -621,8 +672,123 @@ class Graph:
 
             if self._invalid_horizontal_relations():
                 raise CyclicRelationsException(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in horizontal relations")
+
+
         elif r in (Relation.TOP, Relation.BOT, Relation.ATTOP, Relation.ATBOT):
             self.relation_matrix_vertical[v_from][v_to] = r
+
+            if r == Relation.TOP:
+                # Add this relation to all ATBOT neighbours of v_from and opposite to all ATTOP of v_to
+                for atr in v_from.ATBOT.keys():
+                    self.relation_matrix_vertical[atr][v_to] = r
+                    self.relation_matrix_vertical[v_to][atr] = -r
+                    atr.add_neighbour(v_to, r)
+
+                for atl in v_to.ATTOP.keys():
+                    self.relation_matrix_vertical[atl][v_from] = -r
+                    self.relation_matrix_vertical[v_from][atl] = r
+                    atl.add_neighbour(v_from, -r)
+
+                for atl in v_to.ATTOP.keys():
+                    for atr, _ in v_from.ATBOT.keys():
+                        self.relation_matrix_vertical[atr][atl] = r
+                        self.relation_matrix_vertical[atl][atr] = -r
+                        atr.add_neighbour(atl, r)
+
+            elif r == Relation.BOT:
+                # Add this relation to all ATTOP neighbours of v_from and opposite to all ATBOT of v_to
+                for atl in v_from.ATTOP.keys():
+                    self.relation_matrix_vertical[atl][v_to] = r
+                    self.relation_matrix_vertical[v_to][atl] = -r
+                    atl.add_neighbour(v_to, r)
+
+                for atr in v_to.ATBOT.keys():
+                    self.relation_matrix_vertical[atr][v_from] = -r
+                    self.relation_matrix_vertical[v_from][atr] = r
+                    atr.add_neighbour(v_from, -r)
+
+                for atr in v_to.ATBOT.keys():
+                    for atl, _ in v_from.ATTOP.keys():
+                        self.relation_matrix_vertical[atr][atl] = -r
+                        self.relation_matrix_vertical[atl][atr] = r
+                        atr.add_neighbour(atl, -r)
+
+            elif r == Relation.ATTOP:
+                # Snapshot pre-changes sets of neighbours so we don't mutate structures that we work on
+                atla = v_from.ATTOP.copy()
+                atlb = v_to.ATTOP.copy()
+                la = v_from.TOP.copy()
+                lb = v_to.TOP.copy()
+                for atl in atla.keys():
+                    self.relation_matrix_vertical[atl][v_to] = r
+                    self.relation_matrix_vertical[v_to][atl] = r
+                    atl.add_neighbour(v_to, r)
+
+                for atl in atlb.keys():
+                    self.relation_matrix_vertical[atl][v_from] = r
+                    self.relation_matrix_vertical[v_from][atl] = r
+                    atl.add_neighbour(v_from, r)
+
+                for aatl in atla.keys():
+                    for batl in atlb.keys():
+                        self.relation_matrix_vertical[aatl][batl] = r
+                        self.relation_matrix_vertical[batl][aatl] = r
+                        aatl.add_neighbour(batl, r)
+
+                for l in la.keys():
+                    self.relation_matrix_vertical[l][v_to] = Relation.TOP
+                    self.relation_matrix_vertical[v_to][l] = Relation.BOT
+                    l.add_neighbour(v_to, Relation.TOP)
+
+                for l in lb.keys():
+                    self.relation_matrix_vertical[l][v_from] = Relation.TOP
+                    self.relation_matrix_vertical[v_from][l] = Relation.BOT
+                    l.add_neighbour(v_from, Relation.TOP)
+
+                for al in la.keys():
+                    for bl in lb.keys():
+                        self.relation_matrix_vertical[al][bl] = (-r).at()
+                        self.relation_matrix_vertical[bl][al] = (-r).at()
+                        al.add_neighbour(bl, (-r).at())
+
+            elif r == Relation.ATBOT:
+                # Snapshot pre-changes sets of neighbours so we don't mutate structures that we work on
+                atra = v_from.ATBOT.copy()
+                atrb = v_to.ATBOT.copy()
+                ra = v_from.BOT.copy()
+                rb = v_to.BOT.copy()
+                for atr in atra.keys():
+                    self.relation_matrix_vertical[atr][v_to] = r
+                    self.relation_matrix_vertical[v_to][atr] = r
+                    atr.add_neighbour(v_to, r)
+
+                for atr in atrb.keys():
+                    self.relation_matrix_vertical[atr][v_from] = r
+                    self.relation_matrix_vertical[v_from][atr] = r
+                    atr.add_neighbour(v_from, r)
+
+                for aatr in atra.keys():
+                    for batr in atrb.keys():
+                        self.relation_matrix_vertical[aatr][batr] = r
+                        self.relation_matrix_vertical[batr][aatr] = r
+                        aatr.add_neighbour(batr, r)
+
+                for rr in ra.keys():
+                    self.relation_matrix_vertical[rr][v_to] = Relation.BOT
+                    self.relation_matrix_vertical[v_to][rr] = Relation.TOP
+                    rr.add_neighbour(v_to, Relation.BOT)
+
+                for rr in rb.keys():
+                    self.relation_matrix_vertical[rr][v_from] = Relation.BOT
+                    self.relation_matrix_vertical[v_from][rr] = Relation.TOP
+                    rr.add_neighbour(v_from, Relation.BOT)
+
+                for ar in ra.keys():
+                    for br in rb.keys():
+                        self.relation_matrix_vertical[ar][br] = (-r).at()
+                        self.relation_matrix_vertical[br][ar] = (-r).at()
+                        ar.add_neighbour(br, (-r).at())
+
 
             # Inline if is crucial - AT-xyz relations are bidirectional:
             #       "A ATTOP B" is the same as "B ATTOP A"
@@ -637,20 +803,6 @@ class Graph:
         # TODO: [Note for the future] This method might not be necessary as querying graph.relation_matrix_XYZ[v1][v2] is quite intuitive BUT every vertex has to be a part of some graph
         # Give vertex info about new neighbour
         v_from.add_neighbour(v_to, r)
-
-    def _cross_at_relations(self, v_from: Vertex, v_to: Vertex, r: Relation):
-        """
-        When "r" is ATx: add v_from and its ATx neighbours to v_to and all its ATx neighbours; and vice versa
-        :param v_from:
-        :param v_to:
-        :param r:
-        :return:
-        """
-        v_from_group = v_from.get_neighbours_by_relation(r.at()).copy()
-        v_from_group[v_from] = None
-
-        v_to_group = v_to.get_neighbours_by_relation(r.at()).copy()
-        v_to_group[v_to] = None
 
     def _is_cyclic_horizontal_util(self, v: Vertex, visited: Dict[Vertex, bool], rec_stack: Dict[Vertex, bool]) -> bool:
         """
@@ -828,6 +980,10 @@ class Graph:
                     v2.to_bot_of(v1)
                 elif relation is Relation.BOT and not v1.is_bot(v2):
                     v2.to_top_of(v1)
+                elif relation is Relation.ATTOP and not v1.is_attop(v2):
+                    v2.to_attop_of(v1)
+                elif relation is Relation.ATBOT and not v1.is_atbot(v2):
+                    v2.to_atbot_of(v1)
                 #
                 # # UPDATE GRAPH BOUNDING BOX VALUES
                 # self._update_vertical()

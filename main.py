@@ -13,7 +13,6 @@ import os
 
 
 def main(argv):
-    logging.basicConfig(level=logging.INFO)
     try:
         input_stream = FileStream(argv[1])
         lexer = TwoDimLexer(input_stream)
@@ -56,6 +55,7 @@ def main(argv):
         message = f"File {'' if len(argv) < 2 else os.path.abspath(argv[1])}\n{'' if len(e.args) == 0 else e.args[0]}"
         exception_type = e.__class__
         logging.error(message)
+
 
 if __name__ == '__main__':
     main(sys.argv)

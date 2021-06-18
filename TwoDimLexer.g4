@@ -136,6 +136,7 @@ fragment ESCAPED_VALUE
 
 fragment SIZE
     : DECIMALS '%'
+    | FLOAT_LIT '%'
     ;
 
 fragment DECIMALS
