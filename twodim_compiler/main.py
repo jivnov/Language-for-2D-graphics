@@ -44,7 +44,7 @@ def main(argv):
         if len(argv) >= 3:  # If output path was specified
             printer = SecondPassTwoDimParserListener(global_context=global_context, parser = parser, output_path=argv[2])
         else:
-            printer = SecondPassTwoDimParserListener(global_context=global_context, parser = parser, output_path='generated_images/output.svg')
+            printer = SecondPassTwoDimParserListener(global_context=global_context, parser = parser, output_path='./generated_images/output.svg')
 
         # Walk the generated tree with our listener attached
         walker = ParseTreeWalker()

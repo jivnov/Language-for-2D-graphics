@@ -6,7 +6,7 @@ import random
 
 
 class Drawing2d:
-    def __init__(self, w, h, output_path='generated_images/output.svg'):
+    def __init__(self, w, h, output_path='./generated_images/output.svg'):
         """
         :param w:
         :param h:

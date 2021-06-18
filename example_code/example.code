@@ -1,13 +1,16 @@
 #viewport 1000 1000;
 
-rect A [20%, 40%];
+rect A [40%, 40%] <40, 20, 255>;
+rect MiniA [10%, 10%] <255, 220, 20>;
 
-func Foo(rect R){
-    shape S;
-    S = R;
-    S left R;
-};
+rect B [50%, 50%];
 
-Foo(A);
+rect C [30%, 30%] <255, 120, 120>;
+
+MiniA atright A;
+B right A;
+
+C atbot B;
+
 
 draw A;

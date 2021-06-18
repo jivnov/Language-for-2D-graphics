@@ -3,9 +3,9 @@
   <defs/>
   <svg height="100%" width="100%" x="0%" y="0%">
     <defs/>
-    <rect fill="rgb(40, 20, 255)" height="40.0%" width="40.0%" x="5.0%" y="35.0%"/>
+    <rect fill="rgb(40, 20, 255)" height="40.0%" width="40.0%" x="5.0%" y="30.0%"/>
     <rect fill="rgb(0, 0, 0)" height="50.0%" width="50.0%" x="45.0%" y="25.0%"/>
-    <rect fill="rgb(255, 120, 120)" height="30.0%" width="30.0%" x="35.0%" y="25.0%"/>
-    <rect fill="rgb(255, 220, 20)" height="10.0%" width="10.0%" x="45.0%" y="65.0%"/>
+    <rect fill="rgb(255, 220, 20)" height="10.0%" width="10.0%" x="35.0%" y="45.0%"/>
+    <rect fill="rgb(255, 120, 120)" height="30.0%" width="30.0%" x="35.0%" y="45.0%"/>
   </svg>
 </svg>

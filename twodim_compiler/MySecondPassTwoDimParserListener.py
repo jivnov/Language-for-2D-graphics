@@ -18,7 +18,7 @@ def center_graph(d2d: drawing.Drawing2d, g: graph.Graph):
 
 class SecondPassTwoDimParserListener(TwoDimParserListener):
 
-    def __init__(self, global_context, parser, output_path='generated_images/output.svg'):
+    def __init__(self, global_context, parser, output_path='./generated_images/output.svg'):
         super().__init__()
         self.relations_graph = graph.Graph()
         self.output_path = output_path
