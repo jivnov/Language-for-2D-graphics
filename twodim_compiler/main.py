@@ -17,7 +17,6 @@ class SyntaxErrorListener(ErrorListener):
         super(SyntaxErrorListener, self).__init__()
 
     def syntaxError(self, recognizer, offending_symbol, line, column, msg, e):
-        try:
             if e.input.tokens[offending_symbol.tokenIndex - 1].text.upper() in ["RIGHT", "LEFT", "TOP", "BOT","IN"] \
                     or (
                     e.input.tokens[offending_symbol.tokenIndex - 1].text.upper() == " " and e.input.tokens[
@@ -28,8 +27,6 @@ class SyntaxErrorListener(ErrorListener):
                               f"Tip: If \"{offending_symbol.text}\" is what you meant here, check if preceding symbols"
                               f" are also correct and conforms with syntax. Also check if there is a semicolon in "
                               f"the preceding line.")
-        except Exception:
-            raise SyntaxError(f"At line {line} column {column}: {msg}.")
 
 
 class LexerErrorListener(ErrorListener):
@@ -37,7 +34,6 @@ class LexerErrorListener(ErrorListener):
         super(LexerErrorListener, self).__init__()
 
     def syntaxError(self, recognizer, offending_token, line, column, msg, e):
-        try:
             endIndex = e.input.index
             offset = len(str(e.input.strdata)) - e.input.index
             for c in [' ', ';', '(', ')', '[', ']', '{', '}', '<', '>', ',']:
@@ -50,9 +46,7 @@ class LexerErrorListener(ErrorListener):
             raise SyntaxError(
                 f"Syntax Error (Incorrect lexeme): failed to parse token \"{offending_token}\" at line {line} column {column}."
                 f"Check if it fits in syntax rules, is typed correctly and the register used is appropriate.")
-        except Exception:
-            raise SyntaxError(
-                f"Syntax Error (Incorrect lexeme): failed to parse a token at line {line} column {column}.")
+
 
 
 def main(argv):
