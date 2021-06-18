@@ -32,6 +32,10 @@ LEFT                   : 'left';
 RIGHT                  : 'right';
 TOP                    : 'top';
 BOT                    : 'bot';
+ATLEFT                   : 'atleft';
+ATRIGHT                  : 'atright';
+ATTOP                    : 'attop';
+ATBOT                    : 'atbot';
 OUTER                  : 'outer';
 INNER                  : 'inner';
 

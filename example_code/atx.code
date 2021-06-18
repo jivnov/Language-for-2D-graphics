@@ -1,0 +1,14 @@
+#viewport 1000 1000
+
+rect Bg [100%];
+rect A [40%, 40%] <40, 20, 255>;
+rect B [20%, 20%] <235, 235, 205>;
+
+rect MiniA [10%, 10%] <255, 220, 20>;
+
+A atleft Bg;
+B atright Bg;
+
+MiniA atright A;
+
+draw Bg;

@@ -146,6 +146,10 @@ singleLevelRelationOp
     | RIGHT
     | TOP
     | BOT
+    | ATLEFT
+    | ATRIGHT
+    | ATTOP
+    | ATBOT
     ;
 
 multiLevelRelationOp

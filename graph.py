@@ -77,10 +77,10 @@ class Relation(Enum):
     CONTAINED = -3  # Opposite of IN
     ON = 4
     UNDER = -4
-    ATLEFT = LEFT.value * 100  # Meaning: Align the left border of these two shapes
-    ATRIGHT = RIGHT.value * 100
-    ATTOP = TOP.value * 100
-    ATBOT = BOT.value * 100
+    ATLEFT = LEFT * 100  # Meaning: Align the left border of these two shapes
+    ATRIGHT = RIGHT * 100
+    ATTOP = TOP * 100
+    ATBOT = BOT * 100
 
     def __neg__(self):
         return Relation(-self.value)
@@ -280,11 +280,11 @@ class Vertex:
         self.content['height'] = f"{val}%"
 
     def center_horizontally_if_legal(self):
-        if len(self.LEFT) == 0 and len(self.RIGHT) == 0:
+        if len(self.LEFT) == 0 and len(self.RIGHT) == 0 and len(self.ATLEFT) == 0 and len(self.ATRIGHT) == 0:
             self.x = (100 - self.width) / 2
 
     def center_vertically_if_legal(self):
-        if len(self.TOP) == 0 and len(self.BOT) == 0:
+        if len(self.TOP) == 0 and len(self.BOT) == 0 and len(self.ATTOP) == 0 and len(self.ATBOT) == 0:
             self.y = (100 - self.height) / 2
 
     def center_if_legal(self):
@@ -805,6 +805,10 @@ class Graph:
                     v2.to_right_of(v1)
                 elif relation is Relation.RIGHT and not v1.is_right(v2):
                     v2.to_left_of(v1)
+                elif relation is Relation.ATLEFT and not v1.is_atleft(v2):
+                    v2.to_atleft_of(v1)
+                elif relation is Relation.ATRIGHT and not v1.is_atright(v2):
+                    v2.to_atright_of(v1)
 
                 # # UPDATE GRAPH BOUNDING BOX VALUES
                 # self._update_horizontal()

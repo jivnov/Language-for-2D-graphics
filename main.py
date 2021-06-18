@@ -13,6 +13,7 @@ import os
 
 
 def main(argv):
+    logging.basicConfig(level=logging.INFO)
     try:
         input_stream = FileStream(argv[1])
         lexer = TwoDimLexer(input_stream)
