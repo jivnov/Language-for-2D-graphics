@@ -1,4 +1,5 @@
 import uuid
+import copy
 from enum import Enum
 from typing import Any, Dict, List, Tuple
 from collections import OrderedDict
@@ -109,6 +110,9 @@ class Vertex:
             self.shape = shape
         else:
             self.shape = Shape.from_string(shape)
+
+        # Saving it here to use in functions
+        self.size_args = copy.copy(args)
 
         # Determine Bounding Box fractional size through passed arguments
         self.bb_w = 100.0
