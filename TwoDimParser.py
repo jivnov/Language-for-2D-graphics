@@ -3410,7 +3410,7 @@ class TwoDimParser(TwoDimParserBase):
                 self.state = 424
                 if not self.checkPreviousTokenText("}"):
                     from antlr4.error.Errors import FailedPredicateException
-                    raise FailedPredicateException(self, "self.checkPreviousTokenText(\"}\")")
+                    raise FailedPredicateException(self, "Failed to match input with syntax. Expected eos or '}'.")
                 pass
 
 
