@@ -107,7 +107,4 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    try:
         main(sys.argv)
-    except:
-        print("fuyfllgkg")
