@@ -6,7 +6,7 @@ setup(
     packages=['twodim_compiler'],
     url='https://github.com/jivnov/Language-for-2D-graphics',
     license='',
-    author='Paweł Biłko, Lizaveta Hurskaya, Andrei Zhyunou',
+    author='Pawel Bilko, Lizaveta Hurskaya, Andrei Zhyunou',
     author_email='',
     description='A language for creating 2D graphics using relational operations, implemented for Compilers course at AGH UST.',
     install_requires=[
@@ -18,5 +18,11 @@ setup(
         'console_scripts': [
             'twodim=twodim_compiler.main:main'
         ]
-    }
+    },
+    classifiers=[
+            "Programming Language :: Python :: 3",
+            "License :: OSI Approved :: MIT License",
+            "Operating System :: OS Independent",
+        ],
+    package_dir={"": "./"},
 )
