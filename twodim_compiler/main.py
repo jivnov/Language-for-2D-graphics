@@ -53,6 +53,7 @@ def main(argv):
     try:
         input_stream = FileStream(argv[1])
         lexer = TwoDimLexer(input_stream)
+        lexer.removeErrorListeners()
         lexer.addErrorListener(LexerErrorListener())
         stream = CommonTokenStream(lexer)
         parser = TwoDimParser(stream)
