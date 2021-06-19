@@ -6,8 +6,8 @@ from antlr4 import *
 from antlr4.error.ErrorListener import ErrorListener
 from antlr4.tree.Trees import Trees
 
-from MyFirstPassTwoDimParserListener import FirstPassTwoDimParserListener
-from MySecondPassTwoDimParserListener import SecondPassTwoDimParserListener
+from FirstPassTwoDimParserListener import FirstPassTwoDimParserListener
+from SecondPassTwoDimParserListener import SecondPassTwoDimParserListener
 from TwoDimLexer import TwoDimLexer
 from TwoDimParser import TwoDimParser
 
