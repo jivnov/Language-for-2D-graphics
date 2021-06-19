@@ -1,4 +1,4 @@
-# Generated from TwoDimParser.g4 by ANTLR 4.9.2
+# Generated from /home/liza/TKK/projekt/Language-for-2D-graphics/TwoDimParser.g4 by ANTLR 4.9.1
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .TwoDimParser import TwoDimParser

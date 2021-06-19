@@ -510,27 +510,18 @@ class Graph:
         :param v_from:
         :param v_to:
         :param r:
-
         :raises UndeclaredShapeException
         :raises RedundantRelationException
         :raises CyclicRelationsException
-
         :return:
         """
         # Both shapes should have already been added to this graph before defining relations between them
-        if v_from is None:  # or v_from not in self.vertices.keys()
-            raise UndeclaredShapeException(f"Shape {v_from} not declared.")
-        if v_to is None:  # or v_to not in self.vertices.keys()
-            raise UndeclaredShapeException(f"Shape {v_to} not declared.")
-
-        if v_from not in self.vertices.keys():
-            self.add_vertex(v_from)
-
-        if v_to not in self.vertices.keys():
-            self.add_vertex(v_to)
+        if v_from is None or v_to is None or v_from not in self.vertices.keys() or v_to not in self.vertices.keys():
+            logging.info(f"{v_from=} {v_to=}")
+            raise UndeclaredShapeException(f"{v_from=} {v_to=}")
 
         if v_from is v_to:
-            raise RedundantRelationException(f"Trying to define a redundant relation {r} on shape {v_from}. (Defining a relation is impossible when it leads to the same object)")
+            raise RedundantRelationException
 
         # Modify relation in respective matrix; note that you need to modify it for both vertices
         if r in (Relation.LEFT, Relation.RIGHT, Relation.ATLEFT, Relation.ATRIGHT):
@@ -648,7 +639,6 @@ class Graph:
                         self.relation_matrix_horizontal[br][ar] = (-r).at()
                         ar.add_neighbour(br, (-r).at())
 
-
             # Inline if is crucial - AT-xyz relations are bidirectional:
             #       "A ATLEFT B" is the same as "B ATLEFT A"
             self.relation_matrix_horizontal[v_to][v_from] = r if r in (Relation.ATLEFT, Relation.ATRIGHT) else -r
@@ -656,8 +646,6 @@ class Graph:
             if self._invalid_horizontal_relations():
                 raise CyclicRelationsException(
                     f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in horizontal relations")
-        elif r in (Relation.TOP, Relation.BOT):
-                raise CyclicRelationsException(f"Relation {r=} between {v_from.uid=} and {v_to.uid=} causes a cycle in horizontal relations")
 
 
         elif r in (Relation.TOP, Relation.BOT, Relation.ATTOP, Relation.ATBOT):
@@ -774,7 +762,6 @@ class Graph:
                         self.relation_matrix_vertical[ar][br] = (-r).at()
                         self.relation_matrix_vertical[br][ar] = (-r).at()
                         ar.add_neighbour(br, (-r).at())
-
 
             # Inline if is crucial - AT-xyz relations are bidirectional:
             #       "A ATTOP B" is the same as "B ATTOP A"
