@@ -1,12 +1,10 @@
 #viewport 1000 1000;
 
-rect A [5%, 5%];
-rect B [10%, 10%];
-rect C [20%, 20%];
-rect D [50%, 50%];
+rect A [5%, 5%] <20, 110, 50>;
+rect B [10%, 10%] <220, 16, 214>;
+rect C [20%, 20%] <165, 8, 150>;
+rect D [50%, 50%] <156, 10, 184>;
 
-B top A;
-C top B;
-D top C;
+D top C top B top A;
 
 draw A;

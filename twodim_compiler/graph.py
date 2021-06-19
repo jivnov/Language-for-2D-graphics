@@ -516,19 +516,12 @@ class Graph:
         :return:
         """
         # Both shapes should have already been added to this graph before defining relations between them
-        if v_from is None:  # or v_from not in self.vertices.keys()
-            raise UndeclaredShapeException(f"Shape {v_from} not declared.")
-        if v_to is None:  # or v_to not in self.vertices.keys()
-            raise UndeclaredShapeException(f"Shape {v_to} not declared.")
-
-        if v_from not in self.vertices.keys():
-            self.add_vertex(v_from)
-
-        if v_to not in self.vertices.keys():
-            self.add_vertex(v_to)
+        if v_from is None or v_to is None or v_from not in self.vertices.keys() or v_to not in self.vertices.keys():
+            logging.info(f"{v_from=} {v_to=}")
+            raise UndeclaredShapeException(f"{v_from=} {v_to=}")
 
         if v_from is v_to:
-            raise RedundantRelationException(f"Trying to define a redundant relation {r} on shape {v_from}. (Defining a relation is impossible when it leads to the same object)")
+            raise RedundantRelationException
 
         # Modify relation in respective matrix; note that you need to modify it for both vertices
         if r in (Relation.LEFT, Relation.RIGHT, Relation.ATLEFT, Relation.ATRIGHT):

@@ -1,3 +1,5 @@
+// THIS EXAMPLE CODE CREATES A PICTURE OF A CHESSBOARD
+
 #viewport 1234 1234;
 
 func RowStartsBlack() {

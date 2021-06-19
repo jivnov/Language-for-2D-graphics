@@ -1,0 +1,33 @@
+#viewport 1000 1000;
+
+func RowLong() {
+    rect R1 [12.5%] <40, 20>;
+    rect R2 [12.5%] <235, 235, 205>;
+    rect R3 [12.5%] <40, 20>;
+    rect R4 [12.5%] <235, 235, 205>;
+    rect R5 [12.5%] <40, 20>;
+    rect R6 [12.5%] <235, 235, 205>;
+    rect R7 [12.5%] <40, 20>;
+    rect R8 [12.5%] <235, 235, 205>;
+
+    R1 left R2 left R3 left R4 left R5 left R6 left R7 left R8;
+};
+
+func RowShort() {
+    rect R1 [20%] <40, 20>;
+    rect R2 [20%] <235, 235, 205>;
+    rect R3 [20%] <40, 20>;
+    rect R4 [20%] <235, 235, 205>;
+    rect R5 [20%] <40, 20>;
+
+    R1 left R2 left R3 left R4 left R5;
+};
+
+shape R1 [62.5%] = RowShort();
+shape R2 = RowLong();
+
+R1 top R2;
+
+R1 atleft R2;
+
+draw R1;

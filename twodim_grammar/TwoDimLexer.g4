@@ -32,6 +32,10 @@ LEFT                   : 'left';
 RIGHT                  : 'right';
 TOP                    : 'top';
 BOT                    : 'bot';
+ATLEFT                 : 'atleft';
+ATRIGHT                : 'atright';
+ATTOP                  : 'attop';
+ATBOT                  : 'atbot';
 OUTER                  : 'outer';
 INNER                  : 'inner';
 
@@ -112,12 +116,8 @@ RUNE_LIT               : '\'' (~[\n\\] | ESCAPED_VALUE) '\'';
 
 RAW_STRING_LIT         : '`' ~'`'*                      '`';
 INTERPRETED_STRING_LIT : '"' (~["\\] | ESCAPED_VALUE)*  '"';
-
 // TwoDim special literals
-
 SIZE_LIT               : SIZE;
-
-
 // Hidden tokens
 WS                     : [ ]+             -> channel(HIDDEN);
 COMMENT                : '/*' .*? '*/'      -> channel(HIDDEN);
@@ -129,15 +129,13 @@ LINE_COMMENT           : '//' ~[\r\n]*      -> channel(HIDDEN);
 fragment ESCAPED_VALUE
     : '\\' [abfnrtv\\'"]
     ;
-
 fragment SIZE
     : DECIMALS '%'
+    | FLOAT_LIT '%'
     ;
-
 fragment DECIMALS
     : [0-9]+
     ;
-
 fragment EXPONENT
     : [eE] [+-]? DECIMALS
     ;
