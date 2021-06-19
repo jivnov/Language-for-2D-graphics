@@ -4,7 +4,7 @@ A language for creating 2D graphics using relational operations, implemented for
 
 ## Setup
 
-To install TwoDim compiler run ```pip install twodim_compiler```.
+To install TwoDim compiler run ```pip install -i https://test.pypi.org/simple/ Language-for-2D-graphics```.
 
 ## Usage
 To compile file ```example.code``` and save output to ```example_output.svg``` run: 
